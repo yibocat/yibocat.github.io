@@ -1,0 +1,82 @@
+baseURL = "https://example.com"
+title = "一波的收藏夹"
+theme = "notepadium"
+copyright = "©2022 Yibocat."
+
+languageCode = "zh-cn"
+hasCJKLanguage = true
+enableRobotsTXT = true
+
+# Enable Disqus
+#disqusShortname = "XXX"
+
+# Google Analytics
+#googleAnalytics = "UA-123-45"
+
+[markup.highlight]
+codeFences = true
+noClasses = false
+
+[markup.goldmark.renderer]
+unsafe = true  # enable raw HTML in Markdown
+
+[params]
+style = "auto"  # default: auto. light: light theme, dark: dark theme, auto: based on system.
+dateFormat = "2006 年 1 月 1 日"  # if unset, default is "2006-01-02"
+readingTime = true  # show reading time after article date
+logo = "/img/logo.png"  # if you have a logo png
+slogan = "一个没什么干货的笔记本站点"
+# license = ""  # CC License
+fullRss = false # Puts entire HTML post into rss 'description' tag. If unset, default is false.
+ipv6ready = true # Show IPV6Ready logo on footer.
+
+[params.assets]
+css = ["css/fonts.css"]
+
+[params.comments]
+enable = false  # En/Disable comments globally, default: false. You can always enable comments on per page.
+
+[params.comments.utterances]
+repo = "MetalBlueberry/MetalBlueberry.github.io" # enable comments with [utteranc.es](https://utteranc.es/)
+
+[params.math]
+enable = true  # optional: true, false. Enable globally, default: false. You can always enable math on per page.
+use = "katex"  # option: "katex", "mathjax". default: "katex"
+
+[params.syntax]
+use = "none"  # builtin: "prismjs", "hljs". "none" means Chroma
+theme = "github"
+darkTheme = "dracula"  # apply this theme in dark mode
+
+[params.share]
+enable = false
+addThisId = ""
+inlineToolId = ""
+
+
+
+
+[params.profile]
+  enable = true
+  avatar = "https://d33wubrfki0l68.cloudfront.net/ddf49425628d8aec7523db143916b34ae1641e11/b97e8/images/gopher-side_color.svg"
+  name = "gohugo"
+  bio = "Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again."  # support markdown syntax
+  twitter = "GoHugoIO"  # https://twitter.com/XXX
+  github = "gohugoio"  # https://github.com/XXX
+
+[params.nav]
+showCategories = true       # /categories/
+showTags = true             # /tags/
+
+# custom navigation items
+
+[[params.nav.custom]]
+title = "about"
+url = "/about"
+
+
+# for chinese
+[params.beian]
+  icp = ""     # example: 粤ICP备20056596号-1
+  gongan = ""  # example: 粤公网安备 44030502005645号
+  code = ""    # example: 44030502005645
