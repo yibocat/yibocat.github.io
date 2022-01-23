@@ -5,7 +5,7 @@
 
 .archive-year {
     margin-top: 40px;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .archive-year:not(:last-of-type) {
@@ -15,7 +15,8 @@
 .archive-month {
     display: flex;
     align-items: flex-start;
-    padding: 10px 0;
+    /* padding: 15px 0; */
+    /* font-size: 16px; */
 }
 
 .archive-month-header {
@@ -36,7 +37,7 @@
 .archive-entry-title {
     margin: 1px 0;
     font-weight: 650;
-    color:rgba(29,43,76,.85);
+    /* color:rgba(29,43,76,.85); */
 }
 
 .archive-count,
