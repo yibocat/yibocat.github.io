@@ -22,7 +22,7 @@ unsafe = true  # enable raw HTML in Markdown
 
 [params]
 style = "auto"  # default: auto. light: light theme, dark: dark theme, auto: based on system.
-dateFormat = "2006.01.02"  # if unset, default is "2006-01-02"  不能设置成 2006-01-01 ！！！！ 这样日期的月和日就会一样了！！！
+dateFormat = "2006-01-02"  # if unset, default is "2006-01-02"  不能设置成 2006-01-01 ！！！！ 这样日期的月和日就会一样了！！！
 readingTime = true  # show reading time after article date
 logo = "/img/logo.png"  # if you have a logo png
 slogan = "一个没什么干货的笔记本站点"
