@@ -4,7 +4,7 @@ Yibo's blog is building...
 
 ##### Next
 
-- [ ] Archives pages
+- [x] Archives pages (almost)
 - [ ] Search function
 - [ ] Set logo
 - [ ] Lottie Files(https://lottiefiles.com/)
