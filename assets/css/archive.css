@@ -33,7 +33,7 @@
 }
 
 .archive-entry-title {
-    margin: 5px 0;
+    margin: 1px 0;
     font-weight: 400;
 }
 
@@ -41,4 +41,15 @@
 .archive-meta {
     color: var(--secondary);
     font-size: 14px;
+}
+
+
+
+/*  这个 css 后续需要单独分离出来 */
+.entry-link {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
