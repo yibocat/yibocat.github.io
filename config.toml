@@ -31,7 +31,7 @@ fullRss = false # Puts entire HTML post into rss 'description' tag. If unset, de
 ipv6ready = true # Show IPV6Ready logo on footer.
 
 [params.assets]
-css = ["css/fonts.css"]
+css = ["css/fonts.css","css/archive.css"]
 
 [params.comments]
 enable = false  # En/Disable comments globally, default: false. You can always enable comments on per page.
@@ -67,7 +67,7 @@ inlineToolId = ""
 [params.nav]
 showCategories = true       # /categories/
 showTags = true             # /tags/
-
+showArchives = true
 # custom navigation items
 
 [[params.nav.custom]]
