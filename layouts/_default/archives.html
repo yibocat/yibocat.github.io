@@ -11,7 +11,7 @@
 {{ range $pages.GroupByPublishDate "2006" }}
 
 {{ if ne .Key "0001" }}
-  <div class="archives-year">
+  <div class="archive-year">
     <h2 class="archive-year-header">
         {{ replace .Key "0001" "" }}<sup class="archive-count">&nbsp;&nbsp;{{ len .Pages }}</sup>
     </h2>
@@ -22,12 +22,16 @@
                 {{ range .Pages }}
                 {{ if eq .Kind "page" }}
                     <div class="archive-entry">
-                        <h3 class="archive-entry-title">
+                        {{/*  <h3 class="archive-entry-title">  */}}
+                        <h3 class="note title">
                           {{ .Title | markdownify }}
                           {{ if .Draft }}<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
                         </h3>
                         <div class="archive-meta">
                           {{ partial "article-meta.html" . -}}
+                          {{- if or (eq .Params.readingTime true) (and (not (eq .Params.readingTime false)) (eq site.Params.readingTime true)) -}}
+                            <span class="reading-time">{{ T "readingTime" .ReadingTime }}</span>
+                          {{- end -}}
                         </div>
                         <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
                       </div>
