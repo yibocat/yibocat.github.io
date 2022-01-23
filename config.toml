@@ -11,7 +11,7 @@ enableRobotsTXT = true
 #disqusShortname = "XXX"
 
 # Google Analytics
-#googleAnalytics = "UA-123-45"
+# googleAnalytics = "UA-123-45"
 
 [markup.highlight]
 codeFences = true
@@ -22,7 +22,7 @@ unsafe = true  # enable raw HTML in Markdown
 
 [params]
 style = "auto"  # default: auto. light: light theme, dark: dark theme, auto: based on system.
-dateFormat = "2006 年 1 月 1 日"  # if unset, default is "2006-01-02"
+dateFormat = "2006.01.02"  # if unset, default is "2006-01-02"  不能设置成 2006-01-01 ！！！！ 这样日期的月和日就会一样了！！！
 readingTime = true  # show reading time after article date
 logo = "/img/logo.png"  # if you have a logo png
 slogan = "一个没什么干货的笔记本站点"
@@ -33,9 +33,11 @@ ipv6ready = true # Show IPV6Ready logo on footer.
 [params.assets]
 css = ["css/fonts.css","css/archive.css"]
 
+
+
+####   comments
 [params.comments]
 enable = false  # En/Disable comments globally, default: false. You can always enable comments on per page.
-
 [params.comments.utterances]
 repo = "MetalBlueberry/MetalBlueberry.github.io" # enable comments with [utteranc.es](https://utteranc.es/)
 
@@ -53,9 +55,7 @@ enable = false
 addThisId = ""
 inlineToolId = ""
 
-
-
-
+### 文章底部签名
 [params.profile]
   enable = true
   avatar = "https://d33wubrfki0l68.cloudfront.net/ddf49425628d8aec7523db143916b34ae1641e11/b97e8/images/gopher-side_color.svg"
@@ -64,18 +64,19 @@ inlineToolId = ""
   twitter = "GoHugoIO"  # https://twitter.com/XXX
   github = "gohugoio"  # https://github.com/XXX
 
+
+### 自定义菜单配置
 [params.nav]
 showCategories = true       # /categories/
 showTags = true             # /tags/
 showArchives = true
-# custom navigation items
-
+# 外部菜单配置
 [[params.nav.custom]]
 title = "about"
 url = "/about"
 
 
-# for chinese
+#### for chinese 备案
 [params.beian]
   icp = ""     # example: 粤ICP备20056596号-1
   gongan = ""  # example: 粤公网安备 44030502005645号
