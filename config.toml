@@ -33,6 +33,8 @@ ipv6ready = true # Show IPV6Ready logo on footer.
 [params.assets]
 css = ["css/fonts.css","css/archive.css","css/custom_style.css"]
 
+[outputs]
+  home = ["HTML","RSS","JSON"]
 
 
 ####   comments
@@ -68,8 +70,9 @@ inlineToolId = ""
 ### 自定义菜单配置
 [params.nav]
 showCategories = true       # /categories/
-showTags = true             # /tags/
+showTags = false             # /tags/
 showArchives = true
+showSearch = true
 # 外部菜单配置
 [[params.nav.custom]]
 title = "about"

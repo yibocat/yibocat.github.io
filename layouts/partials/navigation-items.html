@@ -9,9 +9,16 @@
     {{- if $nav.showCategories -}}
         <a class="nav item" href="{{- `/categories/` | relLangURL -}}">{{- T "Categories" -}}</a>
     {{- end -}}
+
     {{- if $nav.showTags -}}
         <a class="nav item" href="{{- `/tags/` | relLangURL -}}">{{- T "Tags" -}}</a>
     {{- end -}}
+
+    {{- if $nav.showSearch -}}
+        <a class="nav item" href="{{- `/search/` | relLangURL -}}"> Search </a>
+    {{- end -}}
+
+    {{/*  自定义外部导航  */}}
     {{- range $nav.custom -}}
         {{- $url := replace .url "#" "%23" -}}
         {{- $url = replace $url "." "%2e" -}}
