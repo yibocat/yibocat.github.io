@@ -1,5 +1,5 @@
 baseURL = "https://yibocat.github.io/"
-title = "一波的收藏夹"
+title = "yibocat"
 theme = "notepadium"
 copyright = "©2022 Yibocat."
 
@@ -25,14 +25,14 @@ style = "auto"  # default: auto. light: light theme, dark: dark theme, auto: bas
 dateFormat = "2006-01-02"  # if unset, default is "2006-01-02"  不能设置成 2006-01-01 ！！！！ 这样日期的月和日就会一样了！！！
 readingTime = true  # show reading time after article date
 logo = "/img/logo.png"  # if you have a logo png
-slogan = "一个没什么干货的笔记本站点"
+slogan = "< 100% JavaScript-free >"
 # license = ""  # CC License
 fullRss = false # Puts entire HTML post into rss 'description' tag. If unset, default is false.
 ipv6ready = true # Show IPV6Ready logo on footer.
 
 [params.assets]
-# css = ["css/fonts.css","css/archive.css","css/custom_style.css"]
-css = ["css/fonts.css"]
+css = ["css/fonts.css","css/archive.css","css/custom_style.css"]
+# css = ["css/fonts.css"]
 [outputs]
   home = ["HTML","RSS","JSON"]
 
