@@ -3,9 +3,13 @@
     font-size: 16px;
 }
 
-.archive-year {
+/* .archive-year {
     margin-top: 40px;
     font-size: 20px;
+} */
+
+.archive-year-header{
+    font-size: 35px;
 }
 
 .archive-year:not(:last-of-type) {

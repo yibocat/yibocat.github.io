@@ -1,5 +1,5 @@
 {{ define "main"}}
-
+<div class="note list">
 <section class="article header"><h1>{{- .Title -}}</h1></section>
 
 {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
@@ -11,10 +11,12 @@
 {{ range $pages.GroupByPublishDate "2006" }}
 
 {{ if ne .Key "0001" }}
-  <div class="archive-year">
+  <div class="item">
+
     <h2 class="archive-year-header">
         {{ replace .Key "0001" "" }}<sup class="archive-count">&nbsp;&nbsp;{{ len .Pages }}</sup>
     </h2>
+    
     {{ range .Pages.GroupByDate "January" }}
         <div class="archive-month">
             <h3 class="archive-month-header">{{- .Key }}<sup class="archive-count">&nbsp;&nbsp;{{ len .Pages }}</sup></h3>
@@ -44,4 +46,5 @@
 {{ end }}
 
 {{ end }}
+</div>
 {{ end }}
