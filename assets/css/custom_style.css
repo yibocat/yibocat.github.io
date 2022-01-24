@@ -1,5 +1,5 @@
 
-/* layout */
+/* content-layout */
 #content {
     display: block;
     margin: 0 auto;
@@ -7,8 +7,8 @@
   }
 
 /* Search */
-#search-header{
-  margin-bottom:3000px;
+.search-content{
+  padding: 20px;
 }
 
 #searchbox input {
@@ -30,20 +30,21 @@
   list-style:none;
   border-radius: var(--radius);
   padding: 10px;
-  margin: 10px 80px;
+  margin: 10px 10px;
   position: relative;
   font-weight: bolder;
   /* font-size: 20px; */
 }
 
 #searchResults {
-  margin: 10px 0;
+  margin: 10px 10px;
   width: 100%;
 }
 
 #searchResults li:active {
   transition: transform 0.1s;
-  transform: scale(0.98);
+  transform: scale(1.05);
+  border: 2px solid;
 }
 
 #searchResults a {
@@ -56,6 +57,6 @@
 }
 
 #searchResults .focus {
-  transform: scale(0.98);
-  border: 2px solid var(--tertiary);
+  transform: scale(1.05);
+  border: 20px solid var(--tertiary);
 }
