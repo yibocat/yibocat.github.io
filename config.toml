@@ -71,8 +71,8 @@ inlineToolId = ""
 [params.nav]
 showCategories = true       # /categories/
 showTags = false             # /tags/
-showArchives = true
-showSearch = true
+showArchives = false
+showSearch = false
 # 外部菜单配置
 [[params.nav.custom]]
 title = "about"
