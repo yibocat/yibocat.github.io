@@ -31,8 +31,8 @@ fullRss = false # Puts entire HTML post into rss 'description' tag. If unset, de
 ipv6ready = true # Show IPV6Ready logo on footer.
 
 [params.assets]
-css = ["css/fonts.css","css/archive.css","css/custom_style.css"]
-
+# css = ["css/fonts.css","css/archive.css","css/custom_style.css"]
+css = ["css/fonts.css"]
 [outputs]
   home = ["HTML","RSS","JSON"]
 
