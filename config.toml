@@ -38,7 +38,6 @@ css = ["css/fonts.css","css/archive.css","css/custom_style.css"]
 [outputs]
   home = ["HTML","RSS","JSON"]
 
-
 ####   comments
 [params.comments]
 enable = false  # En/Disable comments globally, default: false. You can always enable comments on per page.
@@ -63,11 +62,70 @@ inlineToolId = ""
 [params.profile]
   enable = true
   avatar = "/json/77907-vault.json"
-  name = "YiboW"
-  bio = "阔别多年重回校园又不会编程的计算机小白"  # support markdown syntax
+  name = "yibocat"
+  bio = "脑子不够键盘来凑"  # support markdown syntax
   # twitter = "GoHugoIO"  # https://twitter.com/XXX
   github = "yibocat"  # https://github.com/XXX
   email = "yibocat@yeah.net"
+
+[params.social]
+    GitHub = "yibocat"
+    Email   = "yibocat@yeah.net"
+    Weibo = "yibocat"
+    Steam = "yibooo"
+    Zhihu = "yibocat"
+    # Linkedin = "xxxx"
+    # Twitter = "xxxx"
+    # Instagram = "xxxx"
+    # Facebook = "xxxx"
+    # Telegram = "xxxx"
+    # Medium = "xxxx"
+    # Gitlab = "xxxx"
+    # Youtubelegacy = "xxxx"
+    # Youtubecustom = "xxxx"
+    # Youtubechannel = "xxxx"
+    # Tumblr ="xxxx"
+    # Quora = "xxxx"
+    # Keybase = "xxxx"
+    # Pinterest = "xxxx"
+    # Reddit = "xxxx"
+    # Codepen = "xxxx"
+    # Bitbucket = "xxxx"
+    # Stackoverflow = "xxxxx"
+    # Odnoklassniki = "xxxx"
+    # VKontakte = "xxxx"
+    # Flickr = "xxxx"
+    # Xing = "xxxx"
+    # Snapchat = "xxxx"
+    # Soundcloud = "xxxx"
+    # Spotify = "xxxx"
+    # Bandcamp = "xxxx"
+    # Paypal = "xxxx"
+    # Fivehundredpx = "xxxx"
+    # Mix = "xxxx"
+    # Goodreads = "xxxx"
+    # Lastfm = "xxxx"
+    # Foursquare = "xxxx"
+    # Hackernews = "xxxx"
+    # Kickstarter = "xxxx"
+    # Patreon = "xxxx"
+    # Twitch = "xxxx"
+    # Strava = "xxxx"
+    # Skype = "xxxx"
+    # Whatsapp = "xxxx"
+    # Douban = "xxxx"
+    # Angellist = "xxxx"
+    # Slidershare = "xxxx"
+    # Jsfiddle = "xxxx"
+    # Deviantart = "xxxx"
+    # Behance = "xxxx"
+    # Dribble = "xxxx"
+    # Wordpress = "xxxx"
+    # Vine = "xxxx"
+    # Googlescholar = "xxxx"
+    # Researchgate = "xxxx"
+    # Mastodon = "xxxx"
+    # Thingiverse = "xxxx"
 
 ### 自定义菜单配置
 [params.nav]
