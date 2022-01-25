@@ -63,15 +63,16 @@
 
 
 
-
+/* homepage */
 .avatar {
   /* text-align: center; */
   position:inherit;
-  padding: 24px;
+  padding: 18px;
 }
 
 .intro{
-  padding-left:24px ;
+  padding-left:18px ;
+  font-size: 14px;
 }
 
 .avatar img{
@@ -99,4 +100,3 @@
   transform: translateY(-0.5em);
   cursor: pointer;
 }
-

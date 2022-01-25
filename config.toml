@@ -23,13 +23,12 @@ unsafe = true  # enable raw HTML in Markdown
 style = "auto"                  # default: auto. light: light theme, dark: dark theme, auto: based on system.
 dateFormat = "2006-01-02"       # if unset, default is "2006-01-02"  不能设置成 2006-01-01 ！！！！ 这样日期的月和日就会一样了！！！
 readingTime = true              # show reading time after article date
-# logo = "/yibo.jpeg"        # if you have a logo png
+logo = "/images/yibo.jpeg"        # if you have a logo png
 # slogan = "< 100% JavaScript-free >"
 # license = ""                  # CC License
 fullRss = false                 # Puts entire HTML post into rss 'description' tag. If unset, default is false.
 ipv6ready = true                # Show IPV6Ready logo on footer.
 
-cdn_url = ""
 avatar = "/images/yibo.jpeg"    # 头像
 
 # css文件
@@ -63,12 +62,12 @@ inlineToolId = ""
 ### 文章底部签名
 [params.profile]
   enable = true
-  avatar = "https://d33wubrfki0l68.cloudfront.net/ddf49425628d8aec7523db143916b34ae1641e11/b97e8/images/gopher-side_color.svg"
-  name = "gohugo"
-  bio = "Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again."  # support markdown syntax
-  twitter = "GoHugoIO"  # https://twitter.com/XXX
-  github = "gohugoio"  # https://github.com/XXX
-
+  avatar = "/json/77907-vault.json"
+  name = "YiboW"
+  bio = "阔别多年重回校园又不会编程的计算机小白"  # support markdown syntax
+  # twitter = "GoHugoIO"  # https://twitter.com/XXX
+  github = "yibocat"  # https://github.com/XXX
+  email = "yibocat@yeah.net"
 
 ### 自定义菜单配置
 [params.nav]
