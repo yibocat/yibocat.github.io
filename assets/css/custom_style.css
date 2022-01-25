@@ -60,3 +60,43 @@
   transform: scale(1.05);
   border: 20px solid var(--tertiary);
 }
+
+
+
+
+.avatar {
+  /* text-align: center; */
+  position:inherit;
+  padding: 24px;
+}
+
+.intro{
+  padding-left:24px ;
+}
+
+.avatar img{
+        width: 128px;
+        height: auto;
+        display: inline-block;
+        -webkit-border-radius: 100%;
+        border-radius: 100%;
+        /* -webkit-box-shadow: 0 0 0 0.3618em ; */
+        box-shadow: 0 0 0 0.2048em ;
+        margin: 0 auto;
+        -webkit-transition: all ease 0.4s;
+        -moz-transition: all ease 0.4s;
+        -o-transition: all ease 0.4s;
+        transition: all ease 0.4s;
+        cursor: pointer;
+}
+
+.avatar img:hover{
+  position: relative;
+  -webkit-transform: translateY(-0.5em);
+  -moz-transform: translateY(-0.5em);
+  -ms-transform: translateY(-0.5em);
+  -o-transform: translateY(-0.5em);
+  transform: translateY(-0.5em);
+  cursor: pointer;
+}
+

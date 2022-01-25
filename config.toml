@@ -9,7 +9,6 @@ enableRobotsTXT = true
 
 # Enable Disqus
 #disqusShortname = "XXX"
-
 # Google Analytics
 # googleAnalytics = "UA-123-45"
 
@@ -21,15 +20,19 @@ noClasses = false
 unsafe = true  # enable raw HTML in Markdown
 
 [params]
-style = "auto"  # default: auto. light: light theme, dark: dark theme, auto: based on system.
-dateFormat = "2006-01-02"  # if unset, default is "2006-01-02"  不能设置成 2006-01-01 ！！！！ 这样日期的月和日就会一样了！！！
-readingTime = true  # show reading time after article date
-# logo = "/img/logo.png"  # if you have a logo png
-slogan = "< 100% JavaScript-free >"
-# license = ""  # CC License
-fullRss = false # Puts entire HTML post into rss 'description' tag. If unset, default is false.
-ipv6ready = true # Show IPV6Ready logo on footer.
+style = "auto"                  # default: auto. light: light theme, dark: dark theme, auto: based on system.
+dateFormat = "2006-01-02"       # if unset, default is "2006-01-02"  不能设置成 2006-01-01 ！！！！ 这样日期的月和日就会一样了！！！
+readingTime = true              # show reading time after article date
+# logo = "/yibo.jpeg"        # if you have a logo png
+# slogan = "< 100% JavaScript-free >"
+# license = ""                  # CC License
+fullRss = false                 # Puts entire HTML post into rss 'description' tag. If unset, default is false.
+ipv6ready = true                # Show IPV6Ready logo on footer.
 
+cdn_url = ""
+avatar = "/images/yibo.jpeg"    # 头像
+
+# css文件
 [params.assets]
 css = ["css/fonts.css","css/archive.css","css/custom_style.css"]
 # css = ["css/fonts.css"]
