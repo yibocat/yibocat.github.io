@@ -6,8 +6,8 @@ Yibo's blog is building...
 
 - [x] Archives pages (almost).
 - [x] Search function.
-- [ ] Set logo.
-- [ ] Lottie Files(https://lottiefiles.com/).
+- [x] Set logo.
+- [x] Lottie Files(https://lottiefiles.com/).
 - [ ] Set the dark mode button.
-- [ ] Reset the site page display.
+- [ ] Reset the site page display.(main-color and font-family)
 - [ ] Reset the tab page.

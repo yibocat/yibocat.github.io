@@ -136,7 +136,7 @@ enableRobotsTXT = true
   showSearch = true
 
 [[params.nav.custom]]             # 自定义外部菜单
-  title = "about"
+  title = "About"
   url = "/about"
 
 
