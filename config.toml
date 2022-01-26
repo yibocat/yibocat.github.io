@@ -13,50 +13,54 @@ enableRobotsTXT = true
 # googleAnalytics = "UA-123-45"
 
 [markup.highlight]
-codeFences = true
-noClasses = false
+  codeFences = true
+  noClasses = false
 
 [markup.goldmark.renderer]
-unsafe = true  # enable raw HTML in Markdown
+  unsafe = true  # enable raw HTML in Markdown
 
 [params]
-style = "auto"                  # default: auto. light: light theme, dark: dark theme, auto: based on system.
-dateFormat = "2006-01-02"       # if unset, default is "2006-01-02"  不能设置成 2006-01-01 ！！！！ 这样日期的月和日就会一样了！！！
-readingTime = true              # show reading time after article date
-logo = "/images/yibo.jpeg"        # if you have a logo png
-# slogan = "< 100% JavaScript-free >"
-# license = ""                  # CC License
-fullRss = false                 # Puts entire HTML post into rss 'description' tag. If unset, default is false.
-ipv6ready = true                # Show IPV6Ready logo on footer.
+  style = "auto"                  # default: auto. light: light theme, dark: dark theme, auto: based on system.
+  dateFormat = "2006-01-02"       # if unset, default is "2006-01-02"  不能设置成 2006-01-01 ！！！！ 这样日期的月和日就会一样了！！！
+  readingTime = true              # show reading time after article date
+  logo = "/images/yibo.jpeg"        # if you have a logo png
+  # slogan = "< 100% JavaScript-free >"
+  # license = ""                  # CC License
+  fullRss = false                 # Puts entire HTML post into rss 'description' tag. If unset, default is false.
+  ipv6ready = true                # Show IPV6Ready logo on footer.
+  avatar = "/images/yibo.jpeg"    # 头像
 
-avatar = "/images/yibo.jpeg"    # 头像
+[params.intro]
+  intro_1 = "这是一个测试"        # 首页简介 1
+  intro_2 = "xxx"               # 首页简介 2
+  intro_3 = "xxx"               # 首页简介 3
 
 # css文件
 [params.assets]
-css = ["css/fonts.css","css/archive.css","css/custom_style.css"]
+  css = ["css/fonts.css","css/archive.css","css/custom_style.css"]
 # css = ["css/fonts.css"]
 [outputs]
   home = ["HTML","RSS","JSON"]
 
 ####   comments
 [params.comments]
-enable = false  # En/Disable comments globally, default: false. You can always enable comments on per page.
+  enable = false  # En/Disable comments globally, default: false. You can always enable comments on per page.
 [params.comments.utterances]
-repo = "MetalBlueberry/MetalBlueberry.github.io" # enable comments with [utteranc.es](https://utteranc.es/)
+  repo = "MetalBlueberry/MetalBlueberry.github.io" # enable comments with [utteranc.es](https://utteranc.es/)
 
 [params.math]
-enable = true  # optional: true, false. Enable globally, default: false. You can always enable math on per page.
-use = "katex"  # option: "katex", "mathjax". default: "katex"
+  enable = true  # optional: true, false. Enable globally, default: false. You can always enable math on per page.
+  use = "katex"  # option: "katex", "mathjax". default: "katex"
 
 [params.syntax]
-use = "none"  # builtin: "prismjs", "hljs". "none" means Chroma
-theme = "github"
-darkTheme = "dracula"  # apply this theme in dark mode
+  use = "none"  # builtin: "prismjs", "hljs". "none" means Chroma
+  theme = "github"
+  darkTheme = "dracula"  # apply this theme in dark mode
 
 [params.share]
-enable = false
-addThisId = ""
-inlineToolId = ""
+  enable = false
+  addThisId = ""
+  inlineToolId = ""
 
 ### 文章底部签名
 [params.profile]
@@ -129,14 +133,14 @@ inlineToolId = ""
 
 ### 自定义菜单配置
 [params.nav]
-showCategories = true       # /categories/
-showTags = false             # /tags/
-showArchives = true
-showSearch = true
+  showCategories = true       # /categories/
+  showTags = false             # /tags/
+  showArchives = true
+  showSearch = true
 # 外部菜单配置
 [[params.nav.custom]]
-title = "about"
-url = "/about"
+  title = "about"
+  url = "/about"
 
 
 #### for chinese 备案

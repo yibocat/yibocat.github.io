@@ -10,8 +10,13 @@
     <div class="avatar">
         <a href="/posts/"> <img src="{{- $avatar | relURL -}}"> </a>
     </div>
-    <div class="intro"># 不会编程却重返校园的计算机小白 </div>
-    <div class="intro"># 脑子不够键盘来凑 </div>
+    {{/*  <div class="intro"># print("Hello world!") </div>
+    <div class="intro"># 脑子不够键盘来凑 </div>  */}}
+
+    {{- with site.Params.intro.intro_1 -}}<div class="intro">{{- . | markdownify -}}</div>{{- end -}}
+    {{- with site.Params.intro.intro_2 -}}<div class="intro">{{- . | markdownify -}}</div>{{- end -}}
+    {{- with site.Params.intro.intro_3 -}}<div class="intro">{{- . | markdownify -}}</div>{{- end -}}
+
     <div class="social-links">
         {{ partial "social.html" . }}
     </div>
