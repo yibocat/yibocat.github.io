@@ -11,7 +11,8 @@ enableRobotsTXT = true
 #disqusShortname = "XXX"
 # Google Analytics
 # googleAnalytics = "UA-123-45"
-
+[outputs]                         # home 加载项
+  home = ["HTML","RSS","JSON"]
 [markup.highlight]
   codeFences = true
   noClasses = false
@@ -19,7 +20,7 @@ enableRobotsTXT = true
 [markup.goldmark.renderer]
   unsafe = true  # enable raw HTML in Markdown
 
-[params]
+[params]                          # 网站配置选项
   style = "auto"                  # default: auto. light: light theme, dark: dark theme, auto: based on system.
   dateFormat = "2006-01-02"       # if unset, default is "2006-01-02"  不能设置成 2006-01-01 ！！！！ 这样日期的月和日就会一样了！！！
   readingTime = true              # show reading time after article date
@@ -30,40 +31,36 @@ enableRobotsTXT = true
   ipv6ready = true                # Show IPV6Ready logo on footer.
   avatar = "/images/yibo.jpeg"    # 头像
 
-[params.intro]
+[params.intro]                    # 首页简介
   intro_1 = "这是一个测试"        # 首页简介 1
   intro_2 = "xxx"               # 首页简介 2
   intro_3 = "xxx"               # 首页简介 3
 
-# custom css文件
-[params.assets]
-  css = ["css/fonts.css","css/archive.css","css/custom_style.css"]
-# css = ["css/fonts.css"]
-[outputs]
-  home = ["HTML","RSS","JSON"]
 
-####   comments
-[params.comments]
+[params.assets]                   # 资产库（包括 css 和 js）
+  css = ["css/fonts.css","css/archive.css","css/custom_style.css"]
+
+[params.comments]                 # 开启评论
   enable = false  # En/Disable comments globally, default: false. You can always enable comments on per page.
-[params.comments.utterances]
+[params.comments.utterances]      # 评论插件
   repo = "MetalBlueberry/MetalBlueberry.github.io" # enable comments with [utteranc.es](https://utteranc.es/)
 
-[params.math]
+[params.math]                     # 数学公式插件
   enable = true  # optional: true, false. Enable globally, default: false. You can always enable math on per page.
   use = "katex"  # option: "katex", "mathjax". default: "katex"
 
-[params.syntax]
+[params.syntax]                   # 主题选择
   use = "none"  # builtin: "prismjs", "hljs". "none" means Chroma
   theme = "github"
   darkTheme = "dracula"  # apply this theme in dark mode
 
-[params.share]
+[params.share]                    # 分享
   enable = false
-  addThisId = ""
-  inlineToolId = ""
+  addThisId = "分享测试"
+  inlineToolId = "测试分享"
 
-### 文章底部签名
-[params.profile]
+
+[params.profile]                  # 文章底部签名设置
   enable = true
   avatar = "/json/77907-vault.json"
   name = "yibocat"
@@ -72,7 +69,7 @@ enableRobotsTXT = true
   github = "yibocat"  # https://github.com/XXX
   email = "yibocat@yeah.net"
 
-[params.social]
+[params.social]                   # 社交标签自定义
     GitHub = "yibocat"
     Email   = "yibocat@yeah.net"
     Weibo = "yibocat"
@@ -131,20 +128,20 @@ enableRobotsTXT = true
     # Mastodon = "xxxx"
     # Thingiverse = "xxxx"
 
-### 自定义菜单配置
-[params.nav]
+
+[params.nav]                      # 自定义菜单
   showCategories = true       # /categories/
   showTags = false             # /tags/
   showArchives = true
   showSearch = true
-# 外部菜单配置
-[[params.nav.custom]]
+
+[[params.nav.custom]]             # 自定义外部菜单
   title = "about"
   url = "/about"
 
 
-#### for chinese 备案
-[params.beian]
+
+[params.beian]                    # 备案设置
   icp = ""     # example: 粤ICP备20056596号-1
   gongan = ""  # example: 粤公网安备 44030502005645号
   code = ""    # example: 44030502005645
