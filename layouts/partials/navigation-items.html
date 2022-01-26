@@ -1,32 +1,36 @@
 {{- $nav := . -}}
 {{- if or $nav.showCategories $nav.showTags $nav.showArchives $nav.custom -}}
-<div class="nav wrap"><nav class="nav">
+<div class="nav wrap">
+    <nav class="nav">
 
-    {{- if $nav.showArchives -}}
+        {{- if $nav.showArchives -}}
         <a class="nav item" href="{{- `/archives/` | relLangURL -}}"> Archives </a>
-    {{- end -}}
-    
-    {{- if $nav.showCategories -}}
+        {{- end -}}
+
+        {{- if $nav.showCategories -}}
         <a class="nav item" href="{{- `/categories/` | relLangURL -}}"> Categories </a>
-    {{- end -}}
+        {{- end -}}
 
-    {{- if $nav.showTags -}}
+        {{- if $nav.showTags -}}
         <a class="nav item" href="{{- `/tags/` | relLangURL -}}"> Tags </a>
-    {{- end -}}
+        {{- end -}}
 
-    {{- if $nav.showSearch -}}
+        {{- if $nav.showSearch -}}
         <a class="nav item" href="{{- `/search/` | relLangURL -}}"> Search </a>
-    {{- end -}}
+        {{- end -}}
 
-    {{/*  自定义外部导航  */}}
-    {{- range $nav.custom -}}
+        {{/* 自定义外部导航 */}}
+        {{- range $nav.custom -}}
         {{- $url := replace .url "#" "%23" -}}
         {{- $url = replace $url "." "%2e" -}}
         {{- $url = $url | safeURL -}}
         {{- if strings.HasPrefix $url "/" -}}{{- $url = $url | relLangURL -}}{{- end -}}
-        <a class="nav item" href="{{- $url -}}" 
-            {{- if strings.HasPrefix $url "http" -}}target="_blank" rel="noopener noreferrer"
-            {{- end -}}>{{- .title -}}</a>
-    {{- end -}}
-</nav></div>
+        <a class="nav item" href="{{- $url -}}" {{- if strings.HasPrefix $url "http" -}}target="_blank"
+            rel="noopener noreferrer" {{- end -}}>{{- .title -}}</a>
+        {{- end -}}
+        
+        {{/*  <a href="javascript:void(0);" class="nav item"><i class="iconfont icon-sun"></i></a>&nbsp;  */}}
+
+    </nav>
+</div>
 {{- end -}}

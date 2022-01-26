@@ -35,7 +35,7 @@ enableRobotsTXT = true
   intro_2 = "xxx"               # 首页简介 2
   intro_3 = "xxx"               # 首页简介 3
 
-# css文件
+# custom css文件
 [params.assets]
   css = ["css/fonts.css","css/archive.css","css/custom_style.css"]
 # css = ["css/fonts.css"]
