@@ -10,7 +10,7 @@
 
   {{- with .avatar -}}
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-  <lottie-player class="avatar" src="{{- . | relURL -}}"  background="transparent"  speed="1" style="max-width:300px;" loop  autoplay></lottie-player>
+  <lottie-player class="avatar" src="{{- . | relURL -}}"  background="transparent"  speed="1" style="max-width:280px;" loop  autoplay></lottie-player>
   {{- end -}}
   
   {{- with .name -}}<p class="name">{{- . -}}</p>{{- end -}}

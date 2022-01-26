@@ -124,3 +124,33 @@ html {
   font-weight:bold;
 }
 
+
+
+/* article */
+.article.navigation{
+  margin-top: 5px;
+  padding: 5px;
+}
+.article.navigation p {
+  margin: 0;
+}
+.article.navigation a:hover{
+  text-decoration: none;
+}
+.article.navigation p+p {
+  margin-top: 5px;
+}
+.article.navigation .link {
+  font-weight: 600;
+  font-size:medium;
+}
+.article.bottom{
+  /* padding-top: 20px; */
+  margin-bottom:30px;
+  padding: 8px;
+}
+.article.bottom.title{
+  /* margin-top:10px; */
+  margin-bottom:0px;
+  font-weight: 600;
+}

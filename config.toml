@@ -26,7 +26,7 @@ enableRobotsTXT = true
   readingTime = true              # show reading time after article date
   logo = "/images/yibo.jpeg"        # if you have a logo png
   # slogan = "< 100% JavaScript-free >"
-  # license = ""                  # CC License
+  license = "这是一个测试"                  # CC License
   fullRss = false                 # Puts entire HTML post into rss 'description' tag. If unset, default is false.
   ipv6ready = true                # Show IPV6Ready logo on footer.
   avatar = "/images/yibo.jpeg"    # 头像
@@ -56,7 +56,7 @@ enableRobotsTXT = true
 
 [params.share]                    # 分享
   enable = false
-  addThisId = "分享测试"
+  addThisId = "facebook"
   inlineToolId = "测试分享"
 
 
