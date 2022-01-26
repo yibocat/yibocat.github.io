@@ -21,6 +21,7 @@ body {
   display: block;
   margin: 0 auto;
   max-width: 789px;
+  padding-top: 130px;
   padding-bottom: 150px;
 }
 
@@ -32,6 +33,11 @@ body {
   margin-bottom: 15px;
 }
 
+#header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
 
 /* Search */
 .search-content{
