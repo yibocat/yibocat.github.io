@@ -3,6 +3,7 @@ author: Hugo Authors
 title: Math Typesetting
 date: 2021-06-14
 description: A brief guide to setup KaTeX
+draft: true
 math: true
 ---
 

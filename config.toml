@@ -26,15 +26,23 @@ enableRobotsTXT = true
   readingTime = true              # show reading time after article date
   logo = "/images/yibo.jpeg"        # if you have a logo png
   # slogan = "< 100% JavaScript-free >"
-  license = "这是一个测试"                  # CC License
+  license = "版权声明：如果转发请带上本文链接和注明来源。"                  # CC License
   fullRss = false                 # Puts entire HTML post into rss 'description' tag. If unset, default is false.
   ipv6ready = true                # Show IPV6Ready logo on footer.
   avatar = "/images/yibo.jpeg"    # 头像
 
 [params.intro]                    # 首页简介
-  intro_1 = "这是一个测试"        # 首页简介 1
-  intro_2 = "xxx"               # 首页简介 2
-  intro_3 = "xxx"               # 首页简介 3
+  intro_1 = "## **这其实是笔记本——脑子不够键盘来凑** ##"        # 首页简介 1
+  intro_2 = "这是一个测试"               # 首页简介 2
+  intro_3 = "**Keywords:**"               # 首页简介 3
+[params.profile]                  # 文章底部签名设置
+  enable = true
+  avatar = "/json/77907-vault.json"
+  name = "yibocat"
+  bio = "脑子不够键盘来凑"  # support markdown syntax
+  # twitter = "GoHugoIO"  # https://twitter.com/XXX
+  github = "yibocat"  # https://github.com/XXX
+  email = "yibocat@yeah.net"
 
 
 [params.assets]                   # 资产库（包括 css 和 js）
@@ -60,20 +68,12 @@ enableRobotsTXT = true
   inlineToolId = "测试分享"
 
 
-[params.profile]                  # 文章底部签名设置
-  enable = true
-  avatar = "/json/77907-vault.json"
-  name = "yibocat"
-  bio = "脑子不够键盘来凑"  # support markdown syntax
-  # twitter = "GoHugoIO"  # https://twitter.com/XXX
-  github = "yibocat"  # https://github.com/XXX
-  email = "yibocat@yeah.net"
 
 [params.social]                   # 社交标签自定义
     GitHub = "yibocat"
     Email   = "yibocat@yeah.net"
-    Weibo = "yibocat"
-    Steam = "yibooo"
+    # Weibo = "yibocat"
+    # Steam = "yibooo"
     Zhihu = "yibocat"
     # Linkedin = "xxxx"
     # Twitter = "xxxx"
@@ -136,12 +136,12 @@ enableRobotsTXT = true
   showSearch = true
 
 [[params.nav.custom]]             # 自定义外部菜单
-  title = "About"
-  url = "/about"
+  # title = "About"
+  # url = "/about"
 
 
 
 [params.beian]                    # 备案设置
-  icp = ""     # example: 粤ICP备20056596号-1
-  gongan = ""  # example: 粤公网安备 44030502005645号
-  code = ""    # example: 44030502005645
+  icp = "粤ICP备20000000号-0"     # example: 粤ICP备20056596号-1
+  gongan = "粤公网安备 000000000000000号"  # example: 粤公网安备 44030502005645号
+  code = "000000000000000"    # example: 44030502005645

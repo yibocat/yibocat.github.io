@@ -1,8 +1,8 @@
 ---
 title: "Test"
 date: 2022-01-23T06:24:01+08:00
-author: "wangyibo"
-draft: false
+# author: "wangyibo"
+draft: true
 tags: ["test"]
 categories: ["test"]
 ---
