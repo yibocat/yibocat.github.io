@@ -30,10 +30,12 @@ enableRobotsTXT = true
   fullRss = false                 # Puts entire HTML post into rss 'description' tag. If unset, default is false.
   ipv6ready = true                # Show IPV6Ready logo on footer.
   avatar = "/images/yibo.jpeg"    # 头像
+  
+  ShowToc = false                  # 显示 table of content 
 
 [params.intro]                    # 首页简介
   intro_1 = "## **这就是个笔记本——脑子不够键盘来凑** ##"        # 首页简介 1
-  intro_2 = "这是一个测试"               # 首页简介 2
+  intro_2 = "**这是一个测试**"               # 首页简介 2
   intro_3 = "**Keywords:**"               # 首页简介 3
 [params.profile]                  # 文章底部签名设置
   enable = true
@@ -47,7 +49,7 @@ enableRobotsTXT = true
 
 [params.assets]                   # 资产库（包括 css 和 js）
   css = ["css/fonts.css","css/archive.css","css/custom_style.css"]
-
+  # js = ["MDB5/js/mdb.min.js"]
 [params.comments]                 # 开启评论
   enable = false  # En/Disable comments globally, default: false. You can always enable comments on per page.
 [params.comments.utterances]      # 评论插件

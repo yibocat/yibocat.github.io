@@ -1,0 +1,13 @@
+<h1>This is a test.</h1>
+<aside id="toc-container" class="toc-container wide" >
+    <div class="toc" style="font-size:larger;">
+        <details {{if (.Param "TocOpen" ) }} open{{ end }}>
+            <summary accesskey="c" title="(Alt + C)">
+                <span class="details">{{- i18n "toc" | default "Table of Contents" }}</span>
+            </summary>
+            {{ .TableOfContents }}
+        </details>
+    </div>
+</aside>
+
+

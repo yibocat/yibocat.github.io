@@ -2,13 +2,14 @@
 
 {{- $justify := false -}}
 {{- if eq .Params.justify true -}} {{- $justify = true -}} {{- end -}}
-<div class="article-container">
+<div class="article-container" >
     {{- partial "article-header.html" . -}}
-    <article class="article markdown-body" {{- if $justify -}}style="text-align: justify;" {{- end -}}>
+    <article class="article markdown-body" {{- if $justify -}}style="text-align: justify;" {{- end -}} >
+        {{- if (.Param "ShowToc") }}{{- partial "toc.html" . }}{{- end }}
         {{- with .Params.cover -}}<p><img class="cover" src="{{- . | safeURL -}}" alt></p>{{- end -}}
-        {{- .Content -}}
+        <div>{{- .Content -}}</div>
     </article>
-    
+
     {{- partial "article-labels.html" . -}}
     {{- partial "article-share.html" . -}}
     {{- partial "article-license.html" . -}}
