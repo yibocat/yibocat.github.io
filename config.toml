@@ -144,6 +144,6 @@ enableRobotsTXT = true
 
 
 [params.beian]                    # 备案设置
-  icp = "粤ICP备20000000号-0"     # example: 粤ICP备20056596号-1
-  gongan = "粤公网安备 000000000000000号"  # example: 粤公网安备 44030502005645号
-  code = "000000000000000"    # example: 44030502005645
+  icp = "陇ICP备2021003237号-1"     # example: 粤ICP备20056596号-1
+  gongan = ""  # example: 粤公网安备 44030502005645号
+  code = ""    # example: 44030502005645
