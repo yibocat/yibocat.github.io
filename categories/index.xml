@@ -9,29 +9,7 @@
 &lt;h2 id="my-heading-2">My Heading-2&lt;/h2>
 &lt;p>He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment.&lt;/p>
 &lt;h3 id="my-subheading-2">My Subheading-2&lt;/h3>
-&lt;p>A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather. Drops&lt;/p></description></item><item><title>Math Typesetting</title><link>https://yibocat.github.io/posts/math-typesetting/</link><pubDate>Mon, 14 Jun 2021 00:00:00 +0000</pubDate><guid>https://yibocat.github.io/posts/math-typesetting/</guid><description>&lt;p>Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p>
-&lt;p>In this example we will be using &lt;a href="https://katex.org/"target="_blank" rel="noopener noreferrer">KaTeX&lt;/a>
-&lt;/p>
-&lt;ul>
-&lt;li>Create a partial under &lt;code>/layouts/partials/math.html&lt;/code>&lt;/li>
-&lt;li>Within this partial reference the &lt;a href="https://katex.org/docs/autorender.html"target="_blank" rel="noopener noreferrer">Auto-render Extension&lt;/a>
-or host these scripts locally.&lt;/li>
-&lt;li>Include the partial in your templates like so:&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="o">{{&lt;/span> &lt;span class="k">if&lt;/span> or .Params.math .Site.Params.math &lt;span class="o">}}&lt;/span>
-&lt;span class="o">{{&lt;/span> partial &lt;span class="s2">&amp;#34;math.html&amp;#34;&lt;/span> . &lt;span class="o">}}&lt;/span>
-&lt;span class="o">{{&lt;/span> end &lt;span class="o">}}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>To enable KaTex globally set the parameter &lt;code>math&lt;/code> to &lt;code>true&lt;/code> in a project&amp;rsquo;s configuration&lt;/li>
-&lt;li>To enable KaTex on a per page basis include the parameter &lt;code>math: true&lt;/code> in content files&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>Note:&lt;/strong> Use the online reference of &lt;a href="https://katex.org/docs/supported.html"target="_blank" rel="noopener noreferrer">Supported TeX Functions&lt;/a>
-&lt;/p>
-&lt;h3 id="examples">Examples&lt;/h3>
-&lt;p>Block math:
-$$
-\varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } }
-$$&lt;/p></description></item><item><title>Archive</title><link>https://yibocat.github.io/archives/</link><pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate><guid>https://yibocat.github.io/archives/</guid><description/></item><item><title>About</title><link>https://yibocat.github.io/about/</link><pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate><guid>https://yibocat.github.io/about/</guid><description>&lt;p>Written in Go, Hugo is an open source static site generator available under the &lt;a href="https://github.com/gohugoio/hugo/blob/master/LICENSE"target="_blank" rel="noopener noreferrer">Apache Licence 2.0.&lt;/a>
+&lt;p>A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather. Drops&lt;/p></description></item><item><title>Archive</title><link>https://yibocat.github.io/archives/</link><pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate><guid>https://yibocat.github.io/archives/</guid><description/></item><item><title>About</title><link>https://yibocat.github.io/about/</link><pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate><guid>https://yibocat.github.io/about/</guid><description>&lt;p>Written in Go, Hugo is an open source static site generator available under the &lt;a href="https://github.com/gohugoio/hugo/blob/master/LICENSE"target="_blank" rel="noopener noreferrer">Apache Licence 2.0.&lt;/a>
 Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.&lt;/p>
 &lt;p>Hugo makes use of a variety of open source projects including:&lt;/p>
 &lt;ul>
