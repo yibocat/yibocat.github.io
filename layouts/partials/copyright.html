@@ -1,0 +1,12 @@
+{{- $copyright := . -}}
+<div class="footer-wrap">
+    <p class="copyright">{{- $copyright -}}</p>
+    <p class="powerby">
+        <span>Powered&nbsp;by&nbsp;</span><a href="https://gohugo.io" target="_blank" rel="noopener noreferrer">Hugo</a>
+        <span>&nbsp;Accelerate with Tencent Cloud CDN.</span>
+        {{/*  <span>&nbsp;&amp;&nbsp;</span>
+        <a href="https://themes.gohugo.io/hugo-notepadium/" target="_blank" rel="noopener noreferrer">Notepadium</a>  */}}
+    </p>
+    {{- partial "beian.html" . -}}
+    {{- partial "ipv6ready.html" . -}}
+</div>
