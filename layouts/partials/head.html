@@ -24,9 +24,6 @@
     })();
 </script>
 
-<script
-    type="text/javascript">document.write(unescape("%3Cspan id='cnzz_stat_icon_1280816536'%3E%3C/span%3E%3Cscript src='https://s9.cnzz.com/z_stat.php%3Fid%3D1280816536%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
-
 {{- define "title" -}}
 {{- $title := .Title -}}
 {{- if and (ne $title "") (ne $title site.Title) -}}
@@ -37,6 +34,9 @@
     {{- $slogan | safeHTML -}}{{- end -}}</title>
 {{- end -}}
 {{- end -}}
+
+
+
 
 {{- block "title" . -}}{{- end -}}
 {{- partial "head-extra.html" . -}}
