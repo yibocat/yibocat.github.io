@@ -181,3 +181,6 @@ body {
   margin-bottom:0px;
   font-weight: 600;
 }
+.article.markdown-body {
+  line-height: 2.0;
+}
