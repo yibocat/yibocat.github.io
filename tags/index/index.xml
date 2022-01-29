@@ -246,8 +246,7 @@ remotes/origin/master
 &lt;/li>
 &lt;li>&lt;a href="https://docs.github.com/cn/pages"target="_blank" rel="noopener noreferrer">https://docs.github.com/cn/pages&lt;/a>
 &lt;/li>
-&lt;/ol></description></item><item><title>Test</title><link>https://yibocat.github.io/posts/test/</link><pubDate>Sun, 23 Jan 2022 06:24:01 +0800</pubDate><guid>https://yibocat.github.io/posts/test/</guid><description>&lt;p>这是一个测试文档。
-This is a test.&lt;/p></description></item><item><title>Math Typesetting</title><link>https://yibocat.github.io/posts/math-typesetting/</link><pubDate>Mon, 14 Jun 2021 00:00:00 +0000</pubDate><guid>https://yibocat.github.io/posts/math-typesetting/</guid><description>&lt;p>Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p>
+&lt;/ol></description></item><item><title>Math Typesetting</title><link>https://yibocat.github.io/posts/math-typesetting/</link><pubDate>Mon, 14 Jun 2021 00:00:00 +0000</pubDate><guid>https://yibocat.github.io/posts/math-typesetting/</guid><description>&lt;p>Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p>
 &lt;p>In this example we will be using &lt;a href="https://katex.org/"target="_blank" rel="noopener noreferrer">KaTeX&lt;/a>
 &lt;/p>
 &lt;ul>
