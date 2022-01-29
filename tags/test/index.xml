@@ -1,4 +1,252 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>test on yibocat</title><link>https://yibocat.github.io/tags/test/</link><description>Recent content in test on yibocat</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>©2022 Yibocat.</copyright><lastBuildDate>Sun, 23 Jan 2022 06:24:01 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/tags/test/index.xml" rel="self" type="application/rss+xml"/><item><title>Test</title><link>https://yibocat.github.io/posts/test/</link><pubDate>Sun, 23 Jan 2022 06:24:01 +0800</pubDate><guid>https://yibocat.github.io/posts/test/</guid><description>&lt;p>这是一个测试文档。
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>test on yibocat</title><link>https://yibocat.github.io/tags/test/</link><description>Recent content in test on yibocat</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>©2022 Yibocat.</copyright><lastBuildDate>Sun, 23 Jan 2022 06:24:01 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/tags/test/index.xml" rel="self" type="application/rss+xml"/><item><title>[建站日记]Hugo+Github+Tencent CDN博客搭建</title><link>https://yibocat.github.io/posts/hugo+github+tencent-cdn%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</link><pubDate>Sat, 29 Jan 2022 12:56:49 +0800</pubDate><guid>https://yibocat.github.io/posts/hugo+github+tencent-cdn%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</guid><description>&lt;p>最近花费了近一周搭建自己的网站，准确的说是静态网页。这是网站的第一篇文章，也可以说是近一周来搭建个人博客的踩坑总结。&lt;/p>
+&lt;p>网站采用的是 hugo 框架，只是因为 hugo 号称是 &amp;ldquo;The world’s fastest framework for building websites&amp;rdquo;，而其特点就在于轻。因为静态网页无需加载太多插件（wordpress 太重了）， 不需要访问数据库，不需要编写太多的网站功能，并且静态网页使用的是纯 html，对于博客系统来说是完全足够了，这也是我放弃 wordpress 的原因。另外一个原因是 wordpress 虽然拥有各种各样眼花缭乱的插件，但是其维护麻烦，不光 wordpress 本身需要版本更新，插件也需要更新，并且更新起来很艰难，常常自动更新失败从而转为手工更新。并且wordpress 很多主题插件是收费的。&lt;/p>
+&lt;p>使用 hugo 搭建个人博客网站，其实理论上来说 hugo 不止可以搭建博客，还可以搭建任何静态网站（甚至是动态网站，不过这也就失去了 hugo 本身的意义了）。而且还有一个更主要的原因：可以学习 git 和 Github。&lt;/p>
+&lt;p>hugo 搭建好之后需要进行部署。通常的做法是托管到 Github Pages，也可以部署在腾讯云的静态网页托管（阿里云也有相同的业务），活或者 Gitee Pages，或者自建服务器等等。所以本文从一开始 hugo 与 git 的安装到最后 CDN 网页加速全过程进行总结。&lt;/p>
+&lt;h3 id="安装-hugo-并新建站点">安装 Hugo 并新建站点&lt;/h3>
+&lt;p>Mac OS 下安装 Hugo 非常方便&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ brew install hugo
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>查看版本是否安装正确&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ hugo version
+hugo v0.86.1+extended darwin/amd64 &lt;span class="nv">BuildDate&lt;/span>&lt;span class="o">=&lt;/span>unknown
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Hugo 安装好之后，就可以创建站点了&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ hugo new site myfirsthugo
+Congratulations! Your new Hugo site is created in /Users/your_name_path/myfirsthugo.
+Just a few more steps and you&lt;span class="err">&amp;#39;&lt;/span>re ready to go:
+1. Download a theme into the same-named folder.
+Choose a theme from https://themes.gohugo.io/ or
+create your own with the &lt;span class="s2">&amp;#34;hugo new theme &amp;lt;THEMENAME&amp;gt;&amp;#34;&lt;/span> command.
+2. Perhaps you want to add some content. You can add single files
+with &lt;span class="s2">&amp;#34;hugo new &amp;lt;SECTIONNAME&amp;gt;/&amp;lt;FILENAME&amp;gt;.&amp;lt;FORMAT&amp;gt;&amp;#34;&lt;/span>.
+3. Start the built-in live server via &lt;span class="s2">&amp;#34;hugo server&amp;#34;&lt;/span>.
+Visit https://gohugo.io/ &lt;span class="k">for&lt;/span> quickstart guide and full documentation.
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>进入站点目录，然后查看目录下包含的文件&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ &lt;span class="nb">cd&lt;/span> myfirsthugo
+$ ls -l
+archetypes content layouts themes
+config.toml data static
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里可以看到 Hugo 自动生成了一堆文件，这些文件也就是 Hugo 站点的结构。&lt;/p>
+&lt;p>archetypes：站点要发表的文章的文章模板，在 Hugo官网上称为模板的 &lt;code>Front Matter&lt;/code>；&lt;/p>
+&lt;p>content：发布的文章在这个目录下生成；&lt;/p>
+&lt;p>layouts：Hugo 站点的布局结构，即 html 布局都要在这个文件夹中编写；&lt;/p>
+&lt;p>themes：站点主题；&lt;/p>
+&lt;p>config.toml：站点配置；&lt;/p>
+&lt;p>data：存放站点的一些数据文件；&lt;/p>
+&lt;p>static：静态文件则保存在这个文件夹中。&lt;/p>
+&lt;h3 id="安装-git">安装 git&lt;/h3>
+&lt;p>git 的安装可以从官方网站上直接下载安装： Mac OS &lt;a href="https://git-scm.com/download/mac"target="_blank" rel="noopener noreferrer">https://git-scm.com/download/mac&lt;/a>
+或者 Windows &lt;a href="https://git-scm.com/download/win"target="_blank" rel="noopener noreferrer">https://git-scm.com/download/win&lt;/a>
+&lt;/p>
+&lt;p>Mac OS 也可以直接终端运行&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ brew install git
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>安装好之后查看 git 版本&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ git --version
+git version 2.32.0 &lt;span class="o">(&lt;/span>Apple Git-132&lt;span class="o">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="初始化-git-存储库安装主题进行配置">初始化 git 存储库，安装主题进行配置&lt;/h3>
+&lt;p>Hugo 建站有两种 Github 托管方式，一种先是直接 git 初始化站点目录，在托管部署时直接将整个目录上传至 Github，这种方法可以很方便的在终端下载安装主题；第二种是先从 Github 上下载好主题并安装，然后运行 Hugo 终端命令 &lt;code>hugo&lt;/code> 生成 public 文件夹，进入 public 并 git 初始化，然后将 public 托管部署到 Github 上。推荐使用第一种方法，以下文章也是采用第一种方法。&lt;/p>
+&lt;p>在 Hugo 站点目录下，进行 git 初始化&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ git init
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后下载主题，可以从 git 命令 &lt;code>clone&lt;/code> 一个主题，也可以从 Github 直接下载，将下载好的主题解压并放在 themes 文件夹中。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ git submodule add https://Github.com/budparr/gohugo-theme-ananke.git themes/ananke
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>下载好的 anake 主题直接放在了 themes 文件夹中，但是主题还并不能加载使用，需要在配置文件中进行主题配置。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ &lt;span class="nb">echo&lt;/span> &lt;span class="nv">theme&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="se">\&amp;#34;&lt;/span>ananke&lt;span class="se">\&amp;#34;&lt;/span> &amp;gt;&amp;gt; config.toml
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者直接打开 &lt;code>config.toml&lt;/code> 在最后一行添加一句：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="nx">baseURL&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;http://example.org/&amp;#34;&lt;/span>
+&lt;span class="nx">languageCode&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;en-us&amp;#34;&lt;/span>
+&lt;span class="nx">title&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;My New Hugo Site&amp;#34;&lt;/span>
+&lt;span class="nx">theme&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;ananke&amp;#34;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后可以新建一个 post 文章&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ hugo new posts/my-first-post.md
+/Users/your_name_path/myfirsthugo/content/posts/my-first-post.md created
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>这时可以看到在 content 文件夹中自动创建了一个 posts 文件夹，并且生成了 &lt;code>my-first-post&lt;/code> 文章。&lt;/p>
+&lt;p>启动 Hugo server&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ hugo server -D
+Start building sites …
+hugo v0.86.1+extended darwin/amd64 &lt;span class="nv">BuildDate&lt;/span>&lt;span class="o">=&lt;/span>unknown
+&lt;span class="p">|&lt;/span> EN
+-------------------+-----
+Pages &lt;span class="p">|&lt;/span> &lt;span class="m">10&lt;/span>
+Paginator pages &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
+Non-page files &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
+Static files &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
+Processed images &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
+Aliases &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
+Sitemaps &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
+Cleaned &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
+Built in &lt;span class="m">72&lt;/span> ms
+Watching &lt;span class="k">for&lt;/span> changes in /Users/your_name_path/myfirsthugo/&lt;span class="o">{&lt;/span>archetypes,content,data,layouts,static,themes&lt;span class="o">}&lt;/span>
+Watching &lt;span class="k">for&lt;/span> config changes in /Users/your_name_path/myfirsthugo/config.toml, /Users/your_name_path/myfirsthugo/themes/ananke/config.yaml
+Environment: &lt;span class="s2">&amp;#34;development&amp;#34;&lt;/span>
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ &lt;span class="o">(&lt;/span>&lt;span class="nb">bind&lt;/span> address 127.0.0.1&lt;span class="o">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>此时在浏览器上打开 &lt;code>http://localhost:1313/&lt;/code> 就可以直接访问了。&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-1.png" alt="jzrj-2022129-1" style="zoom:50%;" />
+&lt;h3 id="生成站点并发布">生成站点并发布&lt;/h3>
+&lt;p>以上步骤只是表示网站可以正常运行了，并不意味着这就是 Hugo 要发布的站点。还要通过 hugo 命令发布站点。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ hugo -D
+Start building sites …
+hugo v0.86.1+extended darwin/amd64 &lt;span class="nv">BuildDate&lt;/span>&lt;span class="o">=&lt;/span>unknown
+&lt;span class="p">|&lt;/span> EN
+-------------------+-----
+Pages &lt;span class="p">|&lt;/span> &lt;span class="m">10&lt;/span>
+Paginator pages &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
+Non-page files &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
+Static files &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
+Processed images &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
+Aliases &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
+Sitemaps &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
+Cleaned &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
+Total in &lt;span class="m">102&lt;/span> ms
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意：这里 &lt;code>-D&lt;/code> 表示以草稿（draft）形式发布站点，所有的草稿文章都会显示。&lt;/p>
+&lt;p>这时就会在站点目录下生成一个 public 文件夹&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ ls
+archetypes content layouts resources themes
+config.toml data public static
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>所有要发布的内容都保存在 public 文件夹中，也就是说，站点呈现的所有内容都已经保存在 public 中了，此时可以将 public 托管到 Github。&lt;/p>
+&lt;blockquote>
+&lt;p>注意：Github Pages 可以使用 Github Action 自动部署并发布，这意味着并不需要运行 &lt;code>hugo&lt;/code> 命令生成 public，我们可以将生成 public 的过程直接部署在 Github 自动发布上。所以可以直接删除掉 public 文件夹，并且在日常浏览中直接使用 &lt;code>hugo server -D&lt;/code> 命令就可以了。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="托管到-github">托管到 Github&lt;/h3>
+&lt;p>浏览器打开网址可以访问，说明网站已经可以正常运行了，但是还需要托管到 Github 上才能进行随时访问。&lt;/p>
+&lt;p>Github Pages 是 Github 官方的博客发布系统，其项目名称需要遵循 &lt;code>username.github.io&lt;/code> 形式。在 Github 上新建一个存储库，任何选项都不要勾选，注意：repository name 要和 Owner 名称相同。如下所示&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-2.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>点击 &lt;code>create repository&lt;/code> 创建存储库，会看到这样的界面&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-3.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>因为之前已经初始化过站点 git 库了，所以只要将远程库的地址加进来就可以了，此时的 Github 库是一个空库。上图中已经告诉了基本步骤，先在本地站点目录创建一个 README.md 文件&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;# accoppo.github.io&amp;#34;&lt;/span> &amp;gt;&amp;gt; README.md
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后创建 &lt;code>master&lt;/code> 分支并提交&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ git add .
+$ git commit -m &lt;span class="s2">&amp;#34;first commit&amp;#34;&lt;/span>
+$ git branch -M master
+$ git remote add origin git@github.com:accoppo/accoppo.github.io.git
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后 &lt;code>push&lt;/code> 上去&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ git push -u origin master
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>-u&lt;/code> 表示库为空，需要整体提交，之后就可以使用 &lt;code>git push&lt;/code> 直接 &lt;code>push&lt;/code> 了。&lt;/p>
+&lt;p>注意：在进行提交推送之前，需要先在 Github 账户设置中新增 SSH 秘钥。&lt;/p>
+&lt;p>然后回到 Github 库中，就可以看到所有内容推送上来了。对于 &lt;code>xxx.github.io&lt;/code> 这样的项目库名称，Github 直接认定是采用 GIthub Pages 发布的，所以在浏览器直接输入 &lt;code>accoppo.github.io&lt;/code> 也是可以显示内容的，只不过显示的 README.md 中的内容。&lt;/p>
+&lt;h3 id="github-action-自动部署并发布">Github Action 自动部署并发布&lt;/h3>
+&lt;p>Action 是 Github 提供的仓库中自动化、自定义和执行软件开发工作流程。&lt;/p>
+&lt;p>官方网站 &lt;a href="https://docs.github.com/cn/actions"target="_blank" rel="noopener noreferrer">https://docs.github.com/cn/actions&lt;/a>
+&lt;/p>
+&lt;p>Hugo + Github Action 可以参考 &lt;a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/#build-hugo-with-github-action"target="_blank" rel="noopener noreferrer">https://gohugo.io/hosting-and-deployment/hosting-on-github/#build-hugo-with-github-action&lt;/a>
+&lt;/p>
+&lt;p>官方提供了一个 yml 文件，文件存在&lt;code>.github/workflows/gh-pages.yml&lt;/code> 里，在项目库中选择 Action 并点击 &lt;code>new workflow&lt;/code>&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-4.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>然后点击 &lt;code>set up a workflow yourself&lt;/code>&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-5.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>然后进入到工作流文件设置中，将 &lt;code>main.yml&lt;/code> 更改为 &lt;code>gh-pages.yml&lt;/code> ，然后将下面代码复制到 &lt;code>Edit new file&lt;/code> 中&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yml" data-lang="yml">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">github pages&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">push&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">master &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Set a branch to deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">deploy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-18.04&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">submodules&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Fetch Hugo themes (true OR recursive)&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">fetch-depth&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">0&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Fetch all history for .GitInfo and .Lastmod&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup Hugo&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-hugo@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">hugo-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;latest&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># extended: true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Build&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">hugo --minify&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-gh-pages@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">github_token&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.GITHUB_TOKEN }}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_dir&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">./public&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如下所示&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-6.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>然后 &lt;code>Start commit&lt;/code> &lt;code>Commit new file&lt;/code> ，&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-7.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>回到 Action 会触发一次构建发布任务，等待几分钟左侧圆圈变成✅&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-8.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>以上任务完成以后，回到 &lt;code>Code&lt;/code> ，并没有看到 public 目录，但是会发现多了一条分支，新增加的这条分支就是 Github Pages 要发布的内容&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-9.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>然后回到 Setting 的 Pages 选项里将发布源改成 &lt;code>gh-pages.yml&lt;/code>&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-10.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>等待几分钟就可以在浏览器中查看了。&lt;/p>
+&lt;p>在发布的站点网页中，并没有看到发布的文章，这是因为在文章的 &lt;code>Front Matter&lt;/code> 设置中将 Draft 设置成了 true，这表示文章现在是草稿形式，并没有发布。&lt;/p>
+&lt;p>而且因为远程库中的内容已经发生变化，所以先从远程将项目库 &lt;code>pull&lt;/code> 下来&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ git pull
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后查看所有分支会发现多出来一条分支 &lt;code>gh-pages&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ git branch -a
+* master
+remotes/origin/gh-pages
+remotes/origin/master
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>修改发布文章的 &lt;code>Front Matter&lt;/code> 的 Draft 选项，并且在 &lt;code>config.toml&lt;/code> 中将 &lt;code>baseURL&lt;/code> 修改成 &lt;code>xxx.github.io&lt;/code> ,再 &lt;code>push &lt;/code> 到 Github&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="nx">baseURL&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;http://xxx.github.io&amp;#34;&lt;/span>
+&lt;span class="nx">languageCode&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;en-us&amp;#34;&lt;/span>
+&lt;span class="nx">title&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;My New Hugo Site&amp;#34;&lt;/span>
+&lt;span class="nx">theme&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;ananke&amp;#34;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>最后就可以正常访问了。&lt;/p>
+&lt;h3 id="域名设置">域名设置&lt;/h3>
+&lt;p>Github Pages 支持设置自定义域名，如下图所示 &lt;code>custom domain &lt;/code> 可以设置自定义域名&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-10.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>首先在任意的域名注册商那里注册一个域名，腾讯云域名注册链接 &lt;a href="https://buy.cloud.tencent.com/domain"target="_blank" rel="noopener noreferrer">https://buy.cloud.tencent.com/domain&lt;/a>
+，或者进入网站 &lt;a href="https://www.dnspod.cn"target="_blank" rel="noopener noreferrer">https://www.dnspod.cn&lt;/a>
+进行域名注册，然后进行备案。&lt;/p>
+&lt;p>等待备案好之后进入 &lt;code>DNSPod&lt;/code> 云解析控制台 &lt;a href="https://www.dnspod.cn"target="_blank" rel="noopener noreferrer">https://www.dnspod.cn&lt;/a>
+，可以看到域名已经添加到我的域名中，然后要做的是对域名添加解析，点击域名，进入我的域名管理，点击快速添加解析&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-11.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>然后将 &lt;code>xxx.github.io&lt;/code> 添加到域名映射CNAME 中，点击确认，就会自动生成四条记录。&lt;/p>
+&lt;p>回到 GIthub 站点项目库的 &lt;code>setting pages&lt;/code> ，将新的域名填入自定义域名框中&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-12.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>等待几分钟，就可以使用自定义域名访问站点了。&lt;/p>
+&lt;h5 id="域名自动更新问题">域名自动更新问题&lt;/h5>
+&lt;p>每次将站点 &lt;code>push&lt;/code> 到 Github 并进行 Action 自动发布时，自定义域名总是会丢失，导致每 &lt;code>push&lt;/code> 一次，就要手动设置一次域名，很是麻烦。后来查阅资料才知道，Github Action 将项目库主分支进行自动部署时，总是重新部署，这使得我们设置好的域名总会刷新掉。解决办法是在本地站点目录的 &lt;code>static&lt;/code> 目录下创建一个 CNAME 文件（注意：没有后缀），写入自定义域名&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-13.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>这样，在每次 Action 自动发布时，&lt;code>static&lt;/code> 目录下的文件会部署到发布目录（即 public目录下）的根目录下，每次进行 &lt;code>push &lt;/code> 就不会丢失自定义域名了。&lt;/p>
+&lt;h3 id="cdn-静态网页加速">CDN 静态网页加速&lt;/h3>
+&lt;p>由于 Github 服务器位于国外，所以访问加载时间是非常长的，这反而失去了静态网页的特点。所以我们可以通过 CDN 内容分发网络对我们的网站进行加速，实现快速访问。&lt;/p>
+&lt;p>不管是腾讯云还是阿里云或者其他 CDN 服务商，都是一样的流程。我们进入腾讯云 CDN 内容分发网络控制台，进入域名管理，然后添加域名进行域名配置&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-14.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>然后进行源站配置，注意：源站配置的回源协议再没有设置 SSL 时选择 HTTP，腾讯云有一年的免费 SSL ，等配置完 SSL 修改源站协议即可。&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-15.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>提交等待几分钟后，需要将生成的加速域名 CNAME 覆盖到 DNSPod 记录管理的 @ 主机记录，这个步骤一般腾讯云会自动替换。&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-16.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>等待 CDN 部署几分钟后，就可以流畅的浏览自己的博客了。&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-17.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;h5 id="注意">注意&lt;/h5>
+&lt;p>CDN 静态网页加速以后，虽然网页浏览速度加快，但是更新缓存资源是延后的，这样造成的后果是发表一篇文章，却不能即时在客户端浏览器看到。幸运的是，在腾讯云的 CDN控制台是有刷新预热功能的，也就是说当网站的源站有资源更新、需要清理违规资源、域名有配置变更的，为避免全网用户受节点缓存影响仍访问到旧的资源、受旧配置的影响，可提交刷新任务，保证全网用户可访问到最新资源或正常访问。&lt;/p>
+&lt;p>这里有三种刷新预热方法&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-18.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;blockquote>
+&lt;p>URL 刷新：表示某一个网页例如主页有信息变化时，通常使用 URL 刷新&lt;/p>
+&lt;p>目录刷新：网站目录下的信息刷新，例如列表、Hugo 的 Posts 目录等&lt;/p>
+&lt;p>URL 预热：当有安装包或者升级包发布时，常采用 URL 预热&lt;/p>
+&lt;/blockquote>
+&lt;p>虽然刷新暂时解决了网页最新的浏览，但是每次手动刷新依然很麻烦。&lt;/p>
+&lt;p>很幸运，腾讯云的 CDN 控制台的插件中心中有一项功能是定时刷新预热&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-19.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>我们可以设置一定的时间或者时间间隔进行自动刷新，避免了每次手动刷新的麻烦。&lt;/p>
+&lt;h3 id="总结与其他">总结与其他&lt;/h3>
+&lt;ol>
+&lt;li>添加网页后台统计分析，当前的流形的统计平台包括百度统计、友盟+、腾讯统计等等，都是很不错的。&lt;/li>
+&lt;li>通过学习 Hugo 的结构，我们不难发现 Hugo 是比较简单的，通过布局嵌套，Hugo 最后部署会将所有的嵌套结构合并成一个网站，这从理论上来说 Hugo 可以搭建任何的网站或者是系统。&lt;/li>
+&lt;li>有时间有机会了可以自己写一个主题。&lt;/li>
+&lt;/ol>
+&lt;h3 id="参考">参考&lt;/h3>
+&lt;ol>
+&lt;li>&lt;a href="https://zhuanlan.zhihu.com/p/350977057"target="_blank" rel="noopener noreferrer">https://zhuanlan.zhihu.com/p/350977057&lt;/a>
+&lt;/li>
+&lt;li>&lt;a href="https://gohugo.io/documentation/"target="_blank" rel="noopener noreferrer">https://gohugo.io/documentation/&lt;/a>
+&lt;/li>
+&lt;li>&lt;a href="https://docs.github.com/cn"target="_blank" rel="noopener noreferrer">https://docs.github.com/cn&lt;/a>
+&lt;/li>
+&lt;li>&lt;a href="https://docs.github.com/cn/pages"target="_blank" rel="noopener noreferrer">https://docs.github.com/cn/pages&lt;/a>
+&lt;/li>
+&lt;/ol></description></item><item><title>Test</title><link>https://yibocat.github.io/posts/test/</link><pubDate>Sun, 23 Jan 2022 06:24:01 +0800</pubDate><guid>https://yibocat.github.io/posts/test/</guid><description>&lt;p>这是一个测试文档。
 This is a test.&lt;/p></description></item><item><title>Math Typesetting</title><link>https://yibocat.github.io/posts/math-typesetting/</link><pubDate>Mon, 14 Jun 2021 00:00:00 +0000</pubDate><guid>https://yibocat.github.io/posts/math-typesetting/</guid><description>&lt;p>Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p>
 &lt;p>In this example we will be using &lt;a href="https://katex.org/"target="_blank" rel="noopener noreferrer">KaTeX&lt;/a>
 &lt;/p>
