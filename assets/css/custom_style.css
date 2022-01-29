@@ -184,3 +184,18 @@ body {
 .article.markdown-body {
   line-height: 2.0;
 }
+
+
+/* syntax */
+pre code,
+pre kbd,
+pre tt,
+pre samp {
+  display: inline;
+  font-size: inherit;
+  font-weight:bold;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, 0);
+}

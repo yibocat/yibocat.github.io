@@ -9,5 +9,5 @@ Yibo's blog is building...
 - [x] Set logo.
 - [x] Lottie Files(https://lottiefiles.com/).
 - [ ] Set the dark mode button.
-- [ ] Reset the site page display.(main-color and font-family)
+- [x] Reset the site page display.
 - [ ] Reset the tab page.

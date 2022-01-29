@@ -61,8 +61,8 @@ enableRobotsTXT = true
 
 [params.syntax]                   # 主题选择
   use = "none"  # builtin: "prismjs", "hljs". "none" means Chroma
-  theme = "github"
-  darkTheme = "dracula"  # apply this theme in dark mode
+  theme = "dracula"  #  可行：Chroma:dracula、friendly      hljs:agate  atom-one-dark
+  darkTheme = "github-dark"  # apply this theme in dark mode # 可行：fruity github-dark rrt solarized-dark256    hljs:zenburn
 
 [params.share]                    # 分享
   enable = false
