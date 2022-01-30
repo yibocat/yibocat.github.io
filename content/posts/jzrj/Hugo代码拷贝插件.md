@@ -2,7 +2,7 @@
 title: "[建站日记] Hugo代码拷贝插件"
 date: 2022-01-30T17:26:21+08:00
 description: ""
-draft: true
+draft: false
 math: true
 tags: ["Hugo","copy","javascript","插件","拷贝","复制"]
 categories: ["建站日记"]
