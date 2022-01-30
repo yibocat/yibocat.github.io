@@ -184,7 +184,11 @@ body {
 .article.markdown-body {
   line-height: 2.0;
 }
-
+.article.markdown-body img {
+  border-radius: 3px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
 
 /* syntax */
 pre code,
