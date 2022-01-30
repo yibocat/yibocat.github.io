@@ -1,11 +1,11 @@
 ---
-title: "[建站日记]Hugo+Github+Tencent CDN博客搭建"
+title: "[建站日记] Hugo+Github+Tencent CDN博客搭建"
 date: 2022-01-29T12:56:49+08:00
 description: ""
 draft: false
 math: true
 
-tags: ["hugo","Github","博客"]
+tags: ["Hugo","Github","博客"]
 categories: ["建站日记"]
 ---
 
