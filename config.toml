@@ -49,7 +49,7 @@ enableRobotsTXT = true
 
 [params.assets]                   # 资产库（包括 css 和 js）
   css = ["css/fonts.css","css/archive.css","css/custom_style.css"]
-  # js = ["MDB5/js/mdb.min.js"]
+  js = ["js/copy-to-clipboard.js"]
 [params.comments]                 # 开启评论
   enable = false  # En/Disable comments globally, default: false. You can always enable comments on per page.
 [params.comments.utterances]      # 评论插件
