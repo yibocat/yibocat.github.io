@@ -1,0 +1,484 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>拷贝 on yibocat</title><link>https://yibocat.github.io/tags/%E6%8B%B7%E8%B4%9D/</link><description>Recent content in 拷贝 on yibocat</description><generator>Hugo -- gohugo.io</generator><copyright>©2022 Yibocat.</copyright><lastBuildDate>Sun, 30 Jan 2022 17:26:21 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/tags/%E6%8B%B7%E8%B4%9D/index.xml" rel="self" type="application/rss+xml"/><item><title>[建站日记] Hugo代码拷贝插件</title><link>https://yibocat.github.io/posts/jzrj/hugo%E4%BB%A3%E7%A0%81%E6%8B%B7%E8%B4%9D%E6%8F%92%E4%BB%B6/</link><pubDate>Sun, 30 Jan 2022 17:26:21 +0800</pubDate><guid>https://yibocat.github.io/posts/jzrj/hugo%E4%BB%A3%E7%A0%81%E6%8B%B7%E8%B4%9D%E6%8F%92%E4%BB%B6/</guid><description>&lt;p>博客是建好了，但是总是想添加一个代码一键复制的功能。一开始是想去 html 标签中直接添加一个 &lt;code>button&lt;/code> ，但是发现好像并没有那么简单。查阅了 Hugo 的内置功能也没有发现，很幸运找到了一篇博客 &lt;a href="https://huangzhongde.cn/"target="_blank" rel="noopener noreferrer">黄忠德的博客&lt;/a>
+，正好解决了我的需求。所以也记录一下。&lt;/p>
+&lt;h3 id="思考">思考&lt;/h3>
+&lt;p>我们知道，代码片段是使用 markdown code fences 来编写的&lt;/p>
+&lt;pre tabindex="0">&lt;code>``` jsx
+import React from 'react';
+```
+&lt;/code>&lt;/pre>&lt;p>以上代码在 Hugo 编译下的 Html 将展示成如下形式&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;highlight&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">pre&lt;/span> &lt;span class="na">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;background-color:#f0f0f0;tab-size:4&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">code&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;language-jsx&amp;#34;&lt;/span> &lt;span class="na">data-lang&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;jsx&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">span&lt;/span> &lt;span class="na">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;color:#007020;font-weight:bold&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>import&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">span&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> React from &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">span&lt;/span> &lt;span class="na">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;color:#4070a0&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&amp;#39;react&amp;#39;&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">span&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>;
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">code&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">pre&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>我们要解决的问题是：&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>搜索所有突出显示的代码块，特别是所有具有类 &lt;code>highlight&lt;/code> 的元素；&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>如何创建按钮放在代码框中；&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>给按钮添加一个事件，用于将代码块中的代码复制到剪贴板。&lt;/strong>&lt;/li>
+&lt;/ol>
+&lt;h3 id="代码">代码&lt;/h3>
+&lt;h4 id="检查复制支持">检查复制支持&lt;/h4>
+&lt;p>进行复制之前，我们首先需要对浏览器是否可以使用 &lt;code>document.execCommand('copy')&lt;/code> 这个功能，因为这段代码正是我们要使用的复制调用代码，我们需要一个命令来检查一下&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">queryCommandSupported&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;copy&amp;#39;&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是 &lt;code>queryCommandSupported&lt;/code> 方法似乎已经弃用，所以其实是不用添加的。&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-20.png" alt="jzrj-20220129-20" style="zoom:50%;" />
+&lt;h4 id="选择突出显示的代码块">选择突出显示的代码块&lt;/h4>
+&lt;p>上文提到，突出显示的代码块是包含在类 &lt;code>highlight&lt;/code> 中的，我们可以使用内置的 DOM API 来检查所有的在 &lt;code>highlight&lt;/code> 内容&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">highlightBlocks&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getElementsByClassName&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;highlight&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="添加按钮">添加按钮&lt;/h4>
+&lt;p>由于 Hugo 的自动编译使得我们无法直接在 html 中添加按钮，这也是我一开始的疑问之处。但是可以使用 js 创建一个特定的函数来实现这个功能。然后在 &lt;code>for&lt;/code> 循环中调用这个函数&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">addCopyButton&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">containerEl&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">copyBtn&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">createElement&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;button&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">className&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;highlight-copy-btn&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Copy&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nx">containerEl&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">appendChild&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kd">var&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="nx">highlightBlocks&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">length&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">addCopyButton&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">highlightBlocks&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="复制响应">复制响应&lt;/h4>
+&lt;p>点击按钮，使用 &lt;code>document.execCommand()&lt;/code> 方法将代码复制到剪贴板，同时还要保持代码的格式。所以创建一个函数，用来选择给定的 html 中的所有文本&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">selectText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">node&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">selection&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getSelection&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">range&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">createRange&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="nx">range&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">selectNodeContents&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">node&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">selection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">removeAllRanges&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="nx">selection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addRange&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">range&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="nx">selection&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>因为代码节点是在 &lt;code> &amp;lt;pre&amp;gt;&lt;/code> 所以使用 &lt;code>.firstElementChild&lt;/code> 来获取节点，选择文本后添加到剪贴板，然后删除所有选择&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">codeEl&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">containerEl&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">firstElementChild&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;click&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kd">function&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">selection&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">selectText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">codeEl&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">execCommand&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;copy&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">selection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">removeAllRanges&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="p">});&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="添加样式">添加样式&lt;/h4>
+&lt;p>这部分是比较简单的，直接放代码了，之后可以自己调试代码按钮样式&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">highlight&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">position&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">relative&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">highlight&lt;/span> &lt;span class="nt">pre&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">padding-right&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">75&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">highlight-copy-btn&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">position&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">absolute&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">top&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">right&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">border&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">border-radius&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">padding&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">font-size&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">0.7&lt;/span>&lt;span class="kt">em&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">line-height&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">1.8&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#fff&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">background-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#777&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">min-width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">55&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">text-align&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">center&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">highlight-copy-btn&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="nd">hover&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">background-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#666&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>我们可以看到在代码框的右上方添加了一个灰色的按钮。&lt;/p>
+&lt;h4 id="已复制响应">已复制响应&lt;/h4>
+&lt;p>所有功能其实都已经完成了，为了更好的用户体验，在点击按钮后需要有一个已复制的响应返回。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">flashCopyMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">el&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">msg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">el&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">msg&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nx">setTimeout&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">function&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">el&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Copy&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">},&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">try&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">selection&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">selectText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">codeEl&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">execCommand&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;copy&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">selection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">removeAllRanges&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="nx">flashCopyMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Copied!&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="p">}&lt;/span> &lt;span class="k">catch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">console&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">flashCopyMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Failed :\&amp;#39;(&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="所有代码">所有代码&lt;/h3>
+&lt;p>&lt;code>copy-to-clipboard.css&lt;/code> :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="p">.&lt;/span>&lt;span class="nc">highlight&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">position&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">relative&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">highlight&lt;/span> &lt;span class="nt">pre&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">padding-right&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">75&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">highlight-copy-btn&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">position&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">absolute&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">top&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">right&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">border&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">border-radius&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">padding&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">font-size&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">0.7&lt;/span>&lt;span class="kt">em&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">line-height&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">1.8&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#fff&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">background-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#777&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">min-width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">55&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">text-align&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">center&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">highlight-copy-btn&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="nd">hover&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">background-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#666&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>copy-to-clipboard.js&lt;/code> :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="p">(&lt;/span>&lt;span class="kd">function&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="s1">&amp;#39;use strict&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">queryCommandSupported&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;copy&amp;#39;&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kd">function&lt;/span> &lt;span class="nx">flashCopyMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">el&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">msg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">el&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">msg&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nx">setTimeout&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">function&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">el&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Copy&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">},&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kd">function&lt;/span> &lt;span class="nx">selectText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">node&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">selection&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getSelection&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">range&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">createRange&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="nx">range&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">selectNodeContents&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">node&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">selection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">removeAllRanges&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="nx">selection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addRange&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">range&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="nx">selection&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="kd">function&lt;/span> &lt;span class="nx">addCopyButton&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">containerEl&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">copyBtn&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">createElement&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;button&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">className&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;highlight-copy-btn&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Copy&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">codeEl&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">containerEl&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">firstElementChild&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;click&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kd">function&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">try&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">selection&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">selectText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">codeEl&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">execCommand&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;copy&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">selection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">removeAllRanges&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="nx">flashCopyMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Copied!&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="p">}&lt;/span> &lt;span class="k">catch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">console&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">flashCopyMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Failed :\&amp;#39;(&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">});&lt;/span>
+&lt;span class="nx">containerEl&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">appendChild&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="c1">// Add copy button to code blocks
+&lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nx">highlightBlocks&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getElementsByClassName&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;highlight&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nb">Array&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">forEach&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">call&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">highlightBlocks&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">addCopyButton&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">})();&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>将这两个文件分别放在 &lt;code>assets/css&lt;/code> 和 &lt;code>assets/js&lt;/code> 下，然后在配置文件 &lt;code>config.toml&lt;/code> 中修改自定义 css 和 js，或者手动添加到 &lt;code>head.html&lt;/code> 头文件中。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="nx">custom_css&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;css/copy-to-clipboard.css&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="nx">custom_js&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;js/copy-to-clipboard.js&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="参考">参考：&lt;/h3>
+&lt;ol>
+&lt;li>&lt;a href="https://huangzhongde.cn/post/2020-02-21-hugo-code-copy-to-clipboard/"target="_blank" rel="noopener noreferrer">https://huangzhongde.cn/post/2020-02-21-hugo-code-copy-to-clipboard/&lt;/a>
+&lt;/li>
+&lt;li>&lt;a href="https://www.tomspencer.dev/blog/2018/09/14/adding-click-to-copy-buttons-to-a-hugo-powered-blog/"target="_blank" rel="noopener noreferrer">https://www.tomspencer.dev/blog/2018/09/14/adding-click-to-copy-buttons-to-a-hugo-powered-blog/&lt;/a>
+&lt;/li>
+&lt;/ol></description></item><item><title>[建站日记] Hugo+Github+Tencent CDN博客搭建</title><link>https://yibocat.github.io/posts/jzrj/hugo+github+tencent-cdn%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</link><pubDate>Sat, 29 Jan 2022 12:56:49 +0800</pubDate><guid>https://yibocat.github.io/posts/jzrj/hugo+github+tencent-cdn%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</guid><description>&lt;p>最近花费了近一周搭建自己的网站，准确的说是静态网页。这是网站的第一篇文章，也可以说是近一周来搭建个人博客的踩坑总结。&lt;/p>
+&lt;p>网站采用的是 hugo 框架，只是因为 hugo 号称是 &amp;ldquo;The world’s fastest framework for building websites&amp;rdquo;，而其特点就在于轻。因为静态网页无需加载太多插件（wordpress 太重了）， 不需要访问数据库，不需要编写太多的网站功能，并且静态网页使用的是纯 html，对于博客系统来说是完全足够了，这也是我放弃 wordpress 的原因。另外一个原因是 wordpress 虽然拥有各种各样眼花缭乱的插件，但是其维护麻烦，不光 wordpress 本身需要版本更新，插件也需要更新，并且更新起来很艰难，常常自动更新失败从而转为手工更新。并且wordpress 很多主题插件是收费的。&lt;/p>
+&lt;p>使用 hugo 搭建个人博客网站，其实理论上来说 hugo 不止可以搭建博客，还可以搭建任何静态网站（甚至是动态网站，不过这也就失去了 hugo 本身的意义了）。而且还有一个更主要的原因：可以学习 git 和 Github。&lt;/p>
+&lt;p>hugo 搭建好之后需要进行部署。通常的做法是托管到 Github Pages，也可以部署在腾讯云的静态网页托管（阿里云也有相同的业务），活或者 Gitee Pages，或者自建服务器等等。所以本文从一开始 hugo 与 git 的安装到最后 CDN 网页加速全过程进行总结。&lt;/p>
+&lt;h3 id="安装-hugo-并新建站点">安装 Hugo 并新建站点&lt;/h3>
+&lt;p>Mac OS 下安装 Hugo 非常方便&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ brew install hugo
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>查看版本是否安装正确&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ hugo version
+hugo v0.86.1+extended darwin/amd64 &lt;span class="nv">BuildDate&lt;/span>&lt;span class="o">=&lt;/span>unknown
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Hugo 安装好之后，就可以创建站点了&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ hugo new site myfirsthugo
+Congratulations! Your new Hugo site is created in /Users/your_name_path/myfirsthugo.
+Just a few more steps and you&lt;span class="err">&amp;#39;&lt;/span>re ready to go:
+1. Download a theme into the same-named folder.
+Choose a theme from https://themes.gohugo.io/ or
+create your own with the &lt;span class="s2">&amp;#34;hugo new theme &amp;lt;THEMENAME&amp;gt;&amp;#34;&lt;/span> command.
+2. Perhaps you want to add some content. You can add single files
+with &lt;span class="s2">&amp;#34;hugo new &amp;lt;SECTIONNAME&amp;gt;/&amp;lt;FILENAME&amp;gt;.&amp;lt;FORMAT&amp;gt;&amp;#34;&lt;/span>.
+3. Start the built-in live server via &lt;span class="s2">&amp;#34;hugo server&amp;#34;&lt;/span>.
+Visit https://gohugo.io/ &lt;span class="k">for&lt;/span> quickstart guide and full documentation.
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>进入站点目录，然后查看目录下包含的文件&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ &lt;span class="nb">cd&lt;/span> myfirsthugo
+$ ls -l
+archetypes content layouts themes
+config.toml data static
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里可以看到 Hugo 自动生成了一堆文件，这些文件也就是 Hugo 站点的结构。&lt;/p>
+&lt;p>archetypes：站点要发表的文章的文章模板，在 Hugo官网上称为模板的 &lt;code>Front Matter&lt;/code>；&lt;/p>
+&lt;p>content：发布的文章在这个目录下生成；&lt;/p>
+&lt;p>layouts：Hugo 站点的布局结构，即 html 布局都要在这个文件夹中编写；&lt;/p>
+&lt;p>themes：站点主题；&lt;/p>
+&lt;p>config.toml：站点配置；&lt;/p>
+&lt;p>data：存放站点的一些数据文件；&lt;/p>
+&lt;p>static：静态文件则保存在这个文件夹中。&lt;/p>
+&lt;h3 id="安装-git">安装 git&lt;/h3>
+&lt;p>git 的安装可以从官方网站上直接下载安装： Mac OS &lt;a href="https://git-scm.com/download/mac"target="_blank" rel="noopener noreferrer">https://git-scm.com/download/mac&lt;/a>
+或者 Windows &lt;a href="https://git-scm.com/download/win"target="_blank" rel="noopener noreferrer">https://git-scm.com/download/win&lt;/a>
+&lt;/p>
+&lt;p>Mac OS 也可以直接终端运行&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ brew install git
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>安装好之后查看 git 版本&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ git --version
+git version 2.32.0 &lt;span class="o">(&lt;/span>Apple Git-132&lt;span class="o">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="初始化-git-存储库安装主题进行配置">初始化 git 存储库，安装主题进行配置&lt;/h3>
+&lt;p>Hugo 建站有两种 Github 托管方式，一种先是直接 git 初始化站点目录，在托管部署时直接将整个目录上传至 Github，这种方法可以很方便的在终端下载安装主题；第二种是先从 Github 上下载好主题并安装，然后运行 Hugo 终端命令 &lt;code>hugo&lt;/code> 生成 public 文件夹，进入 public 并 git 初始化，然后将 public 托管部署到 Github 上。推荐使用第一种方法，以下文章也是采用第一种方法。&lt;/p>
+&lt;p>在 Hugo 站点目录下，进行 git 初始化&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ git init
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后下载主题，可以从 git 命令 &lt;code>clone&lt;/code> 一个主题，也可以从 Github 直接下载，将下载好的主题解压并放在 themes 文件夹中。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ git submodule add https://Github.com/budparr/gohugo-theme-ananke.git themes/ananke
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>下载好的 anake 主题直接放在了 themes 文件夹中，但是主题还并不能加载使用，需要在配置文件中进行主题配置。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ &lt;span class="nb">echo&lt;/span> &lt;span class="nv">theme&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="se">\&amp;#34;&lt;/span>ananke&lt;span class="se">\&amp;#34;&lt;/span> &amp;gt;&amp;gt; config.toml
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者直接打开 &lt;code>config.toml&lt;/code> 在最后一行添加一句：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="nx">baseURL&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;http://example.org/&amp;#34;&lt;/span>
+&lt;span class="nx">languageCode&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;en-us&amp;#34;&lt;/span>
+&lt;span class="nx">title&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;My New Hugo Site&amp;#34;&lt;/span>
+&lt;span class="nx">theme&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;ananke&amp;#34;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后可以新建一个 post 文章&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ hugo new posts/my-first-post.md
+/Users/your_name_path/myfirsthugo/content/posts/my-first-post.md created
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>这时可以看到在 content 文件夹中自动创建了一个 posts 文件夹，并且生成了 &lt;code>my-first-post&lt;/code> 文章。&lt;/p>
+&lt;p>启动 Hugo server&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ hugo server -D
+Start building sites …
+hugo v0.86.1+extended darwin/amd64 &lt;span class="nv">BuildDate&lt;/span>&lt;span class="o">=&lt;/span>unknown
+&lt;span class="p">|&lt;/span> EN
+-------------------+-----
+Pages &lt;span class="p">|&lt;/span> &lt;span class="m">10&lt;/span>
+Paginator pages &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
+Non-page files &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
+Static files &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
+Processed images &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
+Aliases &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
+Sitemaps &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
+Cleaned &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
+Built in &lt;span class="m">72&lt;/span> ms
+Watching &lt;span class="k">for&lt;/span> changes in /Users/your_name_path/myfirsthugo/&lt;span class="o">{&lt;/span>archetypes,content,data,layouts,static,themes&lt;span class="o">}&lt;/span>
+Watching &lt;span class="k">for&lt;/span> config changes in /Users/your_name_path/myfirsthugo/config.toml, /Users/your_name_path/myfirsthugo/themes/ananke/config.yaml
+Environment: &lt;span class="s2">&amp;#34;development&amp;#34;&lt;/span>
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ &lt;span class="o">(&lt;/span>&lt;span class="nb">bind&lt;/span> address 127.0.0.1&lt;span class="o">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>此时在浏览器上打开 &lt;code>http://localhost:1313/&lt;/code> 就可以直接访问了。&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-1.png" alt="jzrj-2022129-1" style="zoom:50%;" />
+&lt;h3 id="生成站点并发布">生成站点并发布&lt;/h3>
+&lt;p>以上步骤只是表示网站可以正常运行了，并不意味着这就是 Hugo 要发布的站点。还要通过 hugo 命令发布站点。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ hugo -D
+Start building sites …
+hugo v0.86.1+extended darwin/amd64 &lt;span class="nv">BuildDate&lt;/span>&lt;span class="o">=&lt;/span>unknown
+&lt;span class="p">|&lt;/span> EN
+-------------------+-----
+Pages &lt;span class="p">|&lt;/span> &lt;span class="m">10&lt;/span>
+Paginator pages &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
+Non-page files &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
+Static files &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
+Processed images &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
+Aliases &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
+Sitemaps &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
+Cleaned &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
+Total in &lt;span class="m">102&lt;/span> ms
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意：这里 &lt;code>-D&lt;/code> 表示以草稿（draft）形式发布站点，所有的草稿文章都会显示。&lt;/p>
+&lt;p>这时就会在站点目录下生成一个 public 文件夹&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ ls
+archetypes content layouts resources themes
+config.toml data public static
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>所有要发布的内容都保存在 public 文件夹中，也就是说，站点呈现的所有内容都已经保存在 public 中了，此时可以将 public 托管到 Github。&lt;/p>
+&lt;blockquote>
+&lt;p>注意：Github Pages 可以使用 Github Action 自动部署并发布，这意味着并不需要运行 &lt;code>hugo&lt;/code> 命令生成 public，我们可以将生成 public 的过程直接部署在 Github 自动发布上。所以可以直接删除掉 public 文件夹，并且在日常浏览中直接使用 &lt;code>hugo server -D&lt;/code> 命令就可以了。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="托管到-github">托管到 Github&lt;/h3>
+&lt;p>浏览器打开网址可以访问，说明网站已经可以正常运行了，但是还需要托管到 Github 上才能进行随时访问。&lt;/p>
+&lt;p>Github Pages 是 Github 官方的博客发布系统，其项目名称需要遵循 &lt;code>username.github.io&lt;/code> 形式。在 Github 上新建一个存储库，任何选项都不要勾选，注意：repository name 要和 Owner 名称相同。如下所示&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-2.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>点击 &lt;code>create repository&lt;/code> 创建存储库，会看到这样的界面&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-3.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>因为之前已经初始化过站点 git 库了，所以只要将远程库的地址加进来就可以了，此时的 Github 库是一个空库。上图中已经告诉了基本步骤，先在本地站点目录创建一个 README.md 文件&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;# accoppo.github.io&amp;#34;&lt;/span> &amp;gt;&amp;gt; README.md
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后创建 &lt;code>master&lt;/code> 分支并提交&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ git add .
+$ git commit -m &lt;span class="s2">&amp;#34;first commit&amp;#34;&lt;/span>
+$ git branch -M master
+$ git remote add origin git@github.com:accoppo/accoppo.github.io.git
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后 &lt;code>push&lt;/code> 上去&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ git push -u origin master
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>-u&lt;/code> 表示库为空，需要整体提交，之后就可以使用 &lt;code>git push&lt;/code> 直接 &lt;code>push&lt;/code> 了。&lt;/p>
+&lt;p>注意：在进行提交推送之前，需要先在 Github 账户设置中新增 SSH 秘钥。&lt;/p>
+&lt;p>然后回到 Github 库中，就可以看到所有内容推送上来了。对于 &lt;code>xxx.github.io&lt;/code> 这样的项目库名称，Github 直接认定是采用 GIthub Pages 发布的，所以在浏览器直接输入 &lt;code>accoppo.github.io&lt;/code> 也是可以显示内容的，只不过显示的 README.md 中的内容。&lt;/p>
+&lt;h3 id="github-action-自动部署并发布">Github Action 自动部署并发布&lt;/h3>
+&lt;p>Action 是 Github 提供的仓库中自动化、自定义和执行软件开发工作流程。&lt;/p>
+&lt;p>官方网站 &lt;a href="https://docs.github.com/cn/actions"target="_blank" rel="noopener noreferrer">https://docs.github.com/cn/actions&lt;/a>
+&lt;/p>
+&lt;p>Hugo + Github Action 可以参考 &lt;a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/#build-hugo-with-github-action"target="_blank" rel="noopener noreferrer">https://gohugo.io/hosting-and-deployment/hosting-on-github/#build-hugo-with-github-action&lt;/a>
+&lt;/p>
+&lt;p>官方提供了一个 yml 文件，文件存在&lt;code>.github/workflows/gh-pages.yml&lt;/code> 里，在项目库中选择 Action 并点击 &lt;code>new workflow&lt;/code>&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-4.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>然后点击 &lt;code>set up a workflow yourself&lt;/code>&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-5.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>然后进入到工作流文件设置中，将 &lt;code>main.yml&lt;/code> 更改为 &lt;code>gh-pages.yml&lt;/code> ，然后将下面代码复制到 &lt;code>Edit new file&lt;/code> 中&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yml" data-lang="yml">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">github pages&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">push&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">master &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Set a branch to deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">deploy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-18.04&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">submodules&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Fetch Hugo themes (true OR recursive)&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">fetch-depth&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">0&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Fetch all history for .GitInfo and .Lastmod&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup Hugo&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-hugo@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">hugo-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;latest&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># extended: true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Build&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">hugo --minify&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-gh-pages@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">github_token&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.GITHUB_TOKEN }}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_dir&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">./public&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如下所示&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-6.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>然后 &lt;code>Start commit&lt;/code> &lt;code>Commit new file&lt;/code> ，&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-7.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>回到 Action 会触发一次构建发布任务，等待几分钟左侧圆圈变成✅&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-8.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>以上任务完成以后，回到 &lt;code>Code&lt;/code> ，并没有看到 public 目录，但是会发现多了一条分支，新增加的这条分支就是 Github Pages 要发布的内容&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-9.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>然后回到 Setting 的 Pages 选项里将发布源改成 &lt;code>gh-pages.yml&lt;/code>&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-10.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>等待几分钟就可以在浏览器中查看了。&lt;/p>
+&lt;p>在发布的站点网页中，并没有看到发布的文章，这是因为在文章的 &lt;code>Front Matter&lt;/code> 设置中将 Draft 设置成了 true，这表示文章现在是草稿形式，并没有发布。&lt;/p>
+&lt;p>而且因为远程库中的内容已经发生变化，所以先从远程将项目库 &lt;code>pull&lt;/code> 下来&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ git pull
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后查看所有分支会发现多出来一条分支 &lt;code>gh-pages&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ git branch -a
+* master
+remotes/origin/gh-pages
+remotes/origin/master
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>修改发布文章的 &lt;code>Front Matter&lt;/code> 的 Draft 选项，并且在 &lt;code>config.toml&lt;/code> 中将 &lt;code>baseURL&lt;/code> 修改成 &lt;code>xxx.github.io&lt;/code> ,再 &lt;code>push &lt;/code> 到 Github&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="nx">baseURL&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;http://xxx.github.io&amp;#34;&lt;/span>
+&lt;span class="nx">languageCode&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;en-us&amp;#34;&lt;/span>
+&lt;span class="nx">title&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;My New Hugo Site&amp;#34;&lt;/span>
+&lt;span class="nx">theme&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;ananke&amp;#34;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>最后就可以正常访问了。&lt;/p>
+&lt;h3 id="域名设置">域名设置&lt;/h3>
+&lt;p>Github Pages 支持设置自定义域名，如下图所示 &lt;code>custom domain &lt;/code> 可以设置自定义域名&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-10.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>首先在任意的域名注册商那里注册一个域名，腾讯云域名注册链接 &lt;a href="https://buy.cloud.tencent.com/domain"target="_blank" rel="noopener noreferrer">https://buy.cloud.tencent.com/domain&lt;/a>
+，或者进入网站 &lt;a href="https://www.dnspod.cn"target="_blank" rel="noopener noreferrer">https://www.dnspod.cn&lt;/a>
+进行域名注册，然后进行备案。&lt;/p>
+&lt;p>等待备案好之后进入 &lt;code>DNSPod&lt;/code> 云解析控制台 &lt;a href="https://www.dnspod.cn"target="_blank" rel="noopener noreferrer">https://www.dnspod.cn&lt;/a>
+，可以看到域名已经添加到我的域名中，然后要做的是对域名添加解析，点击域名，进入我的域名管理，点击快速添加解析&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-11.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>然后将 &lt;code>xxx.github.io&lt;/code> 添加到域名映射CNAME 中，点击确认，就会自动生成四条记录。&lt;/p>
+&lt;p>回到 GIthub 站点项目库的 &lt;code>setting pages&lt;/code> ，将新的域名填入自定义域名框中&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-12.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>等待几分钟，就可以使用自定义域名访问站点了。&lt;/p>
+&lt;h5 id="域名自动更新问题">域名自动更新问题&lt;/h5>
+&lt;p>每次将站点 &lt;code>push&lt;/code> 到 Github 并进行 Action 自动发布时，自定义域名总是会丢失，导致每 &lt;code>push&lt;/code> 一次，就要手动设置一次域名，很是麻烦。后来查阅资料才知道，Github Action 将项目库主分支进行自动部署时，总是重新部署，这使得我们设置好的域名总会刷新掉。解决办法是在本地站点目录的 &lt;code>static&lt;/code> 目录下创建一个 CNAME 文件（注意：没有后缀），写入自定义域名&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-13.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>这样，在每次 Action 自动发布时，&lt;code>static&lt;/code> 目录下的文件会部署到发布目录（即 public目录下）的根目录下，每次进行 &lt;code>push &lt;/code> 就不会丢失自定义域名了。&lt;/p>
+&lt;h3 id="cdn-静态网页加速">CDN 静态网页加速&lt;/h3>
+&lt;p>由于 Github 服务器位于国外，所以访问加载时间是非常长的，这反而失去了静态网页的特点。所以我们可以通过 CDN 内容分发网络对我们的网站进行加速，实现快速访问。&lt;/p>
+&lt;p>不管是腾讯云还是阿里云或者其他 CDN 服务商，都是一样的流程。我们进入腾讯云 CDN 内容分发网络控制台，进入域名管理，然后添加域名进行域名配置&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-14.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>然后进行源站配置，注意：源站配置的回源协议再没有设置 SSL 时选择 HTTP，腾讯云有一年的免费 SSL ，等配置完 SSL 修改源站协议即可。&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-15.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>提交等待几分钟后，需要将生成的加速域名 CNAME 覆盖到 DNSPod 记录管理的 @ 主机记录，这个步骤一般腾讯云会自动替换。&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-16.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>等待 CDN 部署几分钟后，就可以流畅的浏览自己的博客了。&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-17.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;h5 id="注意">注意&lt;/h5>
+&lt;p>CDN 静态网页加速以后，虽然网页浏览速度加快，但是更新缓存资源是延后的，这样造成的后果是发表一篇文章，却不能即时在客户端浏览器看到。幸运的是，在腾讯云的 CDN控制台是有刷新预热功能的，也就是说当网站的源站有资源更新、需要清理违规资源、域名有配置变更的，为避免全网用户受节点缓存影响仍访问到旧的资源、受旧配置的影响，可提交刷新任务，保证全网用户可访问到最新资源或正常访问。&lt;/p>
+&lt;p>这里有三种刷新预热方法&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-18.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;blockquote>
+&lt;p>URL 刷新：表示某一个网页例如主页有信息变化时，通常使用 URL 刷新&lt;/p>
+&lt;p>目录刷新：网站目录下的信息刷新，例如列表、Hugo 的 Posts 目录等&lt;/p>
+&lt;p>URL 预热：当有安装包或者升级包发布时，常采用 URL 预热&lt;/p>
+&lt;/blockquote>
+&lt;p>虽然刷新暂时解决了网页最新的浏览，但是每次手动刷新依然很麻烦。&lt;/p>
+&lt;p>很幸运，腾讯云的 CDN 控制台的插件中心中有一项功能是定时刷新预热&lt;/p>
+&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-19.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p>我们可以设置一定的时间或者时间间隔进行自动刷新，避免了每次手动刷新的麻烦。&lt;/p>
+&lt;h3 id="总结与其他">总结与其他&lt;/h3>
+&lt;ol>
+&lt;li>添加网页后台统计分析，当前的流形的统计平台包括百度统计、友盟+、腾讯统计等等，都是很不错的。&lt;/li>
+&lt;li>通过学习 Hugo 的结构，我们不难发现 Hugo 是比较简单的，通过布局嵌套，Hugo 最后部署会将所有的嵌套结构合并成一个网站，这从理论上来说 Hugo 可以搭建任何的网站或者是系统。&lt;/li>
+&lt;li>有时间有机会了可以自己写一个主题。&lt;/li>
+&lt;/ol>
+&lt;h3 id="参考">参考&lt;/h3>
+&lt;ol>
+&lt;li>&lt;a href="https://zhuanlan.zhihu.com/p/350977057"target="_blank" rel="noopener noreferrer">https://zhuanlan.zhihu.com/p/350977057&lt;/a>
+&lt;/li>
+&lt;li>&lt;a href="https://gohugo.io/documentation/"target="_blank" rel="noopener noreferrer">https://gohugo.io/documentation/&lt;/a>
+&lt;/li>
+&lt;li>&lt;a href="https://docs.github.com/cn"target="_blank" rel="noopener noreferrer">https://docs.github.com/cn&lt;/a>
+&lt;/li>
+&lt;li>&lt;a href="https://docs.github.com/cn/pages"target="_blank" rel="noopener noreferrer">https://docs.github.com/cn/pages&lt;/a>
+&lt;/li>
+&lt;/ol></description></item><item><title>CDN 刷新列表</title><link>https://yibocat.github.io/posts/cdn-%E5%88%B7%E6%96%B0%E5%88%97%E8%A1%A8/</link><pubDate>Fri, 28 Jan 2022 23:15:17 +0800</pubDate><guid>https://yibocat.github.io/posts/cdn-%E5%88%B7%E6%96%B0%E5%88%97%E8%A1%A8/</guid><description>&lt;h3 id="cdn-刷新列表">CDN 刷新列表&lt;/h3>
+&lt;p>CDN 工作台：&lt;a href="https://console.cloud.tencent.com/cdn/refresh"target="_blank" rel="noopener noreferrer">https://console.cloud.tencent.com/cdn/refresh&lt;/a>
+&lt;/p>
+&lt;h4 id="url刷新">URL刷新&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">https://yibocat.com/
+https://yibocat.com/posts
+https://yibocat.com/archives
+https://yibocat.com/categories
+https://yibocat.com/search
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="目录刷新">目录刷新&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">https://yibocat.com/
+https://yibocat.com/posts/
+https://yibocat.com/archives/
+https://yibocat.com/categories/
+https://yibocat.com/search/
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Math Typesetting</title><link>https://yibocat.github.io/posts/math-typesetting/</link><pubDate>Mon, 14 Jun 2021 00:00:00 +0000</pubDate><guid>https://yibocat.github.io/posts/math-typesetting/</guid><description>&lt;p>Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p>
+&lt;p>In this example we will be using &lt;a href="https://katex.org/"target="_blank" rel="noopener noreferrer">KaTeX&lt;/a>
+&lt;/p>
+&lt;ul>
+&lt;li>Create a partial under &lt;code>/layouts/partials/math.html&lt;/code>&lt;/li>
+&lt;li>Within this partial reference the &lt;a href="https://katex.org/docs/autorender.html"target="_blank" rel="noopener noreferrer">Auto-render Extension&lt;/a>
+or host these scripts locally.&lt;/li>
+&lt;li>Include the partial in your templates like so:&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="o">{{&lt;/span> &lt;span class="k">if&lt;/span> or .Params.math .Site.Params.math &lt;span class="o">}}&lt;/span>
+&lt;span class="o">{{&lt;/span> partial &lt;span class="s2">&amp;#34;math.html&amp;#34;&lt;/span> . &lt;span class="o">}}&lt;/span>
+&lt;span class="o">{{&lt;/span> end &lt;span class="o">}}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>To enable KaTex globally set the parameter &lt;code>math&lt;/code> to &lt;code>true&lt;/code> in a project&amp;rsquo;s configuration&lt;/li>
+&lt;li>To enable KaTex on a per page basis include the parameter &lt;code>math: true&lt;/code> in content files&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Note:&lt;/strong> Use the online reference of &lt;a href="https://katex.org/docs/supported.html"target="_blank" rel="noopener noreferrer">Supported TeX Functions&lt;/a>
+&lt;/p>
+&lt;h3 id="examples">Examples&lt;/h3>
+&lt;p>Block math:
+$$
+\varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } }
+$$&lt;/p></description></item><item><title>Archive</title><link>https://yibocat.github.io/archives/</link><pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate><guid>https://yibocat.github.io/archives/</guid><description/></item><item><title>About</title><link>https://yibocat.github.io/about/</link><pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate><guid>https://yibocat.github.io/about/</guid><description>&lt;p>Written in Go, Hugo is an open source static site generator available under the &lt;a href="https://github.com/gohugoio/hugo/blob/master/LICENSE"target="_blank" rel="noopener noreferrer">Apache Licence 2.0.&lt;/a>
+Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.&lt;/p>
+&lt;p>Hugo makes use of a variety of open source projects including:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/yuin/goldmark"target="_blank" rel="noopener noreferrer">https://github.com/yuin/goldmark&lt;/a>
+&lt;/li>
+&lt;li>&lt;a href="https://github.com/alecthomas/chroma"target="_blank" rel="noopener noreferrer">https://github.com/alecthomas/chroma&lt;/a>
+&lt;/li>
+&lt;li>&lt;a href="https://github.com/muesli/smartcrop"target="_blank" rel="noopener noreferrer">https://github.com/muesli/smartcrop&lt;/a>
+&lt;/li>
+&lt;li>&lt;a href="https://github.com/spf13/cobra"target="_blank" rel="noopener noreferrer">https://github.com/spf13/cobra&lt;/a>
+&lt;/li>
+&lt;li>&lt;a href="https://github.com/spf13/viper"target="_blank" rel="noopener noreferrer">https://github.com/spf13/viper&lt;/a>
+&lt;/li>
+&lt;/ul>
+&lt;p>Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.&lt;/p>
+&lt;p>Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.&lt;/p>
+&lt;p>Websites built with Hugo are extremelly fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.&lt;/p>
+&lt;p>Learn more and contribute on &lt;a href="https://github.com/gohugoio"target="_blank" rel="noopener noreferrer">GitHub&lt;/a>
+.&lt;/p></description></item><item><title>Search</title><link>https://yibocat.github.io/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yibocat.github.io/search/</guid><description/></item></channel></rss>
