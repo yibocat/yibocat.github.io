@@ -1,4 +1,4 @@
-/* Background */ pre, .chroma { color: #c9d1d9; background-color: #0e1218; margin-top:1em; margin-bottom:1em;}
+/* Background */ pre, .chroma { color: #c9d1d9; background-color: #1d2430; margin-top:1em; margin-bottom:1em; border:1px solid #3c4058}
 /* Error */ .chroma .err { color: #EA4A5A; }
 /* LineTableTD */ .chroma .lntd { vertical-align: top; padding: 0; margin: 0; border: 0; }
 /* LineTable */ .chroma .lntable { border-spacing: 0; padding: 0; margin: 0; border: 0; width: auto; overflow: auto; display: block; }
