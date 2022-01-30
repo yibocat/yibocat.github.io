@@ -15,7 +15,13 @@ CDN 工作台：[https://console.cloud.tencent.com/cdn/refresh](https://console.
 <!--more-->
 
 
-```
+```shell
+https://yibocat.com/
+https://yibocat.com/posts
+https://yibocat.com/archives
+https://yibocat.com/categories
+https://yibocat.com/search
+
 https://yibocat.com/
 https://yibocat.com/posts/
 https://yibocat.com/archives/
