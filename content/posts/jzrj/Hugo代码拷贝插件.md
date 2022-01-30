@@ -1,6 +1,7 @@
 ---
 title: "[建站日记] Hugo代码拷贝插件"
 date: 2022-01-30T17:26:21+08:00
+author: "yibo"
 description: ""
 draft: false
 math: true

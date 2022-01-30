@@ -3,10 +3,10 @@ title = "yibocat"
 theme = "notepadium"
 copyright = "©2022 Yibocat."
 
-languageCode = "zh-cn"
+# languageCode = "zh-cn"
 hasCJKLanguage = true
 enableRobotsTXT = true
-
+defaultContentLanguage = 'zh'     # 更改语言
 # Enable Disqus
 #disqusShortname = "XXX"
 # Google Analytics
@@ -66,7 +66,7 @@ enableRobotsTXT = true
 
 [params.share]                    # 分享
   enable = false
-  addThisId = "facebook"
+  addThisId = "ra-1234567890"
   inlineToolId = "测试分享"
 
 
