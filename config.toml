@@ -30,8 +30,7 @@ defaultContentLanguage = 'zh'     # 更改语言
   fullRss = false                 # Puts entire HTML post into rss 'description' tag. If unset, default is false.
   ipv6ready = true                # Show IPV6Ready logo on footer.
   avatar = "/images/yibo.jpeg"    # 头像
-  
-  ShowToc = false                  # 显示 table of content 
+  ShowToc = true                  # 显示 table of content 
 
 [params.intro]                    # 首页简介
   intro_1 = "## **这就是个笔记本——脑子不够键盘来凑** ##"        # 首页简介 1
@@ -49,7 +48,7 @@ defaultContentLanguage = 'zh'     # 更改语言
 
 [params.assets]                   # 资产库（包括 css 和 js）
   css = ["css/fonts.css","css/archive.css","css/custom_style.css"]
-  js = ["js/copy-to-clipboard.js"]
+  js = ["js/copy-to-clipboard.js","js/toc.js"]
 [params.comments]                 # 开启评论
   enable = false  # En/Disable comments globally, default: false. You can always enable comments on per page.
 [params.comments.utterances]      # 评论插件

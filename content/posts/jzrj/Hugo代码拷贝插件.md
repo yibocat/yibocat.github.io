@@ -255,23 +255,7 @@ custom_css = ["css/copy-to-clipboard.css"]
 custom_js = ["js/copy-to-clipboard.js"]
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### 参考：
+### 参考
 
 1. https://huangzhongde.cn/post/2020-02-21-hugo-code-copy-to-clipboard/
 2. https://www.tomspencer.dev/blog/2018/09/14/adding-click-to-copy-buttons-to-a-hugo-powered-blog/

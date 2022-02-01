@@ -1,7 +1,8 @@
-/* :root{
+:root{
   --toc-width: 300px;
-  --gap: 24px;
-} */
+  --gap: 45px;
+  /* --article-width: 1000px; */
+}
 
 
 /* body */
@@ -27,7 +28,8 @@ body {
 #content {
   display: block;
   margin: 0 auto;
-  max-width: 789px;
+  /* max-width: 789px; */
+  width: 55%;
   padding-top: 160px;
   padding-bottom: 150px;
 }
@@ -45,7 +47,22 @@ body {
   top: 0;
   width: 100%;
 }
+@media (max-width: 1012px) {
+  #content {
+    width: auto;
+  }
+  .note.list .item,
+  .article-container {
+    padding: 24px;
+    border-radius: 0;
+    box-shadow: none;
+  }
 
+  .article.bottom {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
 
 
 /* Search */
@@ -254,4 +271,52 @@ pre samp {
 }
 .highlight-copy-btn:hover {
   background-color: #666;
+}
+
+
+/* tabel of content */
+.toc-container.wide{
+  position: absolute;
+  height: 100%;
+  right: 0;
+  width: 20%;
+  top: 160px;
+}
+.toc {
+  line-height: 1.5em;
+}
+.wide .toc {
+  position: sticky;
+  top: var(--gap);
+  width: 100%;
+  right: 0;
+  padding: 0 2em 0 0;
+}
+/* .toc details summary {
+
+  margin-inline-start: 20px;
+  padding: 12px 0;
+}
+.toc details[open] summary {
+  font-weight:bolder;
+} */
+.toc ul {
+  list-style-type: circle;
+}
+.active {               /* 监听特效 */
+  font-size: 110%;
+  font-weight: 600;
+}
+.toc li {
+  list-style: none;
+  font-size: 0.95rem;
+  padding-bottom: 5px;
+}
+.toc li a:hover {
+  text-decoration: none;
+  color: var(--secondary);
+}
+.toc .inner {
+  margin: 20px 0 0 20px;
+  font-size: 12px;
 }

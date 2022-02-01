@@ -247,7 +247,7 @@ b {
 #content {
   display: block;
   margin: 0 auto;
-  max-width: 744px;
+  /* max-width: 744px; */
 }
 
 #footer {
