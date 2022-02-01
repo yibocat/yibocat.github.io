@@ -202,7 +202,7 @@ import React from 'react';
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>将这两个文件分别放在 &lt;code>assets/css&lt;/code> 和 &lt;code>assets/js&lt;/code> 下，然后在配置文件 &lt;code>config.toml&lt;/code> 中修改自定义 css 和 js，或者手动添加到 &lt;code>head.html&lt;/code> 头文件中。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="nx">custom_css&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;css/copy-to-clipboard.css&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
 &lt;span class="nx">custom_js&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;js/copy-to-clipboard.js&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="参考">参考：&lt;/h3>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="参考">参考&lt;/h3>
 &lt;ol>
 &lt;li>&lt;a href="https://huangzhongde.cn/post/2020-02-21-hugo-code-copy-to-clipboard/"target="_blank" rel="noopener noreferrer">https://huangzhongde.cn/post/2020-02-21-hugo-code-copy-to-clipboard/&lt;/a>
 &lt;/li>

@@ -1,10 +1,8 @@
 <!doctype html><html lang=zh><meta charset=utf-8><meta name=generator content="Hugo 0.92.1"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name=color-scheme content="light dark">
 <meta name=supported-color-schemes content="light dark">
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3 crossorigin=anonymous>
-<script src=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js integrity=sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p crossorigin=anonymous></script>
 <title>[建站日记] Hugo代码拷贝插件&nbsp;&ndash;&nbsp;yibocat</title>
-<link rel=stylesheet href=/css/core.min.5131a21e7703dee662c8071b3957850051d489d535503c43cb9c5c5fa1a6d28a07d813bc895628701222e8ec49663921.css integrity=sha384-UTGiHncD3uZiyAcbOVeFAFHUidU1UDxDy5xcX6Gm0ooH2BO8iVYocBIi6OxJZjkh><meta name=twitter:card content="summary">
+<link rel=stylesheet href=/css/core.min.6fe9f0f92ff120c01f9bb72af56dafbd0b12ba0363b75948a7b17cac719a8bb376c7be9326348afbfecd2d5b85d7acec.css integrity=sha384-b+nw+S/xIMAfm7cq9W2vvQsSugNjt1lIp7F8rHGai7N2x76TJjSK+/7NLVuF16zs><meta name=twitter:card content="summary">
 <meta name=twitter:title content="[建站日记] Hugo代码拷贝插件"><body><section id=header>
 <div class="header wrap"><span class="header left-side"><a class="site home" href=/><img class="site logo" src=/images/yibo.jpeg alt><span class="site name">yibocat</span></a></span>
 <span class="header right-side"><div class="nav wrap">
@@ -12,7 +10,37 @@
 </nav>
 </div></span></div></section><section id=content><div class=article-container><section class="article header">
 <h1 class="article title">[建站日记] Hugo代码拷贝插件</h1><p class="article date">2022-01-30
-<span class=wordcount>&nbsp;•&nbsp;共&nbsp;1029&nbsp;个字</span><span class=reading-time> • 预计阅读时间 3 分钟</span></p></section><article class="article markdown-body"><div><p>博客是建好了，但是总是想添加一个代码一键复制的功能。一开始是想去 html 标签中直接添加一个 <code>button</code> ，但是发现好像并没有那么简单。查阅了 Hugo 的内置功能也没有发现，很幸运找到了一篇博客 <a href=https://huangzhongde.cn/ target=_blank rel="noopener noreferrer">黄忠德的博客</a>
+<span class=wordcount>&nbsp;•&nbsp;共&nbsp;1028&nbsp;个字</span><span class=reading-time> • 预计阅读时间 3 分钟</span></p></section><aside id=toc-container class="toc-container wide">
+<div class=toc>
+<h3>文章目录</h3>
+<div class=inner><ul>
+<li>
+<a href=#%e6%80%9d%e8%80%83 aria-label=思考>思考</a></li>
+<li>
+<a href=#%e4%bb%a3%e7%a0%81 aria-label=代码>代码</a><ul>
+<li>
+<a href=#%e6%a3%80%e6%9f%a5%e5%a4%8d%e5%88%b6%e6%94%af%e6%8c%81 aria-label=检查复制支持>检查复制支持</a></li>
+<li>
+<a href=#%e9%80%89%e6%8b%a9%e7%aa%81%e5%87%ba%e6%98%be%e7%a4%ba%e7%9a%84%e4%bb%a3%e7%a0%81%e5%9d%97 aria-label=选择突出显示的代码块>选择突出显示的代码块</a></li>
+<li>
+<a href=#%e6%b7%bb%e5%8a%a0%e6%8c%89%e9%92%ae aria-label=添加按钮>添加按钮</a></li>
+<li>
+<a href=#%e5%a4%8d%e5%88%b6%e5%93%8d%e5%ba%94 aria-label=复制响应>复制响应</a></li>
+<li>
+<a href=#%e6%b7%bb%e5%8a%a0%e6%a0%b7%e5%bc%8f aria-label=添加样式>添加样式</a></li>
+<li>
+<a href=#%e5%b7%b2%e5%a4%8d%e5%88%b6%e5%93%8d%e5%ba%94 aria-label=已复制响应>已复制响应</a></li></ul>
+</li>
+<li>
+<a href=#%e6%89%80%e6%9c%89%e4%bb%a3%e7%a0%81 aria-label=所有代码>所有代码</a></li>
+<li>
+<a href=#%e5%8f%82%e8%80%83 aria-label=参考>参考</a>
+</li>
+</ul>
+</div>
+</div>
+</aside>
+<article class="article markdown-body"><div><p>博客是建好了，但是总是想添加一个代码一键复制的功能。一开始是想去 html 标签中直接添加一个 <code>button</code> ，但是发现好像并没有那么简单。查阅了 Hugo 的内置功能也没有发现，很幸运找到了一篇博客 <a href=https://huangzhongde.cn/ target=_blank rel="noopener noreferrer">黄忠德的博客</a>
 ，正好解决了我的需求。所以也记录一下。</p>
 <h3 id=思考>思考</h3>
 <p>我们知道，代码片段是使用 markdown code fences 来编写的</p>
@@ -196,7 +224,7 @@ import React from 'react';
 </code></pre></div><p>将这两个文件分别放在 <code>assets/css</code> 和 <code>assets/js</code> 下，然后在配置文件 <code>config.toml</code> 中修改自定义 css 和 js，或者手动添加到 <code>head.html</code> 头文件中。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=nx>custom_css</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;css/copy-to-clipboard.css&#34;</span><span class=p>]</span>
 <span class=nx>custom_js</span> <span class=p>=</span> <span class=p>[</span><span class=s2>&#34;js/copy-to-clipboard.js&#34;</span><span class=p>]</span>
-</code></pre></div><h3 id=参考>参考：</h3>
+</code></pre></div><h3 id=参考>参考</h3>
 <ol>
 <li><a href=https://huangzhongde.cn/post/2020-02-21-hugo-code-copy-to-clipboard/ target=_blank rel="noopener noreferrer">https://huangzhongde.cn/post/2020-02-21-hugo-code-copy-to-clipboard/</a>
 </li>
@@ -215,5 +243,5 @@ import React from 'react';
 <span>Powered&nbsp;by&nbsp;</span><a href=https://gohugo.io target=_blank rel="noopener noreferrer">Hugo</a>
 <span>&nbsp;Accelerate with Tencent Cloud CDN.</span>
 <a href="https://ipv6-test.com/validate.php?url=referer"><img src=https://ipv6-test.com/button-ipv6-80x15.png alt="ipv6 ready" title="ipv6 ready" border=0></a>
-</p><p style=font-size:12px><a href=http://beian.miit.gov.cn/ target=_blank rel="noopener noreferrer">陇ICP备2021003237号-1</a></p></div></section><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css integrity=sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js integrity=sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js integrity=sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI crossorigin=anonymous onload=renderMathInElement(document.body)></script><script src=/js/core.min.c1cdd26528f5fc184fa4a86712eaea6a9c0c2c96cfd087d3ade615ab3f021881619d195fcaaab1321ac63b4a1b979ae4.js integrity=sha384-wc3SZSj1/BhPpKhnEurqapwMLJbP0IfTreYVqz8CGIFhnRlfyqqxMhrGO0obl5rk></script></body>
+</p><p style=font-size:12px><a href=http://beian.miit.gov.cn/ target=_blank rel="noopener noreferrer">陇ICP备2021003237号-1</a></p></div></section><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css integrity=sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js integrity=sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js integrity=sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI crossorigin=anonymous onload=renderMathInElement(document.body)></script><script src=/js/core.min.45bc6f7686a5f99de05699008e2608053161016a4ce37a6b899e6fd78870c210a3239372eaedcb90385626ad3dafe267.js integrity=sha384-Rbxvdoal+Z3gVpkAjiYIBTFhAWpM43priZ5v14hwwhCjI5Ny6u3LkDhWJq09r+Jn></script></body>
 </html>

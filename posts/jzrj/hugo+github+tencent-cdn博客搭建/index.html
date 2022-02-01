@@ -1,10 +1,8 @@
 <!doctype html><html lang=zh><meta charset=utf-8><meta name=generator content="Hugo 0.92.1"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name=color-scheme content="light dark">
 <meta name=supported-color-schemes content="light dark">
-<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3 crossorigin=anonymous>
-<script src=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js integrity=sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p crossorigin=anonymous></script>
 <title>[建站日记] Hugo+Github+Tencent CDN博客搭建&nbsp;&ndash;&nbsp;yibocat</title>
-<link rel=stylesheet href=/css/core.min.5131a21e7703dee662c8071b3957850051d489d535503c43cb9c5c5fa1a6d28a07d813bc895628701222e8ec49663921.css integrity=sha384-UTGiHncD3uZiyAcbOVeFAFHUidU1UDxDy5xcX6Gm0ooH2BO8iVYocBIi6OxJZjkh><meta name=twitter:card content="summary">
+<link rel=stylesheet href=/css/core.min.6fe9f0f92ff120c01f9bb72af56dafbd0b12ba0363b75948a7b17cac719a8bb376c7be9326348afbfecd2d5b85d7acec.css integrity=sha384-b+nw+S/xIMAfm7cq9W2vvQsSugNjt1lIp7F8rHGai7N2x76TJjSK+/7NLVuF16zs><meta name=twitter:card content="summary">
 <meta name=twitter:title content="[建站日记] Hugo+Github+Tencent CDN博客搭建"><body><section id=header>
 <div class="header wrap"><span class="header left-side"><a class="site home" href=/><img class="site logo" src=/images/yibo.jpeg alt><span class="site name">yibocat</span></a></span>
 <span class="header right-side"><div class="nav wrap">
@@ -12,7 +10,46 @@
 </nav>
 </div></span></div></section><section id=content><div class=article-container><section class="article header">
 <h1 class="article title">[建站日记] Hugo+Github+Tencent CDN博客搭建</h1><p class="article date">2022-01-29
-<span class=wordcount>&nbsp;•&nbsp;共&nbsp;3947&nbsp;个字</span><span class=reading-time> • 预计阅读时间 8 分钟</span></p></section><article class="article markdown-body"><div><p>最近花费了近一周搭建自己的网站，准确的说是静态网页。这是网站的第一篇文章，也可以说是近一周来搭建个人博客的踩坑总结。</p>
+<span class=wordcount>&nbsp;•&nbsp;共&nbsp;3947&nbsp;个字</span><span class=reading-time> • 预计阅读时间 8 分钟</span></p></section><aside id=toc-container class="toc-container wide">
+<div class=toc>
+<h3>文章目录</h3>
+<div class=inner><ul>
+<li>
+<a href=#%e5%ae%89%e8%a3%85-hugo-%e5%b9%b6%e6%96%b0%e5%bb%ba%e7%ab%99%e7%82%b9 aria-label="安装 Hugo 并新建站点">安装 Hugo 并新建站点</a></li>
+<li>
+<a href=#%e5%ae%89%e8%a3%85-git aria-label="安装 git">安装 git</a></li>
+<li>
+<a href=#%e5%88%9d%e5%a7%8b%e5%8c%96-git-%e5%ad%98%e5%82%a8%e5%ba%93%e5%ae%89%e8%a3%85%e4%b8%bb%e9%a2%98%e8%bf%9b%e8%a1%8c%e9%85%8d%e7%bd%ae aria-label="初始化 git 存储库，安装主题进行配置">初始化 git 存储库，安装主题进行配置</a></li>
+<li>
+<a href=#%e7%94%9f%e6%88%90%e7%ab%99%e7%82%b9%e5%b9%b6%e5%8f%91%e5%b8%83 aria-label=生成站点并发布>生成站点并发布</a></li>
+<li>
+<a href=#%e6%89%98%e7%ae%a1%e5%88%b0-github aria-label="托管到 Github">托管到 Github</a></li>
+<li>
+<a href=#github-action-%e8%87%aa%e5%8a%a8%e9%83%a8%e7%bd%b2%e5%b9%b6%e5%8f%91%e5%b8%83 aria-label="Github Action 自动部署并发布">Github Action 自动部署并发布</a></li>
+<li>
+<a href=#%e5%9f%9f%e5%90%8d%e8%ae%be%e7%bd%ae aria-label=域名设置>域名设置</a><ul>
+<ul>
+<li>
+<a href=#%e5%9f%9f%e5%90%8d%e8%87%aa%e5%8a%a8%e6%9b%b4%e6%96%b0%e9%97%ae%e9%a2%98 aria-label=域名自动更新问题>域名自动更新问题</a></li></ul>
+</ul>
+</li>
+<li>
+<a href=#cdn-%e9%9d%99%e6%80%81%e7%bd%91%e9%a1%b5%e5%8a%a0%e9%80%9f aria-label="CDN 静态网页加速">CDN 静态网页加速</a><ul>
+<ul>
+<li>
+<a href=#%e6%b3%a8%e6%84%8f aria-label=注意>注意</a></li></ul>
+</ul>
+</li>
+<li>
+<a href=#%e6%80%bb%e7%bb%93%e4%b8%8e%e5%85%b6%e4%bb%96 aria-label=总结与其他>总结与其他</a></li>
+<li>
+<a href=#%e5%8f%82%e8%80%83 aria-label=参考>参考</a>
+</li>
+</ul>
+</div>
+</div>
+</aside>
+<article class="article markdown-body"><div><p>最近花费了近一周搭建自己的网站，准确的说是静态网页。这是网站的第一篇文章，也可以说是近一周来搭建个人博客的踩坑总结。</p>
 <p>网站采用的是 hugo 框架，只是因为 hugo 号称是 &ldquo;The world’s fastest framework for building websites&rdquo;，而其特点就在于轻。因为静态网页无需加载太多插件（wordpress 太重了）， 不需要访问数据库，不需要编写太多的网站功能，并且静态网页使用的是纯 html，对于博客系统来说是完全足够了，这也是我放弃 wordpress 的原因。另外一个原因是 wordpress 虽然拥有各种各样眼花缭乱的插件，但是其维护麻烦，不光 wordpress 本身需要版本更新，插件也需要更新，并且更新起来很艰难，常常自动更新失败从而转为手工更新。并且wordpress 很多主题插件是收费的。</p>
 <p>使用 hugo 搭建个人博客网站，其实理论上来说 hugo 不止可以搭建博客，还可以搭建任何静态网站（甚至是动态网站，不过这也就失去了 hugo 本身的意义了）。而且还有一个更主要的原因：可以学习 git 和 Github。</p>
 <p>hugo 搭建好之后需要进行部署。通常的做法是托管到 Github Pages，也可以部署在腾讯云的静态网页托管（阿里云也有相同的业务），活或者 Gitee Pages，或者自建服务器等等。所以本文从一开始 hugo 与 git 的安装到最后 CDN 网页加速全过程进行总结。</p>
@@ -280,5 +317,5 @@ $ git remote add origin git@github.com:accoppo/accoppo.github.io.git
 <span>Powered&nbsp;by&nbsp;</span><a href=https://gohugo.io target=_blank rel="noopener noreferrer">Hugo</a>
 <span>&nbsp;Accelerate with Tencent Cloud CDN.</span>
 <a href="https://ipv6-test.com/validate.php?url=referer"><img src=https://ipv6-test.com/button-ipv6-80x15.png alt="ipv6 ready" title="ipv6 ready" border=0></a>
-</p><p style=font-size:12px><a href=http://beian.miit.gov.cn/ target=_blank rel="noopener noreferrer">陇ICP备2021003237号-1</a></p></div></section><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css integrity=sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js integrity=sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js integrity=sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI crossorigin=anonymous onload=renderMathInElement(document.body)></script><script src=/js/core.min.c1cdd26528f5fc184fa4a86712eaea6a9c0c2c96cfd087d3ade615ab3f021881619d195fcaaab1321ac63b4a1b979ae4.js integrity=sha384-wc3SZSj1/BhPpKhnEurqapwMLJbP0IfTreYVqz8CGIFhnRlfyqqxMhrGO0obl5rk></script></body>
+</p><p style=font-size:12px><a href=http://beian.miit.gov.cn/ target=_blank rel="noopener noreferrer">陇ICP备2021003237号-1</a></p></div></section><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css integrity=sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js integrity=sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js integrity=sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI crossorigin=anonymous onload=renderMathInElement(document.body)></script><script src=/js/core.min.45bc6f7686a5f99de05699008e2608053161016a4ce37a6b899e6fd78870c210a3239372eaedcb90385626ad3dafe267.js integrity=sha384-Rbxvdoal+Z3gVpkAjiYIBTFhAWpM43priZ5v14hwwhCjI5Ny6u3LkDhWJq09r+Jn></script></body>
 </html>
