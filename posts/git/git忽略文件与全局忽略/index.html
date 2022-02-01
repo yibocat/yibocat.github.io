@@ -1,0 +1,60 @@
+<!doctype html><html lang=zh><meta charset=utf-8><meta name=generator content="Hugo 0.92.1"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name=color-scheme content="light dark">
+<meta name=supported-color-schemes content="light dark">
+<link href=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css rel=stylesheet integrity=sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3 crossorigin=anonymous>
+<script src=https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js integrity=sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p crossorigin=anonymous></script>
+<title>[Git 日记] Git 忽略 .DS_Store 与全局忽略&nbsp;&ndash;&nbsp;yibocat</title>
+<link rel=stylesheet href=/css/core.min.5131a21e7703dee662c8071b3957850051d489d535503c43cb9c5c5fa1a6d28a07d813bc895628701222e8ec49663921.css integrity=sha384-UTGiHncD3uZiyAcbOVeFAFHUidU1UDxDy5xcX6Gm0ooH2BO8iVYocBIi6OxJZjkh><meta name=twitter:card content="summary">
+<meta name=twitter:title content="[Git 日记] Git 忽略 .DS_Store 与全局忽略"><body><section id=header>
+<div class="header wrap"><span class="header left-side"><a class="site home" href=/><img class="site logo" src=/images/yibo.jpeg alt><span class="site name">yibocat</span></a></span>
+<span class="header right-side"><div class="nav wrap">
+<nav class=nav><a class="nav item" href=/archives/> Archives </a><a class="nav item" href=/categories/> Categories </a><a class="nav item" href=/search/> Search </a><a class="nav item" href></a>
+</nav>
+</div></span></div></section><section id=content><div class=article-container><section class="article header">
+<h1 class="article title">[Git 日记] Git 忽略 .DS_Store 与全局忽略</h1><p class="article date">2022-02-01
+<span class=wordcount>&nbsp;•&nbsp;共&nbsp;417&nbsp;个字</span><span class=reading-time> • 预计阅读时间 1 分钟</span></p></section><article class="article markdown-body"><div><p>Mac OS 的每个文件夹下都有一个隐藏文件 .DS_Store，该文件保存的是当前文件夹的属性，如图标位置、背景等。</p>
+<p>但是每次使用 Git 提交更改时，都会自动生成 .DS_Store 更改，所以每次提交到版本库和 <code>push</code> 到 Github 总是很麻烦。所以 .DS_Store 是没有必要提交到版本库的，这时可以使用 git.gitignore 来忽略此类文件。</p>
+<h3 id=忽略当前目录下的-ds_store>忽略当前目录下的 .DS_Store</h3>
+<p>我们在所要忽略 .DS_Store 的目录下创建一个 <code>.gitignore</code> 文件，然后将要忽略的文件名写入进去</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>touch .gitignore
+</code></pre></div><img src=/images/git/git-20220201-1.png alt=jzrj-20220129-20 style=zoom:50%>
+<p>每次忽略任何文件只需将要忽略的文件添加到 <code>.gitignore</code> 文件就可以了。</p>
+<p>但是每次更改完 <code>.gitignore</code> 文件之后，都需要运行以下代码，否则 <code>.gitignore</code> 是不生效的</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>git rm -r --cached .
+git add .
+git commit -m <span class=s1>&#39;update .gitignore&#39;</span>
+</code></pre></div><h3 id=git-全局忽略>git 全局忽略</h3>
+<p>首先在终端输入如下代码查看 git 现有的全局配置</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>git config --list
+</code></pre></div><p>git 全局配置都在一个 <code>.gitconfig</code> 文件中，所以可以使用 git 全局配置进行全局忽略 .DS_Store 。</p>
+<p>具体步骤是在根目录创建一个 <code>.gitignore_global</code> 文件，把要忽略的文件直接添加到该文件中，和上文中的当前目录添加是一样的</p>
+<p>然后在终端输入</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>git config --global core.excludesfile/Users/reon/.gitignore_global
+</code></pre></div><p>或者直接在 <code>.gitconfig</code> 中添加如下内容</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=o>[</span>core<span class=o>]</span>
+    <span class=nv>excludefile</span> <span class=o>=</span> /Users/xiaqunfeng/.gitignore_global
+</code></pre></div><p>然后同样，同样执行代码</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>git rm --cached filename
+git commit -m <span class=s2>&#34;rm filename&#34;</span>
+</code></pre></div><p>然后 <code>push</code> 到 <code>Github</code> 就可以了。</p>
+<h3 id=参考>参考</h3>
+<ol>
+<li><a href=http://xiaqunfeng.cc/2018/04/24/git-ignore-ds-store/#%E5%88%A0%E9%99%A4github%E4%B8%8A%E6%96%87%E4%BB%B6 target=_blank rel="noopener noreferrer">http://xiaqunfeng.cc/2018/04/24/git-ignore-ds-store/#%E5%88%A0%E9%99%A4github%E4%B8%8A%E6%96%87%E4%BB%B6</a>
+</li>
+<li><a href=https://blog.csdn.net/allanGold/article/details/73132606 target=_blank rel="noopener noreferrer">https://blog.csdn.net/allanGold/article/details/73132606</a>
+</li>
+</ol></div>
+</article><section class="article labels"><a class=category href=/categories/git-%E6%97%A5%E8%AE%B0/>Git 日记</a><a class=tag href=/tags/git/>Git</a><a class=tag href=/tags/mac-os/>Mac OS</a><a class=tag href=/tags/%2eds_store/>.DS_Store</a><a class=tag href=/tags/%2egitignore/>.gitignore</a></section><section class="article license">版权声明：如果转发请带上本文链接和注明来源。</section><section class="article author">
+<script src=https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js></script>
+<lottie-player class=avatar src=/json/77907-vault.json background=transparent speed=1 style=max-width:280px; loop autoplay></lottie-player><p class=name>yibocat</p><div class=bio>脑子不够键盘来凑</div><div class=details><a class=item href=https://github.com/yibocat target=_blank rel="noopener noreferrer"><span class="iconfont icon-github"></span>&nbsp;yibocat</a><a class=item href=mailto:yibocat@yeah.net target=_blank rel="noopener noreferrer"><span class="iconfont icon-mail"></span>&nbsp;yibocat@yeah.net</a></div>
+</section>
+</div>
+<div class="article bottom">
+<div class="article bottom title">更多文章</div><section class="article navigation"><p><a class=link href=/posts/jzrj/hugo%E4%BB%A3%E7%A0%81%E6%8B%B7%E8%B4%9D%E6%8F%92%E4%BB%B6/><span class="iconfont icon-article"></span>[建站日记] Hugo代码拷贝插件</a></p></section></div></section><section id=footer><div class=footer-wrap>
+<p class=copyright>©2022 Yibocat.</p>
+<p class=powerby>
+<span>Powered&nbsp;by&nbsp;</span><a href=https://gohugo.io target=_blank rel="noopener noreferrer">Hugo</a>
+<span>&nbsp;Accelerate with Tencent Cloud CDN.</span>
+<a href="https://ipv6-test.com/validate.php?url=referer"><img src=https://ipv6-test.com/button-ipv6-80x15.png alt="ipv6 ready" title="ipv6 ready" border=0></a>
+</p><p style=font-size:12px><a href=http://beian.miit.gov.cn/ target=_blank rel="noopener noreferrer">陇ICP备2021003237号-1</a></p></div></section><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css integrity=sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js integrity=sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js integrity=sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI crossorigin=anonymous onload=renderMathInElement(document.body)></script><script src=/js/core.min.c1cdd26528f5fc184fa4a86712eaea6a9c0c2c96cfd087d3ade615ab3f021881619d195fcaaab1321ac63b4a1b979ae4.js integrity=sha384-wc3SZSj1/BhPpKhnEurqapwMLJbP0IfTreYVqz8CGIFhnRlfyqqxMhrGO0obl5rk></script></body>
+</html>
