@@ -1,6 +1,8 @@
+<div class="nav-bottom">
 {{- $nav := . -}}
 {{- if or $nav.showCategories $nav.showTags $nav.showArchives $nav.custom $nav.showPosts -}}
-<div class="nav wrap">
+<div class="nav wrap bottom">
+    <!-- <h1>菜单</h1> -->
     <nav class="nav">
 
         {{- if $nav.showPosts -}}
@@ -38,3 +40,4 @@
     </nav>
 </div>
 {{- end -}}
+</div>

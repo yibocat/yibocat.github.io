@@ -183,7 +183,13 @@ body {
   padding: 5px;
   font-weight: bold;
 }
-
+.nav-bottom {
+  border-top: 1px solid currentColor;
+  margin-top:2em;
+}
+.nav.wrap.bottom {
+  padding: 1em;
+}
 
 
 /* article */

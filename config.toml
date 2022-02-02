@@ -131,11 +131,18 @@ defaultContentLanguage = 'zh'     # 更改语言
 
 
 [params.nav]                      # 自定义菜单
-  showCategories = true       # /categories/
-  showTags = false             # /tags/
+  showCategories = true           # /categories/
+  showTags = false                # /tags/
   showArchives = true
   showSearch = true
+  showPosts = true
 
+[params.navbottom]                # 底部菜单
+  showCategories = true           # /categories/
+  showTags = false                 # /tags/
+  showArchives = true
+  showSearch = true
+  showPosts = true
 [[params.nav.custom]]             # 自定义外部菜单
   # title = "About"
   # url = "/about"
