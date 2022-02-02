@@ -1,4 +1,71 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git 日记 on yibocat</title><link>https://yibocat.github.io/categories/git-%E6%97%A5%E8%AE%B0/</link><description>Recent content in Git 日记 on yibocat</description><generator>Hugo -- gohugo.io</generator><copyright>©2022 Yibocat.</copyright><lastBuildDate>Tue, 01 Feb 2022 10:53:07 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/categories/git-%E6%97%A5%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>[Git 日记] Git 忽略 .DS_Store 与全局忽略</title><link>https://yibocat.github.io/posts/git/git%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E4%B8%8E%E5%85%A8%E5%B1%80%E5%BF%BD%E7%95%A5/</link><pubDate>Tue, 01 Feb 2022 10:53:07 +0800</pubDate><guid>https://yibocat.github.io/posts/git/git%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E4%B8%8E%E5%85%A8%E5%B1%80%E5%BF%BD%E7%95%A5/</guid><description>&lt;p>Mac OS 的每个文件夹下都有一个隐藏文件 .DS_Store，该文件保存的是当前文件夹的属性，如图标位置、背景等。&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git 日记 on yibocat</title><link>https://yibocat.github.io/categories/git-%E6%97%A5%E8%AE%B0/</link><description>Recent content in Git 日记 on yibocat</description><generator>Hugo -- gohugo.io</generator><copyright>©2022 Yibocat.</copyright><lastBuildDate>Tue, 01 Feb 2022 10:53:07 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/categories/git-%E6%97%A5%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>[Python 笔记本] 远程搭建 jupyter 服务器</title><link>https://yibocat.github.io/posts/fwq/%E8%BF%9C%E7%A8%8B%E6%90%AD%E5%BB%BAjupyter%E6%9C%8D%E5%8A%A1%E5%99%A8/</link><pubDate>Wed, 02 Feb 2022 21:47:35 +0800</pubDate><guid>https://yibocat.github.io/posts/fwq/%E8%BF%9C%E7%A8%8B%E6%90%AD%E5%BB%BAjupyter%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid><description>&lt;p>本文通过搭建一个简单的远程 &lt;code>Jupyter&lt;/code> 服务端，可以实现不分场合与时间运行代码，或者说是展示代码，这提供了极大的方便。&lt;/p>
+&lt;h3 id="搭建-jupyter-服务器">搭建 &lt;code>Jupyter&lt;/code> 服务器&lt;/h3>
+&lt;p>&lt;code>ssh&lt;/code> 远程登录服务器&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">ssh root@xxx.xxx.xxx.xxx
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>下载并安装 &lt;code>miniconda&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后设置虚拟 &lt;code>conda&lt;/code> 环境，这里我们的环境使用 &lt;code>python 3.9&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">conda create -n myenvname &lt;span class="nv">python&lt;/span>&lt;span class="o">=&lt;/span>3.9
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>切换环境与停用环境&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">conda activate myenvname
+conda deactivate
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="安装-jupyter-和配置">安装 &lt;code>Jupyter&lt;/code> 和配置&lt;/h3>
+&lt;p>安装 &lt;code>jupyter&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">conda install -c conda-forge jupyterlab
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>生成配置文件&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">jupyter notebook --generate-config
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>进入 &lt;code>IPython&lt;/code> ，设置记住哈希密码（这里会将登录密码转换为哈希密码）&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">Ipython
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">In&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]:&lt;/span> &lt;span class="kn">from&lt;/span> &lt;span class="nn">notebook.auth&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">passwd&lt;/span>
+&lt;span class="n">In&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">]:&lt;/span> &lt;span class="n">passwd&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="n">Enter&lt;/span> &lt;span class="n">password&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">Verify&lt;/span> &lt;span class="n">password&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">Out&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">]:&lt;/span> &lt;span class="s1">&amp;#39;argon2:$argon2id$v=19$m=10240,t=10,p=8$1Hk7hXkmqH0KUC3JswHy8A$W2YaZrmVl8AVEjTwx5WJCA&amp;#39;&lt;/span>
+&lt;span class="n">In&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">]:&lt;/span> &lt;span class="n">exit&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="修改配置文件">修改配置文件&lt;/h3>
+&lt;p>通过 FTP 登录到服务器，找到配置文件 &lt;code>jupyter_notebook_config.py&lt;/code> ，添加以下内容到文件末尾&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">c&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">NotebookApp&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">password&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">u&lt;/span>&lt;span class="s1">&amp;#39;argon2:$argon2id$v=19$m=10240,t=10,p=8$1Hk7hXkmqH0KUC3JswHy8A$W2YaZrmVl8AVEjTwx5WJCA&amp;#39;&lt;/span>
+&lt;span class="c1">#就是刚才需要记下的哈希密码&lt;/span>
+&lt;span class="n">c&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">NotebookApp&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">9999&lt;/span>
+&lt;span class="c1">#指定jupyter lab 运行端口，写一个不冲突的端口即可 &lt;/span>
+&lt;span class="n">c&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">NotebookApp&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">allow_remote_access&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">True&lt;/span>
+&lt;span class="c1"># 允许远程访问 &lt;/span>
+&lt;span class="n">c&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">NotebookApp&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ip&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;*&amp;#39;&lt;/span>
+&lt;span class="c1"># 就是设置所有ip皆可访问 &lt;/span>
+&lt;span class="n">c&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">NotebookApp&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">open_browser&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">False&lt;/span>
+&lt;span class="c1"># 禁止自动打开浏览器 &lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>注意：这里需要将端口放行，否则无法连接登录&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="服务器开启-jupyterlab">服务器开启 &lt;code>Jupyterlab&lt;/code>&lt;/h3>
+&lt;p>输入代码打开 &lt;code>Jupyterlab&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">jupyter lab --allow-root
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>此时已经可以在浏览器上查看远程 &lt;code>Jupyterlab&lt;/code> 了，但是当关闭终端时 &lt;code>Jupyter&lt;/code> 也会相应关闭，所以我们需要让 &lt;code>Jupyter&lt;/code> 保持在后台运行&lt;/p>
+&lt;p>后台运行，并将标准输出写入到 &lt;code>jupyter.log&lt;/code> 中&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">nohup jupyter notebook --allow-root &amp;gt; jupyter.log 2&amp;gt;&lt;span class="p">&amp;amp;&lt;/span>&lt;span class="m">1&lt;/span> &lt;span class="p">&amp;amp;&lt;/span>
+nohup jupyter lab --allow-root &amp;gt; jupyter.log 2&amp;gt;&lt;span class="p">&amp;amp;&lt;/span>&lt;span class="m">1&lt;/span> &lt;span class="p">&amp;amp;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>nobup&lt;/code> 表示 &lt;code>no hang up&lt;/code>，就是不挂起，退出终端后依然可以运行。&lt;/p>
+&lt;p>然后找到 &lt;code>jupyter&lt;/code> 进程，终止该进程&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">ps -a
+&lt;span class="nb">kill&lt;/span> -9 pid
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>浏览器中输入 &lt;code>xxx.xxx.xxx.xxx:9999&lt;/code> 进入 &lt;code>jupyter notebook&lt;/code>&lt;/p>
+&lt;p>浏览器中输入 &lt;code>xxx.xxx.xxx.xxx:9999/lab&lt;/code> 进入 &lt;code>jupyterlab&lt;/code>&lt;/p>
+&lt;h3 id="日常登陆-jupyter-及服务器操作">日常登陆 &lt;code>Jupyter&lt;/code> 及服务器操作&lt;/h3>
+&lt;p>远程登录服务器&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">ssh root@xxx.xxx.xxx.xxx
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>切换环境&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">conda activate myenvname
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>运行 &lt;code>jupyterlab&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">jupyter lab --allow-root
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>非挂起运行 &lt;code>JupyterLab&lt;/code> （可关闭终端）&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">nohup jupyter notebook --allow-root &amp;gt; jupyter.log 2&amp;gt;&lt;span class="p">&amp;amp;&lt;/span>&lt;span class="m">1&lt;/span> &lt;span class="p">&amp;amp;&lt;/span>
+nohup jupyter lab --allow-root &amp;gt; jupyter.log 2&amp;gt;&lt;span class="p">&amp;amp;&lt;/span>&lt;span class="m">1&lt;/span> &lt;span class="p">&amp;amp;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>查看运行进程，并杀死进程&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">ps -a
+&lt;span class="nb">kill&lt;/span> &lt;span class="m">1000&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>浏览器中输入 &lt;code>xxx.xxx.xxx.xxx:9999&lt;/code> 进入 &lt;code>jupyter notebook&lt;/code>&lt;/p>
+&lt;p>浏览器中输入 &lt;code>xxx.xxx.xxx.xxx:9999/lab&lt;/code> 进入 &lt;code>jupyterlab&lt;/code>&lt;/p></description></item><item><title>[Git 日记] Git 忽略 .DS_Store 与全局忽略</title><link>https://yibocat.github.io/posts/git/git%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E4%B8%8E%E5%85%A8%E5%B1%80%E5%BF%BD%E7%95%A5/</link><pubDate>Tue, 01 Feb 2022 10:53:07 +0800</pubDate><guid>https://yibocat.github.io/posts/git/git%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E4%B8%8E%E5%85%A8%E5%B1%80%E5%BF%BD%E7%95%A5/</guid><description>&lt;p>Mac OS 的每个文件夹下都有一个隐藏文件 .DS_Store，该文件保存的是当前文件夹的属性，如图标位置、背景等。&lt;/p>
 &lt;p>但是每次使用 Git 提交更改时，都会自动生成 .DS_Store 更改，所以每次提交到版本库和 &lt;code>push&lt;/code> 到 Github 总是很麻烦。所以 .DS_Store 是没有必要提交到版本库的，这时可以使用 git.gitignore 来忽略此类文件。&lt;/p>
 &lt;h3 id="忽略当前目录下的-ds_store">忽略当前目录下的 .DS_Store&lt;/h3>
 &lt;p>我们在所要忽略 .DS_Store 的目录下创建一个 &lt;code>.gitignore&lt;/code> 文件，然后将要忽略的文件名写入进去&lt;/p>
