@@ -69,6 +69,14 @@ body {
 .search-content {
   padding: 20px;
 }
+#searchInput {
+  outline: none;
+  border: none;
+}
+#searchInput input:focus {
+  outline: none;
+  border: none;
+}
 
 #searchbox input {
   padding: 10px 10px;
