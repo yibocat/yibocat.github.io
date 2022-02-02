@@ -283,7 +283,8 @@ pre samp {
   top: 160px;
 }
 .toc {
-  line-height: 1.5em;
+  /* line-height: 1.5em; */
+  background-color:transparent;
 }
 .wide .toc {
   position: sticky;
@@ -309,7 +310,8 @@ pre samp {
 }
 .toc li {
   list-style: none;
-  font-size: 0.95rem;
+  /* font-size: 0.95rem; */
+  font-size: 12px;
   padding-bottom: 5px;
 }
 .toc li a:hover {
@@ -318,5 +320,5 @@ pre samp {
 }
 .toc .inner {
   margin: 20px 0 0 20px;
-  font-size: 12px;
+  /* font-size: 12px; */
 }
