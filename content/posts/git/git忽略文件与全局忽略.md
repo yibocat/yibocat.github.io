@@ -60,14 +60,6 @@ git config --global core.excludesfile/Users/reon/.gitignore_global
     excludefile = /Users/xiaqunfeng/.gitignore_global
 ```
 
-然后同样，同样执行代码
-
-```shell
-git rm --cached filename
-git commit -m "rm filename"
-```
-
-然后 `push` 到 `Github` 就可以了。
 
 ### 参考
 
