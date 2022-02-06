@@ -86,11 +86,7 @@ git commit -m &lt;span class="s1">&amp;#39;update .gitignore&amp;#39;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或者直接在 &lt;code>.gitconfig&lt;/code> 中添加如下内容&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="o">[&lt;/span>core&lt;span class="o">]&lt;/span>
 &lt;span class="nv">excludefile&lt;/span> &lt;span class="o">=&lt;/span> /Users/xiaqunfeng/.gitignore_global
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后同样，同样执行代码&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">git rm --cached filename
-git commit -m &lt;span class="s2">&amp;#34;rm filename&amp;#34;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后 &lt;code>push&lt;/code> 到 &lt;code>Github&lt;/code> 就可以了。&lt;/p>
-&lt;h3 id="参考">参考&lt;/h3>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="参考">参考&lt;/h3>
 &lt;ol>
 &lt;li>&lt;a href="http://xiaqunfeng.cc/2018/04/24/git-ignore-ds-store/#%E5%88%A0%E9%99%A4github%E4%B8%8A%E6%96%87%E4%BB%B6"target="_blank" rel="noopener noreferrer">http://xiaqunfeng.cc/2018/04/24/git-ignore-ds-store/#%E5%88%A0%E9%99%A4github%E4%B8%8A%E6%96%87%E4%BB%B6&lt;/a>
 &lt;/li>
