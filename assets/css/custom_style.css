@@ -336,3 +336,9 @@ pre samp {
   margin: 20px 0 0 20px;
   /* font-size: 12px; */
 }
+
+
+/* Katex */
+.article.markdown-body .katex-display {
+  display:inherit;
+}
