@@ -342,3 +342,19 @@ pre samp {
 .article.markdown-body .katex-display {
   display:inherit;
 }
+.article.markdown-body .katex,
+.article.markdown-body .MathJax {
+  margin: 28px 0;
+  /* margin: 0; */
+  padding: 0;
+}
+
+.article.markdown-body .katex-display,
+.article.markdown-body .MathJax_Display {
+  margin: 0;
+  padding: .2em .4em;
+}
+
+.article.markdown-body .MathJax {
+  outline: none;
+}
