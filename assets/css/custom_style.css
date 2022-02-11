@@ -70,6 +70,7 @@ body {
   padding: 20px;
 }
 #searchInput {
+  font-size: large;
   outline: none;
   border: none;
 }

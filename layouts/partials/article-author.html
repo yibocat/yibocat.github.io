@@ -9,7 +9,9 @@
   {{/*  {{- with .avatar -}}<img class="avatar" src="{{- . | relURL -}}" alt>{{- end -}}  */}}
 
   {{- with .avatar -}}
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  {{- $lottieplayer := resources.Get "js/lottie-player.js" }}
+  {{/*  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>  */}}
+  <script src="{{ $lottieplayer.RelPermalink }}"></script>
   <lottie-player class="avatar" src="{{- . | relURL -}}"  background="transparent"  speed="1" style="max-width:280px;" loop  autoplay></lottie-player>
   {{- end -}}
   
