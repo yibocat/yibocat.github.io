@@ -197,11 +197,11 @@ conda deactivate
 &lt;span class="n">In&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">]:&lt;/span> &lt;span class="n">passwd&lt;/span>&lt;span class="p">()&lt;/span>
 &lt;span class="n">Enter&lt;/span> &lt;span class="n">password&lt;/span>&lt;span class="p">:&lt;/span>
 &lt;span class="n">Verify&lt;/span> &lt;span class="n">password&lt;/span>&lt;span class="p">:&lt;/span>
-&lt;span class="n">Out&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">]:&lt;/span> &lt;span class="s1">&amp;#39;argon2:$argon2id$v=19$m=10240,t=10,p=8$1Hk7hXkmqH0KUC3JswHy8A$W2YaZrmVl8AVEjTwx5WJCA&amp;#39;&lt;/span>
+&lt;span class="n">Out&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">]:&lt;/span> &lt;span class="s1">&amp;#39;argon2:$argon2id$v=19$m=10240,t=10,p=8$1Hk7hXkmqH0KUC3JswHy8A$W2Ya&amp;#39;&lt;/span>
 &lt;span class="n">In&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">]:&lt;/span> &lt;span class="n">exit&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="修改配置文件">修改配置文件&lt;/h3>
 &lt;p>通过 FTP 登录到服务器，找到配置文件 &lt;code>jupyter_notebook_config.py&lt;/code> ，添加以下内容到文件末尾&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">c&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">NotebookApp&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">password&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">u&lt;/span>&lt;span class="s1">&amp;#39;argon2:$argon2id$v=19$m=10240,t=10,p=8$1Hk7hXkmqH0KUC3JswHy8A$W2YaZrmVl8AVEjTwx5WJCA&amp;#39;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">c&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">NotebookApp&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">password&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">u&lt;/span>&lt;span class="s1">&amp;#39;argon2:$argon2id$v=19$m=10240,t=10,p=8$1Hk7hXkmqH0KUC3JswHy8A$W2Ya&amp;#39;&lt;/span>
 &lt;span class="c1">#就是刚才需要记下的哈希密码&lt;/span>
 &lt;span class="n">c&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">NotebookApp&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">port&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">9999&lt;/span>
 &lt;span class="c1">#指定jupyter lab 运行端口，写一个不冲突的端口即可 &lt;/span>

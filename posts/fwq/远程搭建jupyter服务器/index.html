@@ -1,4 +1,4 @@
-<!doctype html><html lang=zh><meta charset=utf-8><meta name=generator content="Hugo 0.92.1"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!doctype html><html lang=zh><meta charset=utf-8><meta name=generator content="Hugo 0.92.2"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name=color-scheme content="light dark">
 <meta name=supported-color-schemes content="light dark">
 <title>[Python 笔记本] 远程搭建 jupyter 服务器&nbsp;&ndash;&nbsp;yibocat</title>
@@ -53,11 +53,11 @@ conda deactivate
 <span class=n>In</span><span class=p>[</span><span class=mi>2</span><span class=p>]:</span> <span class=n>passwd</span><span class=p>()</span>
 <span class=n>Enter</span> <span class=n>password</span><span class=p>:</span>
 <span class=n>Verify</span> <span class=n>password</span><span class=p>:</span>
-<span class=n>Out</span><span class=p>[</span><span class=mi>2</span><span class=p>]:</span> <span class=s1>&#39;argon2:$argon2id$v=19$m=10240,t=10,p=8$1Hk7hXkmqH0KUC3JswHy8A$W2YaZrmVl8AVEjTwx5WJCA&#39;</span>
+<span class=n>Out</span><span class=p>[</span><span class=mi>2</span><span class=p>]:</span> <span class=s1>&#39;argon2:$argon2id$v=19$m=10240,t=10,p=8$1Hk7hXkmqH0KUC3JswHy8A$W2Ya&#39;</span>
 <span class=n>In</span><span class=p>[</span><span class=mi>3</span><span class=p>]:</span> <span class=n>exit</span>
 </code></pre></div><h3 id=修改配置文件>修改配置文件</h3>
 <p>通过 FTP 登录到服务器，找到配置文件 <code>jupyter_notebook_config.py</code> ，添加以下内容到文件末尾</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>c</span><span class=o>.</span><span class=n>NotebookApp</span><span class=o>.</span><span class=n>password</span> <span class=o>=</span> <span class=sa>u</span><span class=s1>&#39;argon2:$argon2id$v=19$m=10240,t=10,p=8$1Hk7hXkmqH0KUC3JswHy8A$W2YaZrmVl8AVEjTwx5WJCA&#39;</span>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>c</span><span class=o>.</span><span class=n>NotebookApp</span><span class=o>.</span><span class=n>password</span> <span class=o>=</span> <span class=sa>u</span><span class=s1>&#39;argon2:$argon2id$v=19$m=10240,t=10,p=8$1Hk7hXkmqH0KUC3JswHy8A$W2Ya&#39;</span>
 <span class=c1>#就是刚才需要记下的哈希密码</span>
 
 <span class=n>c</span><span class=o>.</span><span class=n>NotebookApp</span><span class=o>.</span><span class=n>port</span> <span class=o>=</span> <span class=mi>9999</span>  
