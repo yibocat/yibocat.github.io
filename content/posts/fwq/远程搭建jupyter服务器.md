@@ -67,7 +67,7 @@ In[1]: from notebook.auth import passwd
 In[2]: passwd()
 Enter password:
 Verify password:
-Out[2]: 'argon2:$argon2id$v=19$m=10240,t=10,p=8$1Hk7hXkmqH0KUC3JswHy8A$W2YaZrmVl8AVEjTwx5WJCA'
+Out[2]: 'argon2:$argon2id$v=19$m=10240,t=10,p=8$1Hk7hXkmqH0KUC3JswHy8A$W2Ya'
 In[3]: exit
 ```
 
@@ -76,7 +76,7 @@ In[3]: exit
 通过 FTP 登录到服务器，找到配置文件 `jupyter_notebook_config.py` ，添加以下内容到文件末尾
 
 ```python
-c.NotebookApp.password = u'argon2:$argon2id$v=19$m=10240,t=10,p=8$1Hk7hXkmqH0KUC3JswHy8A$W2YaZrmVl8AVEjTwx5WJCA'
+c.NotebookApp.password = u'argon2:$argon2id$v=19$m=10240,t=10,p=8$1Hk7hXkmqH0KUC3JswHy8A$W2Ya'
 #就是刚才需要记下的哈希密码
 
 c.NotebookApp.port = 9999  
