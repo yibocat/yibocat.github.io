@@ -292,7 +292,9 @@ pre samp {
 /* tabel of content */
 .toc-container.wide{
   position: absolute;
-  height: 100%;
+  /* height: 98%; */
+  height: calc(100% - 200px);
+  /* max-height: 95%; */
   right: 0;
   width: 20%;
   top: 160px;
