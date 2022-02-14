@@ -9,14 +9,25 @@
     {{- range $paginator.Pages -}}
     {{- $relURL := replace .RelPermalink "#" "%23" -}}
     {{- $relURL = replace $relURL "." "%2e" -}}
-    <li class="item"><a class="note" href="{{- $relURL -}}">
+    <li class="item">
+        <a class="note" href="{{- $relURL -}}">
             <p class="note title">{{- .Title | safeHTML -}}</p>
             {{- if .Date -}}
-            <p class="note date">{{- .Date.Format $dateFormat -}}</p>
-            {{/* <p class="note date">{{- partial "article-meta.html" . -}}</p> */}}
+            <p class="note date">
+                {{- .Date.Format $dateFormat -}}
+                <!-- &nbsp;•{{ .WordCount }}&nbsp;个字
+                {{ T "readingTime" .ReadingTime }} -->
+            </p>
+            <!-- <p class="note date">{{- partial "article-meta.html" . -}}</p>  -->
             {{- end -}}
-            {{- if .Summary -}}<p class="note content">{{- .Summary | plainify | safeHTML -}}{{- if .Truncated -}}<span
-                    class="mldr">&mldr;</span>{{- end -}}</p>{{- end -}}
+            {{- if .Summary -}}
+            <p class="note content">
+                {{- .Summary | plainify | safeHTML -}}
+                {{- if .Truncated -}}
+                    <span class="mldr">&mldr;</span>
+                {{- end -}}
+            </p>
+            {{- end -}}
 
             {{/* {{- $imgs := .Params.imgs -}}
             {{- with $imgs -}}
