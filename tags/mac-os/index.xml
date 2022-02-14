@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mac OS on yibocat</title><link>https://yibocat.github.io/tags/mac-os/</link><description>Recent content in Mac OS on yibocat</description><generator>Hugo -- gohugo.io</generator><copyright>©2022 Yibocat.</copyright><lastBuildDate>Tue, 01 Feb 2022 10:53:07 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/tags/mac-os/index.xml" rel="self" type="application/rss+xml"/><item><title>[深度学习笔记] 深度学习第 2 篇——多层感知机</title><link>https://yibocat.github.io/posts/dl/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_3/</link><pubDate>Mon, 14 Feb 2022 12:12:13 +0800</pubDate><guid>https://yibocat.github.io/posts/dl/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_3/</guid><description>&lt;p>其实感知机也就是上一篇所讲的最简单的单层神经网络，即简单线性回归模型，也是属于一个简单二分类或多分类模型。&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mac OS on yibocat</title><link>https://yibocat.github.io/tags/mac-os/</link><description>Recent content in Mac OS on yibocat</description><generator>Hugo -- gohugo.io</generator><copyright>©2022 Yibocat.</copyright><lastBuildDate>Tue, 01 Feb 2022 10:53:07 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/tags/mac-os/index.xml" rel="self" type="application/rss+xml"/><item><title>[深度学习笔记] 深度学习第 2 篇——多层感知机</title><link>https://yibocat.github.io/posts/dl/sdxx_2/</link><pubDate>Mon, 14 Feb 2022 12:12:13 +0800</pubDate><guid>https://yibocat.github.io/posts/dl/sdxx_2/</guid><description>&lt;p>其实感知机也就是上一篇所讲的最简单的单层神经网络，即简单线性回归模型，也是属于一个简单二分类或多分类模型。&lt;/p>
 &lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220214-01.png" style="zoom:16%;" />&lt;/p>
 &lt;h3 id="模型设计">模型设计&lt;/h3>
 &lt;p>多层感知机就是在原本感知机的基础上增加了若干层隐藏层。由于输入层不参与到计算，所以下图展示的是一个二层的神经网络模型。&lt;/p>
@@ -161,16 +161,17 @@ epoch 5, loss 0.0014, train acc 0.864, test acc 0.818
 &lt;p>&lt;a href="https://tangshusen.me/Dive-into-DL-PyTorch/#/"target="_blank" rel="noopener noreferrer">《动手学深度学习》PyTorch 版&lt;/a>
 &lt;/p>
 &lt;p>&lt;a href="https://nndl.github.io"target="_blank" rel="noopener noreferrer">《神经网络与深度学习》邱锡鹏教授&lt;/a>
-&lt;/p></description></item><item><title>[深度学习笔记] 深度学习第 1 篇——简单线性回归</title><link>https://yibocat.github.io/posts/dl/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_2/</link><pubDate>Tue, 08 Feb 2022 22:06:10 +0800</pubDate><guid>https://yibocat.github.io/posts/dl/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_2/</guid><description>&lt;p>线性模型（Linear Model）是机器学习中应用最广泛的模型，指通过样本特征的线性组合来进行预测的模型。线性回归是单层神经网络，其涉及的概念和技术适用于大多数深度学习模型。&lt;/p>
+&lt;/p></description></item><item><title>[深度学习笔记] 深度学习第 1 篇——简单线性回归</title><link>https://yibocat.github.io/posts/dl/sdxx_1/</link><pubDate>Tue, 08 Feb 2022 22:06:10 +0800</pubDate><guid>https://yibocat.github.io/posts/dl/sdxx_1/</guid><description>&lt;p>线性模型（Linear Model）是机器学习中应用最广泛的模型，指通过样本特征的线性组合来进行预测的模型。线性回归是单层神经网络，其涉及的概念和技术适用于大多数深度学习模型。&lt;/p>
 &lt;/br>
-&lt;h2 id="线性回归">线性回归&lt;/h2>
-&lt;h3 id="模型定义">模型定义&lt;/h3>
+&lt;h3 id="线性回归">线性回归&lt;/h3>
+&lt;p>&lt;strong>模型定义&lt;/strong>&lt;/p>
 &lt;p>给定一个 $ D $ 维样本 $ x=[x_1,x_2,\cdots,x_D]^T $ 其线性组合函数为
 $$
 f(x;\omega)=\omega^Tx+b
 $$
 我们说 $ \omega $ 是一个权重矩阵（可以理解为斜率）， $ b $ 为偏差（可以理解为截距），其均为标量。这两个参数称为线性回归模型的参数，而我们的目的就是通过训练模型，得到最佳的参数估计。&lt;/p>
-&lt;h3 id="损失函数">损失函数&lt;/h3>
+&lt;/br>
+&lt;p>&lt;strong>损失函数&lt;/strong>&lt;/p>
 &lt;p>模型训练出的预测值通常需要和真实值进行比对，这种比对也就是&lt;strong>误差&lt;/strong>。在机器学习里把衡量误差的函数称为&lt;strong>损失函数（loss function）&lt;/strong>。这里我们使用平方误差函数，单个样本的平方损失函数可以如下表示
 $$
 l^{(i)}(\omega,b) = \frac{1}{2}(\hat{y}-y)^2
@@ -180,7 +181,8 @@ $$
 l(\omega,b)=\frac{1}{n}\sum_{i=1}^nl^{(i)}(\omega,b)
 $$
 正如上文提到的，深度学习的任务就是找到一组模型参数，使得训练样本的损失最小。&lt;/p>
-&lt;h3 id="算法优化">算法优化&lt;/h3>
+&lt;/br>
+&lt;p>&lt;strong>算法优化&lt;/strong>&lt;/p>
 &lt;p>求解数值解的优化算法中，&lt;strong>小批量随机梯度下降法（mini-batch stochastic gradient descent&lt;/strong> 在深度学习中被广泛使用。&lt;/p>
 &lt;blockquote>
 &lt;p>当模型和损失函数形式较为简单时，上面的误差最小化问题的解可以直接用公式表达出来。这类解叫作解析解（analytical solution）。本节使用的线性回归和平方误差刚好属于这个范畴。然而，大多数深度学习模型并没有解析解，只能通过优化算法有限次迭代模型参数来尽可能降低损失函数的值。这类解叫作数值解（numerical solution）。&lt;/p>
@@ -192,7 +194,8 @@ b\gets b-\frac{\eta}{|\mathcal{B}|}\sum_{i\in\mathcal{B}}\frac{\partial l^{(i)}(
 $$
 这里 $ |\mathcal{B}| $ 表示每个小批量的样本个数，$\eta$ 为学习率。而这里的小批量样本数和学习率是人为设定的而不是学习得来的，所以被称为超参数（hyperparameter）。&lt;/p>
 &lt;/br>
-&lt;h2 id="线性回归实现">线性回归实现&lt;/h2>
+&lt;h3 id="线性回归实现">线性回归实现&lt;/h3>
+&lt;/br>
 &lt;p>线性回归的实现总体上分为以下几个步骤：&lt;/p>
 &lt;ol>
 &lt;li>数据集的准备&lt;/li>
@@ -213,7 +216,8 @@ $$
 &lt;span class="c1">#打印散点图&lt;/span>
 &lt;span class="n">set_figsize&lt;/span>&lt;span class="p">()&lt;/span>
 &lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">scatter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">features&lt;/span>&lt;span class="p">[:,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">numpy&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">labels&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">numpy&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="读取数据">读取数据&lt;/h3>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>&lt;strong>读取数据&lt;/strong>&lt;/p>
 &lt;p>训练模型的时候需要不断读取小批量数据样本，所以可以定义一个函数来返回小批量的随机样本的特征和标签&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="k">def&lt;/span> &lt;span class="nf">data_iter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">batch_size&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">features&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">labels&lt;/span>&lt;span class="p">):&lt;/span>
 &lt;span class="c1"># batch_size 表示批量大小&lt;/span>
@@ -228,27 +232,32 @@ $$
 &lt;span class="c1"># 打印&lt;/span>
 &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">X&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;span class="k">break&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="初始化模型参数">初始化模型参数&lt;/h3>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>&lt;strong>初始化模型参数&lt;/strong>&lt;/p>
 &lt;p>权重初始化成均值为 0 ，标准差为 0.01 的正太随机数，偏差初始化为 0。然后因为参数需要求梯度来迭代，所以设置 &lt;code>requires_grad=True&lt;/code>。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">w&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">tensor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">np&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">random&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">normal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.01&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">num_inputs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)),&lt;/span> &lt;span class="n">dtype&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">float32&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;span class="n">b&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">zeros&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">dtype&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">float32&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;span class="n">w&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">requires_grad_&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">requires_grad&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;span class="n">b&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">requires_grad_&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">requires_grad&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="定义模型">定义模型&lt;/h3>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>&lt;strong>定义模型&lt;/strong>&lt;/p>
 &lt;p>我们已经知道了线性回归的模型表达式，使用 &lt;code>torch.mm&lt;/code> 进行矩阵乘法运算&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="k">def&lt;/span> &lt;span class="nf">linreg&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">X&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">w&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">):&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">mm&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">X&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">w&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">b&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="定义损失函数">定义损失函数&lt;/h3>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>&lt;strong>定义损失函数&lt;/strong>&lt;/p>
 &lt;p>损失函数我们使用平方损失函数。注意：由于 $\hat{y}-y$ 中，$\hat{y}$ 和 $y$ 的形状是不一样的，所以需要使用 &lt;code>y.view&lt;/code> 将 $y$ 的形状变成预测值 $\hat{y}$ 的形状。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="k">def&lt;/span> &lt;span class="nf">squared_loss&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">y_hat&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">):&lt;/span>
 &lt;span class="c1"># 注意这里返回的是向量, 另外, pytorch里的MSELoss并没有除以 2&lt;/span>
 &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">y_hat&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">view&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">y_hat&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">size&lt;/span>&lt;span class="p">()))&lt;/span> &lt;span class="o">**&lt;/span> &lt;span class="mi">2&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mi">2&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="定义优化算法">定义优化算法&lt;/h3>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>&lt;strong>定义优化算法&lt;/strong>&lt;/p>
 &lt;p>优化算法根据上文提到的使用小批量随机梯度下降算法，其通过不断迭代模型参数来优化损失函数。这里 &lt;code>lr&lt;/code> 为迭代步长。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="k">def&lt;/span> &lt;span class="nf">sgd&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">params&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">lr&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">batch_size&lt;/span>&lt;span class="p">):&lt;/span>
 &lt;span class="k">for&lt;/span> &lt;span class="n">param&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="p">:&lt;/span>
 &lt;span class="n">param&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">data&lt;/span> &lt;span class="o">-=&lt;/span> &lt;span class="n">lr&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">param&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">grad&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="n">batch_size&lt;/span> &lt;span class="c1"># 注意这里更改param时用的param.data&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="训练模型">训练模型&lt;/h3>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>&lt;strong>训练模型&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">lr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">0.03&lt;/span> &lt;span class="c1"># 迭代步长&lt;/span>
 &lt;span class="n">num_epochs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">3&lt;/span> &lt;span class="c1"># 迭代周期&lt;/span>
 &lt;span class="n">net&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">linreg&lt;/span> &lt;span class="c1"># 使用线性模型&lt;/span>
@@ -269,8 +278,9 @@ $$
 &lt;/br>
 &lt;p>以上就是全人工实现了一个简单的线性回归模型。当然，&lt;code>PyTorch&lt;/code> 提供了简便的模型构造方法和多种损失函数。&lt;/p>
 &lt;/br>
-&lt;h2 id="线性回归简洁实现">线性回归简洁实现&lt;/h2>
-&lt;h3 id="读取数据-1">读取数据&lt;/h3>
+&lt;h3 id="线性回归简洁实现">线性回归简洁实现&lt;/h3>
+&lt;/br>
+&lt;p>&lt;strong>读取数据&lt;/strong>&lt;/p>
 &lt;p>&lt;code>PyTorch&lt;/code> 提供了 &lt;code>data&lt;/code> 包读取数据。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="kn">import&lt;/span> &lt;span class="nn">torch.utils.data&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">Data&lt;/span>
 &lt;span class="n">batch_size&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">10&lt;/span>
@@ -282,7 +292,8 @@ $$
 &lt;span class="c1"># 打印&lt;/span>
 &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">X&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;span class="k">break&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="定义模型-1">定义模型&lt;/h3>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>&lt;strong>定义模型&lt;/strong>&lt;/p>
 &lt;p>&lt;code>PyTorch&lt;/code> 提供了大量预定义的层，这使得我们可以很简洁的实现模型的构造。&lt;/p>
 &lt;p>导入 &lt;code>torch.nn&lt;/code> 模块，&lt;code>nn&lt;/code>的核心数据结构是 &lt;code>Module&lt;/code> 。&lt;code>Module&lt;/code> 是一个抽象概念，既可以表示一个层，又可以表示一个很多层的神经网络，其实它本身就是所有层的一个基类。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="k">class&lt;/span> &lt;span class="nc">LinearNet&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Module&lt;/span>&lt;span class="p">):&lt;/span>
@@ -301,14 +312,17 @@ $$
 &lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Linear&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num_inputs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;span class="c1"># 此处还可以传入其他层&lt;/span>
 &lt;span class="p">)&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="初始化模型参数-1">初始化模型参数&lt;/h3>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>&lt;strong>初始化模型参数&lt;/strong>&lt;/p>
 &lt;p>&lt;code>PyTorch&lt;/code> 在 &lt;code>init&lt;/code> 模块中提供了很多参数初始化的方法，这里可以通过 &lt;code>init.normal_&lt;/code> 将权重参数每个元素初始化为随机采样于均值为0、标准差为0.01的正态分布，偏差会初始化为零。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="kn">from&lt;/span> &lt;span class="nn">torch.nn&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">init&lt;/span>
 &lt;span class="n">init&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">normal_&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">net&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">weight&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">mean&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.01&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;span class="n">init&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">constant_&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">net&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">bias&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">val&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># 也可以直接修改bias的data: net[0].bias.data.fill_(0)&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="定义损失函数-1">定义损失函数&lt;/h3>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>&lt;strong>定义损失函数&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">loss&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">MSELoss&lt;/span>&lt;span class="p">()&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="定义优化算法-1">定义优化算法&lt;/h3>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>&lt;strong>定义优化算法&lt;/strong>&lt;/p>
 &lt;p>&lt;code>torch.optim&lt;/code>模块提供了很多常用的优化算法比如SGD、Adam和RMSProp等，所以不用再自己实现小批量梯度下降算法了。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="kn">import&lt;/span> &lt;span class="nn">torch.optim&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">optim&lt;/span>
 &lt;span class="n">optimizer&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">optim&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">SGD&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">net&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">parameters&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">lr&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.03&lt;/span>&lt;span class="p">)&lt;/span>
@@ -322,7 +336,8 @@ $$
 &lt;span class="n">nesterov&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">False&lt;/span>
 &lt;span class="n">weight_decay&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>
 &lt;span class="p">)&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="训练模型-1">训练模型&lt;/h3>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>&lt;strong>训练模型&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">num_epochs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">3&lt;/span>
 &lt;span class="k">for&lt;/span> &lt;span class="n">epoch&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_epochs&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">):&lt;/span>
 &lt;span class="k">for&lt;/span> &lt;span class="n">X&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_iter&lt;/span>&lt;span class="p">:&lt;/span>
@@ -337,7 +352,7 @@ $$
 &lt;/br>
 &lt;h3 id="参考">参考&lt;/h3>
 &lt;p>&lt;a href="https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter03_DL-basics/3.1_linear-regression"target="_blank" rel="noopener noreferrer">《动手学深度学习》(PyTorch)&lt;/a>
-&lt;/p></description></item><item><title>[Python 笔记本] 远程搭建 jupyter 服务器</title><link>https://yibocat.github.io/posts/fwq/%E8%BF%9C%E7%A8%8B%E6%90%AD%E5%BB%BAjupyter%E6%9C%8D%E5%8A%A1%E5%99%A8/</link><pubDate>Wed, 02 Feb 2022 21:47:35 +0800</pubDate><guid>https://yibocat.github.io/posts/fwq/%E8%BF%9C%E7%A8%8B%E6%90%AD%E5%BB%BAjupyter%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid><description>&lt;p>本文通过搭建一个简单的远程 &lt;code>Jupyter&lt;/code> 服务端，可以实现不分场合与时间运行代码，或者说是展示代码，这提供了极大的方便。&lt;/p>
+&lt;/p></description></item><item><title>[Python 笔记本] 远程搭建 jupyter 服务器</title><link>https://yibocat.github.io/posts/fwq/fwq_jupyter/</link><pubDate>Wed, 02 Feb 2022 21:47:35 +0800</pubDate><guid>https://yibocat.github.io/posts/fwq/fwq_jupyter/</guid><description>&lt;p>本文通过搭建一个简单的远程 &lt;code>Jupyter&lt;/code> 服务端，可以实现不分场合与时间运行代码，或者说是展示代码，这提供了极大的方便。&lt;/p>
 &lt;h3 id="搭建-jupyter-服务器">搭建 &lt;code>Jupyter&lt;/code> 服务器&lt;/h3>
 &lt;p>&lt;code>ssh&lt;/code> 远程登录服务器&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">ssh root@xxx.xxx.xxx.xxx
@@ -404,7 +419,7 @@ nohup jupyter lab --allow-root &amp;gt; jupyter.log 2&amp;gt;&lt;span class="p">
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">ps -a
 &lt;span class="nb">kill&lt;/span> &lt;span class="m">1000&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>浏览器中输入 &lt;code>xxx.xxx.xxx.xxx:9999&lt;/code> 进入 &lt;code>jupyter notebook&lt;/code>&lt;/p>
-&lt;p>浏览器中输入 &lt;code>xxx.xxx.xxx.xxx:9999/lab&lt;/code> 进入 &lt;code>jupyterlab&lt;/code>&lt;/p></description></item><item><title>[Git 日记] Git 忽略 .DS_Store 与全局忽略</title><link>https://yibocat.github.io/posts/git/git%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E4%B8%8E%E5%85%A8%E5%B1%80%E5%BF%BD%E7%95%A5/</link><pubDate>Tue, 01 Feb 2022 10:53:07 +0800</pubDate><guid>https://yibocat.github.io/posts/git/git%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E4%B8%8E%E5%85%A8%E5%B1%80%E5%BF%BD%E7%95%A5/</guid><description>&lt;p>Mac OS 的每个文件夹下都有一个隐藏文件 .DS_Store，该文件保存的是当前文件夹的属性，如图标位置、背景等。&lt;/p>
+&lt;p>浏览器中输入 &lt;code>xxx.xxx.xxx.xxx:9999/lab&lt;/code> 进入 &lt;code>jupyterlab&lt;/code>&lt;/p></description></item><item><title>[Git 日记] Git 忽略 .DS_Store 与全局忽略</title><link>https://yibocat.github.io/posts/git/git_ignore/</link><pubDate>Tue, 01 Feb 2022 10:53:07 +0800</pubDate><guid>https://yibocat.github.io/posts/git/git_ignore/</guid><description>&lt;p>Mac OS 的每个文件夹下都有一个隐藏文件 .DS_Store，该文件保存的是当前文件夹的属性，如图标位置、背景等。&lt;/p>
 &lt;p>但是每次使用 Git 提交更改时，都会自动生成 .DS_Store 更改，所以每次提交到版本库和 &lt;code>push&lt;/code> 到 Github 总是很麻烦。所以 .DS_Store 是没有必要提交到版本库的，这时可以使用 git.gitignore 来忽略此类文件。&lt;/p>
 &lt;h3 id="忽略当前目录下的-ds_store">忽略当前目录下的 .DS_Store&lt;/h3>
 &lt;p>我们在所要忽略 .DS_Store 的目录下创建一个 &lt;code>.gitignore&lt;/code> 文件，然后将要忽略的文件名写入进去&lt;/p>
@@ -431,7 +446,7 @@ git commit -m &lt;span class="s1">&amp;#39;update .gitignore&amp;#39;&lt;/span>
 &lt;/li>
 &lt;li>&lt;a href="https://blog.csdn.net/allanGold/article/details/73132606"target="_blank" rel="noopener noreferrer">https://blog.csdn.net/allanGold/article/details/73132606&lt;/a>
 &lt;/li>
-&lt;/ol></description></item><item><title>[建站日记] Hugo代码拷贝插件</title><link>https://yibocat.github.io/posts/jzrj/hugo%E4%BB%A3%E7%A0%81%E6%8B%B7%E8%B4%9D%E6%8F%92%E4%BB%B6/</link><pubDate>Sun, 30 Jan 2022 17:26:21 +0800</pubDate><guid>https://yibocat.github.io/posts/jzrj/hugo%E4%BB%A3%E7%A0%81%E6%8B%B7%E8%B4%9D%E6%8F%92%E4%BB%B6/</guid><description>&lt;p>博客是建好了，但是总是想添加一个代码一键复制的功能。一开始是想去 html 标签中直接添加一个 &lt;code>button&lt;/code> ，但是发现好像并没有那么简单。查阅了 Hugo 的内置功能也没有发现，很幸运找到了一篇博客 &lt;a href="https://huangzhongde.cn/"target="_blank" rel="noopener noreferrer">黄忠德的博客&lt;/a>
+&lt;/ol></description></item><item><title>[建站日记] Hugo代码拷贝插件</title><link>https://yibocat.github.io/posts/jzrj/jzrj_2/</link><pubDate>Sun, 30 Jan 2022 17:26:21 +0800</pubDate><guid>https://yibocat.github.io/posts/jzrj/jzrj_2/</guid><description>&lt;p>博客是建好了，但是总是想添加一个代码一键复制的功能。一开始是想去 html 标签中直接添加一个 &lt;code>button&lt;/code> ，但是发现好像并没有那么简单。查阅了 Hugo 的内置功能也没有发现，很幸运找到了一篇博客 &lt;a href="https://huangzhongde.cn/"target="_blank" rel="noopener noreferrer">黄忠德的博客&lt;/a>
 ，正好解决了我的需求。所以也记录一下。&lt;/p>
 &lt;h3 id="思考">思考&lt;/h3>
 &lt;p>我们知道，代码片段是使用 markdown code fences 来编写的&lt;/p>
@@ -610,7 +625,7 @@ import React from 'react';
 &lt;/li>
 &lt;li>&lt;a href="https://www.tomspencer.dev/blog/2018/09/14/adding-click-to-copy-buttons-to-a-hugo-powered-blog/"target="_blank" rel="noopener noreferrer">https://www.tomspencer.dev/blog/2018/09/14/adding-click-to-copy-buttons-to-a-hugo-powered-blog/&lt;/a>
 &lt;/li>
-&lt;/ol></description></item><item><title>[建站日记] Hugo+Github+Tencent CDN博客搭建</title><link>https://yibocat.github.io/posts/jzrj/hugo+github+tencent-cdn%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</link><pubDate>Sat, 29 Jan 2022 12:56:49 +0800</pubDate><guid>https://yibocat.github.io/posts/jzrj/hugo+github+tencent-cdn%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</guid><description>&lt;p>最近花费了近一周搭建自己的网站，准确的说是静态网页。这是网站的第一篇文章，也可以说是近一周来搭建个人博客的踩坑总结。&lt;/p>
+&lt;/ol></description></item><item><title>[建站日记] Hugo+Github+Tencent CDN博客搭建</title><link>https://yibocat.github.io/posts/jzrj/jzri_1/</link><pubDate>Sat, 29 Jan 2022 12:56:49 +0800</pubDate><guid>https://yibocat.github.io/posts/jzrj/jzri_1/</guid><description>&lt;p>最近花费了近一周搭建自己的网站，准确的说是静态网页。这是网站的第一篇文章，也可以说是近一周来搭建个人博客的踩坑总结。&lt;/p>
 &lt;p>网站采用的是 hugo 框架，只是因为 hugo 号称是 &amp;ldquo;The world’s fastest framework for building websites&amp;rdquo;，而其特点就在于轻。因为静态网页无需加载太多插件（wordpress 太重了）， 不需要访问数据库，不需要编写太多的网站功能，并且静态网页使用的是纯 html，对于博客系统来说是完全足够了，这也是我放弃 wordpress 的原因。另外一个原因是 wordpress 虽然拥有各种各样眼花缭乱的插件，但是其维护麻烦，不光 wordpress 本身需要版本更新，插件也需要更新，并且更新起来很艰难，常常自动更新失败从而转为手工更新。并且wordpress 很多主题插件是收费的。&lt;/p>
 &lt;p>使用 hugo 搭建个人博客网站，其实理论上来说 hugo 不止可以搭建博客，还可以搭建任何静态网站（甚至是动态网站，不过这也就失去了 hugo 本身的意义了）。而且还有一个更主要的原因：可以学习 git 和 Github。&lt;/p>
 &lt;p>hugo 搭建好之后需要进行部署。通常的做法是托管到 Github Pages，也可以部署在腾讯云的静态网页托管（阿里云也有相同的业务），活或者 Gitee Pages，或者自建服务器等等。所以本文从一开始 hugo 与 git 的安装到最后 CDN 网页加速全过程进行总结。&lt;/p>
