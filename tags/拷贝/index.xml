@@ -1,4 +1,167 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>拷贝 on yibocat</title><link>https://yibocat.github.io/tags/%E6%8B%B7%E8%B4%9D/</link><description>Recent content in 拷贝 on yibocat</description><generator>Hugo -- gohugo.io</generator><copyright>©2022 Yibocat.</copyright><lastBuildDate>Sun, 30 Jan 2022 17:26:21 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/tags/%E6%8B%B7%E8%B4%9D/index.xml" rel="self" type="application/rss+xml"/><item><title>[深度学习笔记] 深度学习第 1 篇——简单线性回归</title><link>https://yibocat.github.io/posts/dl/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_2/</link><pubDate>Tue, 08 Feb 2022 22:06:10 +0800</pubDate><guid>https://yibocat.github.io/posts/dl/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_2/</guid><description>&lt;p>线性模型（Linear Model）是机器学习中应用最广泛的模型，指通过样本特征的线性组合来进行预测的模型。线性回归是单层神经网络，其涉及的概念和技术适用于大多数深度学习模型。&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>拷贝 on yibocat</title><link>https://yibocat.github.io/tags/%E6%8B%B7%E8%B4%9D/</link><description>Recent content in 拷贝 on yibocat</description><generator>Hugo -- gohugo.io</generator><copyright>©2022 Yibocat.</copyright><lastBuildDate>Sun, 30 Jan 2022 17:26:21 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/tags/%E6%8B%B7%E8%B4%9D/index.xml" rel="self" type="application/rss+xml"/><item><title>[深度学习笔记] 深度学习第 2 篇——多层感知机</title><link>https://yibocat.github.io/posts/dl/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_3/</link><pubDate>Mon, 14 Feb 2022 12:12:13 +0800</pubDate><guid>https://yibocat.github.io/posts/dl/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_3/</guid><description>&lt;p>其实感知机也就是上一篇所讲的最简单的单层神经网络，即简单线性回归模型，也是属于一个简单二分类或多分类模型。&lt;/p>
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220214-01.png" style="zoom:16%;" />&lt;/p>
+&lt;h3 id="模型设计">模型设计&lt;/h3>
+&lt;p>多层感知机就是在原本感知机的基础上增加了若干层隐藏层。由于输入层不参与到计算，所以下图展示的是一个二层的神经网络模型。&lt;/p>
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220214-02.png" style="zoom:50%;" />&lt;/p>
+&lt;p>可以看到，该多层感知机包含 5 个隐藏单元，并且隐藏层中的每个单元和输入层的各个输入是全连接的，输出层的神经元和隐藏层中的各个单元也是全连接的，所以多层感知机中的隐藏层和输出层都是全连接层。&lt;/p>
+&lt;/br>
+&lt;p>我们设一个小批量样本 $X\in \mathbb{R}^{n\times d}$ ，批量大小为 $n$ ，输入个数为 $d$ 。隐藏层层数为一层，隐层单元数为 $h$ ，隐藏层输出为 $H\in \mathbb{R}^{n\times h}$ （也可以记为隐藏层变量）。&lt;/p>
+&lt;p>设隐藏层&lt;strong>权重参数&lt;/strong>和&lt;strong>偏差&lt;/strong>分别为 $W_h\in\mathbb{R}^{d\times h}$ 和 $b_h\in\mathbb{R}^{l \times h}$，输出层&lt;strong>权重&lt;/strong>和&lt;strong>偏差&lt;/strong>分别为 $W_o\in\mathbb{R}^{h\times q}$ 和 $b_o\in\mathbb{R}^{l\times q}$ 。由线性回归的公式可以得到多层感知机的设计模型
+$$
+H=XW_h+b_h \newline
+O=HW_o+b_o
+$$
+将两个式子联立起来，可以得到
+$$
+O = (XW_h+b_h)W_o+b_o = XW_hW_o+b_hW_o+b_o
+$$
+可以看到，多层感知机的模型其实和单层神经网络是等价的，只不过输出层权重变成了 $W_hW_o$ ，偏差变成了 $b_hW_o+b_o$ 。&lt;/p>
+&lt;h3 id="激活函数">激活函数&lt;/h3>
+&lt;p>由上面的推导我们知道线性变换只是对数据进行了&lt;strong>仿射变换(affine transformation)&lt;/strong> ，我们不能直接根据其仿射变换得到想要的输出分类，所以需要引入非线性变换——&lt;strong>激活函数&lt;/strong>。&lt;/p>
+&lt;p>神经网络中有很多不同的激活函数&lt;/p>
+&lt;/br>
+&lt;p>&lt;strong>ReLU函数&lt;/strong>&lt;/p>
+&lt;p>ReLU 函数（Rectified Linear Unit，修正线性单元），也叫 Rectifier 函数，是目前深度神经网络中经常使用的激活函数，该函数定义为
+$$
+ReLU(x)=\max(0,x)
+$$
+其图像如下所示&lt;/p>
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220214-03.png" style="zoom:36%;border:none;"/>&lt;/p>
+&lt;p>可以看到，当输入为负数时导数为 0 ，当输入为正数时导数为 1。&lt;/p>
+&lt;/br>
+&lt;p>&lt;strong>Sigmoid 函数&lt;/strong>&lt;/p>
+&lt;p>Sigmoid 函数可以将元素的值变换到 0 和 1 之间，该函数如下定义：
+$$
+Sigmoid(x) = \frac{1}{1+\exp(-x)}
+$$
+其图像如下所示&lt;/p>
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220214-04.png" style="zoom:36%;border:none;"/>&lt;/p>
+&lt;/br>
+&lt;p>&lt;strong>Tanh 函数&lt;/strong>&lt;/p>
+&lt;p>Tanh 函数是一种 Sigmoid 型函数，也叫做双正切函数，其定义为
+$$
+tanh(x)=\frac{\exp(x)-\exp(-x)}{\exp(x)+\exp(-x)}
+$$
+Tanh 函数可以看成是放大并平移的 Sigmoid 函数，其形状和 Sigmoid 函数看起来很像，但是值域是 (-1,1)。&lt;/p>
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220214-06.png" style="zoom:36%;border:none;"/>&lt;/p>
+&lt;p>我们可以对比一下 Logistic 型 Sigmoid 函数和 Tanh 函数的图像&lt;/p>
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220214-05.png" style="zoom:32%;"/>&lt;/p>
+&lt;h3 id="多层感知机加入激活函数">多层感知机加入激活函数&lt;/h3>
+&lt;p>通过上文已经知道，多层感知机就是含有至少一个隐藏层的全连接神经网络，每个隐藏层的输出由激活函数进行变换，我们可以将激活函数定义为 $\phi(x)$ ，那么多层感知机的模型如下所示
+$$
+H=\phi(XW_h+b_h) \newline
+O=HW_o+b_o
+$$
+&lt;/br>&lt;/p>
+&lt;h3 id="手动实现">手动实现&lt;/h3>
+&lt;p>这部分可以参考原书&lt;a href="https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter03_DL-basics/3.9_mlp-scratch"target="_blank" rel="noopener noreferrer">https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter03_DL-basics/3.9_mlp-scratch&lt;/a>
+或者 Github &lt;a href="https://github.com/ShusenTang/Dive-into-DL-PyTorch/blob/master/code/chapter03_DL-basics/3.9_mlp-scratch.ipynb"target="_blank" rel="noopener noreferrer">https://github.com/ShusenTang/Dive-into-DL-PyTorch/blob/master/code/chapter03_DL-basics/3.9_mlp-scratch.ipynb&lt;/a>
+。&lt;/p>
+&lt;p>获取数据和读取数据直接使用原书中所给的 Fashion-MNIST 数据集，这是一个图像多分类问题，我们假设小批量数据集的数量为 &lt;code>batch_size = 256&lt;/code> ，并且通过 &lt;code>d2l.load_data_fashion_mnist()&lt;/code> 方法得到了训练数据集合测试数据集，该函数是原书中图像多分类问题的读取数据集的函数 。代码如下&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">batch_size&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">256&lt;/span>
+&lt;span class="n">train_iter&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">test_iter&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">d2l&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">load_data_fashion_mnist&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">batch_size&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>&lt;strong>定义参数模型&lt;/strong>&lt;/p>
+&lt;p>原数据集中的图像形状为 28$\times$28 ，一共有 10 个类别，所以可以用 $28\times 28=784$ 向量长度来表示一个图像。所以 输入个数为 784，输出个数为 10。因为我们的数据集的小批量数据数为 256，所以我们可以设置隐藏单元数为 256。注意：隐藏单元数是超参数。&lt;/p>
+&lt;p>然后对参数进行初始化。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">num_inputs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_outputs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_hiddens&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">784&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">256&lt;/span>
+&lt;span class="n">W1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">tensor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">np&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">random&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">normal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.01&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">num_inputs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_hiddens&lt;/span>&lt;span class="p">)),&lt;/span> &lt;span class="n">dtype&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">float&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">b1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">zeros&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num_hiddens&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">dtype&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">float&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">W2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">tensor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">np&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">random&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">normal&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.01&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">num_hiddens&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_outputs&lt;/span>&lt;span class="p">)),&lt;/span> &lt;span class="n">dtype&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">float&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">b2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">zeros&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num_outputs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">dtype&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">float&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">params&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">W1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">W2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b2&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">param&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">param&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">requires_grad_&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">requires_grad&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>&lt;strong>定义激活函数&lt;/strong>&lt;/p>
+&lt;p>&lt;code>PyTorch&lt;/code> 已经有了 ReLU 函数，实现起来很简单。在手动实现时我们最好自己写。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="k">def&lt;/span> &lt;span class="nf">relu&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">X&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">max&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">input&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">X&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">other&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">tensor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mf">0.0&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>&lt;strong>定义模型&lt;/strong>&lt;/p>
+&lt;p>定义模型的第一步需要将每张图像的形状改为长度为 &lt;code>num_inputs&lt;/code> 的向量，以方便将其导入到输入层，然后根据上文中的表达式建立模型&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="k">def&lt;/span> &lt;span class="nf">net&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">X&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="n">X&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">X&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">view&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_inputs&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;span class="n">H&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">relu&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">matmul&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">X&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">W1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">b1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">matmul&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">H&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">W2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">b2&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>.view()&lt;/code> 函数表示重塑形状，这个函数和 &lt;code>sklearn&lt;/code> 中的 &lt;code>reshape()&lt;/code> 的功能是一样的，而 &lt;code>view(-1,1)&lt;/code> 表示重塑成列向量。同理，&lt;code>view(1,-1)&lt;/code> 表示重塑成行向量。 而 &lt;code>torch.matmul()&lt;/code> 是矩阵相乘方法。&lt;/p>
+&lt;/br>
+&lt;p>&lt;strong>定义损失函数&lt;/strong>&lt;/p>
+&lt;p>损失函数直接使用 &lt;code>PyTorch&lt;/code> 中的交叉熵损失函数&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">loss&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">CrossEntropyLoss&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>&lt;strong>训练模型&lt;/strong>&lt;/p>
+&lt;p>我们设置两个超参数，迭代周期和学习率，分别为 5 和 100.0&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">num_epochs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">lr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">100.0&lt;/span>
+&lt;span class="c1"># 本函数已保存在d2lzh包中方便以后使用&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="nf">train_ch3&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">net&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">train_iter&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">test_iter&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">loss&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_epochs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">batch_size&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="n">params&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">None&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">lr&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">None&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">optimizer&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">None&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">epoch&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num_epochs&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="n">train_l_sum&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">train_acc_sum&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">0.0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mf">0.0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">X&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">train_iter&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">y_hat&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">net&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">X&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">l&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">loss&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">y_hat&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sum&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="c1"># 梯度清零&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="n">optimizer&lt;/span> &lt;span class="ow">is&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="kc">None&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">optimizer&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">zero_grad&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="k">elif&lt;/span> &lt;span class="n">params&lt;/span> &lt;span class="ow">is&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="kc">None&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">grad&lt;/span> &lt;span class="ow">is&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="kc">None&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">param&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">param&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">grad&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">zero_&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="n">l&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">backward&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="n">optimizer&lt;/span> &lt;span class="ow">is&lt;/span> &lt;span class="kc">None&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">d2l&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sgd&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">params&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">lr&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">batch_size&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">optimizer&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">step&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1"># “softmax回归的简洁实现”一节将用到&lt;/span>
+&lt;span class="n">train_l_sum&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">l&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="n">train_acc_sum&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">y_hat&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">argmax&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">dim&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sum&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">item&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="n">n&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">shape&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="n">test_acc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">evaluate_accuracy&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">test_iter&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">net&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;epoch &lt;/span>&lt;span class="si">%d&lt;/span>&lt;span class="s1">, loss &lt;/span>&lt;span class="si">%.4f&lt;/span>&lt;span class="s1">, train acc &lt;/span>&lt;span class="si">%.3f&lt;/span>&lt;span class="s1">, test acc &lt;/span>&lt;span class="si">%.3f&lt;/span>&lt;span class="s1">&amp;#39;&lt;/span>
+&lt;span class="o">%&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">epoch&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">train_l_sum&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">train_acc_sum&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="n">n&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">test_acc&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">train_ch3&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">net&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">train_iter&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">test_iter&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">loss&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_epochs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">batch_size&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">params&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">lr&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>最后得到输出如下&lt;/p>
+&lt;pre tabindex="0">&lt;code>epoch 1, loss 0.0030, train acc 0.714, test acc 0.753
+epoch 2, loss 0.0019, train acc 0.821, test acc 0.777
+epoch 3, loss 0.0017, train acc 0.842, test acc 0.834
+epoch 4, loss 0.0015, train acc 0.857, test acc 0.839
+epoch 5, loss 0.0014, train acc 0.865, test acc 0.845
+&lt;/code>&lt;/pre>&lt;/br>
+&lt;p>全部手工实现多层感知机如上所示，但是这样手动实现其实很容易出现错误，且效率不高。我们可以使用 &lt;code>PyTorch&lt;/code> 更简洁地实现多层感知机。&lt;/p>
+&lt;/br>
+&lt;h3 id="简洁实现">简洁实现&lt;/h3>
+&lt;p>&lt;strong>模型定义&lt;/strong>&lt;/p>
+&lt;p>模型定义可以直接使用 &lt;code>PyTorch&lt;/code> 中的 &lt;code>nn.Sequential&lt;/code> 来实现。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">num_inputs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_outputs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_hiddens&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">784&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">256&lt;/span>
+&lt;span class="n">net&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Sequential&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;span class="n">d2l&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">FlattenLayer&lt;/span>&lt;span class="p">(),&lt;/span>
+&lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Linear&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num_inputs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_hiddens&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="c1"># 输入层&lt;/span>
+&lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ReLU&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="c1"># 激活函数&lt;/span>
+&lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Linear&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num_hiddens&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_outputs&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="c1"># 输出层&lt;/span>
+&lt;span class="p">)&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">params&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">net&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">parameters&lt;/span>&lt;span class="p">():&lt;/span> &lt;span class="c1"># 初始化参数&lt;/span>
+&lt;span class="n">init&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">normal_&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">params&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">mean&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.01&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>模型从上往下为输入层，激活函数，输出层。&lt;/p>
+&lt;/br>
+&lt;p>&lt;strong>读取数据训练模型&lt;/strong>&lt;/p>
+&lt;p>这里优化直接使用 &lt;code>Pytorch&lt;/code> 中的 &lt;code>SGD&lt;/code> 梯度下降算法&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">batch_size&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">256&lt;/span> &lt;span class="c1"># 小批量大小\隐藏单元数量&lt;/span>
+&lt;span class="n">train_iter&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">test_iter&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">d2l&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">load_data_fashion_mnist&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">batch_size&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># 读取数据&lt;/span>
+&lt;span class="n">loss&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">nn&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">CrossEntropyLoss&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1"># 损失函数&lt;/span>
+&lt;span class="n">optimizer&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">optim&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">SGD&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">net&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">parameters&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">lr&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.5&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1"># 优化方法&lt;/span>
+&lt;span class="n">num_epochs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">5&lt;/span> &lt;span class="c1"># 迭代周期&lt;/span>
+&lt;span class="n">train_ch3&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">net&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">train_iter&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">test_iter&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">loss&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_epochs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">batch_size&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">None&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">None&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">optimizer&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="c1"># 训练模型&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>最后输出&lt;/p>
+&lt;pre tabindex="0">&lt;code>epoch 1, loss 0.0030, train acc 0.712, test acc 0.744
+epoch 2, loss 0.0019, train acc 0.823, test acc 0.821
+epoch 3, loss 0.0017, train acc 0.844, test acc 0.842
+epoch 4, loss 0.0015, train acc 0.856, test acc 0.842
+epoch 5, loss 0.0014, train acc 0.864, test acc 0.818
+&lt;/code>&lt;/pre>&lt;/br>
+&lt;h3 id="参考">参考&lt;/h3>
+&lt;p>&lt;a href="https://tangshusen.me/Dive-into-DL-PyTorch/#/"target="_blank" rel="noopener noreferrer">《动手学深度学习》PyTorch 版&lt;/a>
+&lt;/p>
+&lt;p>&lt;a href="https://nndl.github.io"target="_blank" rel="noopener noreferrer">《神经网络与深度学习》邱锡鹏教授&lt;/a>
+&lt;/p></description></item><item><title>[深度学习笔记] 深度学习第 1 篇——简单线性回归</title><link>https://yibocat.github.io/posts/dl/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_2/</link><pubDate>Tue, 08 Feb 2022 22:06:10 +0800</pubDate><guid>https://yibocat.github.io/posts/dl/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0_2/</guid><description>&lt;p>线性模型（Linear Model）是机器学习中应用最广泛的模型，指通过样本特征的线性组合来进行预测的模型。线性回归是单层神经网络，其涉及的概念和技术适用于大多数深度学习模型。&lt;/p>
 &lt;/br>
 &lt;h2 id="线性回归">线性回归&lt;/h2>
 &lt;h3 id="模型定义">模型定义&lt;/h3>
@@ -246,7 +409,7 @@ nohup jupyter lab --allow-root &amp;gt; jupyter.log 2&amp;gt;&lt;span class="p">
 &lt;h3 id="忽略当前目录下的-ds_store">忽略当前目录下的 .DS_Store&lt;/h3>
 &lt;p>我们在所要忽略 .DS_Store 的目录下创建一个 &lt;code>.gitignore&lt;/code> 文件，然后将要忽略的文件名写入进去&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">touch .gitignore
-&lt;/code>&lt;/pre>&lt;/div>&lt;img src="https://yibocat.github.io/images/git/git-20220201-1.png" alt="jzrj-20220129-20" style="zoom:50%;" />
+&lt;/code>&lt;/pre>&lt;/div>&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/git/git-20220201-1.png" style="width:90%" />&lt;/p>
 &lt;p>每次忽略任何文件只需将要忽略的文件添加到 &lt;code>.gitignore&lt;/code> 文件就可以了。&lt;/p>
 &lt;p>但是每次更改完 &lt;code>.gitignore&lt;/code> 文件之后，都需要运行以下代码，否则 &lt;code>.gitignore&lt;/code> 是不生效的&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">git rm -r --cached .
@@ -529,7 +692,7 @@ Serving pages from memory
 Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
 Web Server is available at http://localhost:1313/ &lt;span class="o">(&lt;/span>&lt;span class="nb">bind&lt;/span> address 127.0.0.1&lt;span class="o">)&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>此时在浏览器上打开 &lt;code>http://localhost:1313/&lt;/code> 就可以直接访问了。&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-1.png" alt="jzrj-2022129-1" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-1.png" style="width:90%" />&lt;/p>
 &lt;h3 id="生成站点并发布">生成站点并发布&lt;/h3>
 &lt;p>以上步骤只是表示网站可以正常运行了，并不意味着这就是 Hugo 要发布的站点。还要通过 hugo 命令发布站点。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ hugo -D
@@ -558,9 +721,9 @@ config.toml data public static
 &lt;h3 id="托管到-github">托管到 Github&lt;/h3>
 &lt;p>浏览器打开网址可以访问，说明网站已经可以正常运行了，但是还需要托管到 Github 上才能进行随时访问。&lt;/p>
 &lt;p>Github Pages 是 Github 官方的博客发布系统，其项目名称需要遵循 &lt;code>username.github.io&lt;/code> 形式。在 Github 上新建一个存储库，任何选项都不要勾选，注意：repository name 要和 Owner 名称相同。如下所示&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-2.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-2.png" style="width:90%;" />&lt;/p>
 &lt;p>点击 &lt;code>create repository&lt;/code> 创建存储库，会看到这样的界面&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-3.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-3.png" style="width:90%" />&lt;/p>
 &lt;p>因为之前已经初始化过站点 git 库了，所以只要将远程库的地址加进来就可以了，此时的 Github 库是一个空库。上图中已经告诉了基本步骤，先在本地站点目录创建一个 README.md 文件&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;# accoppo.github.io&amp;#34;&lt;/span> &amp;gt;&amp;gt; README.md
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>然后创建 &lt;code>master&lt;/code> 分支并提交&lt;/p>
@@ -580,9 +743,9 @@ $ git remote add origin git@github.com:accoppo/accoppo.github.io.git
 &lt;p>Hugo + Github Action 可以参考 &lt;a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/#build-hugo-with-github-action"target="_blank" rel="noopener noreferrer">https://gohugo.io/hosting-and-deployment/hosting-on-github/#build-hugo-with-github-action&lt;/a>
 &lt;/p>
 &lt;p>官方提供了一个 yml 文件，文件存在&lt;code>.github/workflows/gh-pages.yml&lt;/code> 里，在项目库中选择 Action 并点击 &lt;code>new workflow&lt;/code>&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-4.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-4.png" style="width:90%" />&lt;/p>
 &lt;p>然后点击 &lt;code>set up a workflow yourself&lt;/code>&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-5.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-5.png" style="width:90%" />&lt;/p>
 &lt;p>然后进入到工作流文件设置中，将 &lt;code>main.yml&lt;/code> 更改为 &lt;code>gh-pages.yml&lt;/code> ，然后将下面代码复制到 &lt;code>Edit new file&lt;/code> 中&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yml" data-lang="yml">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">github pages&lt;/span>&lt;span class="w">
 &lt;/span>&lt;span class="w">
@@ -615,15 +778,15 @@ $ git remote add origin git@github.com:accoppo/accoppo.github.io.git
 &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">github_token&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.GITHUB_TOKEN }}&lt;/span>&lt;span class="w">
 &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_dir&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">./public&lt;/span>&lt;span class="w">
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如下所示&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-6.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-6.png" style="width:90%" />&lt;/p>
 &lt;p>然后 &lt;code>Start commit&lt;/code> &lt;code>Commit new file&lt;/code> ，&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-7.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-7.png" style="width:60%" />&lt;/p>
 &lt;p>回到 Action 会触发一次构建发布任务，等待几分钟左侧圆圈变成✅&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-8.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-8.png" style="width:90%" />&lt;/p>
 &lt;p>以上任务完成以后，回到 &lt;code>Code&lt;/code> ，并没有看到 public 目录，但是会发现多了一条分支，新增加的这条分支就是 Github Pages 要发布的内容&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-9.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-9.png" style="width:90%" />&lt;/p>
 &lt;p>然后回到 Setting 的 Pages 选项里将发布源改成 &lt;code>gh-pages.yml&lt;/code>&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-10.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-10.png" style="width:90%" />&lt;/p>
 &lt;p>等待几分钟就可以在浏览器中查看了。&lt;/p>
 &lt;p>在发布的站点网页中，并没有看到发布的文章，这是因为在文章的 &lt;code>Front Matter&lt;/code> 设置中将 Draft 设置成了 true，这表示文章现在是草稿形式，并没有发布。&lt;/p>
 &lt;p>而且因为远程库中的内容已经发生变化，所以先从远程将项目库 &lt;code>pull&lt;/code> 下来&lt;/p>
@@ -641,35 +804,35 @@ remotes/origin/master
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>最后就可以正常访问了。&lt;/p>
 &lt;h3 id="域名设置">域名设置&lt;/h3>
 &lt;p>Github Pages 支持设置自定义域名，如下图所示 &lt;code>custom domain &lt;/code> 可以设置自定义域名&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-10.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-10.png" style="width:90%" />&lt;/p>
 &lt;p>首先在任意的域名注册商那里注册一个域名，腾讯云域名注册链接 &lt;a href="https://buy.cloud.tencent.com/domain"target="_blank" rel="noopener noreferrer">https://buy.cloud.tencent.com/domain&lt;/a>
 ，或者进入网站 &lt;a href="https://www.dnspod.cn"target="_blank" rel="noopener noreferrer">https://www.dnspod.cn&lt;/a>
 进行域名注册，然后进行备案。&lt;/p>
 &lt;p>等待备案好之后进入 &lt;code>DNSPod&lt;/code> 云解析控制台 &lt;a href="https://www.dnspod.cn"target="_blank" rel="noopener noreferrer">https://www.dnspod.cn&lt;/a>
 ，可以看到域名已经添加到我的域名中，然后要做的是对域名添加解析，点击域名，进入我的域名管理，点击快速添加解析&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-11.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-11.png" style="width:90%" />&lt;/p>
 &lt;p>然后将 &lt;code>xxx.github.io&lt;/code> 添加到域名映射CNAME 中，点击确认，就会自动生成四条记录。&lt;/p>
 &lt;p>回到 GIthub 站点项目库的 &lt;code>setting pages&lt;/code> ，将新的域名填入自定义域名框中&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-12.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-12.png" style="width:90%" />&lt;/p>
 &lt;p>等待几分钟，就可以使用自定义域名访问站点了。&lt;/p>
 &lt;h5 id="域名自动更新问题">域名自动更新问题&lt;/h5>
 &lt;p>每次将站点 &lt;code>push&lt;/code> 到 Github 并进行 Action 自动发布时，自定义域名总是会丢失，导致每 &lt;code>push&lt;/code> 一次，就要手动设置一次域名，很是麻烦。后来查阅资料才知道，Github Action 将项目库主分支进行自动部署时，总是重新部署，这使得我们设置好的域名总会刷新掉。解决办法是在本地站点目录的 &lt;code>static&lt;/code> 目录下创建一个 CNAME 文件（注意：没有后缀），写入自定义域名&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-13.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-13.png" style="width:90%" />&lt;/p>
 &lt;p>这样，在每次 Action 自动发布时，&lt;code>static&lt;/code> 目录下的文件会部署到发布目录（即 public目录下）的根目录下，每次进行 &lt;code>push &lt;/code> 就不会丢失自定义域名了。&lt;/p>
 &lt;h3 id="cdn-静态网页加速">CDN 静态网页加速&lt;/h3>
 &lt;p>由于 Github 服务器位于国外，所以访问加载时间是非常长的，这反而失去了静态网页的特点。所以我们可以通过 CDN 内容分发网络对我们的网站进行加速，实现快速访问。&lt;/p>
 &lt;p>不管是腾讯云还是阿里云或者其他 CDN 服务商，都是一样的流程。我们进入腾讯云 CDN 内容分发网络控制台，进入域名管理，然后添加域名进行域名配置&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-14.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-14.png" style="width:90%" />&lt;/p>
 &lt;p>然后进行源站配置，注意：源站配置的回源协议再没有设置 SSL 时选择 HTTP，腾讯云有一年的免费 SSL ，等配置完 SSL 修改源站协议即可。&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-15.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-15.png" style="width:90%" />&lt;/p>
 &lt;p>提交等待几分钟后，需要将生成的加速域名 CNAME 覆盖到 DNSPod 记录管理的 @ 主机记录，这个步骤一般腾讯云会自动替换。&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-16.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-16.png" style="width:90%" />&lt;/p>
 &lt;p>等待 CDN 部署几分钟后，就可以流畅的浏览自己的博客了。&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-17.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-17.png" style="width:90%" />&lt;/p>
 &lt;h5 id="注意">注意&lt;/h5>
 &lt;p>CDN 静态网页加速以后，虽然网页浏览速度加快，但是更新缓存资源是延后的，这样造成的后果是发表一篇文章，却不能即时在客户端浏览器看到。幸运的是，在腾讯云的 CDN控制台是有刷新预热功能的，也就是说当网站的源站有资源更新、需要清理违规资源、域名有配置变更的，为避免全网用户受节点缓存影响仍访问到旧的资源、受旧配置的影响，可提交刷新任务，保证全网用户可访问到最新资源或正常访问。&lt;/p>
 &lt;p>这里有三种刷新预热方法&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-18.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-18.png" style="width:50%" />&lt;/p>
 &lt;blockquote>
 &lt;p>URL 刷新：表示某一个网页例如主页有信息变化时，通常使用 URL 刷新&lt;/p>
 &lt;p>目录刷新：网站目录下的信息刷新，例如列表、Hugo 的 Posts 目录等&lt;/p>
@@ -677,7 +840,7 @@ remotes/origin/master
 &lt;/blockquote>
 &lt;p>虽然刷新暂时解决了网页最新的浏览，但是每次手动刷新依然很麻烦。&lt;/p>
 &lt;p>很幸运，腾讯云的 CDN 控制台的插件中心中有一项功能是定时刷新预热&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-19.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-19.png" style="width:90%" />&lt;/p>
 &lt;p>我们可以设置一定的时间或者时间间隔进行自动刷新，避免了每次手动刷新的麻烦。&lt;/p>
 &lt;h3 id="总结与其他">总结与其他&lt;/h3>
 &lt;ol>

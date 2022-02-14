@@ -2,7 +2,7 @@
 <meta name=color-scheme content="light dark">
 <meta name=supported-color-schemes content="light dark">
 <title>[建站日记] Hugo+Github+Tencent CDN博客搭建&nbsp;&ndash;&nbsp;yibocat</title>
-<link rel=stylesheet href=/css/core.min.30bf4ef27136193a2defbc9b1cc8f30c4fafa74891011fc97852f60d505d807f5b1724b68954c9ab71d3e0af923e13fe.css integrity=sha384-ML9O8nE2GTot77ybHMjzDE+vp0iRAR/JeFL2DVBdgH9bFyS2iVTJq3HT4K+SPhP+><meta name=twitter:card content="summary">
+<link rel=stylesheet href=/css/core.min.692cf0f8b3161d3a21f9a590c0bcac033c3857337180ccc5d6f6d4d811768a4145ab961b0f6ddd20239f5d4a05da238c.css integrity=sha384-aSzw+LMWHToh+aWQwLysAzw4VzNxgMzF1vbU2BF2ikFFq5YbD23dICOfXUoF2iOM><meta name=twitter:card content="summary">
 <meta name=twitter:title content="[建站日记] Hugo+Github+Tencent CDN博客搭建"><body><section id=header>
 <div class="header wrap"><span class="header left-side"><a class="site home" href=/><img class="site logo" src=/images/yibo.jpeg alt><span class="site name">yibocat</span></a></span>
 <span class="header right-side"><div class="nav wrap">
@@ -136,7 +136,7 @@ Serving pages from memory
 Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
 Web Server is available at http://localhost:1313/ <span class=o>(</span><span class=nb>bind</span> address 127.0.0.1<span class=o>)</span>
 </code></pre></div><p>此时在浏览器上打开 <code>http://localhost:1313/</code> 就可以直接访问了。</p>
-<img src=/images/jzrj/jzrj-20220129-1.png alt=jzrj-2022129-1 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-1.png style=width:90%></p>
 <h3 id=生成站点并发布>生成站点并发布</h3>
 <p>以上步骤只是表示网站可以正常运行了，并不意味着这就是 Hugo 要发布的站点。还要通过 hugo 命令发布站点。</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>myfirsthugo $ hugo -D
@@ -167,9 +167,9 @@ config.toml	data		public		static
 <h3 id=托管到-github>托管到 Github</h3>
 <p>浏览器打开网址可以访问，说明网站已经可以正常运行了，但是还需要托管到 Github 上才能进行随时访问。</p>
 <p>Github Pages 是 Github 官方的博客发布系统，其项目名称需要遵循 <code>username.github.io</code> 形式。在 Github 上新建一个存储库，任何选项都不要勾选，注意：repository name 要和 Owner 名称相同。如下所示</p>
-<img src=/images/jzrj/jzrj-20220129-2.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-2.png style=width:90%></p>
 <p>点击 <code>create repository</code> 创建存储库，会看到这样的界面</p>
-<img src=/images/jzrj/jzrj-20220129-3.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-3.png style=width:90%></p>
 <p>因为之前已经初始化过站点 git 库了，所以只要将远程库的地址加进来就可以了，此时的 Github 库是一个空库。上图中已经告诉了基本步骤，先在本地站点目录创建一个 README.md 文件</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ <span class=nb>echo</span> <span class=s2>&#34;# accoppo.github.io&#34;</span> &gt;&gt; README.md
 </code></pre></div><p>然后创建 <code>master</code> 分支并提交</p>
@@ -189,9 +189,9 @@ $ git remote add origin git@github.com:accoppo/accoppo.github.io.git
 <p>Hugo + Github Action 可以参考 <a href=https://gohugo.io/hosting-and-deployment/hosting-on-github/#build-hugo-with-github-action target=_blank rel="noopener noreferrer">https://gohugo.io/hosting-and-deployment/hosting-on-github/#build-hugo-with-github-action</a>
 </p>
 <p>官方提供了一个 yml 文件，文件存在<code>.github/workflows/gh-pages.yml</code> 里，在项目库中选择 Action 并点击 <code>new workflow</code></p>
-<img src=/images/jzrj/jzrj-20220129-4.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-4.png style=width:90%></p>
 <p>然后点击 <code>set up a workflow yourself</code></p>
-<img src=/images/jzrj/jzrj-20220129-5.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-5.png style=width:90%></p>
 <p>然后进入到工作流文件设置中，将 <code>main.yml</code> 更改为 <code>gh-pages.yml</code> ，然后将下面代码复制到 <code>Edit new file</code> 中</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-yml data-lang=yml><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>github pages</span><span class=w>
 </span><span class=w>
@@ -224,15 +224,15 @@ $ git remote add origin git@github.com:accoppo/accoppo.github.io.git
 </span><span class=w>          </span><span class=nt>github_token</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GITHUB_TOKEN }}</span><span class=w>
 </span><span class=w>          </span><span class=nt>publish_dir</span><span class=p>:</span><span class=w> </span><span class=l>./public</span><span class=w>
 </span></code></pre></div><p>如下所示</p>
-<img src=/images/jzrj/jzrj-20220129-6.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-6.png style=width:90%></p>
 <p>然后 <code>Start commit</code> <code>Commit new file</code> ，</p>
-<img src=/images/jzrj/jzrj-20220129-7.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-7.png style=width:60%></p>
 <p>回到 Action 会触发一次构建发布任务，等待几分钟左侧圆圈变成✅</p>
-<img src=/images/jzrj/jzrj-20220129-8.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-8.png style=width:90%></p>
 <p>以上任务完成以后，回到 <code>Code</code> ，并没有看到 public 目录，但是会发现多了一条分支，新增加的这条分支就是 Github Pages 要发布的内容</p>
-<img src=/images/jzrj/jzrj-20220129-9.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-9.png style=width:90%></p>
 <p>然后回到 Setting 的 Pages 选项里将发布源改成 <code>gh-pages.yml</code></p>
-<img src=/images/jzrj/jzrj-20220129-10.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-10.png style=width:90%></p>
 <p>等待几分钟就可以在浏览器中查看了。</p>
 <p>在发布的站点网页中，并没有看到发布的文章，这是因为在文章的 <code>Front Matter</code> 设置中将 Draft 设置成了 true，这表示文章现在是草稿形式，并没有发布。</p>
 <p>而且因为远程库中的内容已经发生变化，所以先从远程将项目库 <code>pull</code> 下来</p>
@@ -250,35 +250,35 @@ $ git remote add origin git@github.com:accoppo/accoppo.github.io.git
 </code></pre></div><p>最后就可以正常访问了。</p>
 <h3 id=域名设置>域名设置</h3>
 <p>Github Pages 支持设置自定义域名，如下图所示 <code>custom domain </code> 可以设置自定义域名</p>
-<img src=/images/jzrj/jzrj-20220129-10.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-10.png style=width:90%></p>
 <p>首先在任意的域名注册商那里注册一个域名，腾讯云域名注册链接 <a href=https://buy.cloud.tencent.com/domain target=_blank rel="noopener noreferrer">https://buy.cloud.tencent.com/domain</a>
 ，或者进入网站 <a href=https://www.dnspod.cn target=_blank rel="noopener noreferrer">https://www.dnspod.cn</a>
 进行域名注册，然后进行备案。</p>
 <p>等待备案好之后进入 <code>DNSPod</code> 云解析控制台 <a href=https://www.dnspod.cn target=_blank rel="noopener noreferrer">https://www.dnspod.cn</a>
 ，可以看到域名已经添加到我的域名中，然后要做的是对域名添加解析，点击域名，进入我的域名管理，点击快速添加解析</p>
-<img src=/images/jzrj/jzrj-20220129-11.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-11.png style=width:90%></p>
 <p>然后将 <code>xxx.github.io</code> 添加到域名映射CNAME 中，点击确认，就会自动生成四条记录。</p>
 <p>回到 GIthub 站点项目库的 <code>setting pages</code> ，将新的域名填入自定义域名框中</p>
-<img src=/images/jzrj/jzrj-20220129-12.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-12.png style=width:90%></p>
 <p>等待几分钟，就可以使用自定义域名访问站点了。</p>
 <h5 id=域名自动更新问题>域名自动更新问题</h5>
 <p>每次将站点 <code>push</code> 到 Github 并进行 Action 自动发布时，自定义域名总是会丢失，导致每 <code>push</code> 一次，就要手动设置一次域名，很是麻烦。后来查阅资料才知道，Github Action 将项目库主分支进行自动部署时，总是重新部署，这使得我们设置好的域名总会刷新掉。解决办法是在本地站点目录的 <code>static</code> 目录下创建一个 CNAME 文件（注意：没有后缀），写入自定义域名</p>
-<img src=/images/jzrj/jzrj-20220129-13.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-13.png style=width:90%></p>
 <p>这样，在每次 Action 自动发布时，<code>static</code> 目录下的文件会部署到发布目录（即 public目录下）的根目录下，每次进行 <code>push </code> 就不会丢失自定义域名了。</p>
 <h3 id=cdn-静态网页加速>CDN 静态网页加速</h3>
 <p>由于 Github 服务器位于国外，所以访问加载时间是非常长的，这反而失去了静态网页的特点。所以我们可以通过 CDN 内容分发网络对我们的网站进行加速，实现快速访问。</p>
 <p>不管是腾讯云还是阿里云或者其他 CDN 服务商，都是一样的流程。我们进入腾讯云 CDN 内容分发网络控制台，进入域名管理，然后添加域名进行域名配置</p>
-<img src=/images/jzrj/jzrj-20220129-14.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-14.png style=width:90%></p>
 <p>然后进行源站配置，注意：源站配置的回源协议再没有设置 SSL 时选择 HTTP，腾讯云有一年的免费 SSL ，等配置完 SSL 修改源站协议即可。</p>
-<img src=/images/jzrj/jzrj-20220129-15.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-15.png style=width:90%></p>
 <p>提交等待几分钟后，需要将生成的加速域名 CNAME 覆盖到 DNSPod 记录管理的 @ 主机记录，这个步骤一般腾讯云会自动替换。</p>
-<img src=/images/jzrj/jzrj-20220129-16.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-16.png style=width:90%></p>
 <p>等待 CDN 部署几分钟后，就可以流畅的浏览自己的博客了。</p>
-<img src=/images/jzrj/jzrj-20220129-17.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-17.png style=width:90%></p>
 <h5 id=注意>注意</h5>
 <p>CDN 静态网页加速以后，虽然网页浏览速度加快，但是更新缓存资源是延后的，这样造成的后果是发表一篇文章，却不能即时在客户端浏览器看到。幸运的是，在腾讯云的 CDN控制台是有刷新预热功能的，也就是说当网站的源站有资源更新、需要清理违规资源、域名有配置变更的，为避免全网用户受节点缓存影响仍访问到旧的资源、受旧配置的影响，可提交刷新任务，保证全网用户可访问到最新资源或正常访问。</p>
 <p>这里有三种刷新预热方法</p>
-<img src=/images/jzrj/jzrj-20220129-18.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-18.png style=width:50%></p>
 <blockquote>
 <p>URL 刷新：表示某一个网页例如主页有信息变化时，通常使用 URL 刷新</p>
 <p>目录刷新：网站目录下的信息刷新，例如列表、Hugo 的 Posts 目录等</p>
@@ -286,7 +286,7 @@ $ git remote add origin git@github.com:accoppo/accoppo.github.io.git
 </blockquote>
 <p>虽然刷新暂时解决了网页最新的浏览，但是每次手动刷新依然很麻烦。</p>
 <p>很幸运，腾讯云的 CDN 控制台的插件中心中有一项功能是定时刷新预热</p>
-<img src=/images/jzrj/jzrj-20220129-19.png alt=jzrj-20220129-2 style=zoom:50%>
+<p style=text-align:center><img src=/images/jzrj/jzrj-20220129-19.png style=width:90%></p>
 <p>我们可以设置一定的时间或者时间间隔进行自动刷新，避免了每次手动刷新的麻烦。</p>
 <h3 id=总结与其他>总结与其他</h3>
 <ol>

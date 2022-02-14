@@ -2,7 +2,7 @@
 <meta name=color-scheme content="light dark">
 <meta name=supported-color-schemes content="light dark">
 <title>[Git 日记] Git 忽略 .DS_Store 与全局忽略&nbsp;&ndash;&nbsp;yibocat</title>
-<link rel=stylesheet href=/css/core.min.30bf4ef27136193a2defbc9b1cc8f30c4fafa74891011fc97852f60d505d807f5b1724b68954c9ab71d3e0af923e13fe.css integrity=sha384-ML9O8nE2GTot77ybHMjzDE+vp0iRAR/JeFL2DVBdgH9bFyS2iVTJq3HT4K+SPhP+><meta name=twitter:card content="summary">
+<link rel=stylesheet href=/css/core.min.692cf0f8b3161d3a21f9a590c0bcac033c3857337180ccc5d6f6d4d811768a4145ab961b0f6ddd20239f5d4a05da238c.css integrity=sha384-aSzw+LMWHToh+aWQwLysAzw4VzNxgMzF1vbU2BF2ikFFq5YbD23dICOfXUoF2iOM><meta name=twitter:card content="summary">
 <meta name=twitter:title content="[Git 日记] Git 忽略 .DS_Store 与全局忽略"><body><section id=header>
 <div class="header wrap"><span class="header left-side"><a class="site home" href=/><img class="site logo" src=/images/yibo.jpeg alt><span class="site name">yibocat</span></a></span>
 <span class="header right-side"><div class="nav wrap">
@@ -30,7 +30,7 @@
 <h3 id=忽略当前目录下的-ds_store>忽略当前目录下的 .DS_Store</h3>
 <p>我们在所要忽略 .DS_Store 的目录下创建一个 <code>.gitignore</code> 文件，然后将要忽略的文件名写入进去</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>touch .gitignore
-</code></pre></div><img src=/images/git/git-20220201-1.png alt=jzrj-20220129-20 style=zoom:50%>
+</code></pre></div><p style=text-align:center><img src=/images/git/git-20220201-1.png style=width:90%></p>
 <p>每次忽略任何文件只需将要忽略的文件添加到 <code>.gitignore</code> 文件就可以了。</p>
 <p>但是每次更改完 <code>.gitignore</code> 文件之后，都需要运行以下代码，否则 <code>.gitignore</code> 是不生效的</p>
 <div class=highlight><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>git rm -r --cached .
