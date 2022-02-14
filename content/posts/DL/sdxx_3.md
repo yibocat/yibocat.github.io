@@ -3,7 +3,7 @@ title: "[深度学习笔记] 深度学习第 3 篇——网络正则化"
 date: 2022-02-14T21:54:56+08:00
 author: "yibo"
 description: ""
-draft: true
+draft: false
 math: true
 tags: ["深度学习","神经网络","优化","模型复杂度","误差","正则化"]
 categories: ["烂笔头之深度学习"]
