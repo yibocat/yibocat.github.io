@@ -1,4 +1,131 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git 日记 on yibocat</title><link>https://yibocat.github.io/categories/git-%E6%97%A5%E8%AE%B0/</link><description>Recent content in Git 日记 on yibocat</description><generator>Hugo -- gohugo.io</generator><copyright>©2022 Yibocat.</copyright><lastBuildDate>Tue, 01 Feb 2022 10:53:07 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/categories/git-%E6%97%A5%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>[深度学习笔记] 深度学习第 2 篇——多层感知机</title><link>https://yibocat.github.io/posts/dl/sdxx_2/</link><pubDate>Mon, 14 Feb 2022 12:12:13 +0800</pubDate><guid>https://yibocat.github.io/posts/dl/sdxx_2/</guid><description>&lt;p>其实感知机也就是上一篇所讲的最简单的单层神经网络，即简单线性回归模型，也是属于一个简单二分类或多分类模型。&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git 日记 on yibocat</title><link>https://yibocat.github.io/categories/git-%E6%97%A5%E8%AE%B0/</link><description>Recent content in Git 日记 on yibocat</description><generator>Hugo -- gohugo.io</generator><copyright>©2022 Yibocat.</copyright><lastBuildDate>Tue, 01 Feb 2022 10:53:07 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/categories/git-%E6%97%A5%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>[深度学习笔记] 深度学习第 3 篇——网络正则化</title><link>https://yibocat.github.io/posts/dl/sdxx_3/</link><pubDate>Mon, 14 Feb 2022 21:54:56 +0800</pubDate><guid>https://yibocat.github.io/posts/dl/sdxx_3/</guid><description>&lt;p>在学习正则化之前，首先看一下&lt;strong>经验误差&lt;/strong>和&lt;strong>泛化误差&lt;/strong>与&lt;strong>过拟合&lt;/strong>和&lt;strong>欠拟合&lt;/strong>，然后给出模型复杂度用来判定一个模型的好坏，然后学习网络正则化。&lt;/p>
+&lt;/br>
+&lt;h3 id="经验误差与泛化误差">经验误差与泛化误差&lt;/h3>
+&lt;p>什么是经验误差和泛化误差？通俗的来讲，经验误差（Empirical Error）就是指模型在训练数据集上的表现出来的误差，泛化误差（Generalization Error）是指模型在任意新样本上的误差。&lt;/p>
+&lt;/br>
+&lt;p>具体来看，给定一个模型 $f(x;\theta)$ ，我们希望的是这个模型有一个小的期望误差，但是我们不知道真实的数据分布和映射函数，所以无法计算期望误差。但是我们可以计算的是经验误差，即模型在训练集上的误差，也就是训练集上的&lt;strong>平均损失&lt;/strong>
+$$
+E_{D}^{emp}(\theta)=\frac{1}{m}\sum_{i=1}^m\mathbb{L}(y^{(i)},f(x^{(i)};\theta))
+$$
+这里 $E_D^{emp}(\theta)$ 表示在训练集 $D$ 上的参数为 $\theta$ 的平均经验误差，假设有 $m$ 个训练数据，$\mathbb{L}$ 表示每个训练数据集的真实标签与模型 $f(x^{(i)};\theta)$ 得到的标签之间的误差函数。&lt;/p>
+&lt;p>我们首先希望得到的模型一定是有较小的平均经验误差。通俗的讲，我们的模型最基本的要求首先是要在训练集上的误差最小吧，也就是暂且让模型满足训练集上的数据误差最小（扯了三句啰嗦话，其实是一个意思）。这也就是常说的&lt;strong>经验风险最小化准则（Empirical Risk Minimization , ERM）&lt;/strong>。&lt;/p>
+&lt;/br>
+&lt;p>接着来看泛化误差。&lt;/p>
+&lt;p>我们假设任意样本集为 $\mathcal{D}$ ，则泛化误差的表示为
+$$
+E_{\mathcal{D}}(\theta) = P_{x\thicksim\mathcal{D}}(y\ne f(x;\theta))
+$$
+这个公式可以这么理解，$P_{x\thicksim\mathcal{D}}$ 表示 $x$ 在任意样本下的误差（或者说平均误差），而任意新样本的标签不等于该模型对该样本数据下的标签（公式可能不太正确，大概意思是一样的）。&lt;/p>
+&lt;/br>
+&lt;p>以上我们知道了什么是经验误差和泛化误差。我们希望一个模型可以满足 ERM。&lt;/p>
+&lt;p>但是！但是！！！我们不能让经验风险无穷小（夸张）！过小的经验风险虽然会让模型在训练集上的表现非常好，但是会造成过拟合！这意味着我们的模型适合且仅适合训练数据集！太好了也不是件好事，所谓物极必反。&lt;/p>
+&lt;p>这也就造成了过拟合现象。&lt;/p>
+&lt;/br>
+&lt;h3 id="过拟合与欠拟合">过拟合与欠拟合&lt;/h3>
+&lt;p>上文讲过，过拟合的意思就是一个训练好的模型只在训练集上表现非常好，但是无法用在新的数据集，或者说测试集上。通常造成过拟合的原因是训练数据集过少，或者可以这么说，过拟合产生的原因是数据集与模型复杂度不匹配，即训练数据集的数量无法支撑高复杂度的模型。而神经网络通常是一个超高复杂度的模型，过少的数据集很容易造成过拟合现象。&lt;/p>
+&lt;p>欠拟合则很好理解，指的是模型较弱的学习能力形成的导致泛化能力不高的现象。总的来说，过拟合和欠拟合都是由于模型复杂度与数据集不匹配造成的。&lt;/p>
+&lt;p>所以我们看一下什么是模型复杂度这个概念。&lt;/p>
+&lt;/br>
+&lt;h3 id="模型复杂度">模型复杂度&lt;/h3>
+&lt;p>首先我们以多项式拟合为例。给定一个由标量数据特征 $x$ 和对应的标量标签 $y$ 组成的训练数据集，多项式函数拟合的目标是找到一个 $K$ 阶多项式函数
+$$
+\hat{y}=b+\sum_{k=1}^Kx^k\omega_k
+$$
+来近似 $y$。上式中，$\omega_k$ 表示模型的权重参数，$b$ 表示偏差参数。而多项式函数拟合也是用平方损失函数。特别的，一阶多项式函数拟合又叫线性函数拟合。&lt;/p>
+&lt;p>从上式可以看到，随着 $k$ 越来越大，模型的参数也就越来越多，模型函数的选择空间更大，所以高阶多项式函数比低阶多项式函数的复杂度更高，这也就意味着高阶多项式函数比低阶多项式函数更容易在相同的训练数据集上得到更低的训练误差。这也就是模型复杂度。&lt;/p>
+&lt;p>下图可以很清晰的看出，模型复杂度与误差的关系以及什么是欠拟合与过拟合&lt;/p>
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220214-07.png" style="width:50%;" />&lt;/p>
+&lt;p>关于过拟合和欠拟合的实验，可以查看原书&lt;a href="https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter03_DL-basics/3.11_underfit-overfit"target="_blank" rel="noopener noreferrer">https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter03_DL-basics/3.11_underfit-overfit&lt;/a>
+&lt;/p>
+&lt;h3 id="正则化">正则化&lt;/h3>
+&lt;p>神经网络因其非常强的拟合能力往往使得经验误差可以降到非常低，从而造成过拟合现象。所以如何提高神经网络的泛化能力是非常重要的。&lt;/p>
+&lt;p>从上文得知，防止过拟合可以从数据入手，增加数据集的数量，但是因神经网络强大的拟合能力可以知道其必然是一个模型复杂度非常高的模型，这意味着数据集的量呈指数增长从而无法满足神经网络超高的复杂度，所以增加数据集的量显然并不是一个好的方法。所以只能从另一个角度来考虑，即限制模型复杂度，也就是我们说的网络正则化。&lt;/p>
+&lt;p>&lt;strong>正则化（Regularization）&lt;/strong> 是一种通过&lt;strong>限制模型复杂度&lt;/strong>来避免过拟合的方法，常用的正则化方法有权重衰减、丢弃法等。&lt;/p>
+&lt;/br>
+&lt;p>&lt;strong>$\ell_1,\ell_2$ 正则化&lt;/strong>&lt;/p>
+&lt;p>$\ell_1,\ell_2$ 正则化也称作范数正则化，是机器学习中最常用的正则化方法。其通过约束参数的 $\ell_1$ 和 $\ell_2$ 范数来减小模型在训练数据集上的过拟合现象。我们将 $\ell_1$ 和 $\ell_2$ 加入到优化问题中
+$$
+\mathcal{J}(\theta) = arg\min_{\theta}\frac{1}{N}\sum_{n=1}^N\mathcal{L}(y^{(n)},f(x^{(n)};\theta))+\lambda\ell_p(\theta)
+$$
+$\mathcal{L}()$ 表示损失函数，$N$ 为训练样本数量，$f()$ 表示待学习的神经网络，$\ell_p$ 表示范数函数，这里 $p$ 表示第 $p$ 范数，这里取值为 ${1,2}$ 表示 $\ell_1,\ell_2$ 范数，$\lambda$ 为正则化系数。&lt;/p>
+&lt;/br>
+&lt;p>怎么理解这个式子呢？首先我们看等式右边的前半部分，这其实就是上文中所提到的经验误差最小化式子。我们假设 $\lambda$ 无限小于 0 即等价于 0 ，此时该式子退化为经验误差最小化，也就是我们所说的只考虑增大训练集数据量来防止过拟合。而加入正则化项后，随着 $\lambda$ 的值越来越大，范数函数在等式中的作用越来越大，而该函数正是来限制模型复杂度的，所以该式子通过加入了正则项，来限制模型的复杂度。&lt;/p>
+&lt;p>至于 $\ell_1$ 和 $\ell_2$ 是如何限制模型的，这涉及到数学问题了，这里就不再赘述了。&lt;/p>
+&lt;/br>
+&lt;p>算了&amp;hellip;做笔记 &amp;hellip; 还是详细一点 &amp;hellip;&lt;/p>
+&lt;/br>
+&lt;p>&lt;strong>正则化项如何影响模型&lt;/strong>&lt;/p>
+&lt;p>我们将上式等式的右边第一部分简化一下，用 $E^{emp}(\theta)$ 表示，则优化问题可以写成
+$$
+\mathcal{J}(\theta)=E^{emp}(\theta)+\lambda\ell_p(\theta)
+$$
+首先看这个式子，我们的目的是为了让 $\mathcal{J}(\theta)$ 最小化，在不考虑正则化项的时候，$\mathcal{J}(\theta)$ 等价于经验误差最小化。而加入正则化项之后就要综合考虑两项了（这里看似废话，实则是循序渐进）。而为了使得 $\mathcal{J}(\theta)$ 最小化，正则化项也要越小越好。&lt;/p>
+&lt;p>这里我们先看一下 1-范数和 2-范数的定义&lt;/p>
+&lt;blockquote>
+&lt;p>向量的 1-范数：$\vert\vert X\vert\vert_1 = \sum_{i=1}^n\vert x_i\vert$ ，表示向量内各元素的绝对值之和&lt;/p>
+&lt;p>向量的 2-范数：$\vert\vert X\vert\vert_2=(\sum_{i=1}^nx_i^2)^{\frac{1}{2}}$ ，表示元素的平方和再开平方&lt;/p>
+&lt;/blockquote>
+&lt;/br>
+&lt;p>这时候我们再看，1-范数为例，我们要让正则化项越小，意味着 $\theta$ 要让 $\sum_{i=1}^n\vert\theta_i\vert$ 尽可能小，这样 $\theta_i$ 就被限制住了。而 $\theta_i$ 是什么？不就是参数吗？我们不光要让参数尽可能小，而且还要让参数的数量尽可能得少！$\theta_i$ 被限制住，曲线也就不会太过陡峭。这种正则化的方式被称为&lt;/p>
+&lt;p>&lt;strong>Lasso 回归（Least Absolute Shrinkage and Selection operator Regression)&lt;/strong> 。&lt;/p>
+&lt;/br>
+&lt;p>&lt;strong>1-范数正则化&lt;/strong>&lt;/p>
+&lt;p>L1 正则化项与稀疏性有关，即 L1 正则化可以使得参数稀疏化从而减小模型复杂度。什么是稀疏性？通常神经网络中的特征会达到一个非常大的数量，如果模型的参数有非常多的 0，那么就可以将很多的参数稀疏掉。而 L1 正则化项相当于对模型进行了一次特征选择，只留下重要的特征，从而提高模型的泛化能力，防止过拟合。&lt;/p>
+&lt;/br>
+&lt;p>我们假设一个二维参数空间，损失函数的等高线如下所示&lt;/p>
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220215-01.jpeg" style="width:40%" />&lt;/p>
+&lt;p>这时 L1 正则化为 $\vert \theta_1\vert+\vert\theta_2\vert$ ，对应的等高线是一个菱形。当不加如正则化项的时候，使用梯度下降法优化损失函数，他会沿着梯度方向下降而得到一个近似的最优解&lt;/p>
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220215-02.jpeg" style="width:40%" />&lt;/p>
+&lt;p>而加入L1正则化后，如下所示。$P,Q$ 两点在同一等高线上，即 $P$ 和 $Q$ 两个点的损失函数是等价的。但是，$OP$ 的距离大于 $OQ$ 的距离&lt;/p>
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220215-03.jpeg" style="width:40%" />&lt;/p>
+&lt;p>因此可以得到 $P$ 点的经验损失函数大于 $Q$ 点的经验损失函数，因为 $Q$ 点的 L1 范数小于 $P$ 点的 L1 范数，所以选择 $Q$ 点，其次，当我们选择 $Q$ 点时，对应的 $\theta_1=0$ ，这恰好将 $\theta_1$ 去掉了，并且对原模型并没有影响。&lt;/p>
+&lt;p>所以可以得出结论，即加上正则化项，参数空间会被缩小，从而减小模型复杂度。&lt;/p>
+&lt;/br>
+&lt;p>&lt;strong>2-范数正则化&lt;/strong>&lt;/p>
+&lt;p>和 L1 正则化是一样的，我们假设一个二维的参数空间，L2 正则化为 $\theta_1^2+\theta_2^2$ ，这时 L2 等高线是一个同心圆&lt;/p>
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220215-04.jpeg" style="width:40%" />&lt;/p>
+&lt;p>同样我们使用上述损失函数与损失函数等高线，如图所示，L2 正则与损失等高线交于 $P,Q$ 两点，可以看到 $P$ 点距离 $Q$ 点更接近原点，即距离短。但是此时 $\theta_1,\theta_2$ 均不为 0 。所以我们说 2-范数正则化可以得到尽可能小的解，但是不具有稀疏性。而 L2 正则化方法也是岭回归方法。&lt;/p>
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220215-05.jpeg" style="width:40%" />&lt;/p>
+&lt;p>到这，我们了解了正则化项是如何影响到模型的复杂度的。&lt;/p>
+&lt;/br>
+&lt;h3 id="总结">总结&lt;/h3>
+&lt;p>训练模型的目的是为了经验风险最小化，而过于追求经验风险最小化会造成过拟合。&lt;/p>
+&lt;/br>
+&lt;p>不论是过拟合还是欠拟合，其产生的原因是由于模型复杂度与数据集不匹配造成的，解决方法有两个：1.从数据集入手（不推荐）；2.从模型复杂度入手（正则化）&lt;/p>
+&lt;/br>
+&lt;p>正则化通过添加正则项来对模型复杂度加以限制，从而避免过拟合&lt;/p>
+&lt;/br>
+&lt;p>正则化如何影响模型复杂度：Lasso 回归（具有稀疏性）与岭回归（不具有稀疏性）。&lt;/p>
+&lt;/br>
+&lt;h3 id="参考">参考&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>《机器学习》周志华&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>《动手学深度学习》PyTorch 版，阿斯顿·张、李沐 &lt;a href="https://tangshusen.me/Dive-into-DL-PyTorch/#/"target="_blank" rel="noopener noreferrer">https://tangshusen.me/Dive-into-DL-PyTorch/#/&lt;/a>
+&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>《神经网络与深度学习》邱锡鹏 &lt;a href="https://nndl.github.io/"target="_blank" rel="noopener noreferrer">https://nndl.github.io&lt;/a>
+&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>概率近似正确？！（PAC Learning） - Haoran Jiang的文章 - 知乎 &lt;a href="https://zhuanlan.zhihu.com/p/44589648"target="_blank" rel="noopener noreferrer">https://zhuanlan.zhihu.com/p/44589648&lt;/a>
+&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>[计算学习理论] PAC (Probably Approximately Correct)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>（理论+代码）理解模型正则化：L1正则、L2正则 - 饼干Japson的文章 - 知乎 &lt;a href="https://zhuanlan.zhihu.com/p/113373391"target="_blank" rel="noopener noreferrer">https://zhuanlan.zhihu.com/p/113373391&lt;/a>
+&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Lasso—原理及最优解 - 风磐的文章 - 知乎 &lt;a href="https://zhuanlan.zhihu.com/p/116869931"target="_blank" rel="noopener noreferrer">https://zhuanlan.zhihu.com/p/116869931&lt;/a>
+&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>[深度学习笔记] 深度学习第 2 篇——多层感知机</title><link>https://yibocat.github.io/posts/dl/sdxx_2/</link><pubDate>Mon, 14 Feb 2022 12:12:13 +0800</pubDate><guid>https://yibocat.github.io/posts/dl/sdxx_2/</guid><description>&lt;p>其实感知机也就是上一篇所讲的最简单的单层神经网络，即简单线性回归模型，也是属于一个简单二分类或多分类模型。&lt;/p>
 &lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220214-01.png" style="zoom:16%;" />&lt;/p>
 &lt;h3 id="模型设计">模型设计&lt;/h3>
 &lt;p>多层感知机就是在原本感知机的基础上增加了若干层隐藏层。由于输入层不参与到计算，所以下图展示的是一个二层的神经网络模型。&lt;/p>
@@ -907,4 +1034,4 @@ Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content fil
 &lt;p>Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.&lt;/p>
 &lt;p>Websites built with Hugo are extremelly fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.&lt;/p>
 &lt;p>Learn more and contribute on &lt;a href="https://github.com/gohugoio"target="_blank" rel="noopener noreferrer">GitHub&lt;/a>
-.&lt;/p></description></item><item><title>Search</title><link>https://yibocat.github.io/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yibocat.github.io/search/</guid><description/></item></channel></rss>
+.&lt;/p></description></item></channel></rss>
