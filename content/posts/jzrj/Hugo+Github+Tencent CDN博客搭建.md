@@ -163,7 +163,7 @@ Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
 
 此时在浏览器上打开 `http://localhost:1313/` 就可以直接访问了。
 
-<img src="/images/jzrj/jzrj-20220129-1.png" alt="jzrj-2022129-1" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-1.png" style="width:90%" /></p>
 
 ### 生成站点并发布
 
@@ -210,11 +210,11 @@ config.toml	data		public		static
 
 Github Pages 是 Github 官方的博客发布系统，其项目名称需要遵循 `username.github.io` 形式。在 Github 上新建一个存储库，任何选项都不要勾选，注意：repository name 要和 Owner 名称相同。如下所示
 
-<img src="/images/jzrj/jzrj-20220129-2.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-2.png" style="width:90%;" /></p>
 
 点击 `create repository` 创建存储库，会看到这样的界面
 
-<img src="/images/jzrj/jzrj-20220129-3.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-3.png" style="width:90%" /></p>
 
 因为之前已经初始化过站点 git 库了，所以只要将远程库的地址加进来就可以了，此时的 Github 库是一个空库。上图中已经告诉了基本步骤，先在本地站点目录创建一个 README.md 文件
 
@@ -253,11 +253,11 @@ Action 是 Github 提供的仓库中自动化、自定义和执行软件开发�
 
 官方提供了一个 yml 文件，文件存在`.github/workflows/gh-pages.yml` 里，在项目库中选择 Action 并点击 `new workflow` 
 
-<img src="/images/jzrj/jzrj-20220129-4.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-4.png" style="width:90%" /></p>
 
 然后点击 `set up a workflow yourself` 
 
-<img src="/images/jzrj/jzrj-20220129-5.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-5.png" style="width:90%" /></p>
 
 然后进入到工作流文件设置中，将 `main.yml` 更改为 `gh-pages.yml` ，然后将下面代码复制到 `Edit new file` 中
 
@@ -296,23 +296,23 @@ jobs:
 
 如下所示
 
-<img src="/images/jzrj/jzrj-20220129-6.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-6.png" style="width:90%" /></p>
 
 然后 `Start commit` `Commit new file` ，
 
-<img src="/images/jzrj/jzrj-20220129-7.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-7.png" style="width:60%" /></p>
 
 回到 Action 会触发一次构建发布任务，等待几分钟左侧圆圈变成✅
 
-<img src="/images/jzrj/jzrj-20220129-8.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-8.png" style="width:90%" /></p>
 
 以上任务完成以后，回到 `Code` ，并没有看到 public 目录，但是会发现多了一条分支，新增加的这条分支就是 Github Pages 要发布的内容
 
-<img src="/images/jzrj/jzrj-20220129-9.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-9.png" style="width:90%" /></p>
 
 然后回到 Setting 的 Pages 选项里将发布源改成 `gh-pages.yml` 
 
-<img src="/images/jzrj/jzrj-20220129-10.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-10.png" style="width:90%" /></p>
 
 等待几分钟就可以在浏览器中查看了。
 
@@ -348,19 +348,19 @@ theme = "ananke"
 
 Github Pages 支持设置自定义域名，如下图所示 `custom domain ` 可以设置自定义域名
 
-<img src="/images/jzrj/jzrj-20220129-10.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-10.png" style="width:90%" /></p>
 
 首先在任意的域名注册商那里注册一个域名，腾讯云域名注册链接 https://buy.cloud.tencent.com/domain，或者进入网站 https://www.dnspod.cn 进行域名注册，然后进行备案。
 
 等待备案好之后进入 `DNSPod` 云解析控制台 https://www.dnspod.cn，可以看到域名已经添加到我的域名中，然后要做的是对域名添加解析，点击域名，进入我的域名管理，点击快速添加解析
 
-<img src="/images/jzrj/jzrj-20220129-11.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-11.png" style="width:90%" /></p>
 
 然后将 `xxx.github.io` 添加到域名映射CNAME 中，点击确认，就会自动生成四条记录。
 
 回到 GIthub 站点项目库的 `setting pages` ，将新的域名填入自定义域名框中
 
-<img src="/images/jzrj/jzrj-20220129-12.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-12.png" style="width:90%" /></p>
 
 等待几分钟，就可以使用自定义域名访问站点了。
 
@@ -368,7 +368,7 @@ Github Pages 支持设置自定义域名，如下图所示 `custom domain ` 可�
 
 每次将站点 `push` 到 Github 并进行 Action 自动发布时，自定义域名总是会丢失，导致每 `push` 一次，就要手动设置一次域名，很是麻烦。后来查阅资料才知道，Github Action 将项目库主分支进行自动部署时，总是重新部署，这使得我们设置好的域名总会刷新掉。解决办法是在本地站点目录的 `static` 目录下创建一个 CNAME 文件（注意：没有后缀），写入自定义域名
 
-<img src="/images/jzrj/jzrj-20220129-13.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-13.png" style="width:90%" /></p>
 
 这样，在每次 Action 自动发布时，`static` 目录下的文件会部署到发布目录（即 public目录下）的根目录下，每次进行 `push ` 就不会丢失自定义域名了。
 
@@ -378,19 +378,19 @@ Github Pages 支持设置自定义域名，如下图所示 `custom domain ` 可�
 
 不管是腾讯云还是阿里云或者其他 CDN 服务商，都是一样的流程。我们进入腾讯云 CDN 内容分发网络控制台，进入域名管理，然后添加域名进行域名配置
 
-<img src="/images/jzrj/jzrj-20220129-14.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-14.png" style="width:90%" /></p>
 
 然后进行源站配置，注意：源站配置的回源协议再没有设置 SSL 时选择 HTTP，腾讯云有一年的免费 SSL ，等配置完 SSL 修改源站协议即可。
 
-<img src="/images/jzrj/jzrj-20220129-15.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-15.png" style="width:90%" /></p>
 
 提交等待几分钟后，需要将生成的加速域名 CNAME 覆盖到 DNSPod 记录管理的 @ 主机记录，这个步骤一般腾讯云会自动替换。
 
-<img src="/images/jzrj/jzrj-20220129-16.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-16.png" style="width:90%" /></p>
 
 等待 CDN 部署几分钟后，就可以流畅的浏览自己的博客了。
 
-<img src="/images/jzrj/jzrj-20220129-17.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-17.png" style="width:90%" /></p>
 
 ##### 注意
 
@@ -398,7 +398,7 @@ CDN 静态网页加速以后，虽然网页浏览速度加快，但是更新缓�
 
 这里有三种刷新预热方法
 
-<img src="/images/jzrj/jzrj-20220129-18.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-18.png" style="width:50%" /></p>
 
 > URL 刷新：表示某一个网页例如主页有信息变化时，通常使用 URL 刷新 
 >
@@ -410,7 +410,7 @@ CDN 静态网页加速以后，虽然网页浏览速度加快，但是更新缓�
 
 很幸运，腾讯云的 CDN 控制台的插件中心中有一项功能是定时刷新预热
 
-<img src="/images/jzrj/jzrj-20220129-19.png" alt="jzrj-20220129-2" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/jzrj/jzrj-20220129-19.png" style="width:90%" /></p>
 
 我们可以设置一定的时间或者时间间隔进行自动刷新，避免了每次手动刷新的麻烦。
 

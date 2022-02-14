@@ -23,7 +23,7 @@ Mac OS 的每个文件夹下都有一个隐藏文件 .DS_Store，该文件保存
 touch .gitignore
 ```
 
-<img src="/images/git/git-20220201-1.png" alt="jzrj-20220129-20" style="zoom:50%;" />
+<p style="text-align:center"><img src="/images/git/git-20220201-1.png" style="width:90%" /></p>
 
 每次忽略任何文件只需将要忽略的文件添加到 `.gitignore` 文件就可以了。
 
