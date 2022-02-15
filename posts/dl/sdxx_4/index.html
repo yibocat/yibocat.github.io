@@ -1,0 +1,307 @@
+<!doctype html><html lang=zh><meta charset=utf-8><meta name=generator content="Hugo 0.92.2"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name=color-scheme content="light dark">
+<meta name=supported-color-schemes content="light dark">
+<script>var _hmt=_hmt||[];(function(){var a=document.createElement("script"),b;a.src="https://hm.baidu.com/hm.js?e5030d0d5c8f146cc58d0a4fe660754f",b=document.getElementsByTagName("script")[0],b.parentNode.insertBefore(a,b)})()</script><title>[深度学习笔记] 深度学习第 4 篇——权重衰减与丢弃法&nbsp;&ndash;&nbsp;yibocat</title>
+<link rel=stylesheet href=/css/core.min.692cf0f8b3161d3a21f9a590c0bcac033c3857337180ccc5d6f6d4d811768a4145ab961b0f6ddd20239f5d4a05da238c.css integrity=sha384-aSzw+LMWHToh+aWQwLysAzw4VzNxgMzF1vbU2BF2ikFFq5YbD23dICOfXUoF2iOM><meta name=twitter:card content="summary">
+<meta name=twitter:title content="[深度学习笔记] 深度学习第 4 篇——权重衰减与丢弃法">
+<body><section id=header>
+<div class="header wrap"><span class="header left-side"><a class="site home" href=/><img class="site logo" src=/images/yibo.jpeg alt><span class="site name">yibocat</span></a></span>
+<span class="header right-side"><div class="nav wrap">
+<nav class=nav><a class="nav item" href=/posts/> 文章 </a><a class="nav item" href=/archives/> 归档 </a><a class="nav item" href=/categories/> 分类 </a><a class="nav item" href=/search/> 搜索 </a><a class="nav item" href></a>
+</nav>
+</div></span></div><div class="site slogan"><span class=title>cout<<" Hello world! "<< endl;</span></div></section><section id=content><div class=article-container><section class="article header">
+<h1 class="article title">[深度学习笔记] 深度学习第 4 篇——权重衰减与丢弃法</h1><p class="article date">2022-02-15
+<span class=wordcount>&nbsp;•&nbsp;共&nbsp;2774&nbsp;个字</span><span class=reading-time> • 预计阅读时间 6 分钟</span></p></section><aside id=toc-container class="toc-container wide">
+<div class=toc>
+<h3>文章目录</h3>
+<div class=inner><ul>
+<li>
+<a href=#%e6%9d%83%e9%87%8d%e8%a1%b0%e5%87%8f aria-label=权重衰减>权重衰减</a></li>
+<li>
+<a href=#%e6%9d%83%e9%87%8d%e8%a1%b0%e5%87%8f%e6%89%8b%e5%8a%a8%e7%bc%96%e7%a0%81%e5%ae%9e%e9%aa%8c aria-label=权重衰减手动编码实验>权重衰减手动编码实验</a></li>
+<li>
+<a href=#%e4%b8%a2%e5%bc%83%e6%b3%95 aria-label=丢弃法>丢弃法</a></li>
+<li>
+<a href=#%e6%89%8b%e5%8a%a8%e5%ae%9e%e7%8e%b0%e4%b8%a2%e5%bc%83%e6%b3%95 aria-label=手动实现丢弃法>手动实现丢弃法</a></li>
+<li>
+<a href=#%e5%8f%82%e8%80%83 aria-label=参考>参考</a>
+</li>
+</ul>
+</div>
+</div>
+</aside>
+<article class="article markdown-body"><div><p>权重衰减与丢弃法是常用的正则化方法，本篇文章我们尝试手动实现权重衰减与丢弃法，并且对其进行评估。</p>
+</br>
+<h3 id=权重衰减>权重衰减</h3>
+<p>我们知道高复杂度模型与样本数据不匹配时会发生过拟合与欠拟合现象，而应对过拟合的方法，一方面是增大训练样本数据量，另外一种方法是限制模型复杂度。一般来说增大样本数据量来匹配神经网络模型复杂度的方法并不是一个好方法，而使用正则化手段对模型添加正则化项可以有效地限制模型复杂度从而防止过拟合。<strong>权重衰减（Weight Decay）</strong> 就是一种有效的正则化方法，即在每次参数更新时，引入一个衰减系数。</p>
+<p>在标准的随机梯度下降中，权重衰减正则化与 $L2$ 范数正则化等价，但是在一些较复杂的优化方法中（Adam）并不等价。这里回顾一下 $L2$ 范数正则化。</p>
+</br>
+<p><strong>$L2$ 范数正则化</strong></p>
+<p>$L2$ 范数正则化在模型原损失函数的基础上增加了 $L2$ 范数正则化项，以此来限制参数从而使得模型复杂度尽可能简单。$L2$ 范数正则化项指的是模型权重参数每个元素的平方和与一个正的常数的乘积。</p>
+<p>我们看线性回归损失函数为
+$$
+\ell(\pmb{\omega},b)=\frac{1}{N}\sum_{i=1}^N\frac{1}{2}(\pmb{x}^{(i)}\pmb{\omega}+b-\pmb{y}^{(i)})^2
+$$
+其中 $\pmb{\omega}$ 为权重参数向量，$b$ 为偏差参数，样本 $i $ 的输入为 $\pmb{x}^{(i)}$ ，该样本标签为 $\pmb{y}^{(i)}$ ，样本数目为 $N$ 。则带有 $L2$ 范数正则化项的损失函数为
+$$
+\ell(\pmb{\omega},b)+\frac{\lambda}{2N}\vert\vert\pmb{\omega}\vert\vert^2
+$$
+这里 $\lambda>0$ 为超参数。当 $\lambda$ 接近 0 时，正则化项对损失函数的影响将逐渐降低。</p>
+<p>$L2$ 范数平方 $\vert\vert\pmb{\omega}\vert\vert^2$ 展开后得到 $\sum_{i=1}^N\omega_i^2$ 。我们在小批量随机梯度下降中将线性回归中的权重 $\pmb{\omega}$ 的迭代方式
+$$
+\omega \gets \omega-\frac{\eta}{|\mathcal{B}|}\sum_{i\in\mathcal{B}}\frac{\partial \ell^{(i)}(\omega,b)}{\partial \omega}
+$$
+更改为如下方式
+$$
+\omega\gets(1-\frac{\eta\lambda}{\vert \mathcal{B}\vert})\omega-\frac{\eta}{\vert \mathcal{B}\vert}\sum_{i\in\mathcal{B}}\frac{\partial \ell^{(i)}(\omega,b)}{\partial \omega}
+$$
+可以看到， $L2$ 范数正则化将权重乘以一个小于 1 的数后再减去不含正则化项的梯度。所以 $L2$ 范数正则化也叫做权重衰减。</p>
+</br>
+<h3 id=权重衰减手动编码实验>权重衰减手动编码实验</h3>
+<p><strong>生成数据集</strong></p>
+<p>设样本数据集特征的维度为 $p$ ，对于数据集中的样本使用如下线性模型
+$$
+y = \sum_{i=1}^p0.01x_i+0.05+\epsilon
+$$
+这里权重为 0.01，$\epsilon$ 为噪声项，其服从均值为 0，标准差为0.01 的高斯分布。同时，我们为了更好的显示过拟合效果，设置维度 $p$ 为 200，训练数据集数量设置为 20。</p>
+<p>导入必须包</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=o>%</span><span class=n>matplotlib</span> <span class=n>inline</span>
+<span class=kn>import</span> <span class=nn>torch</span>
+<span class=kn>import</span> <span class=nn>torch.nn</span> <span class=k>as</span> <span class=nn>nn</span>
+<span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
+<span class=kn>import</span> <span class=nn>sys</span>
+<span class=kn>import</span> <span class=nn>d2lzh_pytorch</span> <span class=k>as</span> <span class=nn>d2l</span>
+</code></pre></div><p>生成数据集</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>n_train</span><span class=p>,</span> <span class=n>n_test</span><span class=p>,</span> <span class=n>num_imputs</span> <span class=o>=</span> <span class=mi>20</span><span class=p>,</span> <span class=mi>100</span><span class=p>,</span> <span class=mi>200</span>
+<span class=n>true_w</span><span class=p>,</span> <span class=n>true_b</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>ones</span><span class=p>(</span><span class=n>num_imputs</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span> <span class=o>*</span> <span class=mf>0.01</span><span class=p>,</span> <span class=mf>0.05</span>
+
+<span class=c1># 生成数据集</span>
+<span class=n>features</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>rand</span><span class=p>((</span><span class=n>n_train</span> <span class=o>+</span> <span class=n>n_test</span><span class=p>,</span> <span class=n>num_imputs</span><span class=p>))</span>
+<span class=n>labels</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>matmul</span><span class=p>(</span><span class=n>features</span><span class=p>,</span> <span class=n>true_w</span><span class=p>)</span> <span class=o>+</span> <span class=n>true_b</span>
+
+<span class=n>labels</span> <span class=o>+=</span> <span class=n>torch</span><span class=o>.</span><span class=n>tensor</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>normal</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mf>0.01</span><span class=p>,</span> <span class=n>size</span><span class=o>=</span><span class=n>labels</span><span class=o>.</span><span class=n>size</span><span class=p>()),</span> <span class=n>dtype</span><span class=o>=</span><span class=n>torch</span><span class=o>.</span><span class=n>float</span><span class=p>)</span>
+<span class=n>train_features</span><span class=p>,</span> <span class=n>test_features</span> <span class=o>=</span> <span class=n>features</span><span class=p>[:</span><span class=n>n_train</span><span class=p>,</span> <span class=p>:],</span> <span class=n>features</span><span class=p>[</span><span class=n>n_train</span><span class=p>:,</span> <span class=p>:]</span>
+<span class=n>train_labels</span><span class=p>,</span> <span class=n>test_labels</span> <span class=o>=</span> <span class=n>labels</span><span class=p>[:</span><span class=n>n_train</span><span class=p>],</span> <span class=n>labels</span><span class=p>[</span><span class=n>n_train</span><span class=p>:]</span>
+</code></pre></div></br>
+<p><strong>初始化模型参数</strong></p>
+<p>定义一个初始化模型参数的函数</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>def</span> <span class=nf>init_params</span><span class=p>():</span>
+    <span class=c1># 随机初始化参数</span>
+    <span class=n>w</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>randn</span><span class=p>((</span><span class=n>num_inputs</span><span class=p>,</span> <span class=mi>1</span><span class=p>),</span> <span class=n>requires_grad</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+    <span class=n>b</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>zeros</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>requires_grad</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+    <span class=k>return</span> <span class=p>[</span><span class=n>w</span><span class=p>,</span> <span class=n>b</span><span class=p>]</span>
+</code></pre></div></br>
+<p><strong>$L2$ 范数正则化项</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>def</span> <span class=nf>l2_penalty</span><span class=p>(</span><span class=n>w</span><span class=p>):</span>
+    <span class=k>return</span> <span class=p>(</span><span class=n>w</span><span class=o>**</span><span class=mi>2</span><span class=p>)</span><span class=o>.</span><span class=n>sum</span><span class=p>()</span> <span class=o>/</span> <span class=mi>2</span>
+</code></pre></div></br>
+<p><strong>定义和训练模型</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>batch_size</span><span class=p>,</span> <span class=n>num_epochs</span><span class=p>,</span> <span class=n>lr</span> <span class=o>=</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>100</span><span class=p>,</span> <span class=mf>0.003</span>			<span class=c1># 小批量为 1，迭代周期 100</span>
+<span class=n>net</span><span class=p>,</span> <span class=n>loss</span> <span class=o>=</span> <span class=n>d2l</span><span class=o>.</span><span class=n>linreg</span><span class=p>,</span> <span class=n>d2l</span><span class=o>.</span><span class=n>squared_loss</span>			<span class=c1># net 使用线性回归，损失函数使用平方差损失</span>
+
+<span class=n>dataset</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>utils</span><span class=o>.</span><span class=n>data</span><span class=o>.</span><span class=n>TensorDataset</span><span class=p>(</span><span class=n>train_features</span><span class=p>,</span> <span class=n>train_labels</span><span class=p>)</span>
+<span class=n>train_iter</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>utils</span><span class=o>.</span><span class=n>data</span><span class=o>.</span><span class=n>DataLoader</span><span class=p>(</span><span class=n>dataset</span><span class=p>,</span> <span class=n>batch_size</span><span class=p>,</span> <span class=n>shuffle</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+
+<span class=k>def</span> <span class=nf>fit_and_plot</span><span class=p>(</span><span class=n>lambd</span><span class=p>):</span>
+    <span class=n>w</span><span class=p>,</span> <span class=n>b</span> <span class=o>=</span> <span class=n>init_params</span><span class=p>()</span>
+    <span class=n>train_ls</span><span class=p>,</span> <span class=n>test_ls</span> <span class=o>=</span> <span class=p>[],</span> <span class=p>[]</span>
+    <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>num_epochs</span><span class=p>):</span>
+        <span class=k>for</span> <span class=n>X</span><span class=p>,</span> <span class=n>y</span> <span class=ow>in</span> <span class=n>train_iter</span><span class=p>:</span>
+            <span class=c1># 添加了L2范数惩罚项</span>
+            <span class=n>l</span> <span class=o>=</span> <span class=n>loss</span><span class=p>(</span><span class=n>net</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>w</span><span class=p>,</span> <span class=n>b</span><span class=p>),</span> <span class=n>y</span><span class=p>)</span> <span class=o>+</span> <span class=n>lambd</span> <span class=o>*</span> <span class=n>l2_penalty</span><span class=p>(</span><span class=n>w</span><span class=p>)</span> 	<span class=c1># 增加正则化项的损失函数</span>
+            <span class=n>l</span> <span class=o>=</span> <span class=n>l</span><span class=o>.</span><span class=n>sum</span><span class=p>()</span>
+
+            <span class=k>if</span> <span class=n>w</span><span class=o>.</span><span class=n>grad</span> <span class=ow>is</span> <span class=ow>not</span> <span class=kc>None</span><span class=p>:</span>					<span class=c1># 梯度清零</span>
+                <span class=n>w</span><span class=o>.</span><span class=n>grad</span><span class=o>.</span><span class=n>data</span><span class=o>.</span><span class=n>zero_</span><span class=p>()</span>
+                <span class=n>b</span><span class=o>.</span><span class=n>grad</span><span class=o>.</span><span class=n>data</span><span class=o>.</span><span class=n>zero_</span><span class=p>()</span>
+            <span class=n>l</span><span class=o>.</span><span class=n>backward</span><span class=p>()</span>							<span class=c1># 反向传播计算</span>
+            <span class=n>d2l</span><span class=o>.</span><span class=n>sgd</span><span class=p>([</span><span class=n>w</span><span class=p>,</span> <span class=n>b</span><span class=p>],</span> <span class=n>lr</span><span class=p>,</span> <span class=n>batch_size</span><span class=p>)</span>			<span class=c1># 随机梯度下降法</span>
+        <span class=n>train_ls</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>loss</span><span class=p>(</span><span class=n>net</span><span class=p>(</span><span class=n>train_features</span><span class=p>,</span> <span class=n>w</span><span class=p>,</span> <span class=n>b</span><span class=p>),</span> <span class=n>train_labels</span><span class=p>)</span><span class=o>.</span><span class=n>mean</span><span class=p>()</span><span class=o>.</span><span class=n>item</span><span class=p>())</span>
+        <span class=n>test_ls</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>loss</span><span class=p>(</span><span class=n>net</span><span class=p>(</span><span class=n>test_features</span><span class=p>,</span> <span class=n>w</span><span class=p>,</span> <span class=n>b</span><span class=p>),</span> <span class=n>test_labels</span><span class=p>)</span><span class=o>.</span><span class=n>mean</span><span class=p>()</span><span class=o>.</span><span class=n>item</span><span class=p>())</span>
+    <span class=n>d2l</span><span class=o>.</span><span class=n>semilogy</span><span class=p>(</span><span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>num_epochs</span> <span class=o>+</span> <span class=mi>1</span><span class=p>),</span> <span class=n>train_ls</span><span class=p>,</span> <span class=s1>&#39;epochs&#39;</span><span class=p>,</span> <span class=s1>&#39;loss&#39;</span><span class=p>,</span>
+                 <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>num_epochs</span> <span class=o>+</span> <span class=mi>1</span><span class=p>),</span> <span class=n>test_ls</span><span class=p>,</span> <span class=p>[</span><span class=s1>&#39;train&#39;</span><span class=p>,</span> <span class=s1>&#39;test&#39;</span><span class=p>])</span>	<span class=c1># 画图</span>
+    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;L2 norm of w:&#39;</span><span class=p>,</span> <span class=n>w</span><span class=o>.</span><span class=n>norm</span><span class=p>()</span><span class=o>.</span><span class=n>item</span><span class=p>())</span>
+</code></pre></div></br>
+<p><strong>观察过拟合</strong></p>
+<p>首先我们让 $\lambda=0.005$ ，因为 $\lambda$ 接近 0，所以正则化项的影响非常小。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>fit_and_plot</span><span class=p>(</span><span class=n>lambd</span><span class=o>=</span><span class=mf>0.005</span><span class=p>)</span>
+</code></pre></div><p>输出</p>
+<pre tabindex=0><code>L2 norm of w: 12.12175464630127
+</code></pre><p style=text-align:center><img src=/images/dl/dl-20220215-06.svg style=width:50%;border:none></p>
+<p>我们可以看到训练误差远远小于测试误差，这是很明显的过拟合。</p>
+<p>然后我们增大 $\lambda$ ，设置为 $\lambda=4$</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>fit_and_plot</span><span class=p>(</span><span class=n>lambd</span><span class=o>=</span><span class=mi>4</span><span class=p>)</span>
+</code></pre></div><p>输出</p>
+<pre tabindex=0><code>L2 norm of w: 0.07619155943393707
+</code></pre><p style=text-align:center><img src=/images/dl/dl-20220215-07.svg style=width:50%;border:none></p>
+<p>可以明显的看到测试误差有所下降，过拟合现象有所缓解。另外，权重参数的L2L_2<em>L</em>2范数比不使用权重衰减时的更小，此时的权重参数更接近0。</p>
+</br>
+<h3 id=丢弃法>丢弃法</h3>
+<p style=text-align:center><img src=/images/dl/dl-20220215-08.png style=width:50%></p>
+<p>我们假设一个模型，其输入个数为 4 个，隐藏单元为 5，则隐藏单元 $h_i$ 的计算表达式为
+$$
+h_i=\phi(x_1\omega_{1i}+x_2\omega_{2i}+x_3\omega_{3i}+x_4\omega_{4i}+b_i)
+$$
+这里 $\phi$ 表示激活函数。当我们对隐藏层使用丢弃法时，该层的隐藏单元会有一定的概率被丢弃掉，我们设丢弃概率为 $p$ ，则一个隐藏单元有 $p$ 概率会被清零，有 $1-p$ 的概率该隐藏单元除以 $1-p$ 进行拉伸。而丢弃概率是超参数。</p>
+<p>设随机变量 $\xi_i$ 为 0 和 1 的概率为 $p$ 和 $1-p$ ，则该随机变量服从伯努利分布。我们设隐藏单元 $h'_i$ 为
+$$
+h'_i=\frac{\xi_i}{1-p}h_i
+$$
+因为 $\xi_i$ 服从伯努利分布，所以其期望为 $E(\xi_i)=1-p$ ，所以
+$$
+E(h'_i)=\frac{E(\xi_i)}{1-p}h_i=h_i
+$$
+得到结论：<strong>丢弃法不改变输入的期望值</strong>！</p>
+<p>我们看一下上述模型使用丢弃法后的神经网络结构</p>
+<p style=text-align:center><img src=/images/dl/dl-20220215-09.svg style=width:50%;border:none></p>
+<p>可以看到 $h_2$ 和 $h_5$ 都被清零，因此反向传播时与 $h_2$ 和 $h_5$ 相关的权重的梯度为 0。</p>
+<p>为什么丢弃法起到正则化的作用？和正则化一样，丢弃法也是为了从减小模型复杂度出发来防止过拟合的，因为随机减少隐藏单元和缩小维度是一样的道理。邱锡鹏教授的《神经网络与深度学习》中给出了两种解释：<strong>集成学习角度</strong>的解释和<strong>贝叶斯学习角度</strong>的解释。</p>
+</br>
+<p><strong>集成学习角度的解释</strong></p>
+<p>每做一次丢弃，相当于从原始的网络中采样得到一个子网络，若一个神经网络有 $n$ 个神经元，那么总共可以采样出 $2^n$ 个子网络。每次迭代都相当于训练一个不同的子网络，这些子网络都共享原始网络的参数，所以最终的网络可以近似看作是集成了指数级个不同网络的组合模型。</p>
+</br>
+<p><strong>贝叶斯学习角度的解释</strong>（不是太明白&mldr;&mldr;）</p>
+<p>丢弃法可以解释为一种贝叶斯学习的近似，用 $y=f(\pmb{x};\theta)$ 来表示要学习的神经网络，贝叶斯学习时假设参数 $\theta$ 为随机向量，并且先验分布为 $q(\theta)$ ，贝叶斯方法的预测为
+$$
+\mathbb{E}_{q(\theta)}[y]=\int_qf(\pmb{x};\theta)q(\theta)d\theta\approx\frac{1}{M} \sum^M f(\pmb{x},\theta_i)
+$$
+其中 $f(\pmb{x},\theta_i)$ 为第 $i$ 次使用丢弃法后的网络，其参数 $\theta_i$ 为对全部参数 $\theta$ 的一次采样。</p>
+</br>
+<h3 id=手动实现丢弃法>手动实现丢弃法</h3>
+<p>定义 <code>dropout()</code> 函数以 <code>drop_prob</code> 的概率丢弃。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>def</span> <span class=nf>dropout</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>drop_prob</span><span class=p>):</span>
+    <span class=n>X</span> <span class=o>=</span> <span class=n>X</span><span class=o>.</span><span class=n>float</span><span class=p>()</span>
+    <span class=k>assert</span> <span class=mi>0</span> <span class=o>&lt;=</span> <span class=n>drop_prob</span> <span class=o>&lt;=</span> <span class=mi>1</span>
+    <span class=n>keep_prob</span> <span class=o>=</span> <span class=mi>1</span> <span class=o>-</span> <span class=n>drop_prob</span>
+    <span class=c1># 这种情况下把全部元素都丢弃</span>
+    <span class=k>if</span> <span class=n>keep_prob</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+        <span class=k>return</span> <span class=n>torch</span><span class=o>.</span><span class=n>zeros_like</span><span class=p>(</span><span class=n>X</span><span class=p>)</span>
+    <span class=n>mask</span> <span class=o>=</span> <span class=p>(</span><span class=n>torch</span><span class=o>.</span><span class=n>rand</span><span class=p>(</span><span class=n>X</span><span class=o>.</span><span class=n>shape</span><span class=p>)</span> <span class=o>&lt;</span> <span class=n>keep_prob</span><span class=p>)</span><span class=o>.</span><span class=n>float</span><span class=p>()</span>
+
+    <span class=k>return</span> <span class=n>mask</span> <span class=o>*</span> <span class=n>X</span> <span class=o>/</span> <span class=n>keep_prob</span>
+</code></pre></div></br>
+<p><strong>定义模型参数</strong></p>
+<p>这里继续使用原书中的 Fashion-MNIST 数据集。然后定义一个包含两个隐藏层的多层感知机，且两个隐藏层的输出个数均为 256。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>num_inputs</span><span class=p>,</span> <span class=n>num_outputs</span><span class=p>,</span> <span class=n>num_hiddens1</span><span class=p>,</span> <span class=n>num_hiddens2</span> <span class=o>=</span> <span class=mi>784</span><span class=p>,</span> <span class=mi>10</span><span class=p>,</span> <span class=mi>256</span><span class=p>,</span> <span class=mi>256</span>
+
+<span class=n>W1</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>tensor</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>normal</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mf>0.01</span><span class=p>,</span> <span class=n>size</span><span class=o>=</span><span class=p>(</span><span class=n>num_inputs</span><span class=p>,</span> <span class=n>num_hiddens1</span><span class=p>)),</span> <span class=n>dtype</span><span class=o>=</span><span class=n>torch</span><span class=o>.</span><span class=n>float</span><span class=p>,</span> <span class=n>requires_grad</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+<span class=n>b1</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>zeros</span><span class=p>(</span><span class=n>num_hiddens1</span><span class=p>,</span> <span class=n>requires_grad</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+<span class=n>W2</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>tensor</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>normal</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mf>0.01</span><span class=p>,</span> <span class=n>size</span><span class=o>=</span><span class=p>(</span><span class=n>num_hiddens1</span><span class=p>,</span> <span class=n>num_hiddens2</span><span class=p>)),</span> <span class=n>dtype</span><span class=o>=</span><span class=n>torch</span><span class=o>.</span><span class=n>float</span><span class=p>,</span> <span class=n>requires_grad</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+<span class=n>b2</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>zeros</span><span class=p>(</span><span class=n>num_hiddens2</span><span class=p>,</span> <span class=n>requires_grad</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+<span class=n>W3</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>tensor</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>normal</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mf>0.01</span><span class=p>,</span> <span class=n>size</span><span class=o>=</span><span class=p>(</span><span class=n>num_hiddens2</span><span class=p>,</span> <span class=n>num_outputs</span><span class=p>)),</span> <span class=n>dtype</span><span class=o>=</span><span class=n>torch</span><span class=o>.</span><span class=n>float</span><span class=p>,</span> <span class=n>requires_grad</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+<span class=n>b3</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>zeros</span><span class=p>(</span><span class=n>num_outputs</span><span class=p>,</span> <span class=n>requires_grad</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+
+<span class=n>params</span> <span class=o>=</span> <span class=p>[</span><span class=n>W1</span><span class=p>,</span> <span class=n>b1</span><span class=p>,</span> <span class=n>W2</span><span class=p>,</span> <span class=n>b2</span><span class=p>,</span> <span class=n>W3</span><span class=p>,</span> <span class=n>b3</span><span class=p>]</span>
+</code></pre></div></br>
+<p><strong>定义模型</strong></p>
+<p>模型定义部分使用 <code>ReLU</code> 激活函数，然后对每个激活函数的输出使用丢弃法。这里我们将第一个隐藏层的丢弃概率设置为 0.1，第二个隐藏层的丢弃概率设为 0.6，然后通过参数 <code>is_training</code> 来判断运行模式是训练还是测试，并在训练模式中使用丢弃法。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>drop_prob1</span><span class=p>,</span> <span class=n>drop_prob2</span> <span class=o>=</span> <span class=mf>0.1</span><span class=p>,</span> <span class=mf>0.6</span>
+
+<span class=k>def</span> <span class=nf>net</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>is_training</span><span class=o>=</span><span class=kc>True</span><span class=p>):</span>
+    <span class=n>X</span> <span class=o>=</span> <span class=n>X</span><span class=o>.</span><span class=n>view</span><span class=p>(</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span> <span class=n>num_inputs</span><span class=p>)</span>
+    <span class=n>H1</span> <span class=o>=</span> <span class=p>(</span><span class=n>torch</span><span class=o>.</span><span class=n>matmul</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>W1</span><span class=p>)</span> <span class=o>+</span> <span class=n>b1</span><span class=p>)</span><span class=o>.</span><span class=n>relu</span><span class=p>()</span>
+    <span class=k>if</span> <span class=n>is_training</span><span class=p>:</span>  					<span class=c1># 只在训练模型时使用丢弃法</span>
+        <span class=n>H1</span> <span class=o>=</span> <span class=n>dropout</span><span class=p>(</span><span class=n>H1</span><span class=p>,</span> <span class=n>drop_prob1</span><span class=p>)</span>  	<span class=c1># 在第一层全连接后添加丢弃层</span>
+    <span class=n>H2</span> <span class=o>=</span> <span class=p>(</span><span class=n>torch</span><span class=o>.</span><span class=n>matmul</span><span class=p>(</span><span class=n>H1</span><span class=p>,</span> <span class=n>W2</span><span class=p>)</span> <span class=o>+</span> <span class=n>b2</span><span class=p>)</span><span class=o>.</span><span class=n>relu</span><span class=p>()</span>
+    <span class=k>if</span> <span class=n>is_training</span><span class=p>:</span>
+        <span class=n>H2</span> <span class=o>=</span> <span class=n>dropout</span><span class=p>(</span><span class=n>H2</span><span class=p>,</span> <span class=n>drop_prob2</span><span class=p>)</span>  	<span class=c1># 在第二层全连接后添加丢弃层</span>
+    <span class=k>return</span> <span class=n>torch</span><span class=o>.</span><span class=n>matmul</span><span class=p>(</span><span class=n>H2</span><span class=p>,</span> <span class=n>W3</span><span class=p>)</span> <span class=o>+</span> <span class=n>b3</span>
+</code></pre></div></br>
+<p><strong>模型评估</strong></p>
+<p>在对模型进行评估的时候不应该使用丢弃法</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=c1># 本函数已保存在d2lzh_pytorch</span>
+<span class=k>def</span> <span class=nf>evaluate_accuracy</span><span class=p>(</span><span class=n>data_iter</span><span class=p>,</span> <span class=n>net</span><span class=p>):</span>
+    <span class=n>acc_sum</span><span class=p>,</span> <span class=n>n</span> <span class=o>=</span> <span class=mf>0.0</span><span class=p>,</span> <span class=mi>0</span>
+    <span class=k>for</span> <span class=n>X</span><span class=p>,</span> <span class=n>y</span> <span class=ow>in</span> <span class=n>data_iter</span><span class=p>:</span>
+        <span class=k>if</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>net</span><span class=p>,</span> <span class=n>torch</span><span class=o>.</span><span class=n>nn</span><span class=o>.</span><span class=n>Module</span><span class=p>):</span>
+            <span class=n>net</span><span class=o>.</span><span class=n>eval</span><span class=p>()</span> 					<span class=c1># 评估模式, 这会关闭dropout</span>
+            <span class=n>acc_sum</span> <span class=o>+=</span> <span class=p>(</span><span class=n>net</span><span class=p>(</span><span class=n>X</span><span class=p>)</span><span class=o>.</span><span class=n>argmax</span><span class=p>(</span><span class=n>dim</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span> <span class=o>==</span> <span class=n>y</span><span class=p>)</span><span class=o>.</span><span class=n>float</span><span class=p>()</span><span class=o>.</span><span class=n>sum</span><span class=p>()</span><span class=o>.</span><span class=n>item</span><span class=p>()</span>
+            <span class=n>net</span><span class=o>.</span><span class=n>train</span><span class=p>()</span> 				<span class=c1># 改回训练模式</span>
+        <span class=k>else</span><span class=p>:</span> 							<span class=c1># 自定义的模型</span>
+            <span class=k>if</span><span class=p>(</span><span class=s1>&#39;is_training&#39;</span> <span class=ow>in</span> <span class=n>net</span><span class=o>.</span><span class=vm>__code__</span><span class=o>.</span><span class=n>co_varnames</span><span class=p>):</span> 
+                <span class=c1># 如果有is_training这个参数</span>
+                <span class=c1># 将is_training设置成False</span>
+                <span class=n>acc_sum</span> <span class=o>+=</span> <span class=p>(</span><span class=n>net</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>is_training</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span><span class=o>.</span><span class=n>argmax</span><span class=p>(</span><span class=n>dim</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span> <span class=o>==</span> <span class=n>y</span><span class=p>)</span><span class=o>.</span><span class=n>float</span><span class=p>()</span><span class=o>.</span><span class=n>sum</span><span class=p>()</span><span class=o>.</span><span class=n>item</span><span class=p>()</span> 
+            <span class=k>else</span><span class=p>:</span>
+                <span class=n>acc_sum</span> <span class=o>+=</span> <span class=p>(</span><span class=n>net</span><span class=p>(</span><span class=n>X</span><span class=p>)</span><span class=o>.</span><span class=n>argmax</span><span class=p>(</span><span class=n>dim</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span> <span class=o>==</span> <span class=n>y</span><span class=p>)</span><span class=o>.</span><span class=n>float</span><span class=p>()</span><span class=o>.</span><span class=n>sum</span><span class=p>()</span><span class=o>.</span><span class=n>item</span><span class=p>()</span> 
+        <span class=n>n</span> <span class=o>+=</span> <span class=n>y</span><span class=o>.</span><span class=n>shape</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+    <span class=k>return</span> <span class=n>acc_sum</span> <span class=o>/</span> <span class=n>n</span>
+</code></pre></div></br>
+<p><strong>训练和测试</strong></p>
+<p>模型训练 <code>train_ch3()</code> 使用和多层感知机里一样的方法</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>num_epochs</span><span class=p>,</span> <span class=n>lr</span> <span class=o>=</span> <span class=mi>5</span><span class=p>,</span> <span class=mf>0.1</span>
+
+<span class=c1># 本函数已保存在d2lzh包中方便以后使用</span>
+<span class=k>def</span> <span class=nf>train_ch3</span><span class=p>(</span><span class=n>net</span><span class=p>,</span> <span class=n>train_iter</span><span class=p>,</span> <span class=n>test_iter</span><span class=p>,</span> <span class=n>loss</span><span class=p>,</span> <span class=n>num_epochs</span><span class=p>,</span> <span class=n>batch_size</span><span class=p>,</span>
+              <span class=n>params</span><span class=o>=</span><span class=kc>None</span><span class=p>,</span> <span class=n>lr</span><span class=o>=</span><span class=kc>None</span><span class=p>,</span> <span class=n>optimizer</span><span class=o>=</span><span class=kc>None</span><span class=p>):</span>
+    <span class=k>for</span> <span class=n>epoch</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>num_epochs</span><span class=p>):</span>
+        <span class=n>train_l_sum</span><span class=p>,</span> <span class=n>train_acc_sum</span><span class=p>,</span> <span class=n>n</span> <span class=o>=</span> <span class=mf>0.0</span><span class=p>,</span> <span class=mf>0.0</span><span class=p>,</span> <span class=mi>0</span>
+        <span class=k>for</span> <span class=n>X</span><span class=p>,</span> <span class=n>y</span> <span class=ow>in</span> <span class=n>train_iter</span><span class=p>:</span>
+            <span class=n>y_hat</span> <span class=o>=</span> <span class=n>net</span><span class=p>(</span><span class=n>X</span><span class=p>)</span>
+            <span class=n>l</span> <span class=o>=</span> <span class=n>loss</span><span class=p>(</span><span class=n>y_hat</span><span class=p>,</span> <span class=n>y</span><span class=p>)</span><span class=o>.</span><span class=n>sum</span><span class=p>()</span>
+
+            <span class=c1># 梯度清零</span>
+            <span class=k>if</span> <span class=n>optimizer</span> <span class=ow>is</span> <span class=ow>not</span> <span class=kc>None</span><span class=p>:</span>
+                <span class=n>optimizer</span><span class=o>.</span><span class=n>zero_grad</span><span class=p>()</span>
+            <span class=k>elif</span> <span class=n>params</span> <span class=ow>is</span> <span class=ow>not</span> <span class=kc>None</span> <span class=ow>and</span> <span class=n>params</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>grad</span> <span class=ow>is</span> <span class=ow>not</span> <span class=kc>None</span><span class=p>:</span>
+                <span class=k>for</span> <span class=n>param</span> <span class=ow>in</span> <span class=n>params</span><span class=p>:</span>
+                    <span class=n>param</span><span class=o>.</span><span class=n>grad</span><span class=o>.</span><span class=n>data</span><span class=o>.</span><span class=n>zero_</span><span class=p>()</span>
+
+            <span class=n>l</span><span class=o>.</span><span class=n>backward</span><span class=p>()</span>
+            <span class=k>if</span> <span class=n>optimizer</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>
+                <span class=n>d2l</span><span class=o>.</span><span class=n>sgd</span><span class=p>(</span><span class=n>params</span><span class=p>,</span> <span class=n>lr</span><span class=p>,</span> <span class=n>batch_size</span><span class=p>)</span>
+            <span class=k>else</span><span class=p>:</span>
+                <span class=n>optimizer</span><span class=o>.</span><span class=n>step</span><span class=p>()</span>  <span class=c1># “softmax回归的简洁实现”一节将用到</span>
+
+
+            <span class=n>train_l_sum</span> <span class=o>+=</span> <span class=n>l</span><span class=o>.</span><span class=n>item</span><span class=p>()</span>
+            <span class=n>train_acc_sum</span> <span class=o>+=</span> <span class=p>(</span><span class=n>y_hat</span><span class=o>.</span><span class=n>argmax</span><span class=p>(</span><span class=n>dim</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span> <span class=o>==</span> <span class=n>y</span><span class=p>)</span><span class=o>.</span><span class=n>sum</span><span class=p>()</span><span class=o>.</span><span class=n>item</span><span class=p>()</span>
+            <span class=n>n</span> <span class=o>+=</span> <span class=n>y</span><span class=o>.</span><span class=n>shape</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+        <span class=n>test_acc</span> <span class=o>=</span> <span class=n>evaluate_accuracy</span><span class=p>(</span><span class=n>test_iter</span><span class=p>,</span> <span class=n>net</span><span class=p>)</span>
+        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;epoch </span><span class=si>%d</span><span class=s1>, loss </span><span class=si>%.4f</span><span class=s1>, train acc </span><span class=si>%.3f</span><span class=s1>, test acc </span><span class=si>%.3f</span><span class=s1>&#39;</span>
+              <span class=o>%</span> <span class=p>(</span><span class=n>epoch</span> <span class=o>+</span> <span class=mi>1</span><span class=p>,</span> <span class=n>train_l_sum</span> <span class=o>/</span> <span class=n>n</span><span class=p>,</span> <span class=n>train_acc_sum</span> <span class=o>/</span> <span class=n>n</span><span class=p>,</span> <span class=n>test_acc</span><span class=p>))</span>
+
+<span class=n>train_ch3</span><span class=p>(</span><span class=n>net</span><span class=p>,</span> <span class=n>train_iter</span><span class=p>,</span> <span class=n>test_iter</span><span class=p>,</span> <span class=n>cross_entropy</span><span class=p>,</span> <span class=n>num_epochs</span><span class=p>,</span> <span class=n>batch_size</span><span class=p>,</span> <span class=p>[</span><span class=n>W</span><span class=p>,</span> <span class=n>b</span><span class=p>],</span> <span class=n>lr</span><span class=p>)</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>num_epochs</span><span class=p>,</span> <span class=n>lr</span><span class=p>,</span> <span class=n>batch_size</span> <span class=o>=</span> <span class=mi>5</span><span class=p>,</span> <span class=mf>100.0</span><span class=p>,</span> <span class=mi>256</span>
+<span class=n>loss</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>nn</span><span class=o>.</span><span class=n>CrossEntropyLoss</span><span class=p>()</span>
+<span class=n>train_iter</span><span class=p>,</span> <span class=n>test_iter</span> <span class=o>=</span> <span class=n>d2l</span><span class=o>.</span><span class=n>load_data_fashion_mnist</span><span class=p>(</span><span class=n>batch_size</span><span class=p>)</span>
+<span class=n>d2l</span><span class=o>.</span><span class=n>train_ch3</span><span class=p>(</span><span class=n>net</span><span class=p>,</span> <span class=n>train_iter</span><span class=p>,</span> <span class=n>test_iter</span><span class=p>,</span> <span class=n>loss</span><span class=p>,</span> <span class=n>num_epochs</span><span class=p>,</span> <span class=n>batch_size</span><span class=p>,</span> <span class=n>params</span><span class=p>,</span> <span class=n>lr</span><span class=p>)</span>
+</code></pre></div><p>输出</p>
+<pre tabindex=0><code>epoch 1, loss 0.0047, train acc 0.538, test acc 0.763
+epoch 2, loss 0.0024, train acc 0.777, test acc 0.773
+epoch 3, loss 0.0020, train acc 0.817, test acc 0.792
+epoch 4, loss 0.0018, train acc 0.839, test acc 0.802
+epoch 5, loss 0.0017, train acc 0.845, test acc 0.831
+</code></pre></br>
+<p>最后，原书中还有两种方法的简洁实现，这里不再写了。</p>
+</br>
+<h3 id=参考>参考</h3>
+<ol>
+<li>
+<p>《动手学深度学习》PyTorch 版，阿斯顿·张、李沐 <a href=https://tangshusen.me/Dive-into-DL-PyTorch/#/ target=_blank rel="noopener noreferrer">https://tangshusen.me/Dive-into-DL-PyTorch/#/</a>
+</p>
+</li>
+<li>
+<p>《神经网络与深度学习》邱锡鹏 <a href=https://nndl.github.io/ target=_blank rel="noopener noreferrer">https://nndl.github.io</a>
+</p>
+</li>
+</ol>
+</div>
+</article><section class="article labels"><a class=category href=/categories/%E7%83%82%E7%AC%94%E5%A4%B4%E4%B9%8B%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/>烂笔头之深度学习</a><a class=tag href=/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/>神经网络</a><a class=tag href=/tags/%E6%9D%83%E9%87%8D%E8%A1%B0%E5%87%8F/>权重衰减</a><a class=tag href=/tags/%E4%B8%A2%E5%BC%83%E6%B3%95/>丢弃法</a><a class=tag href=/tags/%E6%AD%A3%E5%88%99%E5%8C%96/>正则化</a><a class=tag href=/tags/pytorch/>PyTorch</a></section><section class="article license">版权声明：如果转发请带上本文链接和注明来源。</section><section class="article author">
+<script src=/js/lottie-player.js></script>
+<lottie-player class=avatar src=/json/77907-vault.json background=transparent speed=1 style=max-width:280px; loop autoplay></lottie-player><p class=name>yibocat</p><div class=bio>脑子不够键盘来凑</div><div class=details><a class=item href=https://github.com/yibocat target=_blank rel="noopener noreferrer"><span class="iconfont icon-github"></span>&nbsp;yibocat</a><a class=item href=mailto:yibocat@yeah.net target=_blank rel="noopener noreferrer"><span class="iconfont icon-mail"></span>&nbsp;yibocat@yeah.net</a></div>
+</section>
+</div>
+<div class="article bottom">
+<div class="article bottom title">更多文章</div><section class="article navigation"><p><a class=link href=/posts/dl/sdxx_3/><span class="iconfont icon-article"></span>[深度学习笔记] 深度学习第 3 篇——网络正则化</a></p></section><div class=nav-bottom><div class="nav wrap bottom">
+<nav class=nav><a class="nav item" href=/posts/> 文章 </a><a class="nav item" href=/archives/> 归档 </a><a class="nav item" href=/categories/> 分类 </a><a class="nav item" href=/search/> 搜索 </a>
+</nav>
+</div></div></div></section><section id=footer><div class=footer-wrap>
+<p class=copyright>©2022 Yibocat.</p>
+<p class=powerby>
+<span>Powered&nbsp;by&nbsp;</span><a href=https://gohugo.io target=_blank rel="noopener noreferrer">Hugo</a>
+<span>&nbsp;Accelerate with Tencent Cloud CDN.</span>
+<a href="https://ipv6-test.com/validate.php?url=referer"><img src=https://ipv6-test.com/button-ipv6-80x15.png alt="ipv6 ready" title="ipv6 ready" border=0></a>
+</p></div></section><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css integrity=sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js integrity=sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous onload=renderMathInElement(document.body)></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:!0},{left:'$',right:'$',display:!1},{left:'\\(',right:'\\)',display:!1},{left:'\\[',right:'\\]',display:!0}],throwOnError:!1})})</script><script src=/js/core.min.45bc6f7686a5f99de05699008e2608053161016a4ce37a6b899e6fd78870c210a3239372eaedcb90385626ad3dafe267.js integrity=sha384-Rbxvdoal+Z3gVpkAjiYIBTFhAWpM43priZ5v14hwwhCjI5Ny6u3LkDhWJq09r+Jn></script></body>
+</html>
