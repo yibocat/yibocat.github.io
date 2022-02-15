@@ -4,6 +4,16 @@
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark">
 
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e5030d0d5c8f146cc58d0a4fe660754f";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+
 {{- define "title" -}}
 {{- $title := .Title -}}
 {{- if and (ne $title "") (ne $title site.Title) -}}
@@ -11,10 +21,9 @@
 {{- else -}}
 {{- $slogan := site.Params.slogan -}}
 <title>{{- site.Title | safeHTML -}}{{- if and (isset site.Params "slogan") (ne $slogan "") -}} &nbsp;&ndash;&nbsp;
-    {{- $slogan | safeHTML -}}{{- end -}}</title>
+  {{- $slogan | safeHTML -}}{{- end -}}</title>
 {{- end -}}
 {{- end -}}
-
 
 
 
@@ -27,14 +36,3 @@
 <meta name="robots" content="{{ .Params.robots }}" />
 {{- end -}}
 {{/* {{- partial "js.html" . -}} */}}
-
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?e5030d0d5c8f146cc58d0a4fe660754f";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-    
