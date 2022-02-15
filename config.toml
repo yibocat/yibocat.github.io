@@ -150,6 +150,6 @@ defaultContentLanguage = 'zh'     # 更改语言
 
 
 [params.beian]                    # 备案设置
-  icp = "陇ICP备2021003237号-1"     # example: 粤ICP备20056596号-1
+  icp = ""     # example: 粤ICP备20056596号-1
   gongan = ""  # example: 粤公网安备 44030502005645号
   code = ""    # example: 44030502005645
