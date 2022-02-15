@@ -254,7 +254,7 @@ pre tt,
 pre samp {
   display: inline;
   font-size: inherit;
-  font-weight: bold;
+  font-weight: normal;
   color: inherit;
   padding: 0;
   border-radius: 0;
