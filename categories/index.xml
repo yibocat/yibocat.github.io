@@ -90,13 +90,13 @@ $$
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">fit_and_plot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">lambd&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.005&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>输出&lt;/p>
 &lt;pre tabindex="0">&lt;code>L2 norm of w: 12.12175464630127
-&lt;/code>&lt;/pre>&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220215-06.svg" style="width:50%;border:none;" />&lt;/p>
+&lt;/code>&lt;/pre>&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220215-06.png" style="width:50%;border:none;" />&lt;/p>
 &lt;p>我们可以看到训练误差远远小于测试误差，这是很明显的过拟合。&lt;/p>
 &lt;p>然后我们增大 $\lambda$ ，设置为 $\lambda=4$&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">fit_and_plot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">lambd&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>输出&lt;/p>
 &lt;pre tabindex="0">&lt;code>L2 norm of w: 0.07619155943393707
-&lt;/code>&lt;/pre>&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220215-07.svg" style="width:50%;border:none;" />&lt;/p>
+&lt;/code>&lt;/pre>&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220215-07.png" style="width:50%;border:none;" />&lt;/p>
 &lt;p>可以明显的看到测试误差有所下降，过拟合现象有所缓解。另外，权重参数的L2L_2&lt;em>L&lt;/em>2范数比不使用权重衰减时的更小，此时的权重参数更接近0。&lt;/p>
 &lt;/br>
 &lt;h3 id="丢弃法">丢弃法&lt;/h3>
@@ -116,7 +116,7 @@ E(h'_i)=\frac{E(\xi_i)}{1-p}h_i=h_i
 $$
 得到结论：&lt;strong>丢弃法不改变输入的期望值&lt;/strong>！&lt;/p>
 &lt;p>我们看一下上述模型使用丢弃法后的神经网络结构&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220215-09.svg" style="width:50%;border:none;" />&lt;/p>
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/dl/dl-20220215-09.png" style="width:50%;" />&lt;/p>
 &lt;p>可以看到 $h_2$ 和 $h_5$ 都被清零，因此反向传播时与 $h_2$ 和 $h_5$ 相关的权重的梯度为 0。&lt;/p>
 &lt;p>为什么丢弃法起到正则化的作用？和正则化一样，丢弃法也是为了从减小模型复杂度出发来防止过拟合的，因为随机减少隐藏单元和缩小维度是一样的道理。邱锡鹏教授的《神经网络与深度学习》中给出了两种解释：&lt;strong>集成学习角度&lt;/strong>的解释和&lt;strong>贝叶斯学习角度&lt;/strong>的解释。&lt;/p>
 &lt;/br>
