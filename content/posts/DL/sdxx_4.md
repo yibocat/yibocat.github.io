@@ -154,7 +154,7 @@ fit_and_plot(lambd=0.005)
 L2 norm of w: 12.12175464630127
 ```
 
-<p style="text-align:center"><img src="/images/dl/dl-20220215-06.svg" style="width:50%;border:none;" /></p>
+<p style="text-align:center"><img src="/images/dl/dl-20220215-06.png" style="width:50%;border:none;" /></p>
 
 我们可以看到训练误差远远小于测试误差，这是很明显的过拟合。
 
@@ -170,7 +170,7 @@ fit_and_plot(lambd=4)
 L2 norm of w: 0.07619155943393707
 ```
 
-<p style="text-align:center"><img src="/images/dl/dl-20220215-07.svg" style="width:50%;border:none;" /></p>
+<p style="text-align:center"><img src="/images/dl/dl-20220215-07.png" style="width:50%;border:none;" /></p>
 
 可以明显的看到测试误差有所下降，过拟合现象有所缓解。另外，权重参数的L2L_2*L*2范数比不使用权重衰减时的更小，此时的权重参数更接近0。
 
@@ -198,7 +198,7 @@ $$
 
 我们看一下上述模型使用丢弃法后的神经网络结构
 
-<p style="text-align:center"><img src="/images/dl/dl-20220215-09.svg" style="width:50%;border:none;" /></p>
+<p style="text-align:center"><img src="/images/dl/dl-20220215-09.png" style="width:50%;" /></p>
 
 可以看到 $h_2$ 和 $h_5$ 都被清零，因此反向传播时与 $h_2$ 和 $h_5$ 相关的权重的梯度为 0。
 
