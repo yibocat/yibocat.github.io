@@ -2,14 +2,20 @@
 <meta name=color-scheme content="light dark">
 <meta name=supported-color-schemes content="light dark">
 <script>var _hmt=_hmt||[];(function(){var a=document.createElement("script"),b;a.src="https://hm.baidu.com/hm.js?e5030d0d5c8f146cc58d0a4fe660754f",b=document.getElementsByTagName("script")[0],b.parentNode.insertBefore(a,b)})()</script><title>[深度学习笔记] 深度学习第 5 篇——正向传播与反向传播&nbsp;&ndash;&nbsp;yibocat</title>
-<link rel=stylesheet href=/css/core.min.11a09861c9500684646d2120201b864e23d2012bc723cb339c2234bf27e2c69776cb63cf77da1db6e217d2f797148a9f.css integrity=sha384-EaCYYclQBoRkbSEgIBuGTiPSASvHI8sznCI0vyfixpd2y2PPd9odtuIX0veXFIqf><meta name=twitter:card content="summary">
+<link rel=stylesheet href=/css/core.min.878b66c89694ec6d946a268766e1a9c45dad118236eefde5c5c814bd8fa988bffcb0bc84ade8bb6a98d0225df70361ad.css integrity=sha384-h4tmyJaU7G2UaiaHZuGpxF2tEYI27v3lxcgUvY+piL/8sLyErei7apjQIl33A2Gt><meta name=twitter:card content="summary">
 <meta name=twitter:title content="[深度学习笔记] 深度学习第 5 篇——正向传播与反向传播">
 <body><section id=header>
-<div class="header wrap"><span class="header left-side"><a class="site home" href=/><img class="site logo" src=/images/yibo.jpeg alt><span class="site name">yibocat</span></a></span>
+<div class="header wrap"><span class="header left-side"><a class="site home" href=/>
+<span class="site name">yibocat</span></a></span>
 <span class="header right-side"><div class="nav wrap">
 <nav class=nav><a class="nav item" href=/posts/> 文章 </a><a class="nav item" href=/archives/> 归档 </a><a class="nav item" href=/categories/> 分类 </a><a class="nav item" href=/search/> 搜索 </a><a class="nav item" href></a>
 </nav>
-</div></span></div><div class="site slogan"><span class=title>cout<<" Hello world! "<< endl;</span></div></section><section id=content><div class=article-container><section class="article header">
+</div></span>
+</div>
+<div class="site slogan"><span id=typed></span></div>
+<script src=https://cdn.jsdelivr.net/npm/typed.js@2.0.12></script>
+<script>var typed=new Typed('#typed',{strings:['What have you ever fallen into?','Minecraft','Basketball','Code and code','Grand Theft Auto V','Photography','University','Memories','','','','and <strong>her<strong>.'],typeSpeed:60,backSpeed:60,loop:!0})</script>
+</section><section id=content><div class=article-container><section class="article header">
 <h1 class="article title">[深度学习笔记] 深度学习第 5 篇——正向传播与反向传播</h1><p class="article date">2022-02-17
 <span class=wordcount>&nbsp;•&nbsp;共&nbsp;1469&nbsp;个字</span><span class=reading-time> • 预计阅读时间 3 分钟</span></p></section><aside id=toc-container class="toc-container wide">
 <div class=toc>
@@ -20,7 +26,7 @@
 <li>
 <a href=#%e5%8f%8d%e5%90%91%e4%bc%a0%e6%92%ad aria-label=反向传播>反向传播</a></li>
 <li>
-<a href=#%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e6%a8%a1%e5%9e%8b%e8%ae%ad%e7%bb%83 aria-label=深度学习模型训练><strong>深度学习模型训练</strong></a></li>
+<a href=#%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e6%a8%a1%e5%9e%8b%e8%ae%ad%e7%bb%83 aria-label=深度学习模型训练>深度学习模型训练</a></li>
 <li>
 <a href=#%e5%8f%82%e8%80%83 aria-label=参考>参考</a>
 </li>
@@ -104,7 +110,7 @@ $$
 \end{aligned}
 $$
 </br></p>
-<h3 id=深度学习模型训练><strong>深度学习模型训练</strong></h3>
+<h3 id=深度学习模型训练>深度学习模型训练</h3>
 <p>看了这么些公式可能都忘记我们最初是要干什么的，我们为什么要算这么些公式？我们来回顾一下。</p>
 <p>我们训练模型的目的是为了得到最优的参数以满足我们的模型，那么什么样的模型最优呢？可以认为是损失函数最小的模型就是最优的。那么如何降低损失函数呢，我们知道模型在给定样本上的损失函数为 $J$ ，我们要让损失函数最小化，所以通过梯度下降法迭代最接近的参数，使用梯度下降法进行迭代就要通过反向传播算法计算参数梯度。我们回忆一下带有 $L2$ 参数正则化项的参数迭代公式
 $$
