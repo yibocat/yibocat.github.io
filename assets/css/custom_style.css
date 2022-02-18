@@ -361,3 +361,13 @@ pre samp {
 .article.markdown-body .MathJax {
   outline: none;
 }
+
+
+/* Cursor */
+.typed-cursor {
+  display: inline-block;
+  background-color:deeppink;
+  color: deeppink;
+  margin-left: 3px;
+  width: 5px;
+}

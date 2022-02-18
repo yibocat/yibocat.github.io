@@ -1,0 +1,28 @@
+<section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="{{- `/` | relLangURL -}}">
+                {{/* {{- $logo := site.Params.logo -}} */}}
+
+                {{/* {{- if $logo -}}
+                <img class="site logo" src="{{- $logo | relURL -}}" alt />
+                {{- end -}} */}}
+
+        <span class="site name">{{- site.Title | safeHTML -}}</span></a></span>
+        <span class="header right-side">
+            {{- partial "navigation-items.html" site.Params.nav -}}
+        </span>
+    </div>
+    {{/* 动态打字特效——代码网址： https://github.com/mattboldt/typed.js/ 自定义：http://mattboldt.github.io/typed.js/  */}}
+    <div class="site slogan"><span id="typed"></span></div>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        var typed = new Typed('#typed', {
+            strings: ['What have you ever fallen into?',
+                'Minecraft','Basketball','Code and code','Grand Theft Auto V','Photography','University','Memories',
+                '','','','and <strong>her<strong>.',],
+            typeSpeed: 60,
+            backSpeed: 60,
+            loop: true,
+
+        });
+    </script>
+</section>

@@ -24,12 +24,12 @@ defaultContentLanguage = 'zh'     # 更改语言
   style = "auto"                  # default: auto. light: light theme, dark: dark theme, auto: based on system.
   dateFormat = "2006-01-02"       # if unset, default is "2006-01-02"  不能设置成 2006-01-01 ！！！！ 这样日期的月和日就会一样了！！！
   readingTime = true              # show reading time after article date
-  logo = "/images/yibo.jpeg"        # if you have a logo png
-  slogan = "cout<<\" Hello world! \"<< endl;"
+  logo = "/images/yibo_1.jpeg"        # if you have a logo png
+  slogan = ""
   license = "版权声明：如果转发请带上本文链接和注明来源。"                  # CC License
   fullRss = false                 # Puts entire HTML post into rss 'description' tag. If unset, default is false.
   ipv6ready = true                # Show IPV6Ready logo on footer.
-  avatar = "/images/yibo.jpeg"    # 头像
+  avatar = "/images/yibo_1.jpeg"    # 头像
   ShowToc = true                  # 显示 table of content 
 
 [params.intro]                    # 首页简介
