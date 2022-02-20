@@ -1,4 +1,198 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>拷贝 on Yibocat</title><link>https://yibocat.github.io/tags/%E6%8B%B7%E8%B4%9D/</link><description>Recent content in 拷贝 on Yibocat</description><generator>Hugo -- gohugo.io</generator><copyright>©2022 Yibocat.</copyright><lastBuildDate>Sun, 30 Jan 2022 17:26:21 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/tags/%E6%8B%B7%E8%B4%9D/index.xml" rel="self" type="application/rss+xml"/><item><title>[深度学习笔记] 深度学习第 5 篇——正向传播与反向传播</title><link>https://yibocat.github.io/posts/dl/sdxx_5/</link><pubDate>Thu, 17 Feb 2022 21:48:32 +0800</pubDate><guid>https://yibocat.github.io/posts/dl/sdxx_5/</guid><description>&lt;p>什么是正向传播？正向传播是按照神经网络的输入到输出的顺序，依次计算从模型中间变量的过程。而反向传播则是计算神经网络的参数梯度的过程。在训练神经网络时，正向传播与反向传播是相互依赖的。正向传播依次计算模型中间变量，反向传播再根据变量对参数进行梯度求导。所以可以这么理解，在参数进行初始化之后对模型进行交替的正向传播与反向传播，并根据反向传播计算的梯度迭代模型参数。&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>拷贝 on Yibocat</title><link>https://yibocat.github.io/tags/%E6%8B%B7%E8%B4%9D/</link><description>Recent content in 拷贝 on Yibocat</description><generator>Hugo -- gohugo.io</generator><copyright>©2022 Yibocat.</copyright><lastBuildDate>Sun, 30 Jan 2022 17:26:21 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/tags/%E6%8B%B7%E8%B4%9D/index.xml" rel="self" type="application/rss+xml"/><item><title>[建站日记] 动态打字特效</title><link>https://yibocat.github.io/posts/jzrj/jzrj_3/</link><pubDate>Sat, 19 Feb 2022 00:32:35 +0800</pubDate><guid>https://yibocat.github.io/posts/jzrj/jzrj_3/</guid><description>&lt;p>在网站上有一个动态打字特效当然是一件很酷的事啊。无意之间找到了一个动态打字特效插件 &lt;a href="https://mattboldt.com/demos/typed-js/"target="_blank" rel="noopener noreferrer">Typed-js&lt;/a>
+。该插件还实现了各种自定义满足不同的需求。可以说是非常非常好用了，而且安装使用也是非常的简单。&lt;/p>
+&lt;p>该插件的作者是 Matt Boldt，这是他的主页：&lt;a href="https://mattboldt.com/"target="_blank" rel="noopener noreferrer">https://mattboldt.com/&lt;/a>
+。&lt;/p>
+&lt;p>Typed-js 的 Github：&lt;a href="https://github.com/mattboldt/typed.js/"target="_blank" rel="noopener noreferrer">https://github.com/mattboldt/typed.js/&lt;/a>
+。&lt;/p>
+&lt;p>该插件的自定义 Demo 如下：&lt;a href="http://mattboldt.github.io/typed.js/"target="_blank" rel="noopener noreferrer">http://mattboldt.github.io/typed.js/&lt;/a>
+。&lt;/p>
+&lt;p>下面我们大概讲一下该插件的使用方法。&lt;/p>
+&lt;/br>
+&lt;h3 id="安装方法">安装方法&lt;/h3>
+&lt;p>官方提供了三种安装方法：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">npm install typed.js
+yarn add typed.js
+bower install typed.js
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者使用 &lt;code>script&lt;/code> CDN 导入&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;https://cdn.jsdelivr.net/npm/typed.js@2.0.12&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;h3 id="使用">使用&lt;/h3>
+&lt;p>从官方给出的例子来看&lt;/p>
+&lt;p>This is really all you need to get going.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="c1">// Can also be included with a regular script tag
+&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="kr">import&lt;/span> &lt;span class="nx">Typed&lt;/span> &lt;span class="nx">from&lt;/span> &lt;span class="s1">&amp;#39;typed.js&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">options&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">strings&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;&amp;lt;i&amp;gt;First&amp;lt;/i&amp;gt; sentence.&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;amp;amp; a second sentence.&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;span class="nx">typeSpeed&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">40&lt;/span>
+&lt;span class="p">};&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">typed&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Typed&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;.element&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">options&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>上面这个例子展示了基本的使用方法。我们再来看一个更具体的例子&lt;/p>
+&lt;script>
+var typed = new Typed('#typed', {
+stringsElement: '#typed-strings'
+});
+&lt;/script>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;https://cdn.jsdelivr.net/npm/typed.js@2.0.12&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">typed&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Typed&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;#typed&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">stringsElement&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;#typed-strings&amp;#39;&lt;/span>
+&lt;span class="p">});&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;typed-strings&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Typed.js is a &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">strong&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>JavaScript&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">strong&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> library.&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>It &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">em&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>types&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">em&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> out sentences.&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">span&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;typed&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">span&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>stringElement&lt;/code> 为定义的外部动态打字文字，这里也可以直接使用 &lt;code>strings:[]&lt;/code> 来替代。 &lt;code>typed-strings&lt;/code> 表示要插入动态打字特效的模块。一般的自定义则在 &lt;code>new Typed()&lt;/code> 中设置。&lt;/p>
+&lt;/br>
+&lt;h3 id="样式设置">样式设置&lt;/h3>
+&lt;p>&lt;code>css&lt;/code> 动画是基于 &lt;code>javascript&lt;/code> 初始化构建的，所以可以在 &lt;code>css&lt;/code> 中设置各种样式&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="c">/* 光标 */&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">typed-cursor&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="c">/* 如果设置了淡出选项 */&lt;/span>
+&lt;span class="p">.&lt;/span>&lt;span class="nc">typed-fade-out&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;h3 id="自定义">自定义&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">typed&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nx">Typed&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;.element&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * @property {array} strings 要输入的字符
+&lt;/span>&lt;span class="cm"> * @property {string} stringsElement 包含字符串 children 的元素的 ID
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">strings&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;span class="s1">&amp;#39;These are the default values...&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s1">&amp;#39;You know what you should do?&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s1">&amp;#39;Use your own!&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s1">&amp;#39;Have a great day!&amp;#39;&lt;/span>
+&lt;span class="p">],&lt;/span>
+&lt;span class="nx">stringsElement&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * @property {number} typeSpeed 类型速度，单位：毫秒
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">typeSpeed&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * @property {number} startDelay 输入开始前的时间，单位：毫秒
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">startDelay&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * @property {number} backSpeed 退格速度，单位：毫秒
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">backSpeed&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * @property {boolean} smartBackspace 只退格与前一个字符串不匹配的内容
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">smartBackspace&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * @property {boolean} shuffle 随机播放字符串
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">shuffle&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * @property {number} backDelay 退格前的延迟时间，单位：毫秒
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">backDelay&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">700&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * @property {boolean} fadeOut 用淡出替代退格
+&lt;/span>&lt;span class="cm"> * @property {string} fadeOutClass 淡出动画
+&lt;/span>&lt;span class="cm"> * @property {boolean} fadeOutDelay 淡出延迟，单位：毫秒
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">fadeOut&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">fadeOutClass&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;typed-fade-out&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">fadeOutDelay&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">500&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * @property {boolean} loop 进行循环播放
+&lt;/span>&lt;span class="cm"> * @property {number} loopCount 循环播放次数
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">loop&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">loopCount&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kc">Infinity&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * @property {boolean} showCursor 显示光标
+&lt;/span>&lt;span class="cm"> * @property {string} cursorChar 光标字符串，一般为&amp;#39;|&amp;#39;，我个人比较喜欢设置为背景定宽
+&lt;/span>&lt;span class="cm"> * @property {boolean} autoInsertCss 插入 CSS 光标并淡出到 HTML &amp;lt;head&amp;gt;
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">showCursor&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">cursorChar&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;|&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">autoInsertCss&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * @property {string} attr 输出的字符串属性
+&lt;/span>&lt;span class="cm"> * Ex: input placeholder, value, or just HTML text
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">attr&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * @property {boolean} bindInputFocusEvents 如果 el 是文本输入的话则绑定到焦点和模糊
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">bindInputFocusEvents&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * @property {string} contentType 内容类型为 html 或者 null
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">contentType&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;html&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * 开始输入之前执行
+&lt;/span>&lt;span class="cm"> * @param {Typed} self
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">onBegin&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * 所有输入完成执行
+&lt;/span>&lt;span class="cm"> * @param {Typed} self
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">onComplete&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * 每个字符串输入之前执行
+&lt;/span>&lt;span class="cm"> * @param {number} arrayPos
+&lt;/span>&lt;span class="cm"> * @param {Typed} self
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">preStringTyped&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">arrayPos&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * 每个字符串输入之后执行
+&lt;/span>&lt;span class="cm"> * @param {number} arrayPos
+&lt;/span>&lt;span class="cm"> * @param {Typed} self
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">onStringTyped&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">arrayPos&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * 循环过程中输入最后一个字符串后执行
+&lt;/span>&lt;span class="cm"> * @param {Typed} self
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">onLastStringBackspaced&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * 输入停止执行
+&lt;/span>&lt;span class="cm"> * @param {number} arrayPos
+&lt;/span>&lt;span class="cm"> * @param {Typed} self
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">onTypingPaused&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">arrayPos&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * Typing has been started after being stopped
+&lt;/span>&lt;span class="cm"> * @param {number} arrayPos
+&lt;/span>&lt;span class="cm"> * @param {Typed} self
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">onTypingResumed&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">arrayPos&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * 重置之后执行
+&lt;/span>&lt;span class="cm"> * @param {Typed} self
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">onReset&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * 停止之后执行
+&lt;/span>&lt;span class="cm"> * @param {number} arrayPos
+&lt;/span>&lt;span class="cm"> * @param {Typed} self
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">onStop&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">arrayPos&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * 开始之后执行
+&lt;/span>&lt;span class="cm"> * @param {number} arrayPos
+&lt;/span>&lt;span class="cm"> * @param {Typed} self
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">onStart&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">arrayPos&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;span class="cm">/**
+&lt;/span>&lt;span class="cm"> * 销毁之后
+&lt;/span>&lt;span class="cm"> * @param {Typed} self
+&lt;/span>&lt;span class="cm"> */&lt;/span>
+&lt;span class="nx">onDestroy&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;span class="p">});&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;h3 id="举例">举例&lt;/h3>
+&lt;p>&lt;a href="http://mattboldt.github.io/typed.js/"target="_blank" rel="noopener noreferrer">http://mattboldt.github.io/typed.js/&lt;/a>
+&lt;/p>
+&lt;/br></description></item><item><title>[深度学习笔记] 深度学习第 5 篇——正向传播与反向传播</title><link>https://yibocat.github.io/posts/dl/sdxx_5/</link><pubDate>Thu, 17 Feb 2022 21:48:32 +0800</pubDate><guid>https://yibocat.github.io/posts/dl/sdxx_5/</guid><description>&lt;p>什么是正向传播？正向传播是按照神经网络的输入到输出的顺序，依次计算从模型中间变量的过程。而反向传播则是计算神经网络的参数梯度的过程。在训练神经网络时，正向传播与反向传播是相互依赖的。正向传播依次计算模型中间变量，反向传播再根据变量对参数进行梯度求导。所以可以这么理解，在参数进行初始化之后对模型进行交替的正向传播与反向传播，并根据反向传播计算的梯度迭代模型参数。&lt;/p>
 &lt;/br>
 &lt;h3 id="正向传播">正向传播&lt;/h3>
 &lt;p>前几篇文章讲的基本上都是正向传播，这里我们简单地再推导一下。&lt;/p>
@@ -1331,19 +1525,4 @@ remotes/origin/master
 &lt;/li>
 &lt;li>&lt;a href="https://docs.github.com/cn/pages"target="_blank" rel="noopener noreferrer">https://docs.github.com/cn/pages&lt;/a>
 &lt;/li>
-&lt;/ol></description></item><item><title>CDN 刷新列表</title><link>https://yibocat.github.io/posts/cdn-%E5%88%B7%E6%96%B0%E5%88%97%E8%A1%A8/</link><pubDate>Fri, 28 Jan 2022 23:15:17 +0800</pubDate><guid>https://yibocat.github.io/posts/cdn-%E5%88%B7%E6%96%B0%E5%88%97%E8%A1%A8/</guid><description>&lt;h3 id="cdn-刷新列表">CDN 刷新列表&lt;/h3>
-&lt;p>CDN 工作台：&lt;a href="https://console.cloud.tencent.com/cdn/refresh"target="_blank" rel="noopener noreferrer">https://console.cloud.tencent.com/cdn/refresh&lt;/a>
-&lt;/p>
-&lt;h4 id="url刷新">URL刷新&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">https://yibocat.com/
-https://yibocat.com/posts
-https://yibocat.com/archives
-https://yibocat.com/categories
-https://yibocat.com/search
-&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="目录刷新">目录刷新&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">https://yibocat.com/
-https://yibocat.com/posts/
-https://yibocat.com/archives/
-https://yibocat.com/categories/
-https://yibocat.com/search/
-&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/ol></description></item></channel></rss>
