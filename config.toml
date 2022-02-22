@@ -17,7 +17,7 @@ defaultContentLanguage = 'zh'     # 更改语言
   codeFences = true
   noClasses = false
 
-[markup.goldmark.renderer]
+[markup.goldmark.renderer]        # 允许在 Markdown 中嵌入 Html 代码
   unsafe = true  # enable raw HTML in Markdown
 
 [params]                          # 网站配置选项
@@ -34,8 +34,8 @@ defaultContentLanguage = 'zh'     # 更改语言
 
 [params.intro]                    # 首页简介
   intro_1 = "## **这就是个笔记本——脑子不够键盘来凑** ##"        # 首页简介 1
-  intro_2 = "**这是一个测试**"               # 首页简介 2
-  intro_3 = "**Keywords:**"               # 首页简介 3
+  intro_2 = ""               # 首页简介 2
+  intro_3 = ""               # 首页简介 3
 [params.profile]                  # 文章底部签名设置
   enable = true
   avatar = "/json/77907-vault.json"
