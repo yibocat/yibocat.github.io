@@ -1,4 +1,13 @@
 <section id="footer">
+    <div class="tongji" style="text-align:center">
+        {{$scratch := newScratch}}
+        {{ range (where .Site.Pages "Kind" "page" )}}
+            {{$scratch.Add "total" .WordCount}}
+        {{ end }}
+        <span>共 {{ len (where .Site.RegularPages "Section" "posts") }} 篇文章 • 总计 {{$scratch.Get "total" }} 字</span>
+        
+    </div>
+
     {{- $copyright := site.Copyright -}}
     {{- if not $copyright -}}
         {{- $copyright = site.Title | safeHTML -}}
