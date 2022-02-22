@@ -1,0 +1,42 @@
+{{- define "main" -}}
+<div class="categories">
+
+  <div style="text-align: center">
+    <!-- <h1>类别为{{ len .Data.Terms }}个</h1> -->
+    <section class="article header">
+      <h1> {{ .Title }} </h1>
+    </section>
+  </div>
+
+  <section class="categories list">
+    {{ $data := .Data }}
+    {{ range .Data.Terms.ByCount }}
+    {{ $termLink := printf "/%s/%s/" $data.Plural .Term | urlize }}
+
+    <a href="{{ $termLink }}" class="cat">
+      <ul>
+        <!-- <i class="bi bi-folder2" style="font-size:24px; padding:5px"></i> -->
+        <strong>{{ .Term }}
+        <sup class="archive-count">{{ .Count }}</sup>
+      </strong>
+      </ul>
+        <!-- 列出每个项下的文章 -->
+        <!-- <div class="archive-posts">
+        {{ range .Pages | first 5 }}
+        <div>
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </div>
+        {{ end }}
+
+        {{ if gt (len .Pages) 5 }}
+        <div><a href="{{ $termLink }}">……</a></div>
+        {{ end }}
+      </div> -->
+
+
+    </a>
+    {{ end }}
+  </section>
+</div>
+
+{{- end -}}
