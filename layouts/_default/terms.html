@@ -4,7 +4,12 @@
   <div style="text-align: center">
     <!-- <h1>类别为{{ len .Data.Terms }}个</h1> -->
     <section class="article header">
-      <h1> {{ .Title }} </h1>
+      <h1>
+        {{ .Title }}
+        <sup class="archive-count">
+          {{ len .Data.Terms }}
+        </sup>
+      </h1>
     </section>
   </div>
 
@@ -17,11 +22,11 @@
       <ul>
         <!-- <i class="bi bi-folder2" style="font-size:24px; padding:5px"></i> -->
         <strong>{{ .Term }}
-        <sup class="archive-count">{{ .Count }}</sup>
-      </strong>
+          <sup class="archive-count">{{ .Count }}</sup>
+        </strong>
       </ul>
-        <!-- 列出每个项下的文章 -->
-        <!-- <div class="archive-posts">
+      <!-- 列出每个项下的文章 -->
+      <!-- <div class="archive-posts">
         {{ range .Pages | first 5 }}
         <div>
           <a href="{{ .Permalink }}">{{ .Title }}</a>
