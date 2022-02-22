@@ -10,13 +10,11 @@
     <div class="avatar">
         <a href="/posts/"> <img src="{{- $avatar | relURL -}}"> </a>
     </div>
-    {{/* <div class="intro"># print("Hello world!") </div>
-    <div class="intro"># 脑子不够键盘来凑 </div> */}}
     <div class="intro">
         {{- with site.Params.intro.intro_1 -}}<p>{{- . | markdownify -}}</p>{{- end -}}
         <!-- {{- with site.Params.intro.intro_2 -}}<p>{{- . | markdownify -}}</p>{{- end -}}
         {{- with site.Params.intro.intro_3 -}}<p>{{- . | markdownify -}}</p>{{- end -}} -->
-        <!-- <div id="main" style="width:600px;height:300px;"></div> -->
+        {{/*  <div id="main" style="width:600px;height:300px;"></div>   */}}
     </div>
     <div class="social-links">
         {{ partial "social.html" . }}
