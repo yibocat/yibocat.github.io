@@ -1,1 +1,4 @@
 .DS_Store
+layouts/_default/test.html
+content/test.md
+layouts/partials/partials_test.html
