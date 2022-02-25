@@ -6,24 +6,37 @@
 
 {{- $avatar := site.Params.avatar -}}
 {{- if $avatar}}
-<div class="article-header">
+<div class="home-avatar">
     <div class="avatar">
-        <a href="/posts/"> <img src="{{- $avatar | relURL -}}"> </a>
-    </div>
-    <div class="intro">
-        {{- with site.Params.intro.intro_1 -}}<p>{{- . | markdownify -}}</p>{{- end -}}
-        <!-- {{- with site.Params.intro.intro_2 -}}<p>{{- . | markdownify -}}</p>{{- end -}}
-        {{- with site.Params.intro.intro_3 -}}<p>{{- . | markdownify -}}</p>{{- end -}} -->
-        <div id="heatmap"></div>
-    </div>
-    <div class="social-links">
-        {{ partial "social.html" . }}
+        <div class="avatar-img">
+            <a href="/posts/"> <img src="{{- $avatar | relURL -}}"> </a>
+        </div>
+        <div class="avatar-intro">
+            <div class="social-links">
+                {{ partial "social.html" . }}
+            </div>
+            <div class="intro">
+                {{- with site.Params.intro.intro_1 -}}<p>{{- . | markdownify -}}</p>{{- end -}}
+                {{- with site.Params.intro.intro_2 -}}<p>{{- . | markdownify -}}</p>{{- end -}}
+                {{- with site.Params.intro.intro_3 -}}<p>{{- . | markdownify -}}</p>{{- end -}}
+            </div>
+        </div>
+        {{- if (.Param "heatmap") -}}
+        <div class="heatmap">
+            <div id="heatmap"></div>
+        </div>
+        {{- end -}}
     </div>
 
-    {{/*  统计小地球  */}}
-    {{/*  <div style="width:200px; text-align:center;background-color:transparent">
-        <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5rz1gtykhlf&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
-    </div>  */}}
-    
+
+</div>
+
+{{/* 统计小地球 */}}
+{{/* <div style="width:200px; text-align:center;background-color:transparent">
+    <script type="text/javascript"
+        src="//rf.revolvermaps.com/0/0/6.js?i=5rz1gtykhlf&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80"
+        async="async"></script>
+</div> */}}
+
 </div>
 {{- end -}}

@@ -9,15 +9,26 @@ var myChart = echarts.init(document.getElementById('heatmap'));
 window.onresize = function() {
     myChart.resize();
 };
+
 var option;
 
-// 计算日期并转换格式
-var startDate = new Date();
-var year_Mill = startDate.setFullYear((startDate.getFullYear() - 1));
-var startDate = +new Date(year_Mill);
-var endDate = +new Date();
+function heatmap_width(months){             // 计算转换日期
+    var startDate = new Date();
+    var mill = startDate.setMonth((startDate.getMonth() - months));
+    var endDate = +new Date();
+    startDate = +new Date(mill);
 
-var dayTime = 3600 * 24 * 1000;
+    endDate = echarts.format.formatTime('yyyy-MM-dd', endDate);
+    startDate = echarts.format.formatTime('yyyy-MM-dd', startDate);
+
+    var showmonth = [];
+    showmonth.push([
+        startDate,
+        endDate
+    ]);
+    return showmonth
+};
+
 var data = [];
 {{ range.Site.RegularPages }}
 data.push(
@@ -27,17 +38,32 @@ data.push(
     ],
 );
 {{- end -}}
-startDate = echarts.format.formatTime('yyyy-MM-dd', startDate);
-endDate = echarts.format.formatTime('yyyy-MM-dd', endDate);
-var rangeArr = [startDate, endDate];
+
+if(window.matchMedia('(max-width: 320px)').matches){
+    var rangeArr = heatmap_width(3);
+}else if(window.matchMedia('(max-width: 400px)').matches){
+    var rangeArr = heatmap_width(5);
+}else if(window.matchMedia('(max-width: 550px)').matches){
+    var rangeArr = heatmap_width(6);
+}else if(window.matchMedia('(max-width: 1021px)').matches){
+    var rangeArr = heatmap_width(12);
+}else if(window.matchMedia('(max-width: 1400px)').matches){
+    var rangeArr = heatmap_width(9);
+}else if(window.matchMedia('(max-width: 1920px)').matches){
+    var rangeArr = heatmap_width(12);
+}else if(window.matchMedia('(max-width: 2560px)').matches){
+    var rangeArr = heatmap_width(24);
+}
+
+
 
 function LightOption() {                                                // 亮模式
     option = {
         title: {                            // 标题设置
             show: true,
             top: 0,                        // 顶部距离
-            left: 60,                       // 左侧距离
-            text: '去年一年打字数',          // 标题
+            left: 20,                       // 左侧距离
+            text: '文章热力图',          // 标题
             textStyle: {                    // 标题颜色
                 color: 'rgba(29,43,76,.85)',
                 fontSize: 10,
@@ -50,7 +76,7 @@ function LightOption() {                                                // 亮�
             borderWidth: 1,                 // 边框宽度
             formatter: function (obj) {     // 提示框显示内容，写成函数
                 var value = obj.value;
-                return '<div style="font-size: 14px;color: white;">' + value[0] + '：' + value[1] + '</div>';
+                return '<div style="font-size: 14px;color: white;">' + value[0] + ': ' + value[1] + '</div>';
             }
         },
         visualMap: {                        // 视觉映射组件，就是上面的颜色框
@@ -79,7 +105,7 @@ function LightOption() {                                                // 亮�
             left: 30,
             right: 30,
 
-            cellSize: [13, 13],             // 每个单元的大小
+            cellSize: [12, 12],             // 每个单元的大小
             orient: 'horizontal',           // 设置方向 
             range: rangeArr,                // 循环日，rangArr=[开始时间，结束时间]
             splitLine: {                    // 日历每个月分割线
@@ -104,7 +130,6 @@ function LightOption() {                                                // 亮�
             yearLabel: {                    // 年标签
                 show: true,
                 position: 'top',
-                align: 'right',
                 fontWeight: 'normal',
                 fontSize: 12,
                 color: '#24292e',
@@ -138,8 +163,8 @@ function DarkOption() {                                                 // 暗�
         title: {                            // 标题设置
             show: true,
             top: 0,                        // 顶部距离
-            left: 60,                       // 左侧距离
-            text: '去年一年打字数',          // 标题
+            left: 20,                       // 左侧距离
+            text: '文章热力图',          // 标题
             textStyle: {                    // 标题颜色
                 color: '#c7d5f6',
                 fontSize: 10,
@@ -152,7 +177,7 @@ function DarkOption() {                                                 // 暗�
             borderWidth: 1,                 // 边框宽度
             formatter: function (obj) {     // 提示框显示内容，写成函数
                 var value = obj.value;
-                return '<div style="font-size: 14px;color: white;">' + value[0] + '：' + value[1] + '</div>';
+                return '<div style="font-size: 14px;color: white;">' + value[0] + ': ' + value[1] + '</div>';
             }
         },
         visualMap: {                        // 视觉映射组件，就是上面的颜色框
@@ -181,7 +206,7 @@ function DarkOption() {                                                 // 暗�
             top: 45,
             left: 30,
             right: 30,
-            cellSize: [13, 13],             // 每个单元的大小
+            cellSize: [12, 12],             // 每个单元的大小
             orient: 'horizontal',           // 设置方向 
             range: rangeArr,                // 循环日，rangArr=[开始时间，结束时间]
             splitLine: {                    // 日历每个月分割线
@@ -206,7 +231,6 @@ function DarkOption() {                                                 // 暗�
             yearLabel: {                    // 年标签
                 show: true,
                 position: 'top',
-                align: 'right',
                 fontWeight: 'normal',
                 fontSize: 12,
                 color: '#c7d5f6',
@@ -253,7 +277,7 @@ var listeners={                                                         // 模�
       if(mediaQueryList.matches){
         LightOption()
       }
-    }
+    },
   }
 window.matchMedia('(prefers-color-scheme: dark)').addListener(listeners.dark)
 window.matchMedia('(prefers-color-scheme: light)').addListener(listeners.light)
