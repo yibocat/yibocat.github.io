@@ -1,65 +1,261 @@
 <!--
     for user-side override
 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-{{/*  <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
+
 <script type="text/javascript">
-    // 基于准备好的dom，初始化echarts实例
+var myChart = echarts.init(document.getElementById('heatmap'));
+window.onresize = function() {
+    myChart.resize();
+};
+var option;
 
-    var myChart = echarts.init(document.getElementById('main'));
-    window.onresize = function () {
-        myChart.resize();
-    };
+// 计算日期并转换格式
+var startDate = new Date();
+var year_Mill = startDate.setFullYear((startDate.getFullYear() - 1));
+var startDate = +new Date(year_Mill);
+var endDate = +new Date();
 
-    function getVirtulData(year) {
-        year = year || '2017';
-        var date = +echarts.number.parseDate(year + '-01-01');
-        var end = +echarts.number.parseDate(+year + 1 + '-01-01');
-        var dayTime = 3600 * 24 * 1000;
-        var data = [];
+var dayTime = 3600 * 24 * 1000;
+var data = [];
+{{ range.Site.RegularPages }}
+data.push(
+    [
+        {{ .PublishDate.Format "2006-01-02" }},
+        {{ .WordCount }},
+    ],
+);
+{{- end -}}
+startDate = echarts.format.formatTime('yyyy-MM-dd', startDate);
+endDate = echarts.format.formatTime('yyyy-MM-dd', endDate);
+var rangeArr = [startDate, endDate];
 
-        {{ range.Site.RegularPages }}
-        data.push(
-            [
-                {{ .PublishDate.Format "2006-01-02" }},
-                {{ .WordCount }},
-            ],
-        );
-    {{ end }}
-    return data;
-    }
+function LightOption() {                                                // 亮模式
     option = {
-        title: {
-            top: 30,
-            left: 'center',
-            text: '数数敲了几个字？'
+        title: {                            // 标题设置
+            show: true,
+            top: 0,                        // 顶部距离
+            left: 60,                       // 左侧距离
+            text: '去年一年打字数',          // 标题
+            textStyle: {                    // 标题颜色
+                color: 'rgba(29,43,76,.85)',
+                fontSize: 10,
+            }
         },
-        tooltip: {},
-        visualMap: {
-            min: 0,
-            max: 5000,
-            type: 'piecewise',
-            orient: 'horizontal',
-            left: 'center',
-            top: 65
+        tooltip: {                          // 提示框组件
+            padding: 10,
+            backgroundColor: '#777',        // 提示框背景
+            borderColor: '#777',            // 边框颜色
+            borderWidth: 1,                 // 边框宽度
+            formatter: function (obj) {     // 提示框显示内容，写成函数
+                var value = obj.value;
+                return '<div style="font-size: 14px;color: white;">' + value[0] + '：' + value[1] + '</div>';
+            }
         },
-        calendar: {
-            top: 120,
+        visualMap: {                        // 视觉映射组件，就是上面的颜色框
+            show: false,                     // 是否显示
+            top: 0,                         // 顶部距离
+            min: 0,                         // 最小值
+            max: 5000,                      // 最大值
+            textStyle: {                    // 文本样式
+                color: '#7bc96f',
+                fontWeight: 'bold',
+                fontFamily: 'monospace',
+            },
+            calculable: true,               // 是否参与计算
+            inRange: {                      // 选中范围元素
+                symbol: 'rect',
+                color: ['#ccffcc', '#82c979', '#43923c', '#125b15', '#002800']
+            },
+            itemWidth: 12,                  // 宽度
+            itemHeight: 200,                // 高度
+            orient: 'horizontal',           // 设置方向，此处为水平方向
+            right: 0,                       // 左侧距离
+        },
+
+        calendar: {                         // 日历设置
+            top: 45,
             left: 30,
             right: 30,
-            cellSize: ['auto', 12],
-            range: '2022',
-            itemStyle: {
-                borderWidth: 0.5
+
+            cellSize: [13, 13],             // 每个单元的大小
+            orient: 'horizontal',           // 设置方向 
+            range: rangeArr,                // 循环日，rangArr=[开始时间，结束时间]
+            splitLine: {                    // 日历每个月分割线
+                show: false,
+                lineStyle: {                // 月份分割线样式
+                    width: 0.5,
+                    type: 'solid',
+                    color: 'white',
+                },
             },
-            yearLabel: { show: false }
+            itemStyle: {                    // 小格子样式
+                borderWidth: 3.4,           // 边框宽度
+                borderType: 'solid',        // 边框样式
+                
+                shadowColor: '#f3f6f9',
+                shadowBlur: 1.2,
+
+                borderColor: '#f3f6f9',     // 边框颜色       设置为背景色
+                color: '#dddddd',              // 小格颜色
+                opacity: 1,                 // 边框透明度
+            },
+            yearLabel: {                    // 年标签
+                show: true,
+                position: 'top',
+                align: 'right',
+                fontWeight: 'normal',
+                fontSize: 12,
+                color: '#24292e',
+            },
+            monthLabel: {                   // 月标签
+                nameMap: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],      // 月历
+                fontWeight: 'bolder',       // 字体重量
+                color: '#24292e',           // 字体颜色
+                fontSize: 8                 // 字体大小
+            },
+            dayLabel: {                     // 日标签
+                formatter: '{start}  1st',  // 开始的日
+                fontWeight: 'bolder',       // 字体重量
+                nameMap: ['', 'Mon', '', 'Wed', '', 'Fri', '',],        // 显示的日历
+                color: '#24292e',           // 颜色
+                fontSize: 8,                // 字体大小
+
+            },
         },
-        series: {
+
+        series: {                           // 加载数据
             type: 'heatmap',
             coordinateSystem: 'calendar',
-            data: getVirtulData('2022')
+            data: data                      // 数据
         }
     };
+    option && myChart.setOption(option);
+}
+function DarkOption() {                                                 // 暗模式
+    option = {
+        title: {                            // 标题设置
+            show: true,
+            top: 0,                        // 顶部距离
+            left: 60,                       // 左侧距离
+            text: '去年一年打字数',          // 标题
+            textStyle: {                    // 标题颜色
+                color: '#c7d5f6',
+                fontSize: 10,
+            }
+        },
+        tooltip: {                          // 提示框组件
+            padding: 10,
+            backgroundColor: '#777',        // 提示框背景
+            borderColor: '#777',            // 边框颜色
+            borderWidth: 1,                 // 边框宽度
+            formatter: function (obj) {     // 提示框显示内容，写成函数
+                var value = obj.value;
+                return '<div style="font-size: 14px;color: white;">' + value[0] + '：' + value[1] + '</div>';
+            }
+        },
+        visualMap: {                        // 视觉映射组件，就是上面的颜色框
+            show: false,                     // 是否显示
+            top: 0,                         // 顶部距离
+            min: 0,                         // 最小值
+            max: 5000,                      // 最大值
+            textStyle: {                    // 文本样式
+                color: '#c7d5f6',
+                fontWeight: 'bold',
+                fontFamily: 'monospace',
+            },
+            calculable: true,               // 是否参与计算
+            inRange: {                      // 选中范围元素
+                symbol: 'rect',
+                color: ['#ccffcc', '#82c979', '#43923c', '#125b15', '#002800'],     // 选色网站：gka.github.io/palettes/#/  shejidaren.com/examples/tools/websafecolors/
+                opacity: 0.8,
+            },
+            itemWidth: 12,                  // 宽度
+            itemHeight: 200,                // 高度
+            orient: 'horizontal',           // 设置方向，此处为水平方向
+            right: 0,                       // 左侧距离
+        },
 
-    myChart.setOption(option);
-</script>  */}}
+        calendar: {                         // 日历设置
+            top: 45,
+            left: 30,
+            right: 30,
+            cellSize: [13, 13],             // 每个单元的大小
+            orient: 'horizontal',           // 设置方向 
+            range: rangeArr,                // 循环日，rangArr=[开始时间，结束时间]
+            splitLine: {                    // 日历每个月分割线
+                show: false,
+                lineStyle: {                // 月份分割线样式
+                    width: 0.5,
+                    type: 'solid',
+                    color: 'white',
+                },
+            },
+            itemStyle: {                    // 小格子样式
+                borderWidth: 3.4,           // 边框宽度
+                borderType: 'solid',        // 边框样式
+                
+                shadowColor: '#0d1117',
+                shadowBlur: 1.2,
+
+                borderColor: '#0d1117',     // 边框颜色       设置为背景色
+                color: '#24292e',              // 小格颜色
+                opacity: 1,                 // 边框透明度
+            },
+            yearLabel: {                    // 年标签
+                show: true,
+                position: 'top',
+                align: 'right',
+                fontWeight: 'normal',
+                fontSize: 12,
+                color: '#c7d5f6',
+            },
+            monthLabel: {                   // 月标签
+                nameMap: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],      // 月历
+                fontWeight: 'bolder',       // 字体重量
+                color: '#c7d5f6',           // 字体颜色
+                fontSize: 8                 // 字体大小
+            },
+            dayLabel: {                     // 日标签
+                formatter: '{start}  1st',  // 开始的日
+                fontWeight: 'bolder',       // 字体重量
+                nameMap: ['', 'Mon', '', 'Wed', '', 'Fri', '',],        // 显示的日历
+                color: '#c7d5f6',           // 颜色
+                fontSize: 8,                // 字体大小
+
+            },
+        },
+
+        series: {                           // 加载数据
+            type: 'heatmap',
+            coordinateSystem: 'calendar',
+            data: data                      // 数据
+        }
+    };
+    option && myChart.setOption(option);
+}
+
+if(window.matchMedia('(prefers-color-scheme: dark)').matches){          // 暗模式
+    DarkOption()
+}
+else{                                                                   // 亮模式
+    LightOption()
+}
+
+var listeners={                                                         // 模式监听
+    dark:(mediaQueryList )=>{                                           // 暗模式
+      if(mediaQueryList.matches){
+        DarkOption()
+      }
+    },
+    light:(mediaQueryList)=>{                                           // 亮模式
+      if(mediaQueryList.matches){
+        LightOption()
+      }
+    }
+  }
+window.matchMedia('(prefers-color-scheme: dark)').addListener(listeners.dark)
+window.matchMedia('(prefers-color-scheme: light)').addListener(listeners.light)
+
+</script>
