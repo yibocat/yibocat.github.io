@@ -1,4 +1,237 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>插件 on Yibocat</title><link>https://yibocat.github.io/tags/%E6%8F%92%E4%BB%B6/</link><description>Recent content in 插件 on Yibocat</description><generator>Hugo -- gohugo.io</generator><copyright>©2022 Yibocat.</copyright><lastBuildDate>Sat, 19 Feb 2022 00:32:35 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/tags/%E6%8F%92%E4%BB%B6/index.xml" rel="self" type="application/rss+xml"/><item><title>[建站日记] 动态打字特效</title><link>https://yibocat.github.io/posts/jzrj/jzrj_3/</link><pubDate>Sat, 19 Feb 2022 00:32:35 +0800</pubDate><guid>https://yibocat.github.io/posts/jzrj/jzrj_3/</guid><description>&lt;p>在网站上有一个动态打字特效当然是一件很酷的事啊。无意之间找到了一个动态打字特效插件 &lt;a href="https://mattboldt.com/demos/typed-js/"target="_blank" rel="noopener noreferrer">Typed-js&lt;/a>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>插件 on Yibocat</title><link>https://yibocat.github.io/tags/%E6%8F%92%E4%BB%B6/</link><description>Recent content in 插件 on Yibocat</description><generator>Hugo -- gohugo.io</generator><copyright>©2022 Yibocat.</copyright><lastBuildDate>Sat, 19 Feb 2022 00:32:35 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/tags/%E6%8F%92%E4%BB%B6/index.xml" rel="self" type="application/rss+xml"/><item><title>[建站日记] Hugo 添加文章日期热力图</title><link>https://yibocat.github.io/posts/jzrj/jzrj_4/</link><pubDate>Fri, 25 Feb 2022 20:11:23 +0800</pubDate><guid>https://yibocat.github.io/posts/jzrj/jzrj_4/</guid><description>&lt;p>每次看到 Github 上的提交热力图时，总想自己搞一个。但是直接从图开始搞起似乎很麻烦，于是上网一搜，嘿，有两个开源图表库正好满足我的需求，果断开搞。&lt;/p>
+&lt;p>这两个图图表库如下：&lt;/p>
+&lt;p>蚂蚁数据可视化 AntV &lt;a href="https://antv-2018.alipay.com/zh-cn/index.html"target="_blank" rel="noopener noreferrer">https://antv-2018.alipay.com/zh-cn/index.html&lt;/a>
+&lt;/p>
+&lt;p>Apache ECharts &lt;a href="https://echarts.apache.org/zh/index.html"target="_blank" rel="noopener noreferrer">https://echarts.apache.org/zh/index.html&lt;/a>
+&lt;/p>
+&lt;p>这两个都是非常好的图表库，而我使用的 ECharts（只是因为第一个找到的是 ECharts）。不过有一些功能还是没能实现，有机会尝试用 AntV 再实现一下。&lt;/p>
+&lt;p>改造后最后的效果图如下&lt;/p>
+&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220225-01.png" style="width:80%" />&lt;/p>
+&lt;/br>
+&lt;h3 id="获取">获取&lt;/h3>
+&lt;p>ECharts 官方给的安装方式有三种： Github 获取、npm 安装和 CDN 获取，官方建议使用 npm 安装，这里直接使用 CDN 获取：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>而下载网址是在 &lt;a href="https://www.jsdelivr.com/package/npm/echarts"target="_blank" rel="noopener noreferrer">https://www.jsdelivr.com/package/npm/echarts&lt;/a>
+。&lt;/p>
+&lt;p>npm 下载如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">npm install echarts --save
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>另外，官网还提供在线构建，具体可以前往 &lt;a href="https://echarts.apache.org/zh/builder.html"target="_blank" rel="noopener noreferrer">https://echarts.apache.org/zh/builder.html&lt;/a>
+。&lt;/p>
+&lt;/br>
+&lt;h3 id="配置文章数据">配置文章数据&lt;/h3>
+&lt;p>首先配置生成热力图的模块&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;heatmap&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后编写 javascript 脚本。&lt;/p>
+&lt;p>初始化图标并绑定到热力图模块，并设定图表响应容器的大小变化&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kd">var&lt;/span> &lt;span class="nx">myChart&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">echarts&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">init&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getElementById&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;heatmap&amp;#39;&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">onresize&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kd">function&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">myChart&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">resize&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="p">};&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;h3 id="生成文章数据">生成文章数据&lt;/h3>
+&lt;p>生成热力图的 option 结构在 &lt;a href="https://echarts.apache.org/zh/option.html#calendar"target="_blank" rel="noopener noreferrer">https://echarts.apache.org/zh/option.html#calendar&lt;/a>
+。这里我们主要要解决的是两个问题：&lt;/p>
+&lt;blockquote>
+&lt;p>1.如何将日历的日期设置为去年今日到今日日期区间&lt;/p>
+&lt;p>2.将文章的日期和字数传入 ECharts&lt;/p>
+&lt;/blockquote>
+&lt;p>日历时间在 &lt;code>series&lt;/code> 的 &lt;code>data&lt;/code> 中设置，支持 &lt;code>data([day,number])&lt;/code> 的列表形式，我们的目的则是将所有发布的文章的数字作统计，然后传入列表 &lt;code>data&lt;/code> 中。&lt;/p>
+&lt;p>好消息是 Hugo 支持在 &lt;code>html&lt;/code> 中写入代码，随后 Hugo 会自动对其进行编码。接着上面代码&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[];&lt;/span>
+&lt;span class="p">{{&lt;/span> &lt;span class="nx">range&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Site&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">RegularPages&lt;/span> &lt;span class="p">}}&lt;/span>
+&lt;span class="nx">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">push&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;span class="p">[&lt;/span>
+&lt;span class="p">{{&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="nx">PublishDate&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Format&lt;/span> &lt;span class="s2">&amp;#34;2006-01-02&amp;#34;&lt;/span> &lt;span class="p">}},&lt;/span>
+&lt;span class="p">{{&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="nx">WordCount&lt;/span> &lt;span class="p">}},&lt;/span>
+&lt;span class="p">],&lt;/span>
+&lt;span class="p">);&lt;/span>
+&lt;span class="p">{{&lt;/span>&lt;span class="o">-&lt;/span> &lt;span class="nx">end&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="p">}}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里我们将所有发布文章的数据保存在了 &lt;code>data&lt;/code> 中（注意：该段代码需要写在 html 中，若单独编写 js 文件，最后并不会奏效，因为 Hugo 并不会去编译 js 文件）。&lt;/p>
+&lt;/br>
+&lt;h3 id="设置日期时间">设置日期时间&lt;/h3>
+&lt;p>官方给出的日期设置时间非常简单，从当前一年的一月一日开始，随机生成 365 个数据。而 javascript 中有一段代码可以获取当前时间和当前时间前推任意时间&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">sdtime2&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">setHours&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">sdtime1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getHours&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="c1">//小时
+&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="kd">var&lt;/span> &lt;span class="nx">sdtime3&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">setDate&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">getDate&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">7&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="c1">//7天
+&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="kd">var&lt;/span> &lt;span class="nx">sdtime4&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">setMonth&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">getMonth&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="c1">//一个月
+&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="kd">var&lt;/span> &lt;span class="nx">sdtime5&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">setFullYear&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">().&lt;/span>&lt;span class="nx">getFullYear&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="c1">//一年
+&lt;/span>&lt;span class="c1">&lt;/span>&lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">sdtime2&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">Format&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;yyyy-MM-dd HH:mm:ss&amp;#34;&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>我们可以下一个函数，生成当前时间推至前若干个月的日历区间&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">heatmap_width&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">months&lt;/span>&lt;span class="p">){&lt;/span> &lt;span class="c1">// 计算转换日期
+&lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nx">startDate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">mill&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">startDate&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setMonth&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">startDate&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getMonth&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="nx">months&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">endDate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">+&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="nx">startDate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">+&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">mill&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">endDate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">echarts&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">format&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">formatTime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;yyyy-MM-dd&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">endDate&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">startDate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">echarts&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">format&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">formatTime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;yyyy-MM-dd&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">startDate&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">showmonth&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[];&lt;/span>
+&lt;span class="nx">showmonth&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">push&lt;/span>&lt;span class="p">([&lt;/span>
+&lt;span class="nx">startDate&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">endDate&lt;/span>
+&lt;span class="p">]);&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="nx">showmonth&lt;/span>
+&lt;span class="p">};&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>该函数返回一个 &lt;code>[startDate,endDate]&lt;/code> 数据，表示日历的开始日期和结束日期。&lt;/p>
+&lt;/br>
+&lt;h3 id="图表配置">图表配置&lt;/h3>
+&lt;p>上文已经提到过，日历的配置在 &lt;a href="https://echarts.apache.org/zh/option.html#calendar"target="_blank" rel="noopener noreferrer">https://echarts.apache.org/zh/option.html#calendar&lt;/a>
+有非常详细的说明，我们可以直接使用官网样例给出的配置&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="nx">option&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">title&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">top&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">30&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">left&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;center&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">text&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;数数敲了几个字？&amp;#39;&lt;/span>
+&lt;span class="p">},&lt;/span>
+&lt;span class="nx">tooltip&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;span class="nx">visualMap&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">min&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">max&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">5000&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">type&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;piecewise&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">orient&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;horizontal&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">left&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;center&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">top&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">65&lt;/span>
+&lt;span class="p">},&lt;/span>
+&lt;span class="nx">calendar&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">top&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">120&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">left&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">30&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">right&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">30&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">cellSize&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;auto&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">12&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;span class="nx">range&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">heatmap_width&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">12&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="c1">// 设置转换的日历日期区间
+&lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="nx">itemStyle&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">borderWidth&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mf">0.5&lt;/span>
+&lt;span class="p">},&lt;/span>
+&lt;span class="nx">yearLabel&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">show&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kc">false&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;span class="p">},&lt;/span>
+&lt;span class="nx">series&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">type&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;heatmap&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">coordinateSystem&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;calendar&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">data&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">data&lt;/span> &lt;span class="c1">// 加载文章数据
+&lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;span class="p">};&lt;/span>
+&lt;span class="nx">myChart&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setOption&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">option&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>大功告成！日历贡献图就完成了！所有代码 &lt;a href="https://shared.snipper.app/snippet/D67FD48F-2089-4A13-9A2B-37E6B48D3F06"target="_blank" rel="noopener noreferrer">https://shared.snipper.app/snippet/D67FD48F-2089-4A13-9A2B-37E6B48D3F06&lt;/a>
+或者下面的未设置 hugo 获取文章数据的代码，转而使用随机数据&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;ttt&amp;#34;&lt;/span> &lt;span class="na">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;
+&lt;/span>&lt;span class="s"> width: 600px;
+&lt;/span>&lt;span class="s"> height: 300px;
+&lt;/span>&lt;span class="s"> margin-top: 15px;
+&lt;/span>&lt;span class="s"> margin-bottom: 10px;
+&lt;/span>&lt;span class="s"> padding: 2px;
+&lt;/span>&lt;span class="s"> border: 1px solid;
+&lt;/span>&lt;span class="s"> border-radius: 10px;
+&lt;/span>&lt;span class="s"> border-width: 0.5px;
+&lt;/span>&lt;span class="s"> text-align: center;&amp;#34;&lt;/span>
+&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">script&lt;/span> &lt;span class="na">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;text/javascript&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">chartDom&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getElementById&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;ttt&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">myChart&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">echarts&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">init&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">chartDom&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">option&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="c1">// 计算日期并转换格式
+&lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nx">startDate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">year_Mill&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">startDate&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setFullYear&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nx">startDate&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getFullYear&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">));&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">startDate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">+&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">year_Mill&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">endDate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">+&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="nb">Date&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">dayTime&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">3600&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">24&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[];&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kd">var&lt;/span> &lt;span class="nx">time&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">startDate&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">time&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="nx">endDate&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">time&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="nx">dayTime&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">data&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">push&lt;/span>&lt;span class="p">([&lt;/span>
+&lt;span class="nx">echarts&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">format&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">formatTime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;yyyy-MM-dd&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="nx">time&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;span class="nb">Math&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">floor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">Math&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">random&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">10000&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="p">]);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="nx">startDate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">echarts&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">format&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">formatTime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;yyyy-MM-dd&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">startDate&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="nx">endDate&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">echarts&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">format&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">formatTime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;yyyy-MM-dd&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">endDate&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">rangeArr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="nx">startDate&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="nx">endDate&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;span class="nx">option&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">title&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">top&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">30&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">left&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;center&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">text&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;Daily Step Count&amp;#39;&lt;/span>
+&lt;span class="p">},&lt;/span>
+&lt;span class="nx">tooltip&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{},&lt;/span>
+&lt;span class="nx">visualMap&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">min&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">max&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">10000&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">type&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;piecewise&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">orient&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;horizontal&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">left&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;center&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">top&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">65&lt;/span>
+&lt;span class="p">},&lt;/span>
+&lt;span class="nx">calendar&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">top&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">120&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">left&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">30&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">right&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mi">30&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">cellSize&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;auto&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">13&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;span class="nx">range&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">rangeArr&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">itemStyle&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">borderWidth&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="mf">0.5&lt;/span>
+&lt;span class="p">},&lt;/span>
+&lt;span class="nx">yearLabel&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">show&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kc">false&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;span class="p">},&lt;/span>
+&lt;span class="nx">series&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="nx">type&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;heatmap&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">coordinateSystem&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="s1">&amp;#39;calendar&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="nx">data&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="nx">data&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">};&lt;/span>
+&lt;span class="nx">option&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">myChart&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">setOption&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">option&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">script&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>但是，但是！等等&amp;hellip;这样配置的热力图似乎并不完美，在不同屏幕宽度下的展示效果会非常差，所以要设置一下适配屏幕宽度的热力图。&lt;/p>
+&lt;/br>
+&lt;h3 id="优化">优化&lt;/h3>
+&lt;p>我们分别设置在不同屏幕宽度下要显示的日期区间，将如下代码放至 &lt;code>heatmap_width&lt;/code> 函数下面，&lt;code>option&lt;/code> 上面(javascript 并不是特别拿手，只能使用最笨的方法了😥)&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">matchMedia&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;(max-width: 320px)&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">matches&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">rangeArr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">heatmap_width&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>&lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">matchMedia&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;(max-width: 400px)&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">matches&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">rangeArr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">heatmap_width&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>&lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">matchMedia&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;(max-width: 550px)&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">matches&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">rangeArr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">heatmap_width&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">6&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>&lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">matchMedia&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;(max-width: 1021px)&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">matches&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">rangeArr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">heatmap_width&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">12&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>&lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">matchMedia&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;(max-width: 1400px)&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">matches&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">rangeArr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">heatmap_width&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">9&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>&lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">matchMedia&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;(max-width: 1920px)&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">matches&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">rangeArr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">heatmap_width&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">12&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>&lt;span class="k">else&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">matchMedia&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;(max-width: 2560px)&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">matches&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">rangeArr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">heatmap_width&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">24&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;h3 id="暗模式">暗模式&lt;/h3>
+&lt;p>该图表其实本身自带暗模式，但是为了和本网站相匹配，所以决定自己动手实现暗模式。&lt;/p>
+&lt;p>为此我分别写了两个函数&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">function&lt;/span> &lt;span class="nx">LightOption&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="kd">function&lt;/span> &lt;span class="nx">DarkOption&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>将 &lt;code>option&lt;/code> 配置分别放入两个函数中，再单独进行颜色配置&lt;/p>
+&lt;p>然后使用 &lt;code>(window.matchMedia('(prefers-color-scheme: dark)').matches)&lt;/code> 获取当前系统的暗模式方法&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">matchMedia&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;(prefers-color-scheme: dark)&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">matches&lt;/span>&lt;span class="p">){&lt;/span> &lt;span class="c1">// 暗模式
+&lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="nx">DarkOption&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="k">else&lt;/span>&lt;span class="p">{&lt;/span> &lt;span class="c1">// 亮模式
+&lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="nx">LightOption&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>&lt;strong>加入屏幕监听功能&lt;/strong>&lt;/p>
+&lt;p>当我们切换明暗模式时，以上代码对于网站并不会直接生效，需要刷新一遍才可以生效。所以加入监听功能使得网站一旦切换明暗模式则理科生效&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="kd">var&lt;/span> &lt;span class="nx">listeners&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span> &lt;span class="c1">// 模式监听
+&lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="nx">dark&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">mediaQueryList&lt;/span> &lt;span class="p">)=&amp;gt;{&lt;/span> &lt;span class="c1">// 暗模式
+&lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">mediaQueryList&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">matches&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;span class="nx">DarkOption&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">},&lt;/span>
+&lt;span class="nx">light&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">mediaQueryList&lt;/span>&lt;span class="p">)=&amp;gt;{&lt;/span> &lt;span class="c1">// 亮模式
+&lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">mediaQueryList&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">matches&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;span class="nx">LightOption&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">},&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">matchMedia&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;(prefers-color-scheme: dark)&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">addListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">listeners&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">dark&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">matchMedia&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;(prefers-color-scheme: light)&amp;#39;&lt;/span>&lt;span class="p">).&lt;/span>&lt;span class="nx">addListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">listeners&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">light&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;/br>
+&lt;p>至此，总算完成了。&lt;/p>
+&lt;/br>
+&lt;h3 id="总结">总结&lt;/h3>
+&lt;p>ECharts 功能很强大，但是却并不能生成如同 Github 代码贡献图的样子，对于每一天的小方块不能设置更好的样式。不知道 AntV 行不行。总之，以后有时间再研究研究。&lt;/p></description></item><item><title>[建站日记] 动态打字特效</title><link>https://yibocat.github.io/posts/jzrj/jzrj_3/</link><pubDate>Sat, 19 Feb 2022 00:32:35 +0800</pubDate><guid>https://yibocat.github.io/posts/jzrj/jzrj_3/</guid><description>&lt;p>在网站上有一个动态打字特效当然是一件很酷的事啊。无意之间找到了一个动态打字特效插件 &lt;a href="https://mattboldt.com/demos/typed-js/"target="_blank" rel="noopener noreferrer">Typed-js&lt;/a>
 。该插件还实现了各种自定义满足不同的需求。可以说是非常非常好用了，而且安装使用也是非常的简单。&lt;/p>
 &lt;p>该插件的作者是 Matt Boldt，这是他的主页：&lt;a href="https://mattboldt.com/"target="_blank" rel="noopener noreferrer">https://mattboldt.com/&lt;/a>
 。&lt;/p>
@@ -1276,253 +1509,5 @@ import React from 'react';
 &lt;li>&lt;a href="https://huangzhongde.cn/post/2020-02-21-hugo-code-copy-to-clipboard/"target="_blank" rel="noopener noreferrer">https://huangzhongde.cn/post/2020-02-21-hugo-code-copy-to-clipboard/&lt;/a>
 &lt;/li>
 &lt;li>&lt;a href="https://www.tomspencer.dev/blog/2018/09/14/adding-click-to-copy-buttons-to-a-hugo-powered-blog/"target="_blank" rel="noopener noreferrer">https://www.tomspencer.dev/blog/2018/09/14/adding-click-to-copy-buttons-to-a-hugo-powered-blog/&lt;/a>
-&lt;/li>
-&lt;/ol></description></item><item><title>[建站日记] Hugo+Github+Tencent CDN博客搭建</title><link>https://yibocat.github.io/posts/jzrj/jzri_1/</link><pubDate>Sat, 29 Jan 2022 12:56:49 +0800</pubDate><guid>https://yibocat.github.io/posts/jzrj/jzri_1/</guid><description>&lt;p>最近花费了近一周搭建自己的网站，准确的说是静态网页。这是网站的第一篇文章，也可以说是近一周来搭建个人博客的踩坑总结。&lt;/p>
-&lt;p>网站采用的是 hugo 框架，只是因为 hugo 号称是 &amp;ldquo;The world’s fastest framework for building websites&amp;rdquo;，而其特点就在于轻。因为静态网页无需加载太多插件（wordpress 太重了）， 不需要访问数据库，不需要编写太多的网站功能，并且静态网页使用的是纯 html，对于博客系统来说是完全足够了，这也是我放弃 wordpress 的原因。另外一个原因是 wordpress 虽然拥有各种各样眼花缭乱的插件，但是其维护麻烦，不光 wordpress 本身需要版本更新，插件也需要更新，并且更新起来很艰难，常常自动更新失败从而转为手工更新。并且wordpress 很多主题插件是收费的。&lt;/p>
-&lt;p>使用 hugo 搭建个人博客网站，其实理论上来说 hugo 不止可以搭建博客，还可以搭建任何静态网站（甚至是动态网站，不过这也就失去了 hugo 本身的意义了）。而且还有一个更主要的原因：可以学习 git 和 Github。&lt;/p>
-&lt;p>hugo 搭建好之后需要进行部署。通常的做法是托管到 Github Pages，也可以部署在腾讯云的静态网页托管（阿里云也有相同的业务），活或者 Gitee Pages，或者自建服务器等等。所以本文从一开始 hugo 与 git 的安装到最后 CDN 网页加速全过程进行总结。&lt;/p>
-&lt;h3 id="安装-hugo-并新建站点">安装 Hugo 并新建站点&lt;/h3>
-&lt;p>Mac OS 下安装 Hugo 非常方便&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ brew install hugo
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>查看版本是否安装正确&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ hugo version
-hugo v0.86.1+extended darwin/amd64 &lt;span class="nv">BuildDate&lt;/span>&lt;span class="o">=&lt;/span>unknown
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Hugo 安装好之后，就可以创建站点了&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ hugo new site myfirsthugo
-Congratulations! Your new Hugo site is created in /Users/your_name_path/myfirsthugo.
-Just a few more steps and you&lt;span class="err">&amp;#39;&lt;/span>re ready to go:
-1. Download a theme into the same-named folder.
-Choose a theme from https://themes.gohugo.io/ or
-create your own with the &lt;span class="s2">&amp;#34;hugo new theme &amp;lt;THEMENAME&amp;gt;&amp;#34;&lt;/span> command.
-2. Perhaps you want to add some content. You can add single files
-with &lt;span class="s2">&amp;#34;hugo new &amp;lt;SECTIONNAME&amp;gt;/&amp;lt;FILENAME&amp;gt;.&amp;lt;FORMAT&amp;gt;&amp;#34;&lt;/span>.
-3. Start the built-in live server via &lt;span class="s2">&amp;#34;hugo server&amp;#34;&lt;/span>.
-Visit https://gohugo.io/ &lt;span class="k">for&lt;/span> quickstart guide and full documentation.
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>进入站点目录，然后查看目录下包含的文件&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ &lt;span class="nb">cd&lt;/span> myfirsthugo
-$ ls -l
-archetypes content layouts themes
-config.toml data static
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里可以看到 Hugo 自动生成了一堆文件，这些文件也就是 Hugo 站点的结构。&lt;/p>
-&lt;p>archetypes：站点要发表的文章的文章模板，在 Hugo官网上称为模板的 &lt;code>Front Matter&lt;/code>；&lt;/p>
-&lt;p>content：发布的文章在这个目录下生成；&lt;/p>
-&lt;p>layouts：Hugo 站点的布局结构，即 html 布局都要在这个文件夹中编写；&lt;/p>
-&lt;p>themes：站点主题；&lt;/p>
-&lt;p>config.toml：站点配置；&lt;/p>
-&lt;p>data：存放站点的一些数据文件；&lt;/p>
-&lt;p>static：静态文件则保存在这个文件夹中。&lt;/p>
-&lt;h3 id="安装-git">安装 git&lt;/h3>
-&lt;p>git 的安装可以从官方网站上直接下载安装： Mac OS &lt;a href="https://git-scm.com/download/mac"target="_blank" rel="noopener noreferrer">https://git-scm.com/download/mac&lt;/a>
-或者 Windows &lt;a href="https://git-scm.com/download/win"target="_blank" rel="noopener noreferrer">https://git-scm.com/download/win&lt;/a>
-&lt;/p>
-&lt;p>Mac OS 也可以直接终端运行&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ brew install git
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>安装好之后查看 git 版本&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ git --version
-git version 2.32.0 &lt;span class="o">(&lt;/span>Apple Git-132&lt;span class="o">)&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="初始化-git-存储库安装主题进行配置">初始化 git 存储库，安装主题进行配置&lt;/h3>
-&lt;p>Hugo 建站有两种 Github 托管方式，一种先是直接 git 初始化站点目录，在托管部署时直接将整个目录上传至 Github，这种方法可以很方便的在终端下载安装主题；第二种是先从 Github 上下载好主题并安装，然后运行 Hugo 终端命令 &lt;code>hugo&lt;/code> 生成 public 文件夹，进入 public 并 git 初始化，然后将 public 托管部署到 Github 上。推荐使用第一种方法，以下文章也是采用第一种方法。&lt;/p>
-&lt;p>在 Hugo 站点目录下，进行 git 初始化&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ git init
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后下载主题，可以从 git 命令 &lt;code>clone&lt;/code> 一个主题，也可以从 Github 直接下载，将下载好的主题解压并放在 themes 文件夹中。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ git submodule add https://Github.com/budparr/gohugo-theme-ananke.git themes/ananke
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>下载好的 anake 主题直接放在了 themes 文件夹中，但是主题还并不能加载使用，需要在配置文件中进行主题配置。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ &lt;span class="nb">echo&lt;/span> &lt;span class="nv">theme&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="se">\&amp;#34;&lt;/span>ananke&lt;span class="se">\&amp;#34;&lt;/span> &amp;gt;&amp;gt; config.toml
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者直接打开 &lt;code>config.toml&lt;/code> 在最后一行添加一句：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="nx">baseURL&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;http://example.org/&amp;#34;&lt;/span>
-&lt;span class="nx">languageCode&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;en-us&amp;#34;&lt;/span>
-&lt;span class="nx">title&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;My New Hugo Site&amp;#34;&lt;/span>
-&lt;span class="nx">theme&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;ananke&amp;#34;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后可以新建一个 post 文章&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ hugo new posts/my-first-post.md
-/Users/your_name_path/myfirsthugo/content/posts/my-first-post.md created
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>这时可以看到在 content 文件夹中自动创建了一个 posts 文件夹，并且生成了 &lt;code>my-first-post&lt;/code> 文章。&lt;/p>
-&lt;p>启动 Hugo server&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ hugo server -D
-Start building sites …
-hugo v0.86.1+extended darwin/amd64 &lt;span class="nv">BuildDate&lt;/span>&lt;span class="o">=&lt;/span>unknown
-&lt;span class="p">|&lt;/span> EN
--------------------+-----
-Pages &lt;span class="p">|&lt;/span> &lt;span class="m">10&lt;/span>
-Paginator pages &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
-Non-page files &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
-Static files &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
-Processed images &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
-Aliases &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
-Sitemaps &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
-Cleaned &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
-Built in &lt;span class="m">72&lt;/span> ms
-Watching &lt;span class="k">for&lt;/span> changes in /Users/your_name_path/myfirsthugo/&lt;span class="o">{&lt;/span>archetypes,content,data,layouts,static,themes&lt;span class="o">}&lt;/span>
-Watching &lt;span class="k">for&lt;/span> config changes in /Users/your_name_path/myfirsthugo/config.toml, /Users/your_name_path/myfirsthugo/themes/ananke/config.yaml
-Environment: &lt;span class="s2">&amp;#34;development&amp;#34;&lt;/span>
-Serving pages from memory
-Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
-Web Server is available at http://localhost:1313/ &lt;span class="o">(&lt;/span>&lt;span class="nb">bind&lt;/span> address 127.0.0.1&lt;span class="o">)&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>此时在浏览器上打开 &lt;code>http://localhost:1313/&lt;/code> 就可以直接访问了。&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-1.png" style="width:90%" />&lt;/p>
-&lt;h3 id="生成站点并发布">生成站点并发布&lt;/h3>
-&lt;p>以上步骤只是表示网站可以正常运行了，并不意味着这就是 Hugo 要发布的站点。还要通过 hugo 命令发布站点。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ hugo -D
-Start building sites …
-hugo v0.86.1+extended darwin/amd64 &lt;span class="nv">BuildDate&lt;/span>&lt;span class="o">=&lt;/span>unknown
-&lt;span class="p">|&lt;/span> EN
--------------------+-----
-Pages &lt;span class="p">|&lt;/span> &lt;span class="m">10&lt;/span>
-Paginator pages &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
-Non-page files &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
-Static files &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
-Processed images &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
-Aliases &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
-Sitemaps &lt;span class="p">|&lt;/span> &lt;span class="m">1&lt;/span>
-Cleaned &lt;span class="p">|&lt;/span> &lt;span class="m">0&lt;/span>
-Total in &lt;span class="m">102&lt;/span> ms
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意：这里 &lt;code>-D&lt;/code> 表示以草稿（draft）形式发布站点，所有的草稿文章都会显示。&lt;/p>
-&lt;p>这时就会在站点目录下生成一个 public 文件夹&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ ls
-archetypes content layouts resources themes
-config.toml data public static
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>所有要发布的内容都保存在 public 文件夹中，也就是说，站点呈现的所有内容都已经保存在 public 中了，此时可以将 public 托管到 Github。&lt;/p>
-&lt;blockquote>
-&lt;p>注意：Github Pages 可以使用 Github Action 自动部署并发布，这意味着并不需要运行 &lt;code>hugo&lt;/code> 命令生成 public，我们可以将生成 public 的过程直接部署在 Github 自动发布上。所以可以直接删除掉 public 文件夹，并且在日常浏览中直接使用 &lt;code>hugo server -D&lt;/code> 命令就可以了。&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="托管到-github">托管到 Github&lt;/h3>
-&lt;p>浏览器打开网址可以访问，说明网站已经可以正常运行了，但是还需要托管到 Github 上才能进行随时访问。&lt;/p>
-&lt;p>Github Pages 是 Github 官方的博客发布系统，其项目名称需要遵循 &lt;code>username.github.io&lt;/code> 形式。在 Github 上新建一个存储库，任何选项都不要勾选，注意：repository name 要和 Owner 名称相同。如下所示&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-2.png" style="width:90%;" />&lt;/p>
-&lt;p>点击 &lt;code>create repository&lt;/code> 创建存储库，会看到这样的界面&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-3.png" style="width:90%" />&lt;/p>
-&lt;p>因为之前已经初始化过站点 git 库了，所以只要将远程库的地址加进来就可以了，此时的 Github 库是一个空库。上图中已经告诉了基本步骤，先在本地站点目录创建一个 README.md 文件&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;# accoppo.github.io&amp;#34;&lt;/span> &amp;gt;&amp;gt; README.md
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后创建 &lt;code>master&lt;/code> 分支并提交&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ git add .
-$ git commit -m &lt;span class="s2">&amp;#34;first commit&amp;#34;&lt;/span>
-$ git branch -M master
-$ git remote add origin git@github.com:accoppo/accoppo.github.io.git
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后 &lt;code>push&lt;/code> 上去&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ git push -u origin master
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>-u&lt;/code> 表示库为空，需要整体提交，之后就可以使用 &lt;code>git push&lt;/code> 直接 &lt;code>push&lt;/code> 了。&lt;/p>
-&lt;p>注意：在进行提交推送之前，需要先在 Github 账户设置中新增 SSH 秘钥。&lt;/p>
-&lt;p>然后回到 Github 库中，就可以看到所有内容推送上来了。对于 &lt;code>xxx.github.io&lt;/code> 这样的项目库名称，Github 直接认定是采用 GIthub Pages 发布的，所以在浏览器直接输入 &lt;code>accoppo.github.io&lt;/code> 也是可以显示内容的，只不过显示的 README.md 中的内容。&lt;/p>
-&lt;h3 id="github-action-自动部署并发布">Github Action 自动部署并发布&lt;/h3>
-&lt;p>Action 是 Github 提供的仓库中自动化、自定义和执行软件开发工作流程。&lt;/p>
-&lt;p>官方网站 &lt;a href="https://docs.github.com/cn/actions"target="_blank" rel="noopener noreferrer">https://docs.github.com/cn/actions&lt;/a>
-&lt;/p>
-&lt;p>Hugo + Github Action 可以参考 &lt;a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/#build-hugo-with-github-action"target="_blank" rel="noopener noreferrer">https://gohugo.io/hosting-and-deployment/hosting-on-github/#build-hugo-with-github-action&lt;/a>
-&lt;/p>
-&lt;p>官方提供了一个 yml 文件，文件存在&lt;code>.github/workflows/gh-pages.yml&lt;/code> 里，在项目库中选择 Action 并点击 &lt;code>new workflow&lt;/code>&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-4.png" style="width:90%" />&lt;/p>
-&lt;p>然后点击 &lt;code>set up a workflow yourself&lt;/code>&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-5.png" style="width:90%" />&lt;/p>
-&lt;p>然后进入到工作流文件设置中，将 &lt;code>main.yml&lt;/code> 更改为 &lt;code>gh-pages.yml&lt;/code> ，然后将下面代码复制到 &lt;code>Edit new file&lt;/code> 中&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yml" data-lang="yml">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">github pages&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">push&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">master &lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Set a branch to deploy&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">deploy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-18.04&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v2&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">submodules&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Fetch Hugo themes (true OR recursive)&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">fetch-depth&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">0&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># Fetch all history for .GitInfo and .Lastmod&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup Hugo&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-hugo@v2&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">hugo-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;latest&amp;#39;&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># extended: true&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Build&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">hugo --minify&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Deploy&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-gh-pages@v3&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">github_token&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.GITHUB_TOKEN }}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_dir&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">./public&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如下所示&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-6.png" style="width:90%" />&lt;/p>
-&lt;p>然后 &lt;code>Start commit&lt;/code> &lt;code>Commit new file&lt;/code> ，&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-7.png" style="width:60%" />&lt;/p>
-&lt;p>回到 Action 会触发一次构建发布任务，等待几分钟左侧圆圈变成✅&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-8.png" style="width:90%" />&lt;/p>
-&lt;p>以上任务完成以后，回到 &lt;code>Code&lt;/code> ，并没有看到 public 目录，但是会发现多了一条分支，新增加的这条分支就是 Github Pages 要发布的内容&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-9.png" style="width:90%" />&lt;/p>
-&lt;p>然后回到 Setting 的 Pages 选项里将发布源改成 &lt;code>gh-pages.yml&lt;/code>&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-10.png" style="width:90%" />&lt;/p>
-&lt;p>等待几分钟就可以在浏览器中查看了。&lt;/p>
-&lt;p>在发布的站点网页中，并没有看到发布的文章，这是因为在文章的 &lt;code>Front Matter&lt;/code> 设置中将 Draft 设置成了 true，这表示文章现在是草稿形式，并没有发布。&lt;/p>
-&lt;p>而且因为远程库中的内容已经发生变化，所以先从远程将项目库 &lt;code>pull&lt;/code> 下来&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">myfirsthugo $ git pull
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后查看所有分支会发现多出来一条分支 &lt;code>gh-pages&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">$ git branch -a
-* master
-remotes/origin/gh-pages
-remotes/origin/master
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>修改发布文章的 &lt;code>Front Matter&lt;/code> 的 Draft 选项，并且在 &lt;code>config.toml&lt;/code> 中将 &lt;code>baseURL&lt;/code> 修改成 &lt;code>xxx.github.io&lt;/code> ,再 &lt;code>push &lt;/code> 到 Github&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="nx">baseURL&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;http://xxx.github.io&amp;#34;&lt;/span>
-&lt;span class="nx">languageCode&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;en-us&amp;#34;&lt;/span>
-&lt;span class="nx">title&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;My New Hugo Site&amp;#34;&lt;/span>
-&lt;span class="nx">theme&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s2">&amp;#34;ananke&amp;#34;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>最后就可以正常访问了。&lt;/p>
-&lt;h3 id="域名设置">域名设置&lt;/h3>
-&lt;p>Github Pages 支持设置自定义域名，如下图所示 &lt;code>custom domain &lt;/code> 可以设置自定义域名&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-10.png" style="width:90%" />&lt;/p>
-&lt;p>首先在任意的域名注册商那里注册一个域名，腾讯云域名注册链接 &lt;a href="https://buy.cloud.tencent.com/domain"target="_blank" rel="noopener noreferrer">https://buy.cloud.tencent.com/domain&lt;/a>
-，或者进入网站 &lt;a href="https://www.dnspod.cn"target="_blank" rel="noopener noreferrer">https://www.dnspod.cn&lt;/a>
-进行域名注册，然后进行备案。&lt;/p>
-&lt;p>等待备案好之后进入 &lt;code>DNSPod&lt;/code> 云解析控制台 &lt;a href="https://www.dnspod.cn"target="_blank" rel="noopener noreferrer">https://www.dnspod.cn&lt;/a>
-，可以看到域名已经添加到我的域名中，然后要做的是对域名添加解析，点击域名，进入我的域名管理，点击快速添加解析&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-11.png" style="width:90%" />&lt;/p>
-&lt;p>然后将 &lt;code>xxx.github.io&lt;/code> 添加到域名映射CNAME 中，点击确认，就会自动生成四条记录。&lt;/p>
-&lt;p>回到 GIthub 站点项目库的 &lt;code>setting pages&lt;/code> ，将新的域名填入自定义域名框中&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-12.png" style="width:90%" />&lt;/p>
-&lt;p>等待几分钟，就可以使用自定义域名访问站点了。&lt;/p>
-&lt;h5 id="域名自动更新问题">域名自动更新问题&lt;/h5>
-&lt;p>每次将站点 &lt;code>push&lt;/code> 到 Github 并进行 Action 自动发布时，自定义域名总是会丢失，导致每 &lt;code>push&lt;/code> 一次，就要手动设置一次域名，很是麻烦。后来查阅资料才知道，Github Action 将项目库主分支进行自动部署时，总是重新部署，这使得我们设置好的域名总会刷新掉。解决办法是在本地站点目录的 &lt;code>static&lt;/code> 目录下创建一个 CNAME 文件（注意：没有后缀），写入自定义域名&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-13.png" style="width:90%" />&lt;/p>
-&lt;p>这样，在每次 Action 自动发布时，&lt;code>static&lt;/code> 目录下的文件会部署到发布目录（即 public目录下）的根目录下，每次进行 &lt;code>push &lt;/code> 就不会丢失自定义域名了。&lt;/p>
-&lt;h3 id="cdn-静态网页加速">CDN 静态网页加速&lt;/h3>
-&lt;p>由于 Github 服务器位于国外，所以访问加载时间是非常长的，这反而失去了静态网页的特点。所以我们可以通过 CDN 内容分发网络对我们的网站进行加速，实现快速访问。&lt;/p>
-&lt;p>不管是腾讯云还是阿里云或者其他 CDN 服务商，都是一样的流程。我们进入腾讯云 CDN 内容分发网络控制台，进入域名管理，然后添加域名进行域名配置&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-14.png" style="width:90%" />&lt;/p>
-&lt;p>然后进行源站配置，注意：源站配置的回源协议再没有设置 SSL 时选择 HTTP，腾讯云有一年的免费 SSL ，等配置完 SSL 修改源站协议即可。&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-15.png" style="width:90%" />&lt;/p>
-&lt;p>提交等待几分钟后，需要将生成的加速域名 CNAME 覆盖到 DNSPod 记录管理的 @ 主机记录，这个步骤一般腾讯云会自动替换。&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-16.png" style="width:90%" />&lt;/p>
-&lt;p>等待 CDN 部署几分钟后，就可以流畅的浏览自己的博客了。&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-17.png" style="width:90%" />&lt;/p>
-&lt;h5 id="注意">注意&lt;/h5>
-&lt;p>CDN 静态网页加速以后，虽然网页浏览速度加快，但是更新缓存资源是延后的，这样造成的后果是发表一篇文章，却不能即时在客户端浏览器看到。幸运的是，在腾讯云的 CDN控制台是有刷新预热功能的，也就是说当网站的源站有资源更新、需要清理违规资源、域名有配置变更的，为避免全网用户受节点缓存影响仍访问到旧的资源、受旧配置的影响，可提交刷新任务，保证全网用户可访问到最新资源或正常访问。&lt;/p>
-&lt;p>这里有三种刷新预热方法&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-18.png" style="width:50%" />&lt;/p>
-&lt;blockquote>
-&lt;p>URL 刷新：表示某一个网页例如主页有信息变化时，通常使用 URL 刷新&lt;/p>
-&lt;p>目录刷新：网站目录下的信息刷新，例如列表、Hugo 的 Posts 目录等&lt;/p>
-&lt;p>URL 预热：当有安装包或者升级包发布时，常采用 URL 预热&lt;/p>
-&lt;/blockquote>
-&lt;p>虽然刷新暂时解决了网页最新的浏览，但是每次手动刷新依然很麻烦。&lt;/p>
-&lt;p>很幸运，腾讯云的 CDN 控制台的插件中心中有一项功能是定时刷新预热&lt;/p>
-&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-19.png" style="width:90%" />&lt;/p>
-&lt;p>我们可以设置一定的时间或者时间间隔进行自动刷新，避免了每次手动刷新的麻烦。&lt;/p>
-&lt;h3 id="总结与其他">总结与其他&lt;/h3>
-&lt;ol>
-&lt;li>添加网页后台统计分析，当前的流形的统计平台包括百度统计、友盟+、腾讯统计等等，都是很不错的。&lt;/li>
-&lt;li>通过学习 Hugo 的结构，我们不难发现 Hugo 是比较简单的，通过布局嵌套，Hugo 最后部署会将所有的嵌套结构合并成一个网站，这从理论上来说 Hugo 可以搭建任何的网站或者是系统。&lt;/li>
-&lt;li>有时间有机会了可以自己写一个主题。&lt;/li>
-&lt;/ol>
-&lt;h3 id="参考">参考&lt;/h3>
-&lt;ol>
-&lt;li>&lt;a href="https://zhuanlan.zhihu.com/p/350977057"target="_blank" rel="noopener noreferrer">https://zhuanlan.zhihu.com/p/350977057&lt;/a>
-&lt;/li>
-&lt;li>&lt;a href="https://gohugo.io/documentation/"target="_blank" rel="noopener noreferrer">https://gohugo.io/documentation/&lt;/a>
-&lt;/li>
-&lt;li>&lt;a href="https://docs.github.com/cn"target="_blank" rel="noopener noreferrer">https://docs.github.com/cn&lt;/a>
-&lt;/li>
-&lt;li>&lt;a href="https://docs.github.com/cn/pages"target="_blank" rel="noopener noreferrer">https://docs.github.com/cn/pages&lt;/a>
 &lt;/li>
 &lt;/ol></description></item></channel></rss>
