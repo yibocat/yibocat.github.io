@@ -1,54 +1,11 @@
-<!doctype html><html lang=zh><meta charset=utf-8><meta name=generator content="Hugo 0.92.2"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name=color-scheme content="light dark">
-<meta name=supported-color-schemes content="light dark">
-<link rel=bookmark type=image/x-icon href=images/yibo_1.jpeg>
-<link rel=icon type=image/x-icon href=images/yibo_1.jpeg>
-<link rel="shortcut icon" type=image/x-icon href=images/yibo_1.jpeg>
-<script>var _hmt=_hmt||[];(function(){var a=document.createElement("script"),b;a.src="https://hm.baidu.com/hm.js?e5030d0d5c8f146cc58d0a4fe660754f",b=document.getElementsByTagName("script")[0],b.parentNode.insertBefore(a,b)})()</script><title>[深度学习笔记] 深度学习第 1 篇——简单线性回归&nbsp;&ndash;&nbsp;Yibocat</title>
-<link rel=stylesheet href=/css/core.min.0a0307d00613a4a7364263921bc1fbafe7f3eff5f15937907925d4c6a18e9130a5c9d54ad7b4631345308f0335629fed.css integrity=sha384-CgMH0AYTpKc2QmOSG8H7r+fz7/XxWTeQeSXUxqGOkTClydVK17RjE0UwjwM1Yp/t><meta name=twitter:card content="summary">
-<meta name=twitter:title content="[深度学习笔记] 深度学习第 1 篇——简单线性回归">
-<body><section id=header>
-<div class="header wrap"><span class="header left-side"><a class="site home" href=/>
-<span class="site name">Yibocat</span></a></span>
-<span class="header right-side"><div class="nav wrap">
-<nav class=nav><a class="nav item" href=/posts/> 文章 </a><a class="nav item" href=/archives/> 归档 </a><a class="nav item" href=/categories/> 分类 </a><a class="nav item" href=/tags/> 标签 </a><a class="nav item" href=/search/> 搜索 </a><a class="nav item" href></a>
-</nav>
-</div></span>
-</div>
-<div class="site slogan"><span id=type></span></div>
-<script src=https://cdn.jsdelivr.net/npm/typed.js@2.0.12></script>
-<script>var typed=new Typed('#type',{strings:['Minecraft','Basketball','Code and code','Grand Theft Auto V','Photography','Back to campus','','<strong>Python<strong>','<strong>C++<strong>','<strong><i>Swift<i><strong>','Java','<strong>Machine Learning<strong>',"don't like <strong>algorithm<strong>",'','一个不会编程的研究僧'],typeSpeed:60,backSpeed:60,backDelay:1250,smartBackspace:!0,loop:!0})</script>
-</section><section id=content><div class=article-container><section class="article header">
-<h1 class="article title">[深度学习笔记] 深度学习第 1 篇——简单线性回归</h1><p class="article date">2022-02-08
-<span class=wordcount>&nbsp;•&nbsp;共&nbsp;2576&nbsp;个字</span><span class=reading-time> • 预计阅读时间 6 分钟</span></p></section><aside id=toc-container class="toc-container wide">
-<div class=toc>
-<h3>文章目录</h3>
-<div class=inner><ul>
-<li>
-<a href=#%e7%ba%bf%e6%80%a7%e5%9b%9e%e5%bd%92 aria-label=线性回归>线性回归</a></li>
-<li>
-<a href=#%e7%ba%bf%e6%80%a7%e5%9b%9e%e5%bd%92%e5%ae%9e%e7%8e%b0 aria-label=线性回归实现>线性回归实现</a></li>
-<li>
-<a href=#%e7%ba%bf%e6%80%a7%e5%9b%9e%e5%bd%92%e7%ae%80%e6%b4%81%e5%ae%9e%e7%8e%b0 aria-label=线性回归简洁实现>线性回归简洁实现</a></li>
-<li>
-<a href=#%e5%8f%82%e8%80%83 aria-label=参考>参考</a>
-</li>
-</ul>
-</div>
-</div>
-</aside>
-<article class="article markdown-body"><div><p>线性模型（Linear Model）是机器学习中应用最广泛的模型，指通过样本特征的线性组合来进行预测的模型。线性回归是单层神经网络，其涉及的概念和技术适用于大多数深度学习模型。</p>
-</br>
-<h3 id=线性回归>线性回归</h3>
-<p><strong>模型定义</strong></p>
-<p>给定一个 $ D $ 维样本 $ x=[x_1,x_2,\cdots,x_D]^T $ 其线性组合函数为
+<!doctype html><html lang=zh><meta charset=utf-8><meta name=generator content="Hugo 0.94.2"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name=color-scheme content="light dark"><meta name=supported-color-schemes content="light dark"><link rel=bookmark type=image/x-icon href=images/yibo_1.jpeg><link rel=icon type=image/x-icon href=images/yibo_1.jpeg><link rel="shortcut icon" type=image/x-icon href=images/yibo_1.jpeg><script>var _hmt=_hmt||[];(function(){var e=document.createElement("script"),t;e.src="https://hm.baidu.com/hm.js?e5030d0d5c8f146cc58d0a4fe660754f",t=document.getElementsByTagName("script")[0],t.parentNode.insertBefore(e,t)})()</script><title>[深度学习笔记] 深度学习第 1 篇——简单线性回归&nbsp;&ndash;&nbsp;Yibocat</title><link rel=stylesheet href=/css/core.min.0a0307d00613a4a7364263921bc1fbafe7f3eff5f15937907925d4c6a18e9130a5c9d54ad7b4631345308f0335629fed.css integrity=sha384-CgMH0AYTpKc2QmOSG8H7r+fz7/XxWTeQeSXUxqGOkTClydVK17RjE0UwjwM1Yp/t><meta name=twitter:card content="summary"><meta name=twitter:title content="[深度学习笔记] 深度学习第 1 篇——简单线性回归"><body><section id=header><div class="header wrap"><span class="header left-side"><a class="site home" href=/><span class="site name">Yibocat</span></a></span>
+<span class="header right-side"><div class="nav wrap"><nav class=nav><a class="nav item" href=/posts/>文章 </a><a class="nav item" href=/archives/>归档 </a><a class="nav item" href=/categories/>分类 </a><a class="nav item" href=/tags/>标签 </a><a class="nav item" href=/search/>搜索 </a><a class="nav item" href></a></nav></div></span></div><div class="site slogan"><span id=type></span></div><script src=https://cdn.jsdelivr.net/npm/typed.js@2.0.12></script>
+<script>var typed=new Typed("#type",{strings:["Minecraft","Basketball","Code and code","Grand Theft Auto V","Photography","Back to campus",'',"<strong>Python<strong>","<strong>C++<strong>","<strong><i>Swift<i><strong>","Java","<strong>Machine Learning<strong>","don't like <strong>algorithm<strong>",'',"一个不会编程的研究僧"],typeSpeed:60,backSpeed:60,backDelay:1250,smartBackspace:!0,loop:!0})</script></section><section id=content><div class=article-container><section class="article header"><h1 class="article title">[深度学习笔记] 深度学习第 1 篇——简单线性回归</h1><p class="article date">2022-02-08
+<span class=wordcount>&nbsp;•&nbsp;共&nbsp;2576&nbsp;个字</span><span class=reading-time> • 预计阅读时间 6 分钟</span></p></section><aside id=toc-container class="toc-container wide"><div class=toc><h3>文章目录</h3><div class=inner><ul><li><a href=#%e7%ba%bf%e6%80%a7%e5%9b%9e%e5%bd%92 aria-label=线性回归>线性回归</a></li><li><a href=#%e7%ba%bf%e6%80%a7%e5%9b%9e%e5%bd%92%e5%ae%9e%e7%8e%b0 aria-label=线性回归实现>线性回归实现</a></li><li><a href=#%e7%ba%bf%e6%80%a7%e5%9b%9e%e5%bd%92%e7%ae%80%e6%b4%81%e5%ae%9e%e7%8e%b0 aria-label=线性回归简洁实现>线性回归简洁实现</a></li><li><a href=#%e5%8f%82%e8%80%83 aria-label=参考>参考</a></li></ul></div></div></aside><article class="article markdown-body"><div><p>线性模型（Linear Model）是机器学习中应用最广泛的模型，指通过样本特征的线性组合来进行预测的模型。线性回归是单层神经网络，其涉及的概念和技术适用于大多数深度学习模型。</p></br><h3 id=线性回归>线性回归</h3><p><strong>模型定义</strong></p><p>给定一个 $ D $ 维样本 $ x=[x_1,x_2,\cdots,x_D]^T $ 其线性组合函数为
 $$
 f(x;\omega)=\omega^Tx+b
 $$
-我们说 $ \omega $ 是一个权重矩阵（可以理解为斜率）， $ b $ 为偏差（可以理解为截距），其均为标量。这两个参数称为线性回归模型的参数，而我们的目的就是通过训练模型，得到最佳的参数估计。</p>
-</br>
-<p><strong>损失函数</strong></p>
-<p>模型训练出的预测值通常需要和真实值进行比对，这种比对也就是<strong>误差</strong>。在机器学习里把衡量误差的函数称为<strong>损失函数（loss function）</strong>。这里我们使用平方误差函数，单个样本的平方损失函数可以如下表示
+我们说 $ \omega $ 是一个权重矩阵（可以理解为斜率）， $ b $ 为偏差（可以理解为截距），其均为标量。这两个参数称为线性回归模型的参数，而我们的目的就是通过训练模型，得到最佳的参数估计。</p></br><p><strong>损失函数</strong></p><p>模型训练出的预测值通常需要和真实值进行比对，这种比对也就是<strong>误差</strong>。在机器学习里把衡量误差的函数称为<strong>损失函数（loss function）</strong>。这里我们使用平方误差函数，单个样本的平方损失函数可以如下表示
 $$
 l^{(i)}(\omega,b) = \frac{1}{2}(\hat{y}-y)^2
 $$
@@ -56,211 +13,125 @@ $$
 $$
 l(\omega,b)=\frac{1}{n}\sum_{i=1}^nl^{(i)}(\omega,b)
 $$
-正如上文提到的，深度学习的任务就是找到一组模型参数，使得训练样本的损失最小。</p>
-</br>
-<p><strong>算法优化</strong></p>
-<p>求解数值解的优化算法中，<strong>小批量随机梯度下降法（mini-batch stochastic gradient descent</strong> 在深度学习中被广泛使用。</p>
-<blockquote>
-<p>当模型和损失函数形式较为简单时，上面的误差最小化问题的解可以直接用公式表达出来。这类解叫作解析解（analytical solution）。本节使用的线性回归和平方误差刚好属于这个范畴。然而，大多数深度学习模型并没有解析解，只能通过优化算法有限次迭代模型参数来尽可能降低损失函数的值。这类解叫作数值解（numerical solution）。</p>
-</blockquote>
-<p>在线性回归模型中，模型的每个参数的迭代如下所示:
+正如上文提到的，深度学习的任务就是找到一组模型参数，使得训练样本的损失最小。</p></br><p><strong>算法优化</strong></p><p>求解数值解的优化算法中，<strong>小批量随机梯度下降法（mini-batch stochastic gradient descent</strong> 在深度学习中被广泛使用。</p><blockquote><p>当模型和损失函数形式较为简单时，上面的误差最小化问题的解可以直接用公式表达出来。这类解叫作解析解（analytical solution）。本节使用的线性回归和平方误差刚好属于这个范畴。然而，大多数深度学习模型并没有解析解，只能通过优化算法有限次迭代模型参数来尽可能降低损失函数的值。这类解叫作数值解（numerical solution）。</p></blockquote><p>在线性回归模型中，模型的每个参数的迭代如下所示:
 $$
 \omega \gets \omega-\frac{\eta}{|\mathcal{B}|}\sum_{i\in\mathcal{B}}\frac{\partial l^{(i)}(\omega,b)}{\partial \omega} \newline
 b\gets b-\frac{\eta}{|\mathcal{B}|}\sum_{i\in\mathcal{B}}\frac{\partial l^{(i)}(\omega,b)}{\partial b}
 $$
-这里 $ |\mathcal{B}| $ 表示每个小批量的样本个数，$\eta$ 为学习率。而这里的小批量样本数和学习率是人为设定的而不是学习得来的，所以被称为超参数（hyperparameter）。</p>
-</br>
-<h3 id=线性回归实现>线性回归实现</h3>
-</br>
-<p>线性回归的实现总体上分为以下几个步骤：</p>
-<ol>
-<li>数据集的准备</li>
-<li>初始化模型参数</li>
-<li>定义模型</li>
-<li>定义损失函数</li>
-<li>定义优化算法、</li>
-<li>训练模型</li>
-</ol>
-<p>在此之前，我们可以定义一个函数，生成特征标签的散点图，这样可以更直接地观察两者间的线性关系。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>def</span> <span class=nf>use_svg_display</span><span class=p>():</span>
-    <span class=c1># 用矢量图显示</span>
-    <span class=n>display</span><span class=o>.</span><span class=n>set_matplotlib_formats</span><span class=p>(</span><span class=s1>&#39;svg&#39;</span><span class=p>)</span>
-
-<span class=k>def</span> <span class=nf>set_figsize</span><span class=p>(</span><span class=n>figsize</span><span class=o>=</span><span class=p>(</span><span class=mf>3.5</span><span class=p>,</span> <span class=mf>2.5</span><span class=p>)):</span>
-    <span class=n>use_svg_display</span><span class=p>()</span>
-    <span class=c1># 设置图的尺寸</span>
-    <span class=n>plt</span><span class=o>.</span><span class=n>rcParams</span><span class=p>[</span><span class=s1>&#39;figure.figsize&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>figsize</span>
-
-<span class=c1>#打印散点图</span>
-<span class=n>set_figsize</span><span class=p>()</span>
-<span class=n>plt</span><span class=o>.</span><span class=n>scatter</span><span class=p>(</span><span class=n>features</span><span class=p>[:,</span> <span class=mi>1</span><span class=p>]</span><span class=o>.</span><span class=n>numpy</span><span class=p>(),</span> <span class=n>labels</span><span class=o>.</span><span class=n>numpy</span><span class=p>(),</span> <span class=mi>1</span><span class=p>);</span>
-</code></pre></div></br>
-<p><strong>读取数据</strong></p>
-<p>训练模型的时候需要不断读取小批量数据样本，所以可以定义一个函数来返回小批量的随机样本的特征和标签</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>def</span> <span class=nf>data_iter</span><span class=p>(</span><span class=n>batch_size</span><span class=p>,</span> <span class=n>features</span><span class=p>,</span> <span class=n>labels</span><span class=p>):</span>
-    <span class=c1># batch_size 表示批量大小</span>
-    <span class=n>num_examples</span> <span class=o>=</span> <span class=nb>len</span><span class=p>(</span><span class=n>features</span><span class=p>)</span>
-    <span class=n>indices</span> <span class=o>=</span> <span class=nb>list</span><span class=p>(</span><span class=nb>range</span><span class=p>(</span><span class=n>num_examples</span><span class=p>))</span>
-    <span class=n>random</span><span class=o>.</span><span class=n>shuffle</span><span class=p>(</span><span class=n>indices</span><span class=p>)</span>  <span class=c1># 样本的读取顺序是随机的</span>
-    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>num_examples</span><span class=p>,</span> <span class=n>batch_size</span><span class=p>):</span>
-        <span class=n>j</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>LongTensor</span><span class=p>(</span><span class=n>indices</span><span class=p>[</span><span class=n>i</span><span class=p>:</span> <span class=nb>min</span><span class=p>(</span><span class=n>i</span> <span class=o>+</span> <span class=n>batch_size</span><span class=p>,</span> <span class=n>num_examples</span><span class=p>)])</span> <span class=c1># 最后一次可能不足一个batch</span>
-        <span class=k>yield</span>  <span class=n>features</span><span class=o>.</span><span class=n>index_select</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>j</span><span class=p>),</span> <span class=n>labels</span><span class=o>.</span><span class=n>index_select</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>j</span><span class=p>)</span>
-
-<span class=n>batch_size</span> <span class=o>=</span> <span class=mi>10</span>
-
-<span class=k>for</span> <span class=n>X</span><span class=p>,</span> <span class=n>y</span> <span class=ow>in</span> <span class=n>data_iter</span><span class=p>(</span><span class=n>batch_size</span><span class=p>,</span> <span class=n>features</span><span class=p>,</span> <span class=n>labels</span><span class=p>):</span>
-    <span class=c1># 打印</span>
-    <span class=nb>print</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>y</span><span class=p>)</span>
-    <span class=k>break</span>
-</code></pre></div></br>
-<p><strong>初始化模型参数</strong></p>
-<p>权重初始化成均值为 0 ，标准差为 0.01 的正太随机数，偏差初始化为 0。然后因为参数需要求梯度来迭代，所以设置 <code>requires_grad=True</code>。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>w</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>tensor</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>normal</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mf>0.01</span><span class=p>,</span> <span class=p>(</span><span class=n>num_inputs</span><span class=p>,</span> <span class=mi>1</span><span class=p>)),</span> <span class=n>dtype</span><span class=o>=</span><span class=n>torch</span><span class=o>.</span><span class=n>float32</span><span class=p>)</span>
-<span class=n>b</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>zeros</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>dtype</span><span class=o>=</span><span class=n>torch</span><span class=o>.</span><span class=n>float32</span><span class=p>)</span>
-<span class=n>w</span><span class=o>.</span><span class=n>requires_grad_</span><span class=p>(</span><span class=n>requires_grad</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
-<span class=n>b</span><span class=o>.</span><span class=n>requires_grad_</span><span class=p>(</span><span class=n>requires_grad</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span> 
-</code></pre></div></br>
-<p><strong>定义模型</strong></p>
-<p>我们已经知道了线性回归的模型表达式，使用 <code>torch.mm</code> 进行矩阵乘法运算</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>def</span> <span class=nf>linreg</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>w</span><span class=p>,</span> <span class=n>b</span><span class=p>):</span>
-    <span class=k>return</span> <span class=n>torch</span><span class=o>.</span><span class=n>mm</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>w</span><span class=p>)</span> <span class=o>+</span> <span class=n>b</span>
-</code></pre></div></br>
-<p><strong>定义损失函数</strong></p>
-<p>损失函数我们使用平方损失函数。注意：由于 $\hat{y}-y$ 中，$\hat{y}$ 和 $y$ 的形状是不一样的，所以需要使用 <code>y.view</code> 将 $y$ 的形状变成预测值 $\hat{y}$ 的形状。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>def</span> <span class=nf>squared_loss</span><span class=p>(</span><span class=n>y_hat</span><span class=p>,</span> <span class=n>y</span><span class=p>):</span>
-    <span class=c1># 注意这里返回的是向量, 另外, pytorch里的MSELoss并没有除以 2</span>
-    <span class=k>return</span> <span class=p>(</span><span class=n>y_hat</span> <span class=o>-</span> <span class=n>y</span><span class=o>.</span><span class=n>view</span><span class=p>(</span><span class=n>y_hat</span><span class=o>.</span><span class=n>size</span><span class=p>()))</span> <span class=o>**</span> <span class=mi>2</span> <span class=o>/</span> <span class=mi>2</span>
-</code></pre></div></br>
-<p><strong>定义优化算法</strong></p>
-<p>优化算法根据上文提到的使用小批量随机梯度下降算法，其通过不断迭代模型参数来优化损失函数。这里 <code>lr</code> 为迭代步长。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>def</span> <span class=nf>sgd</span><span class=p>(</span><span class=n>params</span><span class=p>,</span> <span class=n>lr</span><span class=p>,</span> <span class=n>batch_size</span><span class=p>):</span>
-    <span class=k>for</span> <span class=n>param</span> <span class=ow>in</span> <span class=n>params</span><span class=p>:</span>
-        <span class=n>param</span><span class=o>.</span><span class=n>data</span> <span class=o>-=</span> <span class=n>lr</span> <span class=o>*</span> <span class=n>param</span><span class=o>.</span><span class=n>grad</span> <span class=o>/</span> <span class=n>batch_size</span> <span class=c1># 注意这里更改param时用的param.data</span>
-</code></pre></div></br>
-<p><strong>训练模型</strong></p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>lr</span> <span class=o>=</span> <span class=mf>0.03</span>												<span class=c1># 迭代步长</span>
-<span class=n>num_epochs</span> <span class=o>=</span> <span class=mi>3</span>											<span class=c1># 迭代周期</span>
-<span class=n>net</span> <span class=o>=</span> <span class=n>linreg</span>											<span class=c1># 使用线性模型</span>
-<span class=n>loss</span> <span class=o>=</span> <span class=n>squared_loss</span>										<span class=c1># 损失函数</span>
-
-<span class=k>for</span> <span class=n>epoch</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>num_epochs</span><span class=p>):</span>  						<span class=c1># 训练模型一共需要num_epochs个迭代周期</span>
-    <span class=c1># 在每一个迭代周期中，会使用训练数据集中所有样本一次（假设样本数能够被批量大小整除）。X</span>
-    <span class=c1># 和y分别是小批量样本的特征和标签</span>
-    <span class=k>for</span> <span class=n>X</span><span class=p>,</span> <span class=n>y</span> <span class=ow>in</span> <span class=n>data_iter</span><span class=p>(</span><span class=n>batch_size</span><span class=p>,</span> <span class=n>features</span><span class=p>,</span> <span class=n>labels</span><span class=p>):</span>
-        <span class=n>l</span> <span class=o>=</span> <span class=n>loss</span><span class=p>(</span><span class=n>net</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>w</span><span class=p>,</span> <span class=n>b</span><span class=p>),</span> <span class=n>y</span><span class=p>)</span><span class=o>.</span><span class=n>sum</span><span class=p>()</span>  				<span class=c1># l是有关小批量X和y的损失</span>
-        <span class=n>l</span><span class=o>.</span><span class=n>backward</span><span class=p>()</span>  									<span class=c1># 小批量的损失对模型参数求梯度</span>
-        <span class=n>sgd</span><span class=p>([</span><span class=n>w</span><span class=p>,</span> <span class=n>b</span><span class=p>],</span> <span class=n>lr</span><span class=p>,</span> <span class=n>batch_size</span><span class=p>)</span>  					<span class=c1># 使用小批量随机梯度下降迭代模型参数</span>
-
-        <span class=c1># 不要忘了梯度清零</span>
-        <span class=n>w</span><span class=o>.</span><span class=n>grad</span><span class=o>.</span><span class=n>data</span><span class=o>.</span><span class=n>zero_</span><span class=p>()</span>
-        <span class=n>b</span><span class=o>.</span><span class=n>grad</span><span class=o>.</span><span class=n>data</span><span class=o>.</span><span class=n>zero_</span><span class=p>()</span>
-    <span class=n>train_l</span> <span class=o>=</span> <span class=n>loss</span><span class=p>(</span><span class=n>net</span><span class=p>(</span><span class=n>features</span><span class=p>,</span> <span class=n>w</span><span class=p>,</span> <span class=n>b</span><span class=p>),</span> <span class=n>labels</span><span class=p>)</span>
-    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;epoch </span><span class=si>%d</span><span class=s1>, loss </span><span class=si>%f</span><span class=s1>&#39;</span> <span class=o>%</span> <span class=p>(</span><span class=n>epoch</span> <span class=o>+</span> <span class=mi>1</span><span class=p>,</span> <span class=n>train_l</span><span class=o>.</span><span class=n>mean</span><span class=p>()</span><span class=o>.</span><span class=n>item</span><span class=p>()))</span>
-</code></pre></div><p>这里我们设置迭代步长为 0.03，迭代周期为 3，每次迭代周期中都会通过 <code>data_iter</code> 读取小批量数据样本，然后设置损失函数时，由于 <code>l</code> 并不是标量，所以需要通过 <code>sum()</code> 方法求和得到标量，再使用 <code>l.backward()</code> 得到模型参数的梯度，然后使用小批量随机梯度下降法迭代模型参数。注意：每次迭代完需要对梯度清零。</p>
-</br>
-<p>以上就是全人工实现了一个简单的线性回归模型。当然，<code>PyTorch</code> 提供了简便的模型构造方法和多种损失函数。</p>
-</br>
-<h3 id=线性回归简洁实现>线性回归简洁实现</h3>
-</br>
-<p><strong>读取数据</strong></p>
-<p><code>PyTorch</code> 提供了 <code>data</code> 包读取数据。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>torch.utils.data</span> <span class=k>as</span> <span class=nn>Data</span>
-
-<span class=n>batch_size</span> <span class=o>=</span> <span class=mi>10</span>
-<span class=c1># 将训练数据的特征和标签组合</span>
-<span class=n>dataset</span> <span class=o>=</span> <span class=n>Data</span><span class=o>.</span><span class=n>TensorDataset</span><span class=p>(</span><span class=n>features</span><span class=p>,</span> <span class=n>labels</span><span class=p>)</span>
-<span class=c1># 随机读取小批量</span>
-<span class=n>data_iter</span> <span class=o>=</span> <span class=n>Data</span><span class=o>.</span><span class=n>DataLoader</span><span class=p>(</span><span class=n>dataset</span><span class=p>,</span> <span class=n>batch_size</span><span class=p>,</span> <span class=n>shuffle</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
-
-<span class=k>for</span> <span class=n>X</span><span class=p>,</span> <span class=n>y</span> <span class=ow>in</span> <span class=n>data_iter</span><span class=p>:</span>
-    <span class=c1># 打印</span>
-    <span class=nb>print</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>y</span><span class=p>)</span>
-    <span class=k>break</span>
-</code></pre></div></br>
-<p><strong>定义模型</strong></p>
-<p><code>PyTorch</code> 提供了大量预定义的层，这使得我们可以很简洁的实现模型的构造。</p>
-<p>导入 <code>torch.nn</code> 模块，<code>nn</code>的核心数据结构是 <code>Module</code> 。<code>Module</code> 是一个抽象概念，既可以表示一个层，又可以表示一个很多层的神经网络，其实它本身就是所有层的一个基类。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>class</span> <span class=nc>LinearNet</span><span class=p>(</span><span class=n>nn</span><span class=o>.</span><span class=n>Module</span><span class=p>):</span>
-    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>n_feature</span><span class=p>):</span>
-        <span class=nb>super</span><span class=p>(</span><span class=n>LinearNet</span><span class=p>,</span> <span class=bp>self</span><span class=p>)</span><span class=o>.</span><span class=fm>__init__</span><span class=p>()</span>
-        <span class=bp>self</span><span class=o>.</span><span class=n>linear</span> <span class=o>=</span> <span class=n>nn</span><span class=o>.</span><span class=n>Linear</span><span class=p>(</span><span class=n>n_feature</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span>
-    <span class=c1># forward 定义前向传播</span>
-    <span class=k>def</span> <span class=nf>forward</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>x</span><span class=p>):</span>
-        <span class=n>y</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>linear</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
-        <span class=k>return</span> <span class=n>y</span>
-
-<span class=n>net</span> <span class=o>=</span> <span class=n>LinearNet</span><span class=p>(</span><span class=n>num_inputs</span><span class=p>)</span>
-<span class=nb>print</span><span class=p>(</span><span class=n>net</span><span class=p>)</span> <span class=c1># 使用print可以打印出网络的结构</span>
-</code></pre></div><p><code>forward()</code> 定义了模型的前向传播计算方式。</p>
-<p>其实 <code>PyTorch</code> 还有更加简便的网络搭建方法，如 <code>nn.Sequential</code>, 这里不再赘述。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>net</span> <span class=o>=</span> <span class=n>nn</span><span class=o>.</span><span class=n>Sequential</span><span class=p>(</span>
-    <span class=n>nn</span><span class=o>.</span><span class=n>Linear</span><span class=p>(</span><span class=n>num_inputs</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span>
-    <span class=c1># 此处还可以传入其他层</span>
-    <span class=p>)</span>
-</code></pre></div></br>
-<p><strong>初始化模型参数</strong></p>
-<p><code>PyTorch</code> 在 <code>init</code> 模块中提供了很多参数初始化的方法，这里可以通过 <code>init.normal_</code> 将权重参数每个元素初始化为随机采样于均值为0、标准差为0.01的正态分布，偏差会初始化为零。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>from</span> <span class=nn>torch.nn</span> <span class=kn>import</span> <span class=n>init</span>
-
-<span class=n>init</span><span class=o>.</span><span class=n>normal_</span><span class=p>(</span><span class=n>net</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>weight</span><span class=p>,</span> <span class=n>mean</span><span class=o>=</span><span class=mi>0</span><span class=p>,</span> <span class=n>std</span><span class=o>=</span><span class=mf>0.01</span><span class=p>)</span>
-<span class=n>init</span><span class=o>.</span><span class=n>constant_</span><span class=p>(</span><span class=n>net</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>bias</span><span class=p>,</span> <span class=n>val</span><span class=o>=</span><span class=mi>0</span><span class=p>)</span>  <span class=c1># 也可以直接修改bias的data: net[0].bias.data.fill_(0)</span>
-</code></pre></div></br>
-<p><strong>定义损失函数</strong></p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>loss</span> <span class=o>=</span> <span class=n>nn</span><span class=o>.</span><span class=n>MSELoss</span><span class=p>()</span>
-</code></pre></div></br>
-<p><strong>定义优化算法</strong></p>
-<p><code>torch.optim</code>模块提供了很多常用的优化算法比如SGD、Adam和RMSProp等，所以不用再自己实现小批量梯度下降算法了。</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>torch.optim</span> <span class=k>as</span> <span class=nn>optim</span>
-
-<span class=n>optimizer</span> <span class=o>=</span> <span class=n>optim</span><span class=o>.</span><span class=n>SGD</span><span class=p>(</span><span class=n>net</span><span class=o>.</span><span class=n>parameters</span><span class=p>(),</span> <span class=n>lr</span><span class=o>=</span><span class=mf>0.03</span><span class=p>)</span>
-<span class=nb>print</span><span class=p>(</span><span class=n>optimizer</span><span class=p>)</span>
-</code></pre></div><p>输出：</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>SGD</span> <span class=p>(</span>
-<span class=n>Parameter</span> <span class=n>Group</span> <span class=mi>0</span>
-    <span class=n>dampening</span><span class=p>:</span> <span class=mi>0</span>
-    <span class=n>lr</span><span class=p>:</span> <span class=mf>0.03</span>
-    <span class=n>momentum</span><span class=p>:</span> <span class=mi>0</span>
-    <span class=n>nesterov</span><span class=p>:</span> <span class=kc>False</span>
-    <span class=n>weight_decay</span><span class=p>:</span> <span class=mi>0</span>
-<span class=p>)</span>
-</code></pre></div></br>
-<p><strong>训练模型</strong></p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>num_epochs</span> <span class=o>=</span> <span class=mi>3</span>
-<span class=k>for</span> <span class=n>epoch</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>num_epochs</span> <span class=o>+</span> <span class=mi>1</span><span class=p>):</span>
-    <span class=k>for</span> <span class=n>X</span><span class=p>,</span> <span class=n>y</span> <span class=ow>in</span> <span class=n>data_iter</span><span class=p>:</span>
-        <span class=n>output</span> <span class=o>=</span> <span class=n>net</span><span class=p>(</span><span class=n>X</span><span class=p>)</span>
-        <span class=n>l</span> <span class=o>=</span> <span class=n>loss</span><span class=p>(</span><span class=n>output</span><span class=p>,</span> <span class=n>y</span><span class=o>.</span><span class=n>view</span><span class=p>(</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span> <span class=mi>1</span><span class=p>))</span>
-        <span class=n>optimizer</span><span class=o>.</span><span class=n>zero_grad</span><span class=p>()</span> <span class=c1># 梯度清零，等价于net.zero_grad()</span>
-        <span class=n>l</span><span class=o>.</span><span class=n>backward</span><span class=p>()</span>
-        <span class=n>optimizer</span><span class=o>.</span><span class=n>step</span><span class=p>()</span>
-    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;epoch </span><span class=si>%d</span><span class=s1>, loss: </span><span class=si>%f</span><span class=s1>&#39;</span> <span class=o>%</span> <span class=p>(</span><span class=n>epoch</span><span class=p>,</span> <span class=n>l</span><span class=o>.</span><span class=n>item</span><span class=p>()))</span>
-</code></pre></div></br>
-<p>以上就是关于简单线性模型的实现，包括所有代码的手工实现以及使用 <code>PyTorch</code> 提供的模块的实现。内容基本上都是根据《动手学深度学习》（PyTorch版）来编写的，代码也是。需要注意的是，应该尽可能采用矢量计算，以提升计算效率。<code>torch.utils.data</code>模块提供了有关数据处理的工具，<code>torch.nn</code>模块定义了大量神经网络的层，<code>torch.nn.init</code>模块定义了各种初始化方法，<code>torch.optim</code>模块提供了很多常用的优化算法。</p>
-</br>
-<h3 id=参考>参考</h3>
-<p><a href=https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter03_DL-basics/3.1_linear-regression target=_blank rel="noopener noreferrer">《动手学深度学习》(PyTorch)</a>
-</p>
-</div>
-</article><section class="article labels"><a class=category href=/categories/%E7%83%82%E7%AC%94%E5%A4%B4%E4%B9%8B%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/>烂笔头之深度学习</a><a class=tag href=/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/>线性回归</a><a class=tag href=/tags/pytorch/>PyTorch</a><a class=tag href=/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/>深度学习</a></section><section class="article license">版权声明：如果转发请带上本文链接和注明来源。</section><section class="article author">
-<script src=/js/lottie-player.js></script>
-<lottie-player class=avatar src=/json/77907-vault.json background=transparent speed=1 style=max-width:280px; loop autoplay></lottie-player><p class=name>yibocat</p><div class=bio>脑子不够键盘来凑</div><div class=details><a class=item href=https://github.com/yibocat target=_blank rel="noopener noreferrer"><span class="iconfont icon-github"></span>&nbsp;yibocat</a><a class=item href=mailto:yibocat@yeah.net target=_blank rel="noopener noreferrer"><span class="iconfont icon-mail"></span>&nbsp;yibocat@yeah.net</a></div>
-</section>
-</div>
-<div class="article bottom">
-<div class="article bottom title">更多文章</div><section class="article navigation"><p><a class=link href=/posts/dl/sdxx_2/><span class="iconfont icon-article"></span>[深度学习笔记] 深度学习第 2 篇——多层感知机</a></p><p><a class=link href=/posts/fwq/fwq_jupyter/><span class="iconfont icon-article"></span>[Python 笔记本] 远程搭建 jupyter 服务器</a></p></section><div class=nav-bottom><div class="nav wrap bottom">
-<nav class=nav><a class="nav item" href=/posts/> 文章 </a><a class="nav item" href=/archives/> 归档 </a><a class="nav item" href=/categories/> 分类 </a><a class="nav item" href=/tags/> 标签 </a><a class="nav item" href=/search/> 搜索 </a>
-</nav>
-</div></div></div></section><section id=footer>
-<div class=tongji style=text-align:center>
-<span>共 12 篇文章 • 总计 21340 字</span>
-</div><div class=footer-wrap>
-<p class=copyright>©2022 Yibocat.</p>
-<p class=powerby>
-<span>Powered&nbsp;by&nbsp;</span><a href=https://gohugo.io target=_blank rel="noopener noreferrer">Hugo</a>
+这里 $ |\mathcal{B}| $ 表示每个小批量的样本个数，$\eta$ 为学习率。而这里的小批量样本数和学习率是人为设定的而不是学习得来的，所以被称为超参数（hyperparameter）。</p></br><h3 id=线性回归实现>线性回归实现</h3></br><p>线性回归的实现总体上分为以下几个步骤：</p><ol><li>数据集的准备</li><li>初始化模型参数</li><li>定义模型</li><li>定义损失函数</li><li>定义优化算法、</li><li>训练模型</li></ol><p>在此之前，我们可以定义一个函数，生成特征标签的散点图，这样可以更直接地观察两者间的线性关系。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>use_svg_display</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 用矢量图显示</span>
+</span></span><span class=line><span class=cl>    <span class=n>display</span><span class=o>.</span><span class=n>set_matplotlib_formats</span><span class=p>(</span><span class=s1>&#39;svg&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>set_figsize</span><span class=p>(</span><span class=n>figsize</span><span class=o>=</span><span class=p>(</span><span class=mf>3.5</span><span class=p>,</span> <span class=mf>2.5</span><span class=p>)):</span>
+</span></span><span class=line><span class=cl>    <span class=n>use_svg_display</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 设置图的尺寸</span>
+</span></span><span class=line><span class=cl>    <span class=n>plt</span><span class=o>.</span><span class=n>rcParams</span><span class=p>[</span><span class=s1>&#39;figure.figsize&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>figsize</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#打印散点图</span>
+</span></span><span class=line><span class=cl><span class=n>set_figsize</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>scatter</span><span class=p>(</span><span class=n>features</span><span class=p>[:,</span> <span class=mi>1</span><span class=p>]</span><span class=o>.</span><span class=n>numpy</span><span class=p>(),</span> <span class=n>labels</span><span class=o>.</span><span class=n>numpy</span><span class=p>(),</span> <span class=mi>1</span><span class=p>);</span>
+</span></span></code></pre></div></br><p><strong>读取数据</strong></p><p>训练模型的时候需要不断读取小批量数据样本，所以可以定义一个函数来返回小批量的随机样本的特征和标签</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>data_iter</span><span class=p>(</span><span class=n>batch_size</span><span class=p>,</span> <span class=n>features</span><span class=p>,</span> <span class=n>labels</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=c1># batch_size 表示批量大小</span>
+</span></span><span class=line><span class=cl>    <span class=n>num_examples</span> <span class=o>=</span> <span class=nb>len</span><span class=p>(</span><span class=n>features</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>indices</span> <span class=o>=</span> <span class=nb>list</span><span class=p>(</span><span class=nb>range</span><span class=p>(</span><span class=n>num_examples</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=n>random</span><span class=o>.</span><span class=n>shuffle</span><span class=p>(</span><span class=n>indices</span><span class=p>)</span>  <span class=c1># 样本的读取顺序是随机的</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>num_examples</span><span class=p>,</span> <span class=n>batch_size</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>j</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>LongTensor</span><span class=p>(</span><span class=n>indices</span><span class=p>[</span><span class=n>i</span><span class=p>:</span> <span class=nb>min</span><span class=p>(</span><span class=n>i</span> <span class=o>+</span> <span class=n>batch_size</span><span class=p>,</span> <span class=n>num_examples</span><span class=p>)])</span> <span class=c1># 最后一次可能不足一个batch</span>
+</span></span><span class=line><span class=cl>        <span class=k>yield</span>  <span class=n>features</span><span class=o>.</span><span class=n>index_select</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>j</span><span class=p>),</span> <span class=n>labels</span><span class=o>.</span><span class=n>index_select</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>j</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>batch_size</span> <span class=o>=</span> <span class=mi>10</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>X</span><span class=p>,</span> <span class=n>y</span> <span class=ow>in</span> <span class=n>data_iter</span><span class=p>(</span><span class=n>batch_size</span><span class=p>,</span> <span class=n>features</span><span class=p>,</span> <span class=n>labels</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 打印</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>y</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>break</span>
+</span></span></code></pre></div></br><p><strong>初始化模型参数</strong></p><p>权重初始化成均值为 0 ，标准差为 0.01 的正太随机数，偏差初始化为 0。然后因为参数需要求梯度来迭代，所以设置 <code>requires_grad=True</code>。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>w</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>tensor</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>normal</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mf>0.01</span><span class=p>,</span> <span class=p>(</span><span class=n>num_inputs</span><span class=p>,</span> <span class=mi>1</span><span class=p>)),</span> <span class=n>dtype</span><span class=o>=</span><span class=n>torch</span><span class=o>.</span><span class=n>float32</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=n>torch</span><span class=o>.</span><span class=n>zeros</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>dtype</span><span class=o>=</span><span class=n>torch</span><span class=o>.</span><span class=n>float32</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>w</span><span class=o>.</span><span class=n>requires_grad_</span><span class=p>(</span><span class=n>requires_grad</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>b</span><span class=o>.</span><span class=n>requires_grad_</span><span class=p>(</span><span class=n>requires_grad</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span> 
+</span></span></code></pre></div></br><p><strong>定义模型</strong></p><p>我们已经知道了线性回归的模型表达式，使用 <code>torch.mm</code> 进行矩阵乘法运算</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>linreg</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>w</span><span class=p>,</span> <span class=n>b</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>torch</span><span class=o>.</span><span class=n>mm</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>w</span><span class=p>)</span> <span class=o>+</span> <span class=n>b</span>
+</span></span></code></pre></div></br><p><strong>定义损失函数</strong></p><p>损失函数我们使用平方损失函数。注意：由于 $\hat{y}-y$ 中，$\hat{y}$ 和 $y$ 的形状是不一样的，所以需要使用 <code>y.view</code> 将 $y$ 的形状变成预测值 $\hat{y}$ 的形状。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>squared_loss</span><span class=p>(</span><span class=n>y_hat</span><span class=p>,</span> <span class=n>y</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 注意这里返回的是向量, 另外, pytorch里的MSELoss并没有除以 2</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>(</span><span class=n>y_hat</span> <span class=o>-</span> <span class=n>y</span><span class=o>.</span><span class=n>view</span><span class=p>(</span><span class=n>y_hat</span><span class=o>.</span><span class=n>size</span><span class=p>()))</span> <span class=o>**</span> <span class=mi>2</span> <span class=o>/</span> <span class=mi>2</span>
+</span></span></code></pre></div></br><p><strong>定义优化算法</strong></p><p>优化算法根据上文提到的使用小批量随机梯度下降算法，其通过不断迭代模型参数来优化损失函数。这里 <code>lr</code> 为迭代步长。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>sgd</span><span class=p>(</span><span class=n>params</span><span class=p>,</span> <span class=n>lr</span><span class=p>,</span> <span class=n>batch_size</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>param</span> <span class=ow>in</span> <span class=n>params</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>param</span><span class=o>.</span><span class=n>data</span> <span class=o>-=</span> <span class=n>lr</span> <span class=o>*</span> <span class=n>param</span><span class=o>.</span><span class=n>grad</span> <span class=o>/</span> <span class=n>batch_size</span> <span class=c1># 注意这里更改param时用的param.data</span>
+</span></span></code></pre></div></br><p><strong>训练模型</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>lr</span> <span class=o>=</span> <span class=mf>0.03</span>												<span class=c1># 迭代步长</span>
+</span></span><span class=line><span class=cl><span class=n>num_epochs</span> <span class=o>=</span> <span class=mi>3</span>											<span class=c1># 迭代周期</span>
+</span></span><span class=line><span class=cl><span class=n>net</span> <span class=o>=</span> <span class=n>linreg</span>											<span class=c1># 使用线性模型</span>
+</span></span><span class=line><span class=cl><span class=n>loss</span> <span class=o>=</span> <span class=n>squared_loss</span>										<span class=c1># 损失函数</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>epoch</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>num_epochs</span><span class=p>):</span>  						<span class=c1># 训练模型一共需要num_epochs个迭代周期</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 在每一个迭代周期中，会使用训练数据集中所有样本一次（假设样本数能够被批量大小整除）。X</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 和y分别是小批量样本的特征和标签</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>X</span><span class=p>,</span> <span class=n>y</span> <span class=ow>in</span> <span class=n>data_iter</span><span class=p>(</span><span class=n>batch_size</span><span class=p>,</span> <span class=n>features</span><span class=p>,</span> <span class=n>labels</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>l</span> <span class=o>=</span> <span class=n>loss</span><span class=p>(</span><span class=n>net</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>w</span><span class=p>,</span> <span class=n>b</span><span class=p>),</span> <span class=n>y</span><span class=p>)</span><span class=o>.</span><span class=n>sum</span><span class=p>()</span>  				<span class=c1># l是有关小批量X和y的损失</span>
+</span></span><span class=line><span class=cl>        <span class=n>l</span><span class=o>.</span><span class=n>backward</span><span class=p>()</span>  									<span class=c1># 小批量的损失对模型参数求梯度</span>
+</span></span><span class=line><span class=cl>        <span class=n>sgd</span><span class=p>([</span><span class=n>w</span><span class=p>,</span> <span class=n>b</span><span class=p>],</span> <span class=n>lr</span><span class=p>,</span> <span class=n>batch_size</span><span class=p>)</span>  					<span class=c1># 使用小批量随机梯度下降迭代模型参数</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># 不要忘了梯度清零</span>
+</span></span><span class=line><span class=cl>        <span class=n>w</span><span class=o>.</span><span class=n>grad</span><span class=o>.</span><span class=n>data</span><span class=o>.</span><span class=n>zero_</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>b</span><span class=o>.</span><span class=n>grad</span><span class=o>.</span><span class=n>data</span><span class=o>.</span><span class=n>zero_</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>train_l</span> <span class=o>=</span> <span class=n>loss</span><span class=p>(</span><span class=n>net</span><span class=p>(</span><span class=n>features</span><span class=p>,</span> <span class=n>w</span><span class=p>,</span> <span class=n>b</span><span class=p>),</span> <span class=n>labels</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;epoch </span><span class=si>%d</span><span class=s1>, loss </span><span class=si>%f</span><span class=s1>&#39;</span> <span class=o>%</span> <span class=p>(</span><span class=n>epoch</span> <span class=o>+</span> <span class=mi>1</span><span class=p>,</span> <span class=n>train_l</span><span class=o>.</span><span class=n>mean</span><span class=p>()</span><span class=o>.</span><span class=n>item</span><span class=p>()))</span>
+</span></span></code></pre></div><p>这里我们设置迭代步长为 0.03，迭代周期为 3，每次迭代周期中都会通过 <code>data_iter</code> 读取小批量数据样本，然后设置损失函数时，由于 <code>l</code> 并不是标量，所以需要通过 <code>sum()</code> 方法求和得到标量，再使用 <code>l.backward()</code> 得到模型参数的梯度，然后使用小批量随机梯度下降法迭代模型参数。注意：每次迭代完需要对梯度清零。</p></br><p>以上就是全人工实现了一个简单的线性回归模型。当然，<code>PyTorch</code> 提供了简便的模型构造方法和多种损失函数。</p></br><h3 id=线性回归简洁实现>线性回归简洁实现</h3></br><p><strong>读取数据</strong></p><p><code>PyTorch</code> 提供了 <code>data</code> 包读取数据。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>torch.utils.data</span> <span class=k>as</span> <span class=nn>Data</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>batch_size</span> <span class=o>=</span> <span class=mi>10</span>
+</span></span><span class=line><span class=cl><span class=c1># 将训练数据的特征和标签组合</span>
+</span></span><span class=line><span class=cl><span class=n>dataset</span> <span class=o>=</span> <span class=n>Data</span><span class=o>.</span><span class=n>TensorDataset</span><span class=p>(</span><span class=n>features</span><span class=p>,</span> <span class=n>labels</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># 随机读取小批量</span>
+</span></span><span class=line><span class=cl><span class=n>data_iter</span> <span class=o>=</span> <span class=n>Data</span><span class=o>.</span><span class=n>DataLoader</span><span class=p>(</span><span class=n>dataset</span><span class=p>,</span> <span class=n>batch_size</span><span class=p>,</span> <span class=n>shuffle</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>X</span><span class=p>,</span> <span class=n>y</span> <span class=ow>in</span> <span class=n>data_iter</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 打印</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>X</span><span class=p>,</span> <span class=n>y</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>break</span>
+</span></span></code></pre></div></br><p><strong>定义模型</strong></p><p><code>PyTorch</code> 提供了大量预定义的层，这使得我们可以很简洁的实现模型的构造。</p><p>导入 <code>torch.nn</code> 模块，<code>nn</code>的核心数据结构是 <code>Module</code> 。<code>Module</code> 是一个抽象概念，既可以表示一个层，又可以表示一个很多层的神经网络，其实它本身就是所有层的一个基类。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>LinearNet</span><span class=p>(</span><span class=n>nn</span><span class=o>.</span><span class=n>Module</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>n_feature</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>super</span><span class=p>(</span><span class=n>LinearNet</span><span class=p>,</span> <span class=bp>self</span><span class=p>)</span><span class=o>.</span><span class=fm>__init__</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>linear</span> <span class=o>=</span> <span class=n>nn</span><span class=o>.</span><span class=n>Linear</span><span class=p>(</span><span class=n>n_feature</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># forward 定义前向传播</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>forward</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>x</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>y</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>linear</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>y</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>net</span> <span class=o>=</span> <span class=n>LinearNet</span><span class=p>(</span><span class=n>num_inputs</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>net</span><span class=p>)</span> <span class=c1># 使用print可以打印出网络的结构</span>
+</span></span></code></pre></div><p><code>forward()</code> 定义了模型的前向传播计算方式。</p><p>其实 <code>PyTorch</code> 还有更加简便的网络搭建方法，如 <code>nn.Sequential</code>, 这里不再赘述。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>net</span> <span class=o>=</span> <span class=n>nn</span><span class=o>.</span><span class=n>Sequential</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>nn</span><span class=o>.</span><span class=n>Linear</span><span class=p>(</span><span class=n>num_inputs</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 此处还可以传入其他层</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span></code></pre></div></br><p><strong>初始化模型参数</strong></p><p><code>PyTorch</code> 在 <code>init</code> 模块中提供了很多参数初始化的方法，这里可以通过 <code>init.normal_</code> 将权重参数每个元素初始化为随机采样于均值为0、标准差为0.01的正态分布，偏差会初始化为零。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>torch.nn</span> <span class=kn>import</span> <span class=n>init</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>init</span><span class=o>.</span><span class=n>normal_</span><span class=p>(</span><span class=n>net</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>weight</span><span class=p>,</span> <span class=n>mean</span><span class=o>=</span><span class=mi>0</span><span class=p>,</span> <span class=n>std</span><span class=o>=</span><span class=mf>0.01</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>init</span><span class=o>.</span><span class=n>constant_</span><span class=p>(</span><span class=n>net</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=n>bias</span><span class=p>,</span> <span class=n>val</span><span class=o>=</span><span class=mi>0</span><span class=p>)</span>  <span class=c1># 也可以直接修改bias的data: net[0].bias.data.fill_(0)</span>
+</span></span></code></pre></div></br><p><strong>定义损失函数</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>loss</span> <span class=o>=</span> <span class=n>nn</span><span class=o>.</span><span class=n>MSELoss</span><span class=p>()</span>
+</span></span></code></pre></div></br><p><strong>定义优化算法</strong></p><p><code>torch.optim</code>模块提供了很多常用的优化算法比如SGD、Adam和RMSProp等，所以不用再自己实现小批量梯度下降算法了。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>torch.optim</span> <span class=k>as</span> <span class=nn>optim</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>optimizer</span> <span class=o>=</span> <span class=n>optim</span><span class=o>.</span><span class=n>SGD</span><span class=p>(</span><span class=n>net</span><span class=o>.</span><span class=n>parameters</span><span class=p>(),</span> <span class=n>lr</span><span class=o>=</span><span class=mf>0.03</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>optimizer</span><span class=p>)</span>
+</span></span></code></pre></div><p>输出：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>SGD</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl><span class=n>Parameter</span> <span class=n>Group</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=n>dampening</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=n>lr</span><span class=p>:</span> <span class=mf>0.03</span>
+</span></span><span class=line><span class=cl>    <span class=n>momentum</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=n>nesterov</span><span class=p>:</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>    <span class=n>weight_decay</span><span class=p>:</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span></code></pre></div></br><p><strong>训练模型</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>num_epochs</span> <span class=o>=</span> <span class=mi>3</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>epoch</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>num_epochs</span> <span class=o>+</span> <span class=mi>1</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>X</span><span class=p>,</span> <span class=n>y</span> <span class=ow>in</span> <span class=n>data_iter</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>output</span> <span class=o>=</span> <span class=n>net</span><span class=p>(</span><span class=n>X</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>l</span> <span class=o>=</span> <span class=n>loss</span><span class=p>(</span><span class=n>output</span><span class=p>,</span> <span class=n>y</span><span class=o>.</span><span class=n>view</span><span class=p>(</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span> <span class=mi>1</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=n>optimizer</span><span class=o>.</span><span class=n>zero_grad</span><span class=p>()</span> <span class=c1># 梯度清零，等价于net.zero_grad()</span>
+</span></span><span class=line><span class=cl>        <span class=n>l</span><span class=o>.</span><span class=n>backward</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>optimizer</span><span class=o>.</span><span class=n>step</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;epoch </span><span class=si>%d</span><span class=s1>, loss: </span><span class=si>%f</span><span class=s1>&#39;</span> <span class=o>%</span> <span class=p>(</span><span class=n>epoch</span><span class=p>,</span> <span class=n>l</span><span class=o>.</span><span class=n>item</span><span class=p>()))</span>
+</span></span></code></pre></div></br><p>以上就是关于简单线性模型的实现，包括所有代码的手工实现以及使用 <code>PyTorch</code> 提供的模块的实现。内容基本上都是根据《动手学深度学习》（PyTorch版）来编写的，代码也是。需要注意的是，应该尽可能采用矢量计算，以提升计算效率。<code>torch.utils.data</code>模块提供了有关数据处理的工具，<code>torch.nn</code>模块定义了大量神经网络的层，<code>torch.nn.init</code>模块定义了各种初始化方法，<code>torch.optim</code>模块提供了很多常用的优化算法。</p></br><h3 id=参考>参考</h3><p><a href=https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter03_DL-basics/3.1_linear-regression target=_blank rel="noopener noreferrer">《动手学深度学习》(PyTorch)</a></p></div></article><section class="article labels"><a class=category href=/categories/%E7%83%82%E7%AC%94%E5%A4%B4%E4%B9%8B%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/>烂笔头之深度学习</a><a class=tag href=/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/>线性回归</a><a class=tag href=/tags/pytorch/>PyTorch</a><a class=tag href=/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/>深度学习</a></section><section class="article license">版权声明：如果转发请带上本文链接和注明来源。</section><section class="article author"><script src=/js/lottie-player.js></script>
+<lottie-player class=avatar src=/json/77907-vault.json background=transparent speed=1 style=max-width:280px; loop autoplay></lottie-player><p class=name>yibocat</p><div class=bio>脑子不够键盘来凑</div><div class=details><a class=item href=https://github.com/yibocat target=_blank rel="noopener noreferrer"><span class="iconfont icon-github"></span>&nbsp;yibocat</a><a class=item href=mailto:yibocat@yeah.net target=_blank rel="noopener noreferrer"><span class="iconfont icon-mail"></span>&nbsp;yibocat@yeah.net</a></div></section></div><div class="article bottom"><div class="article bottom title">更多文章</div><section class="article navigation"><p><a class=link href=/posts/dl/sdxx_2/><span class="iconfont icon-article"></span>[深度学习笔记] 深度学习第 2 篇——多层感知机</a></p><p><a class=link href=/posts/fwq/fwq_jupyter/><span class="iconfont icon-article"></span>[Python 笔记本] 远程搭建 jupyter 服务器</a></p></section><div class=nav-bottom><div class="nav wrap bottom"><nav class=nav><a class="nav item" href=/posts/>文章 </a><a class="nav item" href=/archives/>归档 </a><a class="nav item" href=/categories/>分类 </a><a class="nav item" href=/tags/>标签 </a><a class="nav item" href=/search/>搜索</a></nav></div></div></div></section><section id=footer><div class=tongji style=text-align:center><span>共 12 篇文章 • 总计 21340 字</span></div><div class=footer-wrap><p class=copyright>©2022 Yibocat.</p><p class=powerby><span>Powered&nbsp;by&nbsp;</span><a href=https://gohugo.io target=_blank rel="noopener noreferrer">Hugo</a>
 <span>&nbsp;Accelerate with Tencent Cloud CDN.</span>
-<a href="https://ipv6-test.com/validate.php?url=referer"><img src=https://ipv6-test.com/button-ipv6-80x15.png alt="ipv6 ready" title="ipv6 ready" border=0></a>
-</p></div></section><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css integrity=sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js integrity=sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous onload=renderMathInElement(document.body)></script>
-<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:!0},{left:'$',right:'$',display:!1},{left:'\\(',right:'\\)',display:!1},{left:'\\[',right:'\\]',display:!0}],throwOnError:!1})})</script><script src=/js/core.min.45bc6f7686a5f99de05699008e2608053161016a4ce37a6b899e6fd78870c210a3239372eaedcb90385626ad3dafe267.js integrity=sha384-Rbxvdoal+Z3gVpkAjiYIBTFhAWpM43priZ5v14hwwhCjI5Ny6u3LkDhWJq09r+Jn></script>
+<a href="https://ipv6-test.com/validate.php?url=referer"><img src=https://ipv6-test.com/button-ipv6-80x15.png alt="ipv6 ready" title="ipv6 ready" border=0></a></p></div></section><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css integrity=sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js integrity=sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous onload=renderMathInElement(document.body)></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],throwOnError:!1})})</script><script src=/js/core.min.091f2afc61adf43637b5ab08aa95d7d61c04fe17dcd542b7406dffc53c4a983f3e02d0062197358bf3fda63807f23bb0.js integrity=sha384-CR8q/GGt9DY3tasIqpXX1hwE/hfc1UK3QG3/xTxKmD8+AtAGIZc1i/P9pjgH8juw></script>
 <script src=https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js></script>
-<script type=text/javascript>var myChart=echarts.init(document.getElementById('heatmap')),option,data,rangeArr,listeners;window.onresize=function(){myChart.resize()};function heatmap_width(d){var a=new Date,e=a.setMonth(a.getMonth()-d),b=+new Date,c;return a=+new Date(e),b=echarts.format.formatTime('yyyy-MM-dd',b),a=echarts.format.formatTime('yyyy-MM-dd',a),c=[],c.push([a,b]),c}data=[],data.push(["2022-02-25",1706]),data.push(["2022-02-19",1142]),data.push(["2022-02-17",1469]),data.push(["2022-02-15",2774]),data.push(["2022-02-14",3494]),data.push(["2022-02-14",2006]),data.push(["2022-02-08",2576]),data.push(["2022-02-02",588]),data.push(["2022-02-01",387]),data.push(["2022-01-30",1028]),data.push(["2022-01-29",3947]),data.push(["2022-01-28",74]),data.push(["2019-05-28",0]),data.push(["2019-02-28",149]),data.push(["0001-01-01",0]),window.matchMedia('(max-width: 320px)').matches?(rangeArr=heatmap_width(3)):window.matchMedia('(max-width: 400px)').matches?(rangeArr=heatmap_width(5)):window.matchMedia('(max-width: 550px)').matches?(rangeArr=heatmap_width(6)):window.matchMedia('(max-width: 1021px)').matches?(rangeArr=heatmap_width(12)):window.matchMedia('(max-width: 1400px)').matches?(rangeArr=heatmap_width(9)):window.matchMedia('(max-width: 1920px)').matches?(rangeArr=heatmap_width(12)):window.matchMedia('(max-width: 2560px)').matches&&(rangeArr=heatmap_width(24));function LightOption(){option={title:{show:!0,top:0,left:20,text:'文章热力图',textStyle:{color:'rgba(29,43,76,.85)',fontSize:10}},tooltip:{padding:10,backgroundColor:'#777',borderColor:'#777',borderWidth:1,formatter:function(b){var a=b.value;return'<div style="font-size: 14px;color: white;">'+a[0]+': '+a[1]+'</div>'}},visualMap:{show:!1,top:0,min:0,max:5e3,textStyle:{color:'#7bc96f',fontWeight:'bold',fontFamily:'monospace'},calculable:!0,inRange:{symbol:'rect',color:['#ccffcc','#82c979','#43923c','#125b15','#002800']},itemWidth:12,itemHeight:200,orient:'horizontal',right:0},calendar:{top:45,left:30,right:30,cellSize:[12,12],orient:'horizontal',range:rangeArr,splitLine:{show:!1,lineStyle:{width:.5,type:'solid',color:'white'}},itemStyle:{borderWidth:3.4,borderType:'solid',shadowColor:'#f3f6f9',shadowBlur:1.2,borderColor:'#f3f6f9',color:'#dddddd',opacity:1},yearLabel:{show:!0,position:'top',fontWeight:'normal',fontSize:12,color:'#24292e'},monthLabel:{nameMap:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],fontWeight:'bolder',color:'#24292e',fontSize:8},dayLabel:{formatter:'{start}  1st',fontWeight:'bolder',nameMap:['','Mon','','Wed','','Fri',''],color:'#24292e',fontSize:8}},series:{type:'heatmap',coordinateSystem:'calendar',data}},option&&myChart.setOption(option)}function DarkOption(){option={title:{show:!0,top:0,left:20,text:'文章热力图',textStyle:{color:'#c7d5f6',fontSize:10}},tooltip:{padding:10,backgroundColor:'#777',borderColor:'#777',borderWidth:1,formatter:function(b){var a=b.value;return'<div style="font-size: 14px;color: white;">'+a[0]+': '+a[1]+'</div>'}},visualMap:{show:!1,top:0,min:0,max:5e3,textStyle:{color:'#c7d5f6',fontWeight:'bold',fontFamily:'monospace'},calculable:!0,inRange:{symbol:'rect',color:['#ccffcc','#82c979','#43923c','#125b15','#002800'],opacity:.8},itemWidth:12,itemHeight:200,orient:'horizontal',right:0},calendar:{top:45,left:30,right:30,cellSize:[12,12],orient:'horizontal',range:rangeArr,splitLine:{show:!1,lineStyle:{width:.5,type:'solid',color:'white'}},itemStyle:{borderWidth:3.4,borderType:'solid',shadowColor:'#0d1117',shadowBlur:1.2,borderColor:'#0d1117',color:'#24292e',opacity:1},yearLabel:{show:!0,position:'top',fontWeight:'normal',fontSize:12,color:'#c7d5f6'},monthLabel:{nameMap:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],fontWeight:'bolder',color:'#c7d5f6',fontSize:8},dayLabel:{formatter:'{start}  1st',fontWeight:'bolder',nameMap:['','Mon','','Wed','','Fri',''],color:'#c7d5f6',fontSize:8}},series:{type:'heatmap',coordinateSystem:'calendar',data}},option&&myChart.setOption(option)}window.matchMedia('(prefers-color-scheme: dark)').matches?DarkOption():LightOption(),listeners={dark:a=>{a.matches&&DarkOption()},light:a=>{a.matches&&LightOption()}},window.matchMedia('(prefers-color-scheme: dark)').addListener(listeners.dark),window.matchMedia('(prefers-color-scheme: light)').addListener(listeners.light)</script></body>
-</html>
+<script type=text/javascript>var myChart=echarts.init(document.getElementById("heatmap")),option,data,rangeArr,listeners;window.onresize=function(){myChart.resize()};function heatmap_width(s){var e=new Date,n,o=e.setMonth(e.getMonth()-s),t=+new Date;return e=+new Date(o),t=echarts.format.formatTime("yyyy-MM-dd",t),e=echarts.format.formatTime("yyyy-MM-dd",e),n=[],n.push([e,t]),n}data=[],data.push(["2022-02-25",1706]),data.push(["2022-02-19",1142]),data.push(["2022-02-17",1469]),data.push(["2022-02-15",2774]),data.push(["2022-02-14",3494]),data.push(["2022-02-14",2006]),data.push(["2022-02-08",2576]),data.push(["2022-02-02",588]),data.push(["2022-02-01",387]),data.push(["2022-01-30",1028]),data.push(["2022-01-29",3947]),data.push(["2022-01-28",74]),data.push(["2019-05-28",0]),data.push(["2019-02-28",149]),data.push(["0001-01-01",0]),window.matchMedia("(max-width: 320px)").matches?(rangeArr=heatmap_width(3)):window.matchMedia("(max-width: 400px)").matches?(rangeArr=heatmap_width(5)):window.matchMedia("(max-width: 550px)").matches?(rangeArr=heatmap_width(6)):window.matchMedia("(max-width: 1021px)").matches?(rangeArr=heatmap_width(12)):window.matchMedia("(max-width: 1400px)").matches?(rangeArr=heatmap_width(9)):window.matchMedia("(max-width: 1920px)").matches?(rangeArr=heatmap_width(12)):window.matchMedia("(max-width: 2560px)").matches&&(rangeArr=heatmap_width(24));function LightOption(){option={title:{show:!0,top:0,left:20,text:"文章热力图",textStyle:{color:"rgba(29,43,76,.85)",fontSize:10}},tooltip:{padding:10,backgroundColor:"#777",borderColor:"#777",borderWidth:1,formatter:function(t){var e=t.value;return'<div style="font-size: 14px;color: white;">'+e[0]+": "+e[1]+"</div>"}},visualMap:{show:!1,top:0,min:0,max:5e3,textStyle:{color:"#7bc96f",fontWeight:"bold",fontFamily:"monospace"},calculable:!0,inRange:{symbol:"rect",color:["#ccffcc","#82c979","#43923c","#125b15","#002800"]},itemWidth:12,itemHeight:200,orient:"horizontal",right:0},calendar:{top:45,left:30,right:30,cellSize:[12,12],orient:"horizontal",range:rangeArr,splitLine:{show:!1,lineStyle:{width:.5,type:"solid",color:"white"}},itemStyle:{borderWidth:3.4,borderType:"solid",shadowColor:"#f3f6f9",shadowBlur:1.2,borderColor:"#f3f6f9",color:"#dddddd",opacity:1},yearLabel:{show:!0,position:"top",fontWeight:"normal",fontSize:12,color:"#24292e"},monthLabel:{nameMap:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],fontWeight:"bolder",color:"#24292e",fontSize:8},dayLabel:{formatter:"{start}  1st",fontWeight:"bolder",nameMap:['',"Mon",'',"Wed",'',"Fri",''],color:"#24292e",fontSize:8}},series:{type:"heatmap",coordinateSystem:"calendar",data}},option&&myChart.setOption(option)}function DarkOption(){option={title:{show:!0,top:0,left:20,text:"文章热力图",textStyle:{color:"#c7d5f6",fontSize:10}},tooltip:{padding:10,backgroundColor:"#777",borderColor:"#777",borderWidth:1,formatter:function(t){var e=t.value;return'<div style="font-size: 14px;color: white;">'+e[0]+": "+e[1]+"</div>"}},visualMap:{show:!1,top:0,min:0,max:5e3,textStyle:{color:"#c7d5f6",fontWeight:"bold",fontFamily:"monospace"},calculable:!0,inRange:{symbol:"rect",color:["#ccffcc","#82c979","#43923c","#125b15","#002800"],opacity:.8},itemWidth:12,itemHeight:200,orient:"horizontal",right:0},calendar:{top:45,left:30,right:30,cellSize:[12,12],orient:"horizontal",range:rangeArr,splitLine:{show:!1,lineStyle:{width:.5,type:"solid",color:"white"}},itemStyle:{borderWidth:3.4,borderType:"solid",shadowColor:"#0d1117",shadowBlur:1.2,borderColor:"#0d1117",color:"#24292e",opacity:1},yearLabel:{show:!0,position:"top",fontWeight:"normal",fontSize:12,color:"#c7d5f6"},monthLabel:{nameMap:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],fontWeight:"bolder",color:"#c7d5f6",fontSize:8},dayLabel:{formatter:"{start}  1st",fontWeight:"bolder",nameMap:['',"Mon",'',"Wed",'',"Fri",''],color:"#c7d5f6",fontSize:8}},series:{type:"heatmap",coordinateSystem:"calendar",data}},option&&myChart.setOption(option)}window.matchMedia("(prefers-color-scheme: dark)").matches?DarkOption():LightOption(),listeners={dark:e=>{e.matches&&DarkOption()},light:e=>{e.matches&&LightOption()}},window.matchMedia("(prefers-color-scheme: dark)").addListener(listeners.dark),window.matchMedia("(prefers-color-scheme: light)").addListener(listeners.light)</script></body></html>
