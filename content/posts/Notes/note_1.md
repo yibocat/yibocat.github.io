@@ -3,7 +3,7 @@ title: "[笔记手册] Latex 数学符号表"
 date: 2022-03-10T23:05:05+08:00
 author: "yibo"
 description: ""
-draft: true
+draft: false
 math: true
 tags: ["Latex","手册"]
 categories: ["笔记手册"]
