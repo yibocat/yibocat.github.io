@@ -211,31 +211,91 @@ categories: ["笔记手册"]
 
 ### AMS 箭头
 
-
+|                                                |                                                |                                                    |
+| ---------------------------------------------- | ---------------------------------------------- | -------------------------------------------------- |
+| $\dashleftarrow$ &emsp;\dashleftarrow          | $\dashrightarrow$ &emsp; \dashrightarrow       | $\multimap$ &emsp; \multimap                       |
+| $\leftleftarrows$ &emsp; \leftleftarrows       | $\rightrightarrows$ &emsp; \rightrightarrows   | $\upuparrows$ &emsp; \upuparrows                   |
+| $\leftrightarrows$ &emsp; \leftrightarrows     | $\rightleftarrows$ &emsp; \rightleftarrows     | $\downdownarrows$  &emsp;\downdownarrows           |
+| $\Lleftarrow$ &emsp; \Lleftarrow               | $\Rrightarrow$ &emsp; \Rrightarrow             | $\upharpoonleft$ &emsp; \upharpoonleft             |
+| $\twoheadleftarrow$ &emsp; \twoheadleftarrow   | $\twoheadrightarrow$ &emsp; \twoheadrightarrow | $\upharpoonright$ &emsp; \upharpoonright           |
+| $\leftarrowtail$ &emsp; \leftarrowtail         | $\rightarrowtail$ &emsp; \rightarrowtail       | $\downharpoonleft$ &emsp; \downharpoonleft         |
+| $\leftrightharpoons$ &emsp; \leftrightharpoons | $\rightleftharpoons$ &emsp; \rightleftharpoons | $\downharpoonright$ &emsp; \downharpoonright       |
+| $\Lsh$ &emsp; \Lsh                             | $\Rsh$ &emsp; \Rsh                             | $\rightsquigarrow$ &emsp; \rightsquigarrow         |
+| $\looparrowleft$ &emsp; \looparrowleft         | $\looparrowright$ &emsp; \looparrowright       | $\leftrightsquigarrow$ &emsp; \leftrightsquigarrow |
+| $\curvearrowleft$ &emsp; \curvearrowleft       | $\curvearrowright$ &emsp; \curvearrowright     |                                                    |
+| $\circlearrowleft$ &emsp; \circlearrowleft     | $\circlearrowright$ &emsp; \circlearrowright   |                                                    |
 
 </br>
 
 ### AMS 二元否定关系符合箭头
 
-
+|                                      |                                      |                                              |
+| ------------------------------------ | ------------------------------------ | -------------------------------------------- |
+| $\nless$ &emsp; \nless               | $\ngtr$ &emsp; \ngtr                 | $\varsubsetneqq$ &emsp; \varsubsetneqq       |
+| $\lneq$ &emsp; \lneq                 | $\gneq$  &emsp;\gneq                 | $\varsupsetneqq$ &emsp; \varsupsetneqq       |
+| $\nleq$ &emsp; \nleq                 | $\ngeq$ &emsp; \ngeq                 | $\nsubseteqq$ &emsp; \nsubseteqq             |
+| $\nleqslant$ &emsp; \nleqslant       | $\ngeqslant$ &emsp; \ngeqslant       | $\nsupseteqq$ &emsp; \nsupseteqq             |
+| $\lneqq$ &emsp; \lneqq               | $\gneqq$ &emsp; \gneqq               | $\nmid$ &emsp; \nmid                         |
+| $\lvertneqq$ &emsp; \lvertneqq       | $\gvertneqq$ &emsp; \gvertneqq       | $\nparallel$ &emsp; \nparallel               |
+| $\nleqq$ &emsp; \nleqq               | $\ngeqq$ &emsp; \ngeqq               | $\nshortmid$ &emsp; \nshortmid               |
+| $\lnsim$ &emsp; \lnsim               | $\gnsim$ &emsp; \gnsim               | $\nshortparallel$ &emsp; \nshortparallel     |
+| $\lnapprox$  &emsp;\lnapprox         | $\gnapprox$ &emsp; \gnapprox         | $\nsim$ &emsp; \nsim                         |
+| $\nprec$ &emsp; \nprec               | $\nsucc$ &emsp; \nsucc               | $\ncong$ &emsp; \ncong                       |
+| $\npreceq$ &emsp; \npreceq           | $\nsucceq$ &emsp; \nsucceq           | $\nvdash$ &emsp; \nvdash                     |
+| $\precneqq$ &emsp; \precneqq         | $\succneqq$ &emsp; \succneqq         | $\nvDash$ &emsp; \nvDash                     |
+| $\precnsim$ &emsp; \precnsim         | $\succnsim$ &emsp; \succnsim         | $\nVdash$ &emsp; \nVdash                     |
+| $\precnapprox$ &emsp; \precnapprox   | $\succnapprox$ &emsp; \succnapprox   | $\nVDash$ &emsp; \nVDash                     |
+| $\subsetneq$ &emsp; \subsetneq       | $\supsetneq$ &emsp; \supsetneq       | $\ntriangleleft$ &emsp; \ntriangleleft       |
+| $\varsubsetneq$ &emsp; \varsubsetneq | $\varsupsetneq$ &emsp; \varsupsetneq | $\ntriangleright$ &emsp; \ntriangleright     |
+| $\nsubseteq$ &emsp; \nsubseteq       | $\nsupseteq$ &emsp; \nsupseteq       | $\ntrianglelefteq$ &emsp; \ntrianglelefteq   |
+| $\subsetneqq$ &emsp; \subsetneqq     | $\supsetneqq$ &emsp; \supsetneqq     | $\ntrianglerighteq$ &emsp; \ntrianglerighteq |
+| $\nleftarrow$ &emsp; \nleftarrow     | $\nrightarrow$ &emsp; \nrightarrow   | $\nleftrightarrow$ &emsp; \nleftrightarrow   |
+| $\nLeftarrow$ &emsp; \nLeftarrow     | $\nRightarrow$ &emsp; \nRightarrow   | $\nLeftrightarrow$ &emsp; \nLeftrightarrow   |
 
 </br>
 
 ### AMS 二元运算符
 
-
+|                                          |                                            |                                          |
+| ---------------------------------------- | ------------------------------------------ | ---------------------------------------- |
+| $\dotplus$ &emsp; \dotplus               | $\centerdot$ &emsp; \centerdot             | $\intercal$ &emsp; \intercal             |
+| $\ltimes$  &emsp;\ltimes                 | $\rtimes$ &emsp; \rtimes                   | $\divideontimes$ &emsp; \divideontimes   |
+| $\Cup$ &emsp; \Cup or \doublecup         | $\Cap$ &emsp; \Cap or doublecap            | $\smallsetminus$ &emsp; \smallsetminus   |
+| $\veebar$ &emsp; \veebar                 | $\barwedge$  &emsp;\barwedge               | $\doublebarwedge$ &emsp; \doublebarwedge |
+| $\boxplus$ &emsp; \boxplus               | $\boxminus$ &emsp; \boxminus               | $\circleddash$ &emsp; \circleddash       |
+| $\boxtimes$ &emsp; \boxtimes             | $\boxdot$ &emsp; \boxdot                   | $\circledcirc$ &emsp; \circledcirc       |
+| $\leftthreetimes$ &emsp; \leftthreetimes | $\rightthreetimes$ &emsp; \rightthreetimes | $\circledast$ &emsp; \circledast         |
+| $\curlyvee$ &emsp; \curlyvee             | $\curlywedge$ &emsp; \curlywedge           |                                          |
 
 </br>
 
 ### AMS 其他符号
 
-
+|                                      |                                                |                                          |
+| ------------------------------------ | ---------------------------------------------- | ---------------------------------------- |
+| $\hbar$  &emsp; \hbar                | $\hslash$ &emsp; \hslash                       | $\Bbbk$ &emsp; \Bbbk                     |
+| $\square$ &emsp; \square             | $\blacksquare$ &emsp; \blacksquare             | $\circledS$ &emsp; \circledS             |
+| $\vartriangle$ &emsp; \vartriangle   | $\blacktriangle$ &emsp; \blacktriangle         | $\complement$ &emsp; \complement         |
+| $\triangledown$ &emsp; \triangledown | $\blacktriangledown$ &emsp; \blacktriangledown | $\Game$ &emsp; \Game                     |
+| $\lozenge$ &emsp; \lozenge           | $\blacklozenge$  &emsp; \blacklozenge          | $\bigstar$ &emsp; \bigstar               |
+| $\angle$ &emsp; \angle               | $\measuredangle$  &emsp; \measuredangle        | $\sphericalangle$ &emsp; \sphericalangle |
+| $\diagup$ &emsp; \diagup             | $\diagdown$ &emsp; \diagdown                   | $\backprime$ &emsp; \backprime           |
+| $\nexists$ &emsp; \nexists           | $\Finv$ &emsp; \Finv                           | $\varnothing$ &emsp; \varnothing         |
+| $\eth$  &emsp; \eth                  | $\mho$ &emsp; \mho                             |                                          |
 
 </br>
 
 ### 数学字母
 
-
+|                                                  |
+| ------------------------------------------------ |
+| $\mathrm{ABCdef}$ &emsp; \mathrm{ABCdef}         |
+| $\mathit{ABCdef}$ &emsp; \mathit{ABCdef}         |
+| $\mathnormal{ABCdef}$ &emsp; \mathnormal{ABCdef} |
+| $\mathcal{ABC}$ &emsp; \mathcal{ABC}             |
+| $\mathscr{ABC}$ &emsp; \mathscr{ABC}             |
+| $\mathfrak{ABCdef}$ &emsp; \mathfrak{ABCdef}     |
+| $\mathbb{ABC}$ &emsp; \mathbb{ABC}               |
 
 </br>
 
