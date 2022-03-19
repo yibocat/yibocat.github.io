@@ -1,4 +1,1046 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>感知机 on Yibocat</title><link>https://yibocat.github.io/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/</link><description>Recent content in 感知机 on Yibocat</description><generator>Hugo -- gohugo.io</generator><copyright>©2022 Yibocat.</copyright><lastBuildDate>Mon, 14 Feb 2022 12:12:13 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/index.xml" rel="self" type="application/rss+xml"/><item><title>[建站日记] Hugo 添加文章日期热力图</title><link>https://yibocat.github.io/posts/jzrj/jzrj_4/</link><pubDate>Fri, 25 Feb 2022 20:11:23 +0800</pubDate><guid>https://yibocat.github.io/posts/jzrj/jzrj_4/</guid><description>&lt;p>每次看到 Github 上的代码贡献图时，总想自己搞一个。但是直接搞似乎很麻烦，于是上网一搜，嘿，有两个开源图表库正好满足我的需求，果断开搞。&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>感知机 on Yibocat</title><link>https://yibocat.github.io/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/</link><description>Recent content in 感知机 on Yibocat</description><generator>Hugo -- gohugo.io</generator><copyright>©2022 Yibocat.</copyright><lastBuildDate>Mon, 14 Feb 2022 12:12:13 +0800</lastBuildDate><atom:link href="https://yibocat.github.io/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/index.xml" rel="self" type="application/rss+xml"/><item><title>[笔记手册] Latex 数学符号表</title><link>https://yibocat.github.io/posts/notes/note_1/</link><pubDate>Thu, 10 Mar 2022 23:05:05 +0800</pubDate><guid>https://yibocat.github.io/posts/notes/note_1/</guid><description>&lt;p>经常使用 Latex 写公式，还是总结一下数学符号&amp;hellip;&lt;/p>
+&lt;h3 id="数学模式重音符">数学模式重音符&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:left">&lt;/th>
+&lt;th style="text-align:left">&lt;/th>
+&lt;th style="text-align:left">&lt;/th>
+&lt;th style="text-align:left">&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:left">$\hat{a}$   \hat{a}&lt;/td>
+&lt;td style="text-align:left">$\check{a}$   \check{a}&lt;/td>
+&lt;td style="text-align:left">$\tilde{a}$   \tilde{a}&lt;/td>
+&lt;td style="text-align:left">$\acute{a}$   \acute{a}&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">$\grave{a}$   \grave{a}&lt;/td>
+&lt;td style="text-align:left">$\dot{a}$   \dot{a}&lt;/td>
+&lt;td style="text-align:left">$\ddot{a}$   \ddpt{a}&lt;/td>
+&lt;td style="text-align:left">$\breve{a}$   \breve{a}&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">$\bar{a}$   \bar{a}&lt;/td>
+&lt;td style="text-align:left">$\vec{a}$   \vec{a}&lt;/td>
+&lt;td style="text-align:left">$\widehat{A}$   \widehat{A}&lt;/td>
+&lt;td style="text-align:left">$\widetilde{A}$   \widetilde{A}&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="小写希腊字母">小写希腊字母&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$\alpha$   \alpha&lt;/td>
+&lt;td>$\theta$   \theta&lt;/td>
+&lt;td>$o$   o&lt;/td>
+&lt;td>$\upsilon$   \upsilon&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\beta$   \beta&lt;/td>
+&lt;td>$\vartheta$   \vartheta&lt;/td>
+&lt;td>$\pi$   \pi&lt;/td>
+&lt;td>$\phi$   \phi&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\gamma$   \gamma&lt;/td>
+&lt;td>$\iota$   \iota&lt;/td>
+&lt;td>$\varpi$   \varpi&lt;/td>
+&lt;td>$\varphi$   \varphi&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\delta$   \delta&lt;/td>
+&lt;td>$\kappa$   \kappa&lt;/td>
+&lt;td>$\rho$   \rho&lt;/td>
+&lt;td>$\chi$   \chi&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\epsilon$   \epsilon&lt;/td>
+&lt;td>$\lambda$   \lambda&lt;/td>
+&lt;td>$\varrho$   \varrho&lt;/td>
+&lt;td>$\psi$   \psi&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\varepsilon$   \varepailon&lt;/td>
+&lt;td>$\mu$   \mu&lt;/td>
+&lt;td>$\sigma$   \sigma&lt;/td>
+&lt;td>$\omega$   \omega&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\zeta$   \zeta&lt;/td>
+&lt;td>$\nu$   \nu&lt;/td>
+&lt;td>$\varsigma$   \varsigma&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\eta$   \eta&lt;/td>
+&lt;td>$\xi$   \xi&lt;/td>
+&lt;td>$\tau$   \tau&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="大写希腊字母">大写希腊字母&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:left">&lt;/th>
+&lt;th style="text-align:left">&lt;/th>
+&lt;th style="text-align:left">&lt;/th>
+&lt;th style="text-align:left">&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:left">$\Gamma$   \Gamma&lt;/td>
+&lt;td style="text-align:left">$\Lambda$   \Lambda&lt;/td>
+&lt;td style="text-align:left">$\Sigma$   \Sigma&lt;/td>
+&lt;td style="text-align:left">$\Psi$   \Psi&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">$\Delta$   \Delta&lt;/td>
+&lt;td style="text-align:left">$\Xi$   \Xi&lt;/td>
+&lt;td style="text-align:left">$\Upsilon$   \Upsilon&lt;/td>
+&lt;td style="text-align:left">$\Omega$   \Omega&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">$\Theta$   \Theta&lt;/td>
+&lt;td style="text-align:left">$\Pi$   \Pi&lt;/td>
+&lt;td style="text-align:left">$\Phi$   \Phi&lt;/td>
+&lt;td style="text-align:left">&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="二元关系符">二元关系符&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$&amp;lt;$   &amp;lt;&lt;/td>
+&lt;td>$&amp;gt;$   &amp;gt;&lt;/td>
+&lt;td>$=$   =&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\leq$   \leq or \le&lt;/td>
+&lt;td>$\geq$   \geq or \ge&lt;/td>
+&lt;td>$\equiv$   \equiv&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\ll$   \ll&lt;/td>
+&lt;td>$\gg$   \gg&lt;/td>
+&lt;td>$\doteq$   \doteq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\prec$   \prec&lt;/td>
+&lt;td>$\succ$   \succ&lt;/td>
+&lt;td>$\sim$   \sim&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\preceq$   \preceq&lt;/td>
+&lt;td>$\succeq$   \succeq&lt;/td>
+&lt;td>$\simeq$   \simeq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\subset$   \subset&lt;/td>
+&lt;td>$\supset$   \supset&lt;/td>
+&lt;td>$\approx$   \approx&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\subseteq$   \subseteq&lt;/td>
+&lt;td>$\subseteq$   \supseteq&lt;/td>
+&lt;td>$\cong$   \cong&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\sqsubset$   \sqsubset&lt;/td>
+&lt;td>$\sqsupset$   \sqsupset&lt;/td>
+&lt;td>$\Join$   \Join&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\sqsubseteq$   \sqsubseteq&lt;/td>
+&lt;td>$\sqsupseteq$   \sqsupseteq&lt;/td>
+&lt;td>$\bowtie$   \bowtie&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\in$   \in&lt;/td>
+&lt;td>$\ni$   \ni or \owns&lt;/td>
+&lt;td>$\propto$   \propto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\vdash$   \vdash&lt;/td>
+&lt;td>$\dashv$   \dashv&lt;/td>
+&lt;td>$\models$   \models&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\mid$   \mid&lt;/td>
+&lt;td>$\parallel$   \parallel&lt;/td>
+&lt;td>$\perp$   \perp&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\smile$   \smile&lt;/td>
+&lt;td>$\frown$   \frown&lt;/td>
+&lt;td>$\asymp$   \asymp&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$:$   :&lt;/td>
+&lt;td>$\notin$   \notin&lt;/td>
+&lt;td>$\neq$   \neq or \ne&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="二元运算符">二元运算符&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$+$   +&lt;/td>
+&lt;td>$-$   -&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\pm$   \pm&lt;/td>
+&lt;td>$\mp$   \mp&lt;/td>
+&lt;td>$\triangleleft$   \triangleleft&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\cdot$   \cdot&lt;/td>
+&lt;td>$\div$   \div&lt;/td>
+&lt;td>$\triangleright$   \triangleright&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\times$   \times&lt;/td>
+&lt;td>$\setminus$   \setminus&lt;/td>
+&lt;td>$\star$   \star&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\cup$   \cup&lt;/td>
+&lt;td>$\cap$   \cap&lt;/td>
+&lt;td>$\ast$   \ast&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\sqcup$   \sqcup&lt;/td>
+&lt;td>$\sqcap$   \sqcap&lt;/td>
+&lt;td>$\circ$   \circ&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\vee$   \vee or \lor&lt;/td>
+&lt;td>$\wedge$   \wedge or \land&lt;/td>
+&lt;td>$\bullet$   \bullet&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\oplus$   \oplus&lt;/td>
+&lt;td>$\ominus$   \ominus&lt;/td>
+&lt;td>$\diamond$   \diamond&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\odot$   \odot&lt;/td>
+&lt;td>$\oslash$   \oslash&lt;/td>
+&lt;td>$\uplus$   \uplus&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\otimes$   \otimes&lt;/td>
+&lt;td>$\bigcirc$   \bigcirc&lt;/td>
+&lt;td>$\amalg$   \amalg&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\bigtriangleup$   \bigtriangleup&lt;/td>
+&lt;td>$\bigtriangledown$   \bigtriangledown&lt;/td>
+&lt;td>$\dagger$   \dagger&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lhd$   \lhd&lt;/td>
+&lt;td>$\rhd$   \rhd&lt;/td>
+&lt;td>$\ddagger$   \ddagger&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\unlhd$   \unlhd&lt;/td>
+&lt;td>$\unrhd$   \unlhd&lt;/td>
+&lt;td>$\wr$   \wr&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="大尺寸运算符">大尺寸运算符&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$\sum$   \sum&lt;/td>
+&lt;td>$\bigcup$   \bigcup&lt;/td>
+&lt;td>$\bigvee$   \bigvee&lt;/td>
+&lt;td>$\bigoplus$   \bigoplus&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\prod$   \prod&lt;/td>
+&lt;td>$\bigcap$   \bigcap&lt;/td>
+&lt;td>$\bigwedge$   \bigwedge&lt;/td>
+&lt;td>$\bigotimes$   \bigotimes&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\coprod$   \coprod&lt;/td>
+&lt;td>$\bigsqcup$   \bigsqcup&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>$\bigodot$   \bigodot&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\int$   \int&lt;/td>
+&lt;td>$\oint$   \oint&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>$\biguplus$   \biguplus&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="箭头">箭头&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$\gets$   \gets&lt;/td>
+&lt;td>$\longleftarrow$   \longleftarrow&lt;/td>
+&lt;td>$\uparrow$   \uparrow&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\to$   \to&lt;/td>
+&lt;td>$\longrightarrow$   \longrightarrow&lt;/td>
+&lt;td>$\downarrow$   \downarrow&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\leftrightarrow$   \leftrightarrow&lt;/td>
+&lt;td>$\longleftrightarrow$   \longleftrightarrow&lt;/td>
+&lt;td>$\updownarrow$   \updownarrow&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\Leftarrow$   \Lafearrow&lt;/td>
+&lt;td>$\Longleftarrow$   \Longleftarrow&lt;/td>
+&lt;td>$\Uparrow$   \Uparrow&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\Rightarrow$   \Rightarrow&lt;/td>
+&lt;td>$\Longrightarrow$   \Longrightarrow&lt;/td>
+&lt;td>$\Downarrow$   \Downarrow&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\Leftrightarrow$   \Leftrightarrow&lt;/td>
+&lt;td>$\Longleftrightarrow$   \Longleftrightarrow&lt;/td>
+&lt;td>$\Updownarrow$   \Updownarrow&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\mapsto$   \mapsto&lt;/td>
+&lt;td>$\longmapsto$   \longmapsto&lt;/td>
+&lt;td>$\nearrow$   \nearrow&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\hookleftarrow$   \hookleftarrow&lt;/td>
+&lt;td>$\hookrightarrow$   \hookrightarrow&lt;/td>
+&lt;td>$\searrow$   \searrow&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\leftharpoonup$   \leftharpoonup&lt;/td>
+&lt;td>$\rightharpoonup$   \rightharpoonup&lt;/td>
+&lt;td>$\swarrow$   \swarrow&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\leftharpoondown$   \leftharpoondown&lt;/td>
+&lt;td>$\rightharpoondown$   \rightharpoondown&lt;/td>
+&lt;td>$\nwarrow$   \nwarrow&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\rightleftharpoons$   \rightleftharpoons&lt;/td>
+&lt;td>$\iff$   \iff&lt;/td>
+&lt;td>$\leadsto$   \leadsto&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="定界符">定界符&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$($   (&lt;/td>
+&lt;td>$)$   )&lt;/td>
+&lt;td>$\uparrow$   \uparrow&lt;/td>
+&lt;td>$\Uparrow$   \Uparrow&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lbrack$   [ or \lbrack&lt;/td>
+&lt;td>$]$   ] or \rbrack&lt;/td>
+&lt;td>$\downarrow$   \downarrow&lt;/td>
+&lt;td>$\Downarrow$   \Downarrow&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lbrace$   \{ or \lbrace&lt;/td>
+&lt;td>$\rbrace$   \} or \rbrace&lt;/td>
+&lt;td>$\updownarrow$   \updownarrow&lt;/td>
+&lt;td>$\Updownarrow$   \Updownarrow&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\langle$   \langle&lt;/td>
+&lt;td>$\rangle$   \rangle&lt;/td>
+&lt;td>$\vert$   \vert or |&lt;/td>
+&lt;td>$|$   \| or \Vert&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lfloor$   \lfloor&lt;/td>
+&lt;td>$\rfloor$   \rfloor&lt;/td>
+&lt;td>$\lceil$   \lceil&lt;/td>
+&lt;td>$\rceil$   \rceil&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$/$   /&lt;/td>
+&lt;td>$\backslash$   \backslash&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="大尺寸定界符">大尺寸定界符&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$\lgroup$   \lgroup&lt;/td>
+&lt;td>$\rgroup$   \rgroup&lt;/td>
+&lt;td>$\lmoustache$   \lmoustache&lt;/td>
+&lt;td>$\rmoustache$   \rmoustache&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="其他符号">其他符号&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$\dots$   \dots&lt;/td>
+&lt;td>$\cdots$   \cdots&lt;/td>
+&lt;td>$\vdots$   \vdots&lt;/td>
+&lt;td>$\ddots$   \ddots&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\hbar$   \hbar&lt;/td>
+&lt;td>$\imath$   \imath&lt;/td>
+&lt;td>$\jmath$   \jmath&lt;/td>
+&lt;td>$\ell$   \ell&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\Re$   \Re&lt;/td>
+&lt;td>$\Im$   \Im&lt;/td>
+&lt;td>$\aleph$   \aleph&lt;/td>
+&lt;td>$\wp$   \wp&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\forall$   \forall&lt;/td>
+&lt;td>$\exists$   \exists&lt;/td>
+&lt;td>$\mho$   \mho&lt;/td>
+&lt;td>$\partial$   \partial&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$&amp;rsquo;$   '&lt;/td>
+&lt;td>$\prime$   \prime&lt;/td>
+&lt;td>$\emptyset$   \emptyset&lt;/td>
+&lt;td>$\infty$   \infty&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\nabla$   \nabla&lt;/td>
+&lt;td>$\triangle$   \triangle&lt;/td>
+&lt;td>$\Box$   \Box&lt;/td>
+&lt;td>$\Diamond$   \Diamond&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\bot$   \bot&lt;/td>
+&lt;td>$\top$   \top&lt;/td>
+&lt;td>$\angle$   \angle&lt;/td>
+&lt;td>$\surd$   \surd&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\diamondsuit$   \diamondsuit&lt;/td>
+&lt;td>$\heartsuit$   \heartsuit&lt;/td>
+&lt;td>$\clubsuit$   \clubsuit&lt;/td>
+&lt;td>$\spadesuit$   \spadesuit&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\neg$   \neg&lt;/td>
+&lt;td>$\flat$   \flat&lt;/td>
+&lt;td>$\natural$   \natural&lt;/td>
+&lt;td>$\sharp$   \sharp&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="非数学符号">非数学符号&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$\S$   \S&lt;/td>
+&lt;td>$\P$   \P&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="ams定界符">AMS定界符&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$\ulcorner$   \ulcorner&lt;/td>
+&lt;td>$\urcorner$   \urcorner&lt;/td>
+&lt;td>$\llcorner$   \llcorner&lt;/td>
+&lt;td>$\lrcorner$   \lrcorner&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lvert$   \lvert&lt;/td>
+&lt;td>$\rvert$   \rvert&lt;/td>
+&lt;td>$\lVert$   \lVert&lt;/td>
+&lt;td>$\rVert$   \rVert&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="ams-希腊和希伯来字母">AMS 希腊和希伯来字母&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$\digamma$   \digamma&lt;/td>
+&lt;td>$\varkappa$   \varkappa&lt;/td>
+&lt;td>$\beth$   \beth&lt;/td>
+&lt;td>$\daleth$   \delath&lt;/td>
+&lt;td>$\gimel$   \gimel&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="ams-二元关系符">AMS 二元关系符&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$\lessdot$   \lessdot&lt;/td>
+&lt;td>$\gtrdot$   \gtrdot&lt;/td>
+&lt;td>$\doteqdot$   \doteqdot or \Doteq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\leqslant$   \leqslant&lt;/td>
+&lt;td>$\geqslant$   \geqslant&lt;/td>
+&lt;td>$\risingdotseq$   \risingdotseq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\eqslantless$   \eqslantless&lt;/td>
+&lt;td>$\eqslantgtr$   \eqslantgtr&lt;/td>
+&lt;td>$\fallingdotseq$   \fallingdotseq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\leqq$   \leqq&lt;/td>
+&lt;td>$\geqq$   \geqq&lt;/td>
+&lt;td>$\eqcirc$   \eqcirc&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lll$   \lll&lt;/td>
+&lt;td>$\ggg$   \ggg&lt;/td>
+&lt;td>$\circeq$   \circeq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lesssim$   \lesssim&lt;/td>
+&lt;td>$\gtrsim$   \gtrsim&lt;/td>
+&lt;td>$\triangleq$   \triangleq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lessapprox$   \lessapprox&lt;/td>
+&lt;td>$\gtrapprox$   \gtrapprox&lt;/td>
+&lt;td>$\bumpeq$   \bumpeq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lessgtr$   \lessgtr&lt;/td>
+&lt;td>$\gtrless$   \gtrless&lt;/td>
+&lt;td>$\Bumpeq$   \Bumpeq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lesseqgtr$   \lesseqgtr&lt;/td>
+&lt;td>$\gtreqless$   \gtreqless&lt;/td>
+&lt;td>$\thicksim$   \thicksim&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lesseqqgtr$   \lesseqqgtr&lt;/td>
+&lt;td>$\gtreqqless$   \gtreqqless&lt;/td>
+&lt;td>$\thickapprox$   \thickapprox&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\preccurlyeq$   \preccurlyeq&lt;/td>
+&lt;td>$\succcurlyeq$   \succcurlyeq&lt;/td>
+&lt;td>$\approxeq$   \approxeq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\curlyeqprec$   \curlyeqprec&lt;/td>
+&lt;td>$\curlyeqsucc$   \curlyeqsucc&lt;/td>
+&lt;td>$\backsim$   \backsim&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\precsim$   \precsim&lt;/td>
+&lt;td>$\succsim$   \succsim&lt;/td>
+&lt;td>$\backsimeq$   \backsimeq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\precapprox$   \precapprox&lt;/td>
+&lt;td>$\succapprox$   \succapprox&lt;/td>
+&lt;td>$\vDash$   \vDash&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\subseteqq$   \subseteqq&lt;/td>
+&lt;td>$\supseteqq$   \supseteqq&lt;/td>
+&lt;td>$\Vdash$   \Vdash&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\Subset$   \Subset&lt;/td>
+&lt;td>$\Supset$   \Supset&lt;/td>
+&lt;td>$\Vvdash$   \Vvdash&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\sqsubset$   \sqsubset&lt;/td>
+&lt;td>$\sqsupset$   \sqsupset&lt;/td>
+&lt;td>$\backepsilon$   \backepsilon&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\therefore$   \therefore&lt;/td>
+&lt;td>$\because$   \because&lt;/td>
+&lt;td>$\varpropto$   \varpropto&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\shortmid$   \shortmid&lt;/td>
+&lt;td>$\shortparallel$   \shortparallel&lt;/td>
+&lt;td>$\between$   \between&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\smallsmile$   \smallsmile&lt;/td>
+&lt;td>$\smallfrown$   \smallfrown&lt;/td>
+&lt;td>$\pitchfork$   \pitchfork&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\vartriangleleft$   \vartriangleleft&lt;/td>
+&lt;td>$\vartriangleright$   \vartriangleleft&lt;/td>
+&lt;td>$\blacktriangleleft$   \blacktriangleleft&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\trianglelefteq$   \trianglelefteq&lt;/td>
+&lt;td>$\trianglerighteq$   \trianglerighteq&lt;/td>
+&lt;td>$\blacktriangleright$   \blacktriangleright&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="ams-箭头">AMS 箭头&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$\dashleftarrow$  \dashleftarrow&lt;/td>
+&lt;td>$\dashrightarrow$   \dashrightarrow&lt;/td>
+&lt;td>$\multimap$   \multimap&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\leftleftarrows$   \leftleftarrows&lt;/td>
+&lt;td>$\rightrightarrows$   \rightrightarrows&lt;/td>
+&lt;td>$\upuparrows$   \upuparrows&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\leftrightarrows$   \leftrightarrows&lt;/td>
+&lt;td>$\rightleftarrows$   \rightleftarrows&lt;/td>
+&lt;td>$\downdownarrows$  \downdownarrows&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\Lleftarrow$   \Lleftarrow&lt;/td>
+&lt;td>$\Rrightarrow$   \Rrightarrow&lt;/td>
+&lt;td>$\upharpoonleft$   \upharpoonleft&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\twoheadleftarrow$   \twoheadleftarrow&lt;/td>
+&lt;td>$\twoheadrightarrow$   \twoheadrightarrow&lt;/td>
+&lt;td>$\upharpoonright$   \upharpoonright&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\leftarrowtail$   \leftarrowtail&lt;/td>
+&lt;td>$\rightarrowtail$   \rightarrowtail&lt;/td>
+&lt;td>$\downharpoonleft$   \downharpoonleft&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\leftrightharpoons$   \leftrightharpoons&lt;/td>
+&lt;td>$\rightleftharpoons$   \rightleftharpoons&lt;/td>
+&lt;td>$\downharpoonright$   \downharpoonright&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\Lsh$   \Lsh&lt;/td>
+&lt;td>$\Rsh$   \Rsh&lt;/td>
+&lt;td>$\rightsquigarrow$   \rightsquigarrow&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\looparrowleft$   \looparrowleft&lt;/td>
+&lt;td>$\looparrowright$   \looparrowright&lt;/td>
+&lt;td>$\leftrightsquigarrow$   \leftrightsquigarrow&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\curvearrowleft$   \curvearrowleft&lt;/td>
+&lt;td>$\curvearrowright$   \curvearrowright&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\circlearrowleft$   \circlearrowleft&lt;/td>
+&lt;td>$\circlearrowright$   \circlearrowright&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="ams-二元否定关系符合箭头">AMS 二元否定关系符合箭头&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$\nless$   \nless&lt;/td>
+&lt;td>$\ngtr$   \ngtr&lt;/td>
+&lt;td>$\varsubsetneqq$   \varsubsetneqq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lneq$   \lneq&lt;/td>
+&lt;td>$\gneq$  \gneq&lt;/td>
+&lt;td>$\varsupsetneqq$   \varsupsetneqq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\nleq$   \nleq&lt;/td>
+&lt;td>$\ngeq$   \ngeq&lt;/td>
+&lt;td>$\nsubseteqq$   \nsubseteqq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\nleqslant$   \nleqslant&lt;/td>
+&lt;td>$\ngeqslant$   \ngeqslant&lt;/td>
+&lt;td>$\nsupseteqq$   \nsupseteqq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lneqq$   \lneqq&lt;/td>
+&lt;td>$\gneqq$   \gneqq&lt;/td>
+&lt;td>$\nmid$   \nmid&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lvertneqq$   \lvertneqq&lt;/td>
+&lt;td>$\gvertneqq$   \gvertneqq&lt;/td>
+&lt;td>$\nparallel$   \nparallel&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\nleqq$   \nleqq&lt;/td>
+&lt;td>$\ngeqq$   \ngeqq&lt;/td>
+&lt;td>$\nshortmid$   \nshortmid&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lnsim$   \lnsim&lt;/td>
+&lt;td>$\gnsim$   \gnsim&lt;/td>
+&lt;td>$\nshortparallel$   \nshortparallel&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lnapprox$  \lnapprox&lt;/td>
+&lt;td>$\gnapprox$   \gnapprox&lt;/td>
+&lt;td>$\nsim$   \nsim&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\nprec$   \nprec&lt;/td>
+&lt;td>$\nsucc$   \nsucc&lt;/td>
+&lt;td>$\ncong$   \ncong&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\npreceq$   \npreceq&lt;/td>
+&lt;td>$\nsucceq$   \nsucceq&lt;/td>
+&lt;td>$\nvdash$   \nvdash&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\precneqq$   \precneqq&lt;/td>
+&lt;td>$\succneqq$   \succneqq&lt;/td>
+&lt;td>$\nvDash$   \nvDash&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\precnsim$   \precnsim&lt;/td>
+&lt;td>$\succnsim$   \succnsim&lt;/td>
+&lt;td>$\nVdash$   \nVdash&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\precnapprox$   \precnapprox&lt;/td>
+&lt;td>$\succnapprox$   \succnapprox&lt;/td>
+&lt;td>$\nVDash$   \nVDash&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\subsetneq$   \subsetneq&lt;/td>
+&lt;td>$\supsetneq$   \supsetneq&lt;/td>
+&lt;td>$\ntriangleleft$   \ntriangleleft&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\varsubsetneq$   \varsubsetneq&lt;/td>
+&lt;td>$\varsupsetneq$   \varsupsetneq&lt;/td>
+&lt;td>$\ntriangleright$   \ntriangleright&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\nsubseteq$   \nsubseteq&lt;/td>
+&lt;td>$\nsupseteq$   \nsupseteq&lt;/td>
+&lt;td>$\ntrianglelefteq$   \ntrianglelefteq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\subsetneqq$   \subsetneqq&lt;/td>
+&lt;td>$\supsetneqq$   \supsetneqq&lt;/td>
+&lt;td>$\ntrianglerighteq$   \ntrianglerighteq&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\nleftarrow$   \nleftarrow&lt;/td>
+&lt;td>$\nrightarrow$   \nrightarrow&lt;/td>
+&lt;td>$\nleftrightarrow$   \nleftrightarrow&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\nLeftarrow$   \nLeftarrow&lt;/td>
+&lt;td>$\nRightarrow$   \nRightarrow&lt;/td>
+&lt;td>$\nLeftrightarrow$   \nLeftrightarrow&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="ams-二元运算符">AMS 二元运算符&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$\dotplus$   \dotplus&lt;/td>
+&lt;td>$\centerdot$   \centerdot&lt;/td>
+&lt;td>$\intercal$   \intercal&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\ltimes$  \ltimes&lt;/td>
+&lt;td>$\rtimes$   \rtimes&lt;/td>
+&lt;td>$\divideontimes$   \divideontimes&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\Cup$   \Cup or \doublecup&lt;/td>
+&lt;td>$\Cap$   \Cap or doublecap&lt;/td>
+&lt;td>$\smallsetminus$   \smallsetminus&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\veebar$   \veebar&lt;/td>
+&lt;td>$\barwedge$  \barwedge&lt;/td>
+&lt;td>$\doublebarwedge$   \doublebarwedge&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\boxplus$   \boxplus&lt;/td>
+&lt;td>$\boxminus$   \boxminus&lt;/td>
+&lt;td>$\circleddash$   \circleddash&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\boxtimes$   \boxtimes&lt;/td>
+&lt;td>$\boxdot$   \boxdot&lt;/td>
+&lt;td>$\circledcirc$   \circledcirc&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\leftthreetimes$   \leftthreetimes&lt;/td>
+&lt;td>$\rightthreetimes$   \rightthreetimes&lt;/td>
+&lt;td>$\circledast$   \circledast&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\curlyvee$   \curlyvee&lt;/td>
+&lt;td>$\curlywedge$   \curlywedge&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="ams-其他符号">AMS 其他符号&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$\hbar$   \hbar&lt;/td>
+&lt;td>$\hslash$   \hslash&lt;/td>
+&lt;td>$\Bbbk$   \Bbbk&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\square$   \square&lt;/td>
+&lt;td>$\blacksquare$   \blacksquare&lt;/td>
+&lt;td>$\circledS$   \circledS&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\vartriangle$   \vartriangle&lt;/td>
+&lt;td>$\blacktriangle$   \blacktriangle&lt;/td>
+&lt;td>$\complement$   \complement&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\triangledown$   \triangledown&lt;/td>
+&lt;td>$\blacktriangledown$   \blacktriangledown&lt;/td>
+&lt;td>$\Game$   \Game&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\lozenge$   \lozenge&lt;/td>
+&lt;td>$\blacklozenge$   \blacklozenge&lt;/td>
+&lt;td>$\bigstar$   \bigstar&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\angle$   \angle&lt;/td>
+&lt;td>$\measuredangle$   \measuredangle&lt;/td>
+&lt;td>$\sphericalangle$   \sphericalangle&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\diagup$   \diagup&lt;/td>
+&lt;td>$\diagdown$   \diagdown&lt;/td>
+&lt;td>$\backprime$   \backprime&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\nexists$   \nexists&lt;/td>
+&lt;td>$\Finv$   \Finv&lt;/td>
+&lt;td>$\varnothing$   \varnothing&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\eth$   \eth&lt;/td>
+&lt;td>$\mho$   \mho&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br>
+&lt;h3 id="数学字母">数学字母&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>$\mathrm{ABCdef}$   \mathrm{ABCdef}&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\mathit{ABCdef}$   \mathit{ABCdef}&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\mathnormal{ABCdef}$   \mathnormal{ABCdef}&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\mathcal{ABC}$   \mathcal{ABC}&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\mathscr{ABC}$   \mathscr{ABC}&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\mathfrak{ABCdef}$   \mathfrak{ABCdef}&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>$\mathbb{ABC}$   \mathbb{ABC}&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;/br></description></item><item><title>[建站日记] Hugo 添加文章日期热力图</title><link>https://yibocat.github.io/posts/jzrj/jzrj_4/</link><pubDate>Fri, 25 Feb 2022 20:11:23 +0800</pubDate><guid>https://yibocat.github.io/posts/jzrj/jzrj_4/</guid><description>&lt;p>每次看到 Github 上的代码贡献图时，总想自己搞一个。但是直接搞似乎很麻烦，于是上网一搜，嘿，有两个开源图表库正好满足我的需求，果断开搞。&lt;/p>
 &lt;p>这两个图图表库如下：&lt;/p>
 &lt;p>蚂蚁数据可视化 AntV &lt;a href="https://antv-2018.alipay.com/zh-cn/index.html"target="_blank" rel="noopener noreferrer">https://antv-2018.alipay.com/zh-cn/index.html&lt;/a>
 &lt;/p>
@@ -1406,195 +2448,5 @@ $$
 &lt;li>&lt;a href="http://xiaqunfeng.cc/2018/04/24/git-ignore-ds-store/#%E5%88%A0%E9%99%A4github%E4%B8%8A%E6%96%87%E4%BB%B6"target="_blank" rel="noopener noreferrer">http://xiaqunfeng.cc/2018/04/24/git-ignore-ds-store/#%E5%88%A0%E9%99%A4github%E4%B8%8A%E6%96%87%E4%BB%B6&lt;/a>
 &lt;/li>
 &lt;li>&lt;a href="https://blog.csdn.net/allanGold/article/details/73132606"target="_blank" rel="noopener noreferrer">https://blog.csdn.net/allanGold/article/details/73132606&lt;/a>
-&lt;/li>
-&lt;/ol></description></item><item><title>[建站日记] Hugo代码拷贝插件</title><link>https://yibocat.github.io/posts/jzrj/jzrj_2/</link><pubDate>Sun, 30 Jan 2022 17:26:21 +0800</pubDate><guid>https://yibocat.github.io/posts/jzrj/jzrj_2/</guid><description>&lt;p>博客是建好了，但是总是想添加一个代码一键复制的功能。一开始是想去 html 标签中直接添加一个 &lt;code>button&lt;/code> ，但是发现好像并没有那么简单。查阅了 Hugo 的内置功能也没有发现，很幸运找到了一篇博客 &lt;a href="https://huangzhongde.cn/"target="_blank" rel="noopener noreferrer">黄忠德的博客&lt;/a>
-，正好解决了我的需求。所以也记录一下。&lt;/p>
-&lt;h3 id="思考">思考&lt;/h3>
-&lt;p>我们知道，代码片段是使用 markdown code fences 来编写的&lt;/p>
-&lt;pre tabindex="0">&lt;code>``` jsx
-import React from &amp;#39;react&amp;#39;;
-```
-&lt;/code>&lt;/pre>&lt;p>以上代码在 Hugo 编译下的 Html 将展示成如下形式&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;highlight&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">pre&lt;/span> &lt;span class="na">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;background-color:#f0f0f0;tab-size:4&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">code&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;language-jsx&amp;#34;&lt;/span> &lt;span class="na">data-lang&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;jsx&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">span&lt;/span> &lt;span class="na">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;color:#007020;font-weight:bold&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>import&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">span&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> React from &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">span&lt;/span> &lt;span class="na">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;color:#4070a0&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&amp;#39;react&amp;#39;&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">span&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">code&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">pre&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>我们要解决的问题是：&lt;/p>
-&lt;ol>
-&lt;li>&lt;strong>搜索所有突出显示的代码块，特别是所有具有类 &lt;code>highlight&lt;/code> 的元素；&lt;/strong>&lt;/li>
-&lt;li>&lt;strong>如何创建按钮放在代码框中；&lt;/strong>&lt;/li>
-&lt;li>&lt;strong>给按钮添加一个事件，用于将代码块中的代码复制到剪贴板。&lt;/strong>&lt;/li>
-&lt;/ol>
-&lt;h3 id="代码">代码&lt;/h3>
-&lt;h4 id="检查复制支持">检查复制支持&lt;/h4>
-&lt;p>进行复制之前，我们首先需要对浏览器是否可以使用 &lt;code>document.execCommand('copy')&lt;/code> 这个功能，因为这段代码正是我们要使用的复制调用代码，我们需要一个命令来检查一下&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">queryCommandSupported&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;copy&amp;#39;&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是 &lt;code>queryCommandSupported&lt;/code> 方法似乎已经弃用，所以其实是不用添加的。&lt;/p>
-&lt;img src="https://yibocat.github.io/images/jzrj/jzrj-20220129-20.png" alt="jzrj-20220129-20" style="zoom:50%;" />
-&lt;h4 id="选择突出显示的代码块">选择突出显示的代码块&lt;/h4>
-&lt;p>上文提到，突出显示的代码块是包含在类 &lt;code>highlight&lt;/code> 中的，我们可以使用内置的 DOM API 来检查所有的在 &lt;code>highlight&lt;/code> 内容&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nx">highlightBlocks&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getElementsByClassName&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;highlight&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="添加按钮">添加按钮&lt;/h4>
-&lt;p>由于 Hugo 的自动编译使得我们无法直接在 html 中添加按钮，这也是我一开始的疑问之处。但是可以使用 js 创建一个特定的函数来实现这个功能。然后在 &lt;code>for&lt;/code> 循环中调用这个函数&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">addCopyButton&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">containerEl&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">copyBtn&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">createElement&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;button&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">className&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;highlight-copy-btn&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Copy&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">containerEl&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">appendChild&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="kd">var&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="nx">highlightBlocks&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">length&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="nx">i&lt;/span>&lt;span class="o">++&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">addCopyButton&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">highlightBlocks&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="nx">i&lt;/span>&lt;span class="p">]);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="复制响应">复制响应&lt;/h4>
-&lt;p>点击按钮，使用 &lt;code>document.execCommand()&lt;/code> 方法将代码复制到剪贴板，同时还要保持代码的格式。所以创建一个函数，用来选择给定的 html 中的所有文本&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">selectText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">node&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">selection&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getSelection&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">range&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">createRange&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">range&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">selectNodeContents&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">node&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">selection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">removeAllRanges&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">selection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addRange&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">range&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">selection&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>因为代码节点是在 &lt;code> &amp;lt;pre&amp;gt;&lt;/code> 所以使用 &lt;code>.firstElementChild&lt;/code> 来获取节点，选择文本后添加到剪贴板，然后删除所有选择&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nx">codeEl&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">containerEl&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">firstElementChild&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;click&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kd">function&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">selection&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">selectText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">codeEl&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">execCommand&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;copy&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">selection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">removeAllRanges&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="添加样式">添加样式&lt;/h4>
-&lt;p>这部分是比较简单的，直接放代码了，之后可以自己调试代码按钮样式&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="line">&lt;span class="cl">&lt;span class="p">.&lt;/span>&lt;span class="nc">highlight&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">position&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">relative&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">.&lt;/span>&lt;span class="nc">highlight&lt;/span> &lt;span class="nt">pre&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">padding-right&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">75&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">.&lt;/span>&lt;span class="nc">highlight-copy-btn&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">position&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">absolute&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">top&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">right&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">border&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">border-radius&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">padding&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">font-size&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">0.7&lt;/span>&lt;span class="kt">em&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">line-height&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">1.8&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#fff&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">background-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#777&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">min-width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">55&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">text-align&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">center&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">.&lt;/span>&lt;span class="nc">highlight-copy-btn&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="nd">hover&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">background-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#666&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>我们可以看到在代码框的右上方添加了一个灰色的按钮。&lt;/p>
-&lt;h4 id="已复制响应">已复制响应&lt;/h4>
-&lt;p>所有功能其实都已经完成了，为了更好的用户体验，在点击按钮后需要有一个已复制的响应返回。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">flashCopyMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">el&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">msg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">el&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">msg&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setTimeout&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">function&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">el&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Copy&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">try&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">selection&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">selectText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">codeEl&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">execCommand&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;copy&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">selection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">removeAllRanges&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">flashCopyMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Copied!&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span> &lt;span class="k">catch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">flashCopyMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Failed :\&amp;#39;(&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="所有代码">所有代码&lt;/h3>
-&lt;p>&lt;code>copy-to-clipboard.css&lt;/code> :&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-css" data-lang="css">&lt;span class="line">&lt;span class="cl">&lt;span class="p">.&lt;/span>&lt;span class="nc">highlight&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">position&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">relative&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">.&lt;/span>&lt;span class="nc">highlight&lt;/span> &lt;span class="nt">pre&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">padding-right&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">75&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">.&lt;/span>&lt;span class="nc">highlight-copy-btn&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">position&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">absolute&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">top&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">right&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">border&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">border-radius&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">padding&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">font-size&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">0.7&lt;/span>&lt;span class="kt">em&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">line-height&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">1.8&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#fff&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">background-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#777&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">min-width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">55&lt;/span>&lt;span class="kt">px&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">text-align&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">center&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">.&lt;/span>&lt;span class="nc">highlight-copy-btn&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="nd">hover&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">background-color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mh">#666&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>copy-to-clipboard.js&lt;/code> :&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="p">(&lt;/span>&lt;span class="kd">function&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;use strict&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">queryCommandSupported&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;copy&amp;#39;&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">function&lt;/span> &lt;span class="nx">flashCopyMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">el&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">msg&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">el&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">msg&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">setTimeout&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">function&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">el&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Copy&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span> &lt;span class="mi">1000&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">function&lt;/span> &lt;span class="nx">selectText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">node&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">selection&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">window&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getSelection&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">range&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">createRange&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">range&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">selectNodeContents&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">node&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">selection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">removeAllRanges&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">selection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addRange&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">range&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nx">selection&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">function&lt;/span> &lt;span class="nx">addCopyButton&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">containerEl&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">copyBtn&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">createElement&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;button&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">className&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;highlight-copy-btn&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">textContent&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Copy&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">codeEl&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">containerEl&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">firstElementChild&lt;/span>&lt;span class="p">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">addEventListener&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;click&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kd">function&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">try&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nx">selection&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">selectText&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">codeEl&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">execCommand&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;copy&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">selection&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">removeAllRanges&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">flashCopyMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Copied!&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">catch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">console&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">e&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">flashCopyMessage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Failed :\&amp;#39;(&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">containerEl&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">appendChild&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">copyBtn&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Add copy button to code blocks
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nx">highlightBlocks&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">document&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">getElementsByClassName&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;highlight&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">Array&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">prototype&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">forEach&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">call&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">highlightBlocks&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">addCopyButton&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">})();&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>将这两个文件分别放在 &lt;code>assets/css&lt;/code> 和 &lt;code>assets/js&lt;/code> 下，然后在配置文件 &lt;code>config.toml&lt;/code> 中修改自定义 css 和 js，或者手动添加到 &lt;code>head.html&lt;/code> 头文件中。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-toml" data-lang="toml">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">custom_css&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;css/copy-to-clipboard.css&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">custom_js&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;js/copy-to-clipboard.js&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="参考">参考&lt;/h3>
-&lt;ol>
-&lt;li>&lt;a href="https://huangzhongde.cn/post/2020-02-21-hugo-code-copy-to-clipboard/"target="_blank" rel="noopener noreferrer">https://huangzhongde.cn/post/2020-02-21-hugo-code-copy-to-clipboard/&lt;/a>
-&lt;/li>
-&lt;li>&lt;a href="https://www.tomspencer.dev/blog/2018/09/14/adding-click-to-copy-buttons-to-a-hugo-powered-blog/"target="_blank" rel="noopener noreferrer">https://www.tomspencer.dev/blog/2018/09/14/adding-click-to-copy-buttons-to-a-hugo-powered-blog/&lt;/a>
 &lt;/li>
 &lt;/ol></description></item></channel></rss>
