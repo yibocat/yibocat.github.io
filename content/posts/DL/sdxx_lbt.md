@@ -3,7 +3,7 @@ title: "[深度学习笔记] 烂笔头深度学习"
 date: 2022-02-08T21:47:27+08:00
 author: "yibo"
 description: ""
-draft: true
+draft: false
 math: true
 tags: ["深度学习","神经网络","PyTorch"]
 categories: ["烂笔头之深度学习"]
