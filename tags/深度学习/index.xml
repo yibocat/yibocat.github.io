@@ -2349,6 +2349,20 @@ $$
 &lt;/br>
 &lt;h3 id="参考">参考&lt;/h3>
 &lt;p>&lt;a href="https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter03_DL-basics/3.1_linear-regression"target="_blank" rel="noopener noreferrer">《动手学深度学习》(PyTorch)&lt;/a>
+&lt;/p></description></item><item><title>[深度学习笔记] 烂笔头深度学习</title><link>https://yibocat.github.io/posts/dl/sdxx_lbt/</link><pubDate>Tue, 08 Feb 2022 21:47:27 +0800</pubDate><guid>https://yibocat.github.io/posts/dl/sdxx_lbt/</guid><description>&lt;p>终于开始学习深度学习了，也一直打算将深度学习的学习过程记作一个笔记，以便以后翻阅。&lt;/p>
+&lt;p>一开始阅读了深度学习的圣经书——花书，发现其实花书对我这种初学者来说并不友好。主要感觉花书的翻译并不太好，很容易让人对自己的语言能力产生怀疑。所以后来转而学习《动手学深度学习》，网上有免费的资源：&lt;a href="https://github.com/d2l-ai/d2l-zh"target="_blank" rel="noopener noreferrer">https://github.com/d2l-ai/d2l-zh&lt;/a>
+，而这本书的最开始使用的是 &lt;code>MXNet&lt;/code> 框架。幸运的是这本书后来又有了 &lt;code>PyTorch&lt;/code> 版和 &lt;code>TensorFlow&lt;/code> 版。&lt;/p>
+&lt;p>《动手学深度学习》&lt;code>PyTorch&lt;/code> 版：&lt;a href="https://tangshusen.me/Dive-into-DL-PyTorch/#/"target="_blank" rel="noopener noreferrer">https://tangshusen.me/Dive-into-DL-PyTorch/#/&lt;/a>
+&lt;/p>
+&lt;p>《动手学深度学习》&lt;code>TensorFlow&lt;/code> 版：&lt;a href="https://trickygo.github.io/Dive-into-DL-TensorFlow2.0/#/"target="_blank" rel="noopener noreferrer">https://trickygo.github.io/Dive-into-DL-TensorFlow2.0/#/&lt;/a>
+&lt;/p>
+&lt;p>而且，邱锡鹏教授的《神经网络与深度学习》也是非常好的学习教材&lt;/p>
+&lt;p>《神经网络与深度学习》：&lt;a href="https://nndl.github.io"target="_blank" rel="noopener noreferrer">https://nndl.github.io&lt;/a>
+&lt;/p>
+&lt;p>本学习笔记也是根据 《动手学深度学习》&lt;code>PyTorch&lt;/code> 版来记录的。&lt;/p>
+&lt;/br>
+&lt;/br>
+&lt;p>&lt;a href="https://yibocat.com/posts/dl/%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0_2/"target="_blank" rel="noopener noreferrer">深度学习第 1 篇——简单线性回归&lt;/a>
 &lt;/p></description></item><item><title>[Python 笔记本] 远程搭建 jupyter 服务器</title><link>https://yibocat.github.io/posts/fwq/fwq_jupyter/</link><pubDate>Wed, 02 Feb 2022 21:47:35 +0800</pubDate><guid>https://yibocat.github.io/posts/fwq/fwq_jupyter/</guid><description>&lt;p>本文通过搭建一个简单的远程 &lt;code>Jupyter&lt;/code> 服务端，可以实现不分场合与时间运行代码，或者说是展示代码，这提供了极大的方便。&lt;/p>
 &lt;h3 id="搭建-jupyter-服务器">搭建 &lt;code>Jupyter&lt;/code> 服务器&lt;/h3>
 &lt;p>&lt;code>ssh&lt;/code> 远程登录服务器&lt;/p>
@@ -2422,31 +2436,4 @@ $$
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">ps -a
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">kill&lt;/span> &lt;span class="m">1000&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>浏览器中输入 &lt;code>xxx.xxx.xxx.xxx:9999&lt;/code> 进入 &lt;code>jupyter notebook&lt;/code>&lt;/p>
-&lt;p>浏览器中输入 &lt;code>xxx.xxx.xxx.xxx:9999/lab&lt;/code> 进入 &lt;code>jupyterlab&lt;/code>&lt;/p></description></item><item><title>[Git 日记] Git 忽略 .DS_Store 与全局忽略</title><link>https://yibocat.github.io/posts/git/git_ignore/</link><pubDate>Tue, 01 Feb 2022 10:53:07 +0800</pubDate><guid>https://yibocat.github.io/posts/git/git_ignore/</guid><description>&lt;p>Mac OS 的每个文件夹下都有一个隐藏文件 .DS_Store，该文件保存的是当前文件夹的属性，如图标位置、背景等。&lt;/p>
-&lt;p>但是每次使用 Git 提交更改时，都会自动生成 .DS_Store 更改，所以每次提交到版本库和 &lt;code>push&lt;/code> 到 Github 总是很麻烦。所以 .DS_Store 是没有必要提交到版本库的，这时可以使用 git.gitignore 来忽略此类文件。&lt;/p>
-&lt;h3 id="忽略当前目录下的-ds_store">忽略当前目录下的 .DS_Store&lt;/h3>
-&lt;p>我们在所要忽略 .DS_Store 的目录下创建一个 &lt;code>.gitignore&lt;/code> 文件，然后将要忽略的文件名写入进去&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">touch .gitignore
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p style="text-align:center">&lt;img src="https://yibocat.github.io/images/git/git-20220201-1.png" style="width:90%" />&lt;/p>
-&lt;p>每次忽略任何文件只需将要忽略的文件添加到 &lt;code>.gitignore&lt;/code> 文件就可以了。&lt;/p>
-&lt;p>但是每次更改完 &lt;code>.gitignore&lt;/code> 文件之后，都需要运行以下代码，否则 &lt;code>.gitignore&lt;/code> 是不生效的&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">git rm -r --cached .
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git add .
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git commit -m &lt;span class="s1">&amp;#39;update .gitignore&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="git-全局忽略">git 全局忽略&lt;/h3>
-&lt;p>首先在终端输入如下代码查看 git 现有的全局配置&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">git config --list
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>git 全局配置都在一个 &lt;code>.gitconfig&lt;/code> 文件中，所以可以使用 git 全局配置进行全局忽略 .DS_Store 。&lt;/p>
-&lt;p>具体步骤是在根目录创建一个 &lt;code>.gitignore_global&lt;/code> 文件，把要忽略的文件直接添加到该文件中，和上文中的当前目录添加是一样的&lt;/p>
-&lt;p>然后在终端输入&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">git config --global core.excludesfile/Users/reon/.gitignore_global
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者直接在 &lt;code>.gitconfig&lt;/code> 中添加如下内容&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>core&lt;span class="o">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">excludefile&lt;/span> &lt;span class="o">=&lt;/span> /Users/xiaqunfeng/.gitignore_global
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="参考">参考&lt;/h3>
-&lt;ol>
-&lt;li>&lt;a href="http://xiaqunfeng.cc/2018/04/24/git-ignore-ds-store/#%E5%88%A0%E9%99%A4github%E4%B8%8A%E6%96%87%E4%BB%B6"target="_blank" rel="noopener noreferrer">http://xiaqunfeng.cc/2018/04/24/git-ignore-ds-store/#%E5%88%A0%E9%99%A4github%E4%B8%8A%E6%96%87%E4%BB%B6&lt;/a>
-&lt;/li>
-&lt;li>&lt;a href="https://blog.csdn.net/allanGold/article/details/73132606"target="_blank" rel="noopener noreferrer">https://blog.csdn.net/allanGold/article/details/73132606&lt;/a>
-&lt;/li>
-&lt;/ol></description></item></channel></rss>
+&lt;p>浏览器中输入 &lt;code>xxx.xxx.xxx.xxx:9999/lab&lt;/code> 进入 &lt;code>jupyterlab&lt;/code>&lt;/p></description></item></channel></rss>
