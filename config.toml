@@ -38,7 +38,7 @@ defaultContentLanguage = 'zh'     # 更改语言
 [params.intro]                    # 首页简介
   intro_1 = "## **好记性不如烂笔头** ##"        # 首页简介 1
   intro_2 = "**Keywords**: 💻python | 👾Minecraft| 🏀 | 😶‍🌫️Fuzzy Set."               # 首页简介 2
-  intro_3 = "**Status**: 📖Crazy remedial math skills"               # 首页简介 3
+  intro_3 = "**Status**: 📖"               # 首页简介 3
 [params.profile]                  # 文章底部签名设置
   enable = true
   avatar = "/json/77907-vault.json"
