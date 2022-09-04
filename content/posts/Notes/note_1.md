@@ -32,7 +32,7 @@ categories: ["笔记手册"]
 | $\gamma$ &emsp; \gamma           | $\iota$ &emsp; \iota         | $\varpi$ &emsp; \varpi       | $\varphi$ &emsp; \varphi   |
 | $\delta$ &emsp; \delta           | $\kappa$ &emsp; \kappa       | $\rho$ &emsp; \rho           | $\chi$ &emsp; \chi         |
 | $\epsilon$ &emsp; \epsilon       | $\lambda$ &emsp; \lambda     | $\varrho$ &emsp; \varrho     | $\psi$ &emsp; \psi         |
-| $\varepsilon$ &emsp; \varepailon | $\mu$ &emsp; \mu             | $\sigma$ &emsp; \sigma       | $\omega$ &emsp; \omega     |
+| $\varepsilon$ &emsp; \varepsilon | $\mu$ &emsp; \mu             | $\sigma$ &emsp; \sigma       | $\omega$ &emsp; \omega     |
 | $\zeta$ &emsp; \zeta             | $\nu$ &emsp; \nu             | $\varsigma$ &emsp; \varsigma |                            |
 | $\eta$ &emsp; \eta               | $\xi$ &emsp; \xi             | $\tau$ &emsp; \tau           |                            |
 
